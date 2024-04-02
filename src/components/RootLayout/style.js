@@ -24,6 +24,7 @@ export const layout = css`
 `
 
 export const container = css`
+    width: 100%;
     height: 720px;
     overflow-y: auto;
     &::-webkit-scrollbar {
