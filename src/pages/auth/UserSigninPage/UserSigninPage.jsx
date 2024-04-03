@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import * as s from './style';
 import InputWithMessagebox from '../../../components/InputWithMessageBox/InputWithMessagebox';
 import useInput from '../../../hooks/useInput';
-
+import googleImg from '../../../assets/icons/google.png'
+import naverImg from '../../../assets/icons/naver.png'
+import kakaoImg from '../../../assets/icons/kakao.png'
 
 function UserSigninPage(props) {
     const [username, usernameChange, usernameMessage, setUsername] = useInput();
@@ -47,13 +49,13 @@ function UserSigninPage(props) {
                     </span>
                     <div css={s.oauthBox}>
                         <Link>
-                            <img src="" alt="구글로그인" />
+                            <img src={googleImg} alt="구글로그인" />
                         </Link>
                         <Link>
-                            <img src="" alt="네이버로그인" />
+                            <img src={naverImg} alt="네이버로그인" />
                         </Link>
                         <Link>
-                            <img src="" alt="카카오로그인" />
+                            <img src={kakaoImg} alt="카카오로그인" />
                         </Link>
                     </div>
                 </div>

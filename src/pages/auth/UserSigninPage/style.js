@@ -98,18 +98,33 @@ export const buttonBox = css`
 
     }
 `;
+
 export const line = css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const oauthBox = css`
     box-sizing: border-box;
     display: flex;
     align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 30px;
     & > a {
+        height: 20px;
+        width: 20px;
         color: #ffffff;
         text-decoration: none;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin: 0px 10px;
+        & > img {
+            height: 100%;
+        }
     }
 `;
