@@ -7,7 +7,7 @@ import { FaCalendarDays, FaUser } from "react-icons/fa6";
 function NavigationButtonBar(props) {
     return (
         <div css={s.layout}>
-            <Link css={s.buttonBox}> 
+            <Link css={s.buttonBox} to={"/user/reservation"}> 
                 <div>
                     <FaCalendarDays />
                 </div>
@@ -15,7 +15,7 @@ function NavigationButtonBar(props) {
                 Reservation            
                 </span>
             </Link>
-            <Link css={s.buttonBox}> 
+            <Link css={s.buttonBox} to={"/"}> 
                 <div>
                     <FaHome />
                 </div>
@@ -23,7 +23,7 @@ function NavigationButtonBar(props) {
                 Home  
                 </span>          
             </Link>
-            <Link css={s.buttonBox}> 
+            <Link css={s.buttonBox} to={"/"}> 
                 <div>
                     <FaUser />
                 </div>
