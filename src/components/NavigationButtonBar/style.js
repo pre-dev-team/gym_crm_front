@@ -14,6 +14,7 @@ export const layout = css`
     width: 100%;
     height: 60px;
     background-color: #262627;
+    z-index: 99;
 `
 
 export const buttonBox = css`
