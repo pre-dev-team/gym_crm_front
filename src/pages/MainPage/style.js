@@ -12,4 +12,9 @@ font-size: 25px;
 & > img {
     height: 30%;
 }
+
+& > div {
+    text-align: center;
+    margin: 10px 0px;
+}
 `

@@ -14,9 +14,9 @@ function App() {
             <RootHeader />
             <Routes>
                 <Route path='/' element={<MainPage />} />
-                <Route path='admin/*' element={<AdminPage />} />
-                <Route path='user/*' element={<UserPage />} />
-                <Route path='auth/*' element={<AuthPage />} />
+                <Route path='/admin/*' element={<AdminPage />} />
+                <Route path='/user/*' element={<UserPage />} />
+                <Route path='/auth/*' element={<AuthPage />} />
             </Routes>
             <NavigationButtonBar />
         </RootLayout>
