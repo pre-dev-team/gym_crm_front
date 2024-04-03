@@ -5,6 +5,9 @@ import * as s from './style';
 import { useState } from 'react';
 import useInput from '../../../hooks/useInput';
 import { useMutation } from 'react-query';
+import {userSignupRequest} from '../../../apis/api/signup';
+
+
 function UserSignupPage(props) {
     const [username, UsernameChange, usernameMessage, setUsername] = useInput();
     const [password, passwordChange, passwordMessage, setPassword] = useInput();
@@ -15,7 +18,7 @@ function UserSignupPage(props) {
 
     const userSignupMutation = useMutation({
         mutationKey: "userSignupMutation",
-        mutationFn: UserSignupPage,
+        mutationFn: userSignupRequest,
         onSuccess: response => {
             console.log(response);
         },
