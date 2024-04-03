@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
+import * as s from './style';
 import { Link } from 'react-router-dom';
 import InputWithMessagebox from '../../../components/InputWithMessageBox/InputWithMessagebox';
-import * as s from './style';
 import { useState } from 'react';
 import useInput from '../../../hooks/useInput';
 import { useMutation } from 'react-query';
@@ -9,7 +9,7 @@ import {userSignupRequest} from '../../../apis/api/signup';
 
 
 function UserSignupPage(props) {
-    const [username, UsernameChange, usernameMessage, setUsername] = useInput();
+    const [username, usernameChange, usernameMessage, setUsername] = useInput();
     const [password, passwordChange, passwordMessage, setPassword] = useInput();
     const [checkPassword, checkPasswordChange, checkPasswordMessage, setCheckPassword] = useInput();
     const [name, nameChange, nameMessage, setName] = useInput();
@@ -49,7 +49,7 @@ function UserSignupPage(props) {
                         name={"username"}
                         value={username}
                         placeholder={"아이디"}
-                        onChange={UsernameChange}
+                        onChange={usernameChange}
                     />
                 </div>
                 <div css={s.inputBox}>

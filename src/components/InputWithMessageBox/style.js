@@ -5,7 +5,7 @@ export const layout = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 300px;
+    width: 210px;
     height: 60px;
     padding: 0px 10px;
     background-color: transparent;
@@ -22,6 +22,7 @@ export const inputBox = css`
         outline: none;
         padding: 0px 5px;
         background-color: transparent;
+        margin-bottom: 20px;
     }
 `;
 
