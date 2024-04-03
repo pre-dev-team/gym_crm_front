@@ -6,8 +6,8 @@ function AuthPage(props) {
 
     return (
         <Routes>
-            <Route path='signin'/>
-            <Route path='signup'/>
+            <Route path='/auth/signup'/>
+            <Route path='admin/signup'/>
             <Route />
             <Route />
             <Route />

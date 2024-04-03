@@ -7,7 +7,6 @@ import logo from '../../assets/image/test.png'
 function MainPage(props) {
     return (
         <div css={s.test}>
-                <img src={logo} />
                 <span>team-pre-dev</span>
         </div>
     );
