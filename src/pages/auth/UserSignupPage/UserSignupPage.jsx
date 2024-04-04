@@ -2,19 +2,43 @@
 import * as s from './style';
 import { Link } from 'react-router-dom';
 import InputWithMessagebox from '../../../components/InputWithMessageBox/InputWithMessagebox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useInput from '../../../hooks/useInput';
 import { useMutation } from 'react-query';
 import {userSignupRequest} from '../../../apis/api/signup';
 
 
 function UserSignupPage(props) {
-    const [username, usernameChange, usernameMessage, setUsername] = useInput();
-    const [password, passwordChange, passwordMessage, setPassword] = useInput();
-    const [checkPassword, checkPasswordChange, checkPasswordMessage, setCheckPassword] = useInput();
-    const [name, nameChange, nameMessage, setName] = useInput();
-    const [email, emailChange, emailMessage, setEmail] = useInput();
-    const [phone, phoneChange, phoneMessage, setPhone] = useInput();
+    const [username, usernameChange, usernameMessage, setUsername, setUsernameMessage] = useInput("userUsername");
+    const [password, passwordChange, passwordMessage, setPassword] = useInput("userPassword");
+    const [checkPassword, checkPasswordChange] = useInput("checkPassword");
+    const [name, nameChange, nameMessage, setName] = useInput("userName");
+    const [email, emailChange, emailMessage, setEmail] = useInput("userPhone");
+    const [phone, phoneChange, phoneMessage, setPhone] = useInput("userEmail");
+    const [checkPasswordMessage, setCheckPasswordMessage] = useState(null);
+
+    useEffect(() => {
+        if(!checkPassword || !password) {
+            setCheckPasswordMessage(() => null);
+            return;
+        }
+
+        if(checkPassword === password) {
+            setCheckPasswordMessage(() => {
+                return {
+                    type: "success",
+                    text: ""
+                }
+            })
+        } else {
+            setCheckPasswordMessage(() => {
+                return {
+                    type: "error",
+                    text: "비밀번호가 일치하지 않습니다."
+                }
+            })
+        }
+    }, [checkPassword, password]);
 
     const userSignupMutation = useMutation({
         mutationKey: "userSignupMutation",
@@ -35,8 +59,48 @@ function UserSignupPage(props) {
             userPhone:phone,
             userEmail:email
         });
+
+        const checkFlags = [
+            usernameMessage?.type,
+            passwordMessage?.type,
+            checkPasswordMessage?.type,
+            nameMessage?.type,
+            phoneMessage?.type,
+            emailMessage?.type
+        ];
+
+        if(checkFlags.includes("error") || checkFlags.includes(undefined) || checkFlags.includes(null)) {
+            alert("가입 정보를 다시 확인하세요.");
+            return;
+        }
+
+        userSignupRequest({
+            username,
+            password,
+            name,
+            phone,
+            email
+        }).then(response => {
+            console.log(response);
+        }).catch(error => {
+            if(error.response.status === 400) {
+                const errorMap = error.response.data;
+                const errorEntries = Object.entries(errorMap);
+                for(let [ k, v ] of errorEntries) {
+                    if(k === "username") {
+                        setUsernameMessage(() => {
+                            return {
+                                type: "error",
+                                text: v
+                            }
+                        })
+                    }
+                }
+            } else {
+                alert("회원가입 오류");
+            }
+        });
     }
-    
 
     return (
 
@@ -50,6 +114,7 @@ function UserSignupPage(props) {
                         value={username}
                         placeholder={"아이디"}
                         onChange={usernameChange}
+                        message={usernameMessage}
                     />
                 </div>
                 <div css={s.inputBox}>
@@ -59,6 +124,7 @@ function UserSignupPage(props) {
                         value={password}
                         placeholder={"비밀번호"}
                         onChange={passwordChange}
+                        message={passwordMessage}
                     />
                 </div>
                 <div css={s.inputBox}>
@@ -68,6 +134,7 @@ function UserSignupPage(props) {
                         value={checkPassword}
                         placeholder={"비밀번호확인"}
                         onChange={checkPasswordChange}
+                        message={checkPasswordMessage}
                     />
                 </div>
                 <div css={s.inputBox}>
@@ -77,6 +144,7 @@ function UserSignupPage(props) {
                         value={name}
                         placeholder={"이름"}
                         onChange={nameChange}
+                        message={nameMessage}
                     />
                 </div>
                 <div css={s.inputBox}>
@@ -86,6 +154,7 @@ function UserSignupPage(props) {
                         value={email}
                         placeholder={"이메일"}
                         onChange={emailChange}
+                        message={emailMessage}
                     />
                 </div>
                 <div css={s.inputBox}>
@@ -95,6 +164,7 @@ function UserSignupPage(props) {
                         value={phone}
                         placeholder={"휴대전화번호"}
                         onChange={phoneChange}
+                        message={phoneMessage}
                     />
                 </div>
                 <div css={s.buttonBox}>
