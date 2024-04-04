@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    position: relative;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -27,10 +28,20 @@ export const inputBox = css`
     }
 `;
 
+export const inputIcon = (type) => css`
+    position: absolute;
+    right: 35px;
+    top: 2px;
+    display: flex;
+    justify-content: right;
+    color: ${type === "error" ? "#ff3030" : "#00921b"};
+`;
+
 export const messageBox = css`
     height: 30px;
-    font-size: 14px;
+    font-size: 13px;
     padding: 0px 5px;
     background-color: transparent;
     color: white;
 `;
+
