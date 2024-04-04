@@ -1,7 +1,14 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-    c & > h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    & > h1 {
+        font-size: 36px;
         color: white;
     }
 `;
@@ -15,8 +22,8 @@ export const loginBox = css`
     justify-content: center;
     margin-top: 20px;
     width: 350px;
-    height: 360px;
-    border: 1px solid #ffffff;
+    height: 430px;
+    box-shadow: 1px 0px 2px 1px black;
 `;
 
 export const selectBox = css`
@@ -32,8 +39,8 @@ export const linkBox = css`
     top: 0;
     box-sizing: border-box;
     width: 100%;
-    height: 15%;
-    font-size: 16px;
+    height: 10%;
+    font-size: 14px;
     & > a {
         color: #ffffff;
         text-decoration: none;
@@ -43,10 +50,9 @@ export const linkBox = css`
         height: 100%;
         width: 50%;
         border-collapse: collapse;
-        border: 1px solid #ffffff;
     }
     & > a:nth-of-type(1) {
-        border-bottom: none;
+        box-shadow: inset 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
     }
 `;
 
@@ -66,7 +72,9 @@ export const searchBox = css`
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 50px;
     & > a {
+        padding: 5px;
         font-size: 12px;
         color: #ffffff;
         text-decoration: none;
@@ -81,12 +89,19 @@ export const buttonBox = css`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 10px;
     margin-bottom: 15px;
     & > button {
-        background-color: white;
-        border: none;
+        width: 100px;
+        height: 30px;
+        background-color: transparent;
+        color: #999999;
+        font-size: 14px;
+        box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
         cursor: pointer;
-        width: 130px;
+        &:active {
+            box-shadow: inset 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
+        }
     }
 `;
 
@@ -94,6 +109,14 @@ export const line = css`
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
+    font-size: 12px;
+    cursor: default;
+    &::before,
+    ::after {
+        margin: 0px 5px;
+        content: "―――――――――";
+    }
 `;
 
 export const oauthBox = css`
@@ -105,17 +128,22 @@ export const oauthBox = css`
     justify-content: center;
     width: 100%;
     height: 30px;
+    margin-top: 10px;
     & > a {
-        height: 20px;
-        width: 20px;
+        height: 25px;
+        width: 25px;
+        padding: 5px;
         color: #ffffff;
         text-decoration: none;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0px 10px;
+        margin: 0px 15px;
         & > img {
             height: 100%;
         }
     }
+`;
+export const blank = css`
+    flex-grow: 0.4;
 `;

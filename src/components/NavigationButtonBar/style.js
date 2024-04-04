@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
 
 export const layout = css`
     box-sizing: border-box;
@@ -9,13 +9,13 @@ export const layout = css`
     justify-content: space-between;
     align-items: center;
     margin: 0;
-    border-top: 1px solid #fafafa;
     padding: 0px 50px;
     width: 100%;
     height: 60px;
     background-color: #262627;
     z-index: 99;
-`
+    box-shadow: 3px 5px 10px 3px black;
+`;
 
 export const buttonBox = css`
     display: flex;
@@ -28,4 +28,4 @@ export const buttonBox = css`
     & > span {
         font-size: 12px;
     }
-`
+`;

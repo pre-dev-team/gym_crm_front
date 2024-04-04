@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
 
 export const background = css`
     position: fixed;
@@ -8,20 +8,19 @@ export const background = css`
     width: 100%;
     height: 100%;
     background-color: #808080;
-`
+`;
 
 export const layout = css`
     box-sizing: border-box;
     position: relative;
     display: flex;
     margin: 30px auto;
-    border: 2px solid #fafafa;
     padding: 10px;
     width: 425px;
     height: 800px;
     overflow: hidden;
     background-color: #262627;
-`
+`;
 
 export const container = css`
     width: 100%;
@@ -31,4 +30,4 @@ export const container = css`
     &::-webkit-scrollbar {
         display: none;
     }
-`
+`;

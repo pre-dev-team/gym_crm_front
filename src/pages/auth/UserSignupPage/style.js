@@ -6,20 +6,24 @@ export const layout = css`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 30px auto;
-    border: 1px solid #ffffff;
     padding: 10px;
     width: 100%;
-    height: 90%;
+    height: 100%;
     background-color: transparent;
+`;
 
+export const signupBox = css`
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 550px;
+    box-shadow: 1px 0px 2px 1px black;
     & > h1 {
-        margin: 30px 0px;
+        margin-bottom: 20px;
         color: #ffffff;
-    }
-
-    & > button {
-        width: 50px;
     }
 `;
 
@@ -34,7 +38,7 @@ export const buttonBox = css`
     margin-top: 10px;
     & > button {
         width: 100px;
-
+        height: 30px;
         background-color: transparent;
         color: #999999;
         font-size: 14px;

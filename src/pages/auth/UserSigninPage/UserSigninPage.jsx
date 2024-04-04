@@ -66,12 +66,12 @@ function UserSigninPage(props) {
                             onChange={passwordChange}
                         />
                     </div>
+                    <div css={s.searchBox}>
+                        <Link>🔒 아이디찾기</Link>
+                        <Link>🔑 비밀번호찾기</Link>
+                    </div>
                     <div css={s.buttonBox}>
                         <button onClick={handleLoginClick}>로그인</button>
-                    </div>
-                    <div css={s.searchBox}>
-                        <Link>🔒아이디찾기</Link>
-                        <Link>🔑비밀번호찾기</Link>
                     </div>
                     <span css={s.line}>
                         <span>또는</span>
@@ -89,6 +89,7 @@ function UserSigninPage(props) {
                     </div>
                 </div>
             </div>
+            <div css={s.blank}></div>
         </div>
     );
 }
