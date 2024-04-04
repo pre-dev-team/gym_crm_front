@@ -25,23 +25,29 @@ export const inputBox = css`
         background-color: transparent;
         margin-bottom: 20px;
         box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s, box-shadow 0.3s;
+        &:focus {
+            transform: translateY(2px);
+            box-shadow: inset 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
+        }
     }
 `;
 
 export const inputIcon = (type) => css`
     position: absolute;
-    right: 35px;
-    top: 2px;
+    right: 20px;
+    top: 20px;
     display: flex;
     justify-content: right;
     color: ${type === "error" ? "#ff3030" : "#00921b"};
 `;
 
-export const messageBox = css`
+export const messageBox = (type) => css`
+    position: absolute;
+    bottom: -15px;
     height: 30px;
-    font-size: 13px;
+    font-size: 10px;
     padding: 0px 5px;
     background-color: transparent;
-    color: white;
+    color: ${type === "error" ? "#ff3030" : "#00921b"};
 `;
-
