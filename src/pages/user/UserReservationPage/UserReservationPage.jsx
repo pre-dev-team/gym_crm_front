@@ -20,13 +20,16 @@ function UserReservationPage(props) {
     const [selectDate, setSelectDate] = useState(new Date());
     const [selectPeriod, setSelectPeriod] = useState();
     const [isSelect, setIsSelect] = useState(false);
-
     const testQuery = useMutation({
         mutationKey: "testQuery",
         mutationFn: test,
         onSuccess: (response) => {},
         onError: (error) => {},
     });
+
+    const handleResevationClick = () => {
+        testQuery.mutate(selectDate);
+    };
 
     dayjs("2021-07-17").format("YYYY년 M월 D일");
 
@@ -78,6 +81,9 @@ function UserReservationPage(props) {
             <div>
                 <div>트레이너 검색창</div>
                 <div>트레이너 보여주는창</div>
+            </div>
+            <div>
+                <button onClick={handleResevationClick}>예약하기</button>
             </div>
         </div>
     );

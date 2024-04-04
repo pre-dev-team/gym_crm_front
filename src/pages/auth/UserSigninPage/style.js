@@ -1,21 +1,10 @@
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
 
 export const layout = css`
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 30px auto;
-    border-collapse: collapse;
-    padding: 10px;
-    width: 100%;
-    height: 90%;
-    
-    & > h1 {
+    c & > h1 {
         color: white;
     }
-`
+`;
 
 export const loginBox = css`
     position: relative;
@@ -28,14 +17,14 @@ export const loginBox = css`
     width: 350px;
     height: 360px;
     border: 1px solid #ffffff;
-`
+`;
 
 export const selectBox = css`
     position: absolute;
     top: 54px;
     width: 348px;
     height: 300px;
-`
+`;
 
 export const linkBox = css`
     position: absolute;
@@ -98,7 +87,6 @@ export const buttonBox = css`
         border: none;
         cursor: pointer;
         width: 130px;
-
     }
 `;
 
