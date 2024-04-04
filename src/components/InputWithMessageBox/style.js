@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
 
 export const layout = css`
     position: relative;
@@ -6,7 +6,6 @@ export const layout = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 250px;
     height: 60px;
     padding: 0px 10px;
     background-color: transparent;
@@ -15,15 +14,17 @@ export const layout = css`
 export const inputBox = css`
     height: 30px;
     & > input {
-        color: white;
-        font-size: 16px;
         box-sizing: border-box;
         border: none;
-        border-bottom: 1px solid black;
         outline: none;
         padding: 0px 5px;
+        height: 25px;
+        width: 260px;
+        font-size: 16px;
+        color: white;
         background-color: transparent;
         margin-bottom: 20px;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
     }
 `;
 
@@ -42,5 +43,5 @@ export const messageBox = css`
     padding: 0px 5px;
     background-color: transparent;
     color: white;
-    font-weight: 500;
 `;
+
