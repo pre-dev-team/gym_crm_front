@@ -56,6 +56,9 @@ export const linkBox = css`
         border-collapse: collapse;
         border: 1px solid #ffffff;
     }
+    & > a:nth-of-type(1) {
+        border-bottom: none;
+    }
 `;
 
 export const inputBox = css`
