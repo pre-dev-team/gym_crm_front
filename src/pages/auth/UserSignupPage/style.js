@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
 
 export const layout = css`
     box-sizing: border-box;
@@ -21,30 +21,27 @@ export const layout = css`
     & > button {
         width: 50px;
     }
-`
+`;
 
 export const inputBox = css`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-
-`
+`;
 
 export const buttonBox = css`
     margin-top: 10px;
     & > button {
-        width: 70px;
-        background-color: white;
-        border: none;
+        width: 100px;
+
+        background-color: transparent;
+        color: #999999;
         font-size: 14px;
+        box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
         cursor: pointer;
-        &:hover{
-            background-color: #eeeeee;
-        }
         &:active {
-            background-color: #999999;
+            box-shadow: inset 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
         }
     }
-`
+`;

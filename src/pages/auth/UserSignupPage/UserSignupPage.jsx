@@ -1,12 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import * as s from './style';
-import { Link } from 'react-router-dom';
-import InputWithMessagebox from '../../../components/InputWithMessageBox/InputWithMessagebox';
-import { useState } from 'react';
-import useInput from '../../../hooks/useInput';
-import { useMutation } from 'react-query';
-import {userSignupRequest} from '../../../apis/api/signup';
-
+import * as s from "./style";
+import { Link } from "react-router-dom";
+import InputWithMessagebox from "../../../components/InputWithMessageBox/InputWithMessagebox";
+import { useState } from "react";
+import useInput from "../../../hooks/useInput";
+import { useMutation } from "react-query";
+import { userSignupRequest } from "../../../apis/api/signup";
 
 function UserSignupPage(props) {
     const [username, usernameChange, usernameMessage, setUsername] = useInput();
@@ -19,32 +18,30 @@ function UserSignupPage(props) {
     const userSignupMutation = useMutation({
         mutationKey: "userSignupMutation",
         mutationFn: userSignupRequest,
-        onSuccess: response => {
+        onSuccess: (response) => {
             console.log(response);
         },
-        onError: error => {
+        onError: (error) => {
             console.log(error);
-        }
-    })
+        },
+    });
 
     const handleSubmitClick = () => {
         userSignupMutation.mutate({
             userUsername: username,
             userPassword: password,
-            userName:name,
-            userPhone:phone,
-            userEmail:email
+            userName: name,
+            userPhone: phone,
+            userEmail: email,
         });
-    }
-    
+    };
 
     return (
-
         <div css={s.layout}>
             <h1>회원가입</h1>
             <div css={s.inputBox}>
                 <div css={s.inputBox}>
-                    <InputWithMessagebox 
+                    <InputWithMessagebox
                         type={"text"}
                         name={"username"}
                         value={username}
@@ -53,7 +50,7 @@ function UserSignupPage(props) {
                     />
                 </div>
                 <div css={s.inputBox}>
-                    <InputWithMessagebox 
+                    <InputWithMessagebox
                         type={"password"}
                         name={"password"}
                         value={password}
@@ -62,7 +59,7 @@ function UserSignupPage(props) {
                     />
                 </div>
                 <div css={s.inputBox}>
-                    <InputWithMessagebox 
+                    <InputWithMessagebox
                         type={"password"}
                         name={"checkPassword"}
                         value={checkPassword}
@@ -71,7 +68,7 @@ function UserSignupPage(props) {
                     />
                 </div>
                 <div css={s.inputBox}>
-                    <InputWithMessagebox 
+                    <InputWithMessagebox
                         type={"text"}
                         name={"name"}
                         value={name}
@@ -80,7 +77,7 @@ function UserSignupPage(props) {
                     />
                 </div>
                 <div css={s.inputBox}>
-                    <InputWithMessagebox 
+                    <InputWithMessagebox
                         type={"email"}
                         name={"email"}
                         value={email}
@@ -89,7 +86,7 @@ function UserSignupPage(props) {
                     />
                 </div>
                 <div css={s.inputBox}>
-                    <InputWithMessagebox 
+                    <InputWithMessagebox
                         type={"text"}
                         name={"phone"}
                         value={phone}
@@ -98,7 +95,7 @@ function UserSignupPage(props) {
                     />
                 </div>
                 <div css={s.buttonBox}>
-                    <button onClick={handleSubmitClick}>제출</button>
+                    <button onClick={handleSubmitClick}>가입</button>
                 </div>
             </div>
         </div>

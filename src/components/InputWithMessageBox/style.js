@@ -1,11 +1,10 @@
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
 
 export const layout = css`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 210px;
     height: 60px;
     padding: 0px 10px;
     background-color: transparent;
@@ -14,15 +13,17 @@ export const layout = css`
 export const inputBox = css`
     height: 30px;
     & > input {
-        color: white;
-        font-size: 16px;
         box-sizing: border-box;
         border: none;
-        border-bottom: 1px solid black;
         outline: none;
         padding: 0px 5px;
+        height: 25px;
+        width: 260px;
+        font-size: 16px;
+        color: white;
         background-color: transparent;
         margin-bottom: 20px;
+        box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
     }
 `;
 

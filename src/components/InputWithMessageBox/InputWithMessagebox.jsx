@@ -1,13 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import * as s from './style';
+import * as s from "./style";
 
 function InputWithMessagebox(props) {
-
-    const {message, type, placeholder, value, ref, name, onChange} = props;
+    const { message, type, placeholder, value, ref, name, onChange } = props;
     return (
         <div css={s.layout}>
             <div css={s.inputBox}>
-                <input 
+                <input
                     type={type}
                     name={name}
                     value={value}
@@ -18,7 +17,7 @@ function InputWithMessagebox(props) {
                 />
             </div>
             <div css={s.messageBox}>
-                <span>{message}테스트메세지</span>
+                <span>{message}</span>
             </div>
         </div>
     );
