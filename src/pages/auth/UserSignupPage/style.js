@@ -43,7 +43,11 @@ export const buttonBox = css`
         color: #999999;
         font-size: 14px;
         box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
+        transition: transform 0.3s, box-shadow 0.3s;
         cursor: pointer;
+        &:hover {
+            transform: translateY(2px);
+        }
         &:active {
             box-shadow: inset 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
         }
