@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { Link } from "react-router-dom";
 import * as s from "./style";
+import { motion } from "framer-motion";
 import InputWithMessagebox from "../../../components/InputWithMessageBox/InputWithMessagebox";
 import useInput from "../../../hooks/useInput";
 import googleImg from "../../../assets/icons/google.png";
@@ -42,7 +43,13 @@ function UserSigninPage(props) {
     };
 
     return (
-        <div css={s.layout}>
+        <motion.div
+            transition={{ duration: 0.3, delay: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            css={s.layout}
+        >
             <h1>로그인</h1>
             <div css={s.loginBox}>
                 <div css={s.linkBox}>
@@ -90,7 +97,7 @@ function UserSigninPage(props) {
                 </div>
             </div>
             <div css={s.blank}></div>
-        </div>
+        </motion.div>
     );
 }
 

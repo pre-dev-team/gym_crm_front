@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import InputWithMessagebox from "../../../components/InputWithMessageBox/InputWithMessagebox";
 import { useState } from "react";
@@ -37,7 +38,13 @@ function UserSignupPage(props) {
     };
 
     return (
-        <div css={s.layout}>
+        <motion.div
+            transition={{ duration: 0.3, delay: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            css={s.layout}
+        >
             <div css={s.signupBox}>
                 <h1>회원가입</h1>
                 <div css={s.inputBox}>
@@ -100,7 +107,7 @@ function UserSignupPage(props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

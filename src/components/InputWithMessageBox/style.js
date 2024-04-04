@@ -23,7 +23,7 @@ export const inputBox = css`
         color: white;
         background-color: transparent;
         margin-bottom: 20px;
-        box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
     }
 `;
 

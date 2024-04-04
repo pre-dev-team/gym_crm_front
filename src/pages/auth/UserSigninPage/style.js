@@ -74,14 +74,23 @@ export const searchBox = css`
     justify-content: center;
     height: 50px;
     & > a {
-        padding: 5px;
+        padding: 10px 20px;
         font-size: 12px;
         color: #ffffff;
         text-decoration: none;
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
         margin: 0px 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        &:hover {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            transform: translateY(2px);
+        }
+        &:active {
+            box-shadow: inset 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
+        }
     }
 `;
 
@@ -98,7 +107,11 @@ export const buttonBox = css`
         color: #999999;
         font-size: 14px;
         box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
+        transition: transform 0.3s, box-shadow 0.3s;
         cursor: pointer;
+        &:hover {
+            transform: translateY(2px);
+        }
         &:active {
             box-shadow: inset 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
         }
