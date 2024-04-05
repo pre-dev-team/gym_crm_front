@@ -12,8 +12,8 @@ function UserSignupPage(props) {
     const [password, passwordChange, passwordMessage, setPassword] = useInput("userPassword");
     const [checkPassword, checkPasswordChange] = useInput("checkPassword");
     const [name, nameChange, nameMessage, setName] = useInput("userName");
-    const [email, emailChange, emailMessage, setEmail] = useInput("userPhone");
-    const [phone, phoneChange, phoneMessage, setPhone] = useInput("userEmail");
+    const [phone, phoneChange, phoneMessage, setPhone] = useInput("userPhone");
+    const [email, emailChange, emailMessage, setEmail] = useInput("userEmail");
     const [checkPasswordMessage, setCheckPasswordMessage] = useState(null);
 
     useEffect(() => {
@@ -39,26 +39,12 @@ function UserSignupPage(props) {
         }
     }, [checkPassword, password]);
 
-    const userSignupMutation = useMutation({
-        mutationKey: "userSignupMutation",
-        mutationFn: userSignupRequest,
-        onSuccess: (response) => {
-            console.log(response);
-        },
-        onError: (error) => {
-            console.log(error);
-        },
-    });
-
-    const handleSubmitClick = () => {
-        userSignupMutation.mutate({
-            userUsername: username,
-            userPassword: password,
-            userName: name,
-            userPhone: phone,
-            userEmail: email,
-        });
-
+       const handleSubmitClick = () => {
+        if (!password) {
+            alert("비밀번호를 입력하세요.");
+            return;
+        }
+        
         const checkFlags = [
             usernameMessage?.type,
             passwordMessage?.type,
@@ -74,14 +60,15 @@ function UserSignupPage(props) {
         }
 
         userSignupRequest({
-            username,
-            password,
-            name,
-            phone,
-            email,
+            userUsername: username,
+            userPassword: password,
+            userName: name,
+            userPhone: phone,
+            userEmail: email,
         })
             .then((response) => {
-                console.log(response);
+                alert("회원가입 성공");
+                window.location.replace("/");
             })
             .catch((error) => {
                 if (error.response.status === 400) {
@@ -155,22 +142,22 @@ function UserSignupPage(props) {
                 </div>
                 <div css={s.inputBox}>
                     <InputWithMessagebox
-                        type={"email"}
-                        name={"email"}
-                        value={email}
-                        placeholder={"이메일"}
-                        onChange={emailChange}
-                        message={emailMessage}
-                    />
-                </div>
-                <div css={s.inputBox}>
-                    <InputWithMessagebox
                         type={"text"}
                         name={"phone"}
                         value={phone}
                         placeholder={"휴대전화번호"}
                         onChange={phoneChange}
                         message={phoneMessage}
+                    />
+                </div>
+                <div css={s.inputBox}>
+                    <InputWithMessagebox
+                        type={"email"}
+                        name={"email"}
+                        value={email}
+                        placeholder={"이메일"}
+                        onChange={emailChange}
+                        message={emailMessage}
                     />
                 </div>
                 <div css={s.buttonBox}>
