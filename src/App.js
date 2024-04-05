@@ -7,8 +7,20 @@ import AdminPage from "./pages/admin/AdminPage";
 import UserPage from "./pages/user/UserPage";
 import AuthPage from "./pages/auth/AuthPage";
 import RootHeader from "./components/RootHeader/RootHeader";
+import { useQuery } from "react-query";
 
 function App() {
+    const PrincipalQuery = useQuery(["PrincipalQuery"], null, {
+        retry: 0,
+        refetchOnWindowFocus: false,
+        onSuccess: (response) => {
+            console.log("권한체크");
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
     return (
         <RootLayout>
             <RootHeader />

@@ -11,8 +11,9 @@ export const layout = css`
     padding: 10px;
     width: 100%;
     height: 90%;
-    color: white;
 `;
+
+export const calenderBox = css``;
 
 export const customButton = css`
     width: 200px;
@@ -33,7 +34,7 @@ export const periodBox = (isSelect) => css`
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    width: 350px;
+    width: 400px;
     height: 240px;
     font-size: 12px;
     color: black;
@@ -53,5 +54,13 @@ export const periodButton = (isSelect) => css`
     }
     &:active {
         background-color: #999999;
+    }
+`;
+
+export const trainerBox = css`
+    width: 100%;
+    height: 320px;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
     }
 `;
