@@ -23,7 +23,7 @@ function NavigationButtonBar(props) {
                 Home  
                 </span>          
             </Link>
-            <Link css={s.buttonBox} to={"/"}> 
+            <Link css={s.buttonBox} to={"/user/mypage"}> 
                 <div>
                     <FaUser />
                 </div>
