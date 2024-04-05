@@ -6,8 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
-import { useMutation, useQuery } from "react-query";
-import { test } from "../../../apis/api/test";
+import { useMutation } from "react-query";
+import { userReservationRequest } from "../../../apis/api/reservation";
 import TrainerCardForReservation from "../../../components/TrainerCardForReservation/TrainerCardForReservation";
 
 const CustomInput = ({ value, onClick }) => (
@@ -29,11 +29,16 @@ function UserReservationPage(props) {
         );
     }, [selectPeriod]);
 
-    const testQuery = useMutation({
-        mutationKey: "testQuery",
-        mutationFn: test,
-        onSuccess: (response) => {},
-        onError: (error) => {},
+    const userReservationQuery = useMutation({
+        mutationKey: "userReservationQuery",
+        mutationFn: userReservationRequest,
+        onSuccess: (response) => {
+            console.log(response);
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+        retry: 0,
     });
 
     const handleResevationClick = (trainerId) => {
@@ -43,8 +48,9 @@ function UserReservationPage(props) {
             timeId: selectPeriod,
             date: selectDate,
         });
+
         if (window.confirm("예약하시겠습니까?")) {
-            testQuery.mutate({
+            userReservationQuery.mutate({
                 userId: null,
                 trainderId: trainerId,
                 timeId: selectPeriod,
