@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import KakaoMapAPI from '../../components/KakaoMapAPI/KakaoMapAPI';
 import TrainerInformation from '../../components/TrainerInformation/TrainerInformation';
 import * as s from './style';
 import { motion } from 'framer-motion';
@@ -8,6 +9,7 @@ import { motion } from 'framer-motion';
 
 function MainPage(props) {
     return (
+
         <div css={s.test}>
             <motion.div
                 transition={{ "duration": 1, delay: 0 }}
@@ -44,6 +46,9 @@ function MainPage(props) {
                 exit={{ "opacity": 0 }}>
                 Be A Man At Pre-Dev
             </motion.div>
+
+            <KakaoMapAPI />
+
         </div>
     );
 }
