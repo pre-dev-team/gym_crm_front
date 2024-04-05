@@ -9,10 +9,7 @@ import { motion } from 'framer-motion';
 
 function MainPage(props) {
     return (
-        // <div>
-        //     {/* <TrainerInformation /> */}
- 
-        // </div>
+
         <div css={s.test}>
             <motion.div
                 transition={{ "duration": 1, delay: 0 }}
@@ -49,7 +46,9 @@ function MainPage(props) {
                 exit={{ "opacity": 0 }}>
                 Be A Man At Pre-Dev
             </motion.div>
+
             <KakaoMapAPI />
+
         </div>
     );
 }
