@@ -8,12 +8,12 @@ import { useMutation } from "react-query";
 import { userSignupRequest } from "../../../apis/api/signup";
 
 function UserSignupPage(props) {
-    const [username, usernameChange, usernameMessage, setUsername, setUsernameMessage] = useInput("userUsername");
-    const [password, passwordChange, passwordMessage, setPassword] = useInput("userPassword");
+    const [username, usernameChange, usernameMessage, setUsername, setUsernameMessage] = useInput("username");
+    const [password, passwordChange, passwordMessage, setPassword] = useInput("password");
     const [checkPassword, checkPasswordChange] = useInput("checkPassword");
-    const [name, nameChange, nameMessage, setName] = useInput("userName");
-    const [phone, phoneChange, phoneMessage, setPhone] = useInput("userPhone");
-    const [email, emailChange, emailMessage, setEmail] = useInput("userEmail");
+    const [name, nameChange, nameMessage, setName] = useInput("name");
+    const [phone, phoneChange, phoneMessage, setPhone] = useInput("phone");
+    const [email, emailChange, emailMessage, setEmail] = useInput("email");
     const [checkPasswordMessage, setCheckPasswordMessage] = useState(null);
 
     useEffect(() => {
