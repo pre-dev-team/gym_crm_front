@@ -39,12 +39,49 @@ function UserSignupPage(props) {
         }
     }, [checkPassword, password]);
 
-       const handleSubmitClick = () => {
+    useEffect(() => {
+        if (phone.length === 3) {
+            setPhone((phone) => phone.concat("-"));
+        }
+        if (phone.length === 8) {
+            setPhone((phone) => phone.concat("-"));
+        }
+    }, [phone]);
+
+    const userSignupMutation = useMutation({
+        mutationKey: "userSignupMutation",
+        mutationFn: userSignupRequest,
+        onSuccess: (response) => {
+            console.log(response);
+            alert("회원가입 성공");
+            // window.location.replace("/");
+        },
+        onError: (error) => {
+            if (error.response.status === 400) {
+                const errorMap = error.response.data;
+                const errorEntries = Object.entries(errorMap);
+                for (let [k, v] of errorEntries) {
+                    if (k === "username") {
+                        setUsernameMessage(() => {
+                            return {
+                                type: "error",
+                                text: v,
+                            };
+                        });
+                    }
+                }
+            } else {
+                alert("회원가입 오류");
+            }
+        },
+    });
+
+    const handleSubmitClick = () => {
         if (!password) {
             alert("비밀번호를 입력하세요.");
             return;
         }
-        
+
         const checkFlags = [
             usernameMessage?.type,
             passwordMessage?.type,
@@ -59,35 +96,13 @@ function UserSignupPage(props) {
             return;
         }
 
-        userSignupRequest({
-            userUsername: username,
-            userPassword: password,
-            userName: name,
-            userPhone: phone,
-            userEmail: email,
-        })
-            .then((response) => {
-                alert("회원가입 성공");
-                window.location.replace("/");
-            })
-            .catch((error) => {
-                if (error.response.status === 400) {
-                    const errorMap = error.response.data;
-                    const errorEntries = Object.entries(errorMap);
-                    for (let [k, v] of errorEntries) {
-                        if (k === "username") {
-                            setUsernameMessage(() => {
-                                return {
-                                    type: "error",
-                                    text: v,
-                                };
-                            });
-                        }
-                    }
-                } else {
-                    alert("회원가입 오류");
-                }
-            });
+        userSignupMutation.mutate({
+            username: username,
+            password: password,
+            name: name,
+            phone: phone,
+            email: email,
+        });
     };
 
     return (
@@ -161,7 +176,7 @@ function UserSignupPage(props) {
                     />
                 </div>
                 <div css={s.buttonBox}>
-                    <button onClick={handleSubmitClick}>제출</button>
+                    <button onClick={handleSubmitClick}>가입</button>
                 </div>
             </div>
         </motion.div>

@@ -6,8 +6,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
-import { useMutation } from "react-query";
-import { userReservationRequest } from "../../../apis/api/reservation";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import {
+    getDayReservationRequest,
+    getReservationTimeRequest,
+    userReservationRequest,
+} from "../../../apis/api/reservation";
 import TrainerCardForReservation from "../../../components/TrainerCardForReservation/TrainerCardForReservation";
 
 const CustomInput = ({ value, onClick }) => (
@@ -19,15 +23,37 @@ const CustomInput = ({ value, onClick }) => (
 function UserReservationPage(props) {
     const dayjsDate = dayjs();
     const [selectDate, setSelectDate] = useState(new Date());
-    const [selectPeriod, setSelectPeriod] = useState(0);
+    const [selectTimeId, setSelectTimeId] = useState(0);
     const [isSelect, setIsSelect] = useState(false);
-    const [possiblePeriod, setPossiblePeriod] = useState([]);
+    const [possibleTimes, setPossibleTimes] = useState([]);
+    const [schedule, setSchedule] = useState([]);
+    const queryClient = useQueryClient();
+    const principalDate = queryClient.getQueriesData("principalQuery");
+
+    const getTimedurationQuery = useQuery(["getTimedurationQuery"], getReservationTimeRequest, {
+        retry: 0,
+        refetchOnWindowFocus: false,
+        onSuccess: (response) => {
+            console.log(response);
+            setSchedule(() => response.data);
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
+    const getDayReservationQuery = useQuery(["getDayReservationQuery"], getDayReservationRequest(selectDate), {
+        retry: 0,
+        refetchOnWindowFocus: false,
+        onSuccess: (response) => {
+            console.log(response);
+            setSchedule(() => response.data);
+        },
+    });
 
     useEffect(() => {
-        setPossiblePeriod(() =>
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].filter((time) => time + 9 > new Date().getHours() + 1)
-        );
-    }, [selectPeriod]);
+        setPossibleTimes(() => schedule.filter((time) => time.timeId + 9 > new Date().getHours() + 1));
+    }, [selectTimeId]);
 
     const userReservationQuery = useMutation({
         mutationKey: "userReservationQuery",
@@ -45,7 +71,7 @@ function UserReservationPage(props) {
         console.log({
             userId: null,
             trainderId: trainerId,
-            timeId: selectPeriod,
+            timeId: selectTimeId,
             date: selectDate,
         });
 
@@ -53,7 +79,7 @@ function UserReservationPage(props) {
             userReservationQuery.mutate({
                 userId: null,
                 trainderId: trainerId,
-                timeId: selectPeriod,
+                timeId: selectTimeId,
                 date: selectDate,
             });
         }
@@ -61,8 +87,11 @@ function UserReservationPage(props) {
 
     dayjs("2021-07-17").format("YYYY년 M월 D일");
 
-    const handlePeriodClick = (periodId) => {
-        setSelectPeriod(() => periodId);
+    const handleTimeClick = (timeId) => {
+        setSelectTimeId(() => timeId);
+        if (selectTimeId === timeId) {
+            setSelectTimeId(() => 0);
+        }
     };
 
     return (
@@ -83,15 +112,15 @@ function UserReservationPage(props) {
             </div>
 
             <div css={s.periodBox(isSelect)}>
-                {possiblePeriod.map((periodId) => {
+                {possibleTimes.map((time) => {
                     return (
                         <div
-                            key={periodId}
-                            onClick={() => handlePeriodClick(periodId)}
-                            id={periodId}
-                            css={s.periodButton(periodId === selectPeriod)}
+                            key={time.timeId}
+                            onClick={() => handleTimeClick(time.timeId)}
+                            id={time.timeId}
+                            css={s.periodButton(time.timeId === selectTimeId)}
                         >
-                            {periodId + 9}:00 ~ {periodId + 10}:00
+                            {time.timeDuration}
                         </div>
                     );
                 })}

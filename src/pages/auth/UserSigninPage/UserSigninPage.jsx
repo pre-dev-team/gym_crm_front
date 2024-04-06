@@ -20,9 +20,13 @@ function UserSigninPage(props) {
         mutationFn: userSigninRequest,
         onSuccess: (response) => {
             const accessToken = response?.data;
-            localStorage.setItem("accessToken", accessToken);
-            alert("로그인성공");
-            window.location.replace("/");
+            if (!!accessToken) {
+                localStorage.setItem("accessToken", accessToken);
+                alert("로그인성공");
+                window.location.replace("/");
+            } else {
+                alert("해당 사용자가 없습니다");
+            }
         },
         onError: (error) => {
             alert("에러");
@@ -31,7 +35,6 @@ function UserSigninPage(props) {
     });
 
     const handleLoginClick = () => {
-        
         console.log({
             username: username,
             password: password,
@@ -43,8 +46,8 @@ function UserSigninPage(props) {
         }
 
         userSigninMutation.mutate({
-            userUsername: username,
-            userPassword: password,
+            username: username,
+            password: password,
         });
     };
 
