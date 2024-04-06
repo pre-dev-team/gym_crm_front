@@ -40,10 +40,7 @@ function UserSignupPage(props) {
     }, [checkPassword, password]);
 
     useEffect(() => {
-        if (phone.length === 3) {
-            setPhone((phone) => phone.concat("-"));
-        }
-        if (phone.length === 8) {
+        if (phone.length === 3 || phone.length === 8) {
             setPhone((phone) => phone.concat("-"));
         }
     }, [phone]);
@@ -53,7 +50,7 @@ function UserSignupPage(props) {
         mutationFn: userSignupRequest,
         onSuccess: (response) => {
             console.log(response);
-            alert("회원가입 성공");
+            // alert("회원가입 성공");
             // window.location.replace("/");
         },
         onError: (error) => {
