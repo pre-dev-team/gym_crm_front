@@ -3,16 +3,11 @@ import * as s from "./style";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import {
-    getDayReservationRequest,
-    getReservationTimeRequest,
-    userReservationRequest,
-} from "../../../apis/api/reservation";
-import TrainerCardForReservation from "../../../components/TrainerCardForReservation/TrainerCardForReservation";
+import { useQuery, useQueryClient } from "react-query";
+import { getDayReservationRequest, getReservationTimeRequest } from "../../../apis/api/reservation";
+import TrainerBoardForReservation from "../../../components/TrainerBoardForReservation/TrainerBoardForReservation";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -58,8 +53,11 @@ function UserReservationPage(props) {
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
+                console.log(response.data);
+                console.log(possibleTimes);
                 setReservedTimeId(() => response.data.map((time) => time.timeId));
             },
+            onError: (error) => {},
         }
     );
 
@@ -75,42 +73,8 @@ function UserReservationPage(props) {
             setPossibleTimes(() => schedule.filter((time) => !reservedTimeId.includes(time.timeId)));
         }
     }, [selectDate, selectTimeId]);
-    // #########################################예약관련######################################### //
-
-    //로그인 유저 예약
-    const userReservationMutation = useMutation({
-        mutationKey: "userReservationMutation",
-        mutationFn: userReservationRequest,
-        retry: 0,
-
-        onSuccess: (response) => {
-            console.log(response.data.timeId);
-        },
-
-        onError: (error) => {
-            console.log(error);
-        },
-    });
-    // #########################################예약관련######################################### //
 
     // #########################################클릭 핸들러######################################### //
-    const handleResevationClick = (trainerId) => {
-        console.log({
-            userId: userId,
-            trainderId: trainerId,
-            timeId: selectTimeId,
-            date: selectDate,
-        });
-
-        if (window.confirm("예약하시겠습니까?")) {
-            userReservationMutation.mutate({
-                userId: userId,
-                trainerId: trainerId,
-                timeId: selectTimeId,
-                date: selectDate,
-            });
-        }
-    };
 
     const handleTimeClick = (timeId) => {
         setSelectTimeId(() => timeId);
@@ -118,14 +82,13 @@ function UserReservationPage(props) {
             setSelectTimeId(() => 0);
         }
     };
-    // #########################################클릭 핸들러######################################### //
 
     return (
         <div css={s.layout}>
             <div css={s.calenderBox}>
                 <DatePicker
                     onChange={(date) => {
-                        setSelectDate(date);
+                        setSelectDate(() => date);
                     }}
                     selected={selectDate}
                     minDate={new Date()}
@@ -151,9 +114,7 @@ function UserReservationPage(props) {
                 })}
             </div>
             <div css={s.trainerBox}>
-                <TrainerCardForReservation profileUrl={null} name={null} onClick={() => handleResevationClick(1)} />
-                <TrainerCardForReservation profileUrl={null} name={null} onClick={() => handleResevationClick(2)} />
-                <TrainerCardForReservation profileUrl={null} name={null} onClick={() => handleResevationClick(3)} />
+                <TrainerBoardForReservation userId={userId} selectTimeId={selectTimeId} selectDate={selectDate} />
             </div>
         </div>
     );
