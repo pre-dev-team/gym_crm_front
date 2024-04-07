@@ -23,13 +23,15 @@ const CustomInput = ({ value, onClick }) => (
 function UserReservationPage(props) {
     const [selectDate, setSelectDate] = useState(new Date());
     const [selectTimeId, setSelectTimeId] = useState(0);
-    const [isSelect, setIsSelect] = useState(false);
-    const [possibleTimes, setPossibleTimes] = useState([]);
     const [schedule, setSchedule] = useState([]);
+    const [possibleTimes, setPossibleTimes] = useState([]);
+    const [reservedTimeId, setReservedTimeId] = useState([]);
+    const [userId, setUserId] = useState(0);
     const queryClient = useQueryClient();
-    const principalDate = queryClient.getQueriesData("principalQuery");
+    const principalData = queryClient.getQueryData("principalQuery");
 
     // #########################################시간관련######################################### //
+    // 시간DB 가져옴
     const getTimedurationQuery = useQuery(["getTimedurationQuery"], getReservationTimeRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
@@ -41,7 +43,28 @@ function UserReservationPage(props) {
         },
     });
 
+    //선택 날짜 예약정보를 통해 예약한 시간대는 불활성화 시킴
+    const getDayReservationQuery = useQuery(
+        ["getDayReservationQuery", selectDate],
+
+        () =>
+            getDayReservationRequest({
+                date: selectDate,
+                userId: userId,
+                trainerId: 0,
+            }),
+
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                setReservedTimeId(() => response.data.map((time) => time.timeId));
+            },
+        }
+    );
+
     useEffect(() => {
+        setUserId(() => principalData?.data.userId);
         const today = new Date();
         const isSameDate = today.getDate() === selectDate.getDate();
         const isSameMonth = today.getMonth() === selectDate.getMonth();
@@ -49,54 +72,40 @@ function UserReservationPage(props) {
         if (isSameDate && isSameMonth & isSameYear) {
             setPossibleTimes(() => schedule.filter((time) => time.timeId + 9 > new Date().getHours() + 1));
         } else {
-            setPossibleTimes(() => schedule);
+            setPossibleTimes(() => schedule.filter((time) => !reservedTimeId.includes(time.timeId)));
         }
     }, [selectDate, selectTimeId]);
-    // #########################################시간관련######################################### //
     // #########################################예약관련######################################### //
 
-    //선택 날짜 예약정보GET
-    const getDayReservationQuery = useQuery(
-        ["getDayReservationQuery", selectDate],
-        getDayReservationRequest({
-            date: selectDate,
-        }),
-        {
-            retry: 0,
-            refetchOnWindowFocus: false,
-            onSuccess: (response) => {
-                console.log(response);
-            },
-        }
-    );
-
-    //로그인 유저 예약정보GET
-    const userReservationQuery = useMutation({
-        mutationKey: "userReservationQuery",
+    //로그인 유저 예약
+    const userReservationMutation = useMutation({
+        mutationKey: "userReservationMutation",
         mutationFn: userReservationRequest,
+        retry: 0,
+
         onSuccess: (response) => {
-            console.log(response);
+            console.log(response.data.timeId);
         },
+
         onError: (error) => {
             console.log(error);
         },
-        retry: 0,
     });
     // #########################################예약관련######################################### //
 
     // #########################################클릭 핸들러######################################### //
     const handleResevationClick = (trainerId) => {
         console.log({
-            userId: null,
+            userId: userId,
             trainderId: trainerId,
             timeId: selectTimeId,
             date: selectDate,
         });
 
         if (window.confirm("예약하시겠습니까?")) {
-            userReservationQuery.mutate({
-                userId: null,
-                trainderId: trainerId,
+            userReservationMutation.mutate({
+                userId: userId,
+                trainerId: trainerId,
                 timeId: selectTimeId,
                 date: selectDate,
             });
@@ -117,7 +126,6 @@ function UserReservationPage(props) {
                 <DatePicker
                     onChange={(date) => {
                         setSelectDate(date);
-                        console.log(date.toLocaleString("ko-KR"));
                     }}
                     selected={selectDate}
                     minDate={new Date()}
@@ -128,7 +136,7 @@ function UserReservationPage(props) {
                 />
             </div>
 
-            <div css={s.periodBox(isSelect)}>
+            <div css={s.periodBox}>
                 {possibleTimes.map((time) => {
                     return (
                         <div
@@ -144,9 +152,8 @@ function UserReservationPage(props) {
             </div>
             <div css={s.trainerBox}>
                 <TrainerCardForReservation profileUrl={null} name={null} onClick={() => handleResevationClick(1)} />
-                <TrainerCardForReservation profileUrl={null} name={null} onClick={() => handleResevationClick(1)} />
-                <TrainerCardForReservation profileUrl={null} name={null} onClick={() => handleResevationClick(1)} />
-                <TrainerCardForReservation profileUrl={null} name={null} onClick={() => handleResevationClick(1)} />
+                <TrainerCardForReservation profileUrl={null} name={null} onClick={() => handleResevationClick(2)} />
+                <TrainerCardForReservation profileUrl={null} name={null} onClick={() => handleResevationClick(3)} />
             </div>
         </div>
     );

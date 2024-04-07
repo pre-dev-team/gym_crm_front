@@ -8,8 +8,7 @@ import googleImg from "../../../assets/icons/google.png";
 import naverImg from "../../../assets/icons/naver.png";
 import kakaoImg from "../../../assets/icons/kakao.png";
 import { useMutation } from "react-query";
-import { userSigninRequest } from "../../../apis/api/signin";
-import { useState } from "react";
+import { SigninRequest } from "../../../apis/api/signin";
 
 function UserSigninPage(props) {
     const [username, usernameChange, usernameMessage, setUsername] = useInput();
@@ -17,7 +16,7 @@ function UserSigninPage(props) {
 
     const userSigninMutation = useMutation({
         mutationKey: "userSigninMutation",
-        mutationFn: userSigninRequest,
+        mutationFn: SigninRequest,
         onSuccess: (response) => {
             const accessToken = response?.data;
             if (!!accessToken) {
