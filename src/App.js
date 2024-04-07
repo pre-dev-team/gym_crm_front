@@ -7,10 +7,12 @@ import AdminPage from "./pages/admin/AdminPage";
 import UserPage from "./pages/user/UserPage";
 import AuthPage from "./pages/auth/AuthPage";
 import RootHeader from "./components/RootHeader/RootHeader";
+import AdminRootLayout from "./components/AdminRootLayout/AdminRootLayout";
 
 import { useQuery } from "react-query";
 
 import TrainerInformation from "./components/TrainerInformation/TrainerInformation";
+import TrainerPage from "./pages/trainer/TrainerPage";
 
 
 function App() {
@@ -26,7 +28,8 @@ function App() {
     });
 
     return (
-        <RootLayout>
+        <>
+        {/* <RootLayout>
             <RootHeader />
             <Routes>
                 <Route path="/" element={<MainPage />} />
@@ -36,7 +39,14 @@ function App() {
                 <Route path="user/mypage" element={<TrainerInformation />} />
             </Routes>
             <NavigationButtonBar />
-        </RootLayout>
+        </RootLayout> */}
+
+        <AdminRootLayout>
+            <Routes>
+                <Route path="trainer/*" element={<TrainerPage />} />
+            </Routes>
+        </AdminRootLayout>
+        </>
     );
 }
 
