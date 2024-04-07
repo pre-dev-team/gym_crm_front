@@ -28,7 +28,7 @@ export const customButton = css`
 
 export const infoBox = css``;
 
-export const periodBox = (isSelect) => css`
+export const periodBox = css`
     display: flex;
     flex-wrap: wrap;
     align-items: center;

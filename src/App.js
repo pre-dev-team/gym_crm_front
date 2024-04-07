@@ -12,7 +12,6 @@ import { useQuery } from "react-query";
 
 import TrainerInformation from "./components/TrainerInformation/TrainerInformation";
 
-
 function App() {
     const PrincipalQuery = useQuery(["PrincipalQuery"], null, {
         retry: 0,

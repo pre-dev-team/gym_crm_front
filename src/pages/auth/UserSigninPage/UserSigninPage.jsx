@@ -8,8 +8,7 @@ import googleImg from "../../../assets/icons/google.png";
 import naverImg from "../../../assets/icons/naver.png";
 import kakaoImg from "../../../assets/icons/kakao.png";
 import { useMutation } from "react-query";
-import { userSigninRequest } from "../../../apis/api/signin";
-import { useState } from "react";
+import { SigninRequest } from "../../../apis/api/signin";
 
 function UserSigninPage(props) {
     const [username, usernameChange, usernameMessage, setUsername] = useInput();
@@ -17,12 +16,16 @@ function UserSigninPage(props) {
 
     const userSigninMutation = useMutation({
         mutationKey: "userSigninMutation",
-        mutationFn: userSigninRequest,
+        mutationFn: SigninRequest,
         onSuccess: (response) => {
             const accessToken = response?.data;
-            localStorage.setItem("accessToken", accessToken);
-            alert("로그인성공");
-            window.location.replace("/");
+            if (!!accessToken) {
+                localStorage.setItem("accessToken", accessToken);
+                alert("로그인성공");
+                window.location.replace("/");
+            } else {
+                alert("해당 사용자가 없습니다");
+            }
         },
         onError: (error) => {
             alert("에러");
@@ -31,7 +34,6 @@ function UserSigninPage(props) {
     });
 
     const handleLoginClick = () => {
-        
         console.log({
             username: username,
             password: password,
@@ -43,8 +45,8 @@ function UserSigninPage(props) {
         }
 
         userSigninMutation.mutate({
-            userUsername: username,
-            userPassword: password,
+            username: username,
+            password: password,
         });
     };
 
