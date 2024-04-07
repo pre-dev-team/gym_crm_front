@@ -21,7 +21,6 @@ const CustomInput = ({ value, onClick }) => (
 );
 
 function UserReservationPage(props) {
-    const dayjsDate = dayjs();
     const [selectDate, setSelectDate] = useState(new Date());
     const [selectTimeId, setSelectTimeId] = useState(0);
     const [isSelect, setIsSelect] = useState(false);
@@ -30,11 +29,11 @@ function UserReservationPage(props) {
     const queryClient = useQueryClient();
     const principalDate = queryClient.getQueriesData("principalQuery");
 
+    // #########################################시간관련######################################### //
     const getTimedurationQuery = useQuery(["getTimedurationQuery"], getReservationTimeRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
-            console.log(response);
             setSchedule(() => response.data);
         },
         onError: (error) => {
@@ -42,19 +41,36 @@ function UserReservationPage(props) {
         },
     });
 
-    const getDayReservationQuery = useQuery(["getDayReservationQuery"], getDayReservationRequest(selectDate), {
-        retry: 0,
-        refetchOnWindowFocus: false,
-        onSuccess: (response) => {
-            console.log(response);
-            setSchedule(() => response.data);
-        },
-    });
-
     useEffect(() => {
-        setPossibleTimes(() => schedule.filter((time) => time.timeId + 9 > new Date().getHours() + 1));
-    }, [selectTimeId]);
+        const today = new Date();
+        const isSameDate = today.getDate() === selectDate.getDate();
+        const isSameMonth = today.getMonth() === selectDate.getMonth();
+        const isSameYear = today.getFullYear() === selectDate.getFullYear();
+        if (isSameDate && isSameMonth & isSameYear) {
+            setPossibleTimes(() => schedule.filter((time) => time.timeId + 9 > new Date().getHours() + 1));
+        } else {
+            setPossibleTimes(() => schedule);
+        }
+    }, [selectDate, selectTimeId]);
+    // #########################################시간관련######################################### //
+    // #########################################예약관련######################################### //
 
+    //선택 날짜 예약정보GET
+    const getDayReservationQuery = useQuery(
+        ["getDayReservationQuery", selectDate],
+        getDayReservationRequest({
+            date: selectDate,
+        }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                console.log(response);
+            },
+        }
+    );
+
+    //로그인 유저 예약정보GET
     const userReservationQuery = useMutation({
         mutationKey: "userReservationQuery",
         mutationFn: userReservationRequest,
@@ -66,7 +82,9 @@ function UserReservationPage(props) {
         },
         retry: 0,
     });
+    // #########################################예약관련######################################### //
 
+    // #########################################클릭 핸들러######################################### //
     const handleResevationClick = (trainerId) => {
         console.log({
             userId: null,
@@ -85,14 +103,13 @@ function UserReservationPage(props) {
         }
     };
 
-    dayjs("2021-07-17").format("YYYY년 M월 D일");
-
     const handleTimeClick = (timeId) => {
         setSelectTimeId(() => timeId);
         if (selectTimeId === timeId) {
             setSelectTimeId(() => 0);
         }
     };
+    // #########################################클릭 핸들러######################################### //
 
     return (
         <div css={s.layout}>

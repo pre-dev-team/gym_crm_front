@@ -10,6 +10,6 @@ export const getReservationTimeRequest = async () => {
     return response;
 };
 
-export const getDayReservationRequest = async (param) => {
-    const response = await instance.get("/reservation/day", param);
+export const getDayReservationRequest = async (params) => {
+    const response = await instance.get("/reservation/day", { params });
 };
