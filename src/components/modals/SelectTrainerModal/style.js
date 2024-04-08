@@ -2,13 +2,14 @@ import { css } from "@emotion/react";
 
 export const layout = (isSelect) => css`
     position: absolute;
-    top: 20%;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 400px;
+    width: 370px;
     height: 400px;
     background-color: white;
 `;

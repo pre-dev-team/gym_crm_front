@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useEffect, useState } from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import ko from "date-fns/locale/ko";
 import { motion } from "framer-motion";
+import { getDayReservationRequest, userReservationRequest } from "../../../apis/api/reservation";
 import DatePicker from "react-datepicker";
 import { getTimeRequest } from "../../../apis/api/common";
 
@@ -13,16 +14,21 @@ const CustomInput = ({ value, onClick }) => (
     </button>
 );
 
-function SelectTrainerModal({ trainerId, isClick, setIsClick }) {
+function SelectTrainerModal(props) {
+    const { trainerId, isClick, setIsClick } = props;
     const [selectDate, setSelectDate] = useState(new Date());
     const [schedule, setSchedule] = useState([]);
     const [possibleTimes, setPossibleTimes] = useState([]);
     const [selectTimeId, setSelectTimeId] = useState(0);
+    const [accountId, setAccountId] = useState(0);
+    const [reservedTimeIds, setReservedTimeIds] = useState([]);
+    const queryClient = useQueryClient();
+    const principalData = queryClient.getQueryData("principalQuery");
+
     const getTimedurationQuery = useQuery(["getTimedurationQuery"], getTimeRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
-            console.log(response);
             setSchedule(() => response.data);
         },
         onError: (error) => {
@@ -30,7 +36,28 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick }) {
         },
     });
 
+    const getDayReservationQuery = useQuery(
+        ["getDayReservationQuery", selectDate],
+        () =>
+            getDayReservationRequest({
+                date: selectDate,
+                accountId: 0,
+                trainerId: trainerId,
+            }),
+
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                setReservedTimeIds(() => response.data.map((time) => time.timeId));
+            },
+            onError: (error) => {},
+            enabled: !!trainerId,
+        }
+    );
+
     useEffect(() => {
+        setAccountId(() => principalData?.data.accountId);
         const today = new Date();
         const isSameDate = today.getDate() === selectDate.getDate();
         const isSameMonth = today.getMonth() === selectDate.getMonth();
@@ -38,9 +65,9 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick }) {
         if (isSameDate && isSameMonth & isSameYear) {
             setPossibleTimes(() => schedule.filter((time) => time.timeId + 9 > new Date().getHours() + 1));
         } else {
-            setPossibleTimes(() => schedule);
+            setPossibleTimes(() => schedule.filter((time) => !reservedTimeIds.includes(time.timeId)));
         }
-    }, [selectDate, selectTimeId]);
+    }, [selectDate, selectTimeId, reservedTimeIds]);
 
     const handleTimeClick = (timeId) => {
         setSelectTimeId(() => timeId);
@@ -50,8 +77,38 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick }) {
     };
 
     const handleReservationClick = () => {
-        setIsClick(() => false);
+        console.log({
+            accountId: accountId,
+            trainderId: trainerId,
+            timeId: selectTimeId,
+            date: selectDate,
+        });
+
+        if (window.confirm("예약하시겠습니까?")) {
+            userReservationMutation.mutate({
+                accountId: accountId,
+                trainerId: trainerId,
+                timeId: selectTimeId,
+                date: selectDate,
+            });
+        }
     };
+
+    const userReservationMutation = useMutation({
+        mutationKey: "userReservationMutation",
+        mutationFn: userReservationRequest,
+        retry: 0,
+
+        onSuccess: (response) => {
+            setIsClick(() => false);
+            alert("예약완료");
+            window.location.reload();
+        },
+
+        onError: (error) => {
+            console.log(error);
+        },
+    });
 
     return (
         <motion.div
@@ -86,7 +143,10 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick }) {
                     );
                 })}
             </div>
-            <button onClick={handleReservationClick}>예약하기</button>
+            <div>
+                <button onClick={handleReservationClick}>예약하기</button>
+                <button onClick={() => setIsClick(() => false)}>닫기</button>
+            </div>
         </motion.div>
     );
 }

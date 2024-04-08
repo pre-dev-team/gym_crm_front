@@ -11,7 +11,7 @@ import SelectTrainerModal from "../../../components/modals/SelectTrainerModal/Se
 function UserTrainerReservationPage(props) {
     const [trainers, setTrainers] = useState([]);
     const [isClick, setIsClick] = useState(false);
-
+    const [selectTrainerId, setSelectTrainerId] = useState(0);
     const getTrainers = useQuery(["getTrainers"], getTrainersRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
@@ -22,6 +22,11 @@ function UserTrainerReservationPage(props) {
         onError: (error) => {},
     });
 
+    const handleReservationClick = (id) => {
+        setIsClick(() => true);
+        setSelectTrainerId(() => id);
+    };
+
     return (
         <div css={s.layout}>
             <div css={s.trainerBox}>
@@ -31,7 +36,7 @@ function UserTrainerReservationPage(props) {
                             <div key={trainer.trainerId}>
                                 <TrainerCardForReservation
                                     key={trainer.trainerId}
-                                    onClick={() => setIsClick(() => true)}
+                                    onClick={() => handleReservationClick(trainer.trainerId)}
                                     name={trainer.name}
                                     profileUrl={trainer.trainerProfileImgUrl}
                                 />
@@ -40,7 +45,7 @@ function UserTrainerReservationPage(props) {
                     );
                 })}
                 {!!isClick ? (
-                    <SelectTrainerModal setIsClick={setIsClick} isClick={isClick} trainerId={trainers.trainerId} />
+                    <SelectTrainerModal setIsClick={setIsClick} isClick={isClick} trainerId={selectTrainerId} />
                 ) : (
                     <></>
                 )}
