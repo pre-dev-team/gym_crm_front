@@ -8,21 +8,10 @@ import UserTrainerReservationPage from "./UserTrainerReservationPage/UserTrainer
 
 // 여기서 user관련된 모든 것 할겁니다
 function UserPage(props) {
-    const principalQuery = useQuery(["principalQuery"], getPrincipalRequest, {
-        retry: 0,
-        refetchOnWindowFocus: false,
-        onSuccess: (response) => {
-            console.log(response);
-        },
-        onError: (error) => {
-            console.log(error);
-        },
-    });
-
     return (
         <Routes>
             <Route path="/reservation" element={<UserReservationMainPage />} />
-            <Route path="/reservation/time" element={principalQuery.isLoading ? <></> : <UserReservationPage />} />
+            <Route path="/reservation/time" element={<UserReservationPage />} />
             <Route path="/reservation/trainer" element={<UserTrainerReservationPage />} />
         </Routes>
     );

@@ -13,38 +13,44 @@ import { useQuery } from "react-query";
 
 import TrainerInformation from "./components/TrainerInformation/TrainerInformation";
 import TrainerPage from "./pages/trainer/TrainerPage";
+import UserMyPage from "./pages/user/UserMyPage/UserMyPage";
+import { getPrincipalRequest } from "./apis/api/principal";
 
 function App() {
-    const PrincipalQuery = useQuery(["PrincipalQuery"], null, {
+    const PrincipalQuery = useQuery(["PrincipalQuery"], getPrincipalRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
-            console.log("권한체크");
+            console.log("현재권한: " + response.data.authorities[0].authority);
         },
         onError: (error) => {
             console.log(error);
         },
     });
 
+    const isTrainer = PrincipalQuery.isSuccess && PrincipalQuery.data.data.authorities[0].authority === "ROLE_TRAINER";
+
     return (
         <>
-            <RootLayout>
-                <RootHeader />
-                <Routes>
-                    <Route path="/" element={<MainPage />} />
-                    <Route path="admin/*" element={<AdminPage />} />
-                    <Route path="user/*" element={<UserPage />} />
-                    <Route path="auth/*" element={<AuthPage />} />
-                    <Route path="user/mypage" element={<TrainerInformation />} />
-                </Routes>
-                <NavigationButtonBar />
-            </RootLayout>
-
-            {/* <AdminRootLayout>
-            <Routes>
-                <Route path="trainer/*" element={<TrainerPage />} />
-            </Routes>
-        </AdminRootLayout> */}
+            {isTrainer ? (
+                <AdminRootLayout>
+                    <Routes>
+                        <Route path="trainer/*" element={<TrainerPage />} />
+                    </Routes>
+                </AdminRootLayout>
+            ) : (
+                <RootLayout>
+                    <RootHeader />
+                    <Routes>
+                        <Route path="/" element={<MainPage />} />
+                        <Route path="admin/*" element={<AdminPage />} />
+                        <Route path="user/*" element={<UserPage />} />
+                        <Route path="auth/*" element={<AuthPage />} />
+                        <Route path="user/mypage" element={<UserMyPage />} />
+                    </Routes>
+                    <NavigationButtonBar />
+                </RootLayout>
+            )}
         </>
     );
 }
