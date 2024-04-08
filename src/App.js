@@ -8,16 +8,13 @@ import UserPage from "./pages/user/UserPage";
 import AuthPage from "./pages/auth/AuthPage";
 import RootHeader from "./components/RootHeader/RootHeader";
 import AdminRootLayout from "./components/AdminRootLayout/AdminRootLayout";
-
 import { useQuery } from "react-query";
-
-import TrainerInformation from "./components/TrainerInformation/TrainerInformation";
 import TrainerPage from "./pages/trainer/TrainerPage";
 import UserMyPage from "./pages/user/UserMyPage/UserMyPage";
 import { getPrincipalRequest } from "./apis/api/principal";
 
 function App() {
-    const PrincipalQuery = useQuery(["PrincipalQuery"], getPrincipalRequest, {
+    const principalQuery = useQuery(["principalQuery"], getPrincipalRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
@@ -28,7 +25,7 @@ function App() {
         },
     });
 
-    const isTrainer = PrincipalQuery.isSuccess && PrincipalQuery.data.data.authorities[0].authority === "ROLE_TRAINER";
+    const isTrainer = principalQuery.isSuccess && principalQuery.data.data.authorities[0].authority === "ROLE_TRAINER";
 
     return (
         <>

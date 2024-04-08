@@ -1,8 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import UserReservationPage from "./UserTimeReservationPage/UserTimeReservationPage";
-import { useQuery } from "react-query";
-import { getPrincipalRequest } from "../../apis/api/principal";
 import UserReservationMainPage from "./UserReservationMainPage/UserReservationMainPage";
 import UserTrainerReservationPage from "./UserTrainerReservationPage/UserTrainerReservationPage";
 
