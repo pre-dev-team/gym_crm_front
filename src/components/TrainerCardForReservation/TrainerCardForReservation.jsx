@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 
-function TrainerCardForReservation({ onClick, name, profileUrl }) {
+function TrainerCardForReservation({ key, onClick, name, profileUrl }) {
     return (
-        <div css={s.layout}>
+        <div css={s.layout} key={key}>
             <div css={s.photoBox}>
                 <img src={profileUrl} />
             </div>

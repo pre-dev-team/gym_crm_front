@@ -6,7 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
 import { useQuery, useQueryClient } from "react-query";
-import { getDayReservationRequest, getReservationTimeRequest } from "../../../apis/api/reservation";
+import { getDayReservationRequest } from "../../../apis/api/reservation";
+import { getTimeRequest } from "../../../apis/api/common";
 import TrainerBoardForReservation from "../../../components/TrainerBoardForReservation/TrainerBoardForReservation";
 
 const CustomInput = ({ value, onClick }) => (
@@ -21,13 +22,13 @@ function UserReservationPage(props) {
     const [schedule, setSchedule] = useState([]);
     const [possibleTimes, setPossibleTimes] = useState([]);
     const [reservedTimeId, setReservedTimeId] = useState([]);
-    const [userId, setUserId] = useState(0);
+    const [accountId, setAccountId] = useState(0);
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
 
     // #########################################시간관련######################################### //
     // 시간DB 가져옴
-    const getTimedurationQuery = useQuery(["getTimedurationQuery"], getReservationTimeRequest, {
+    const getTimedurationQuery = useQuery(["getTimedurationQuery"], getTimeRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
@@ -45,7 +46,7 @@ function UserReservationPage(props) {
         () =>
             getDayReservationRequest({
                 date: selectDate,
-                userId: userId,
+                accountId: accountId,
                 trainerId: 0,
             }),
 
@@ -53,16 +54,15 @@ function UserReservationPage(props) {
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
-                console.log(response.data);
-                console.log(possibleTimes);
                 setReservedTimeId(() => response.data.map((time) => time.timeId));
             },
             onError: (error) => {},
+            enabled: !!accountId,
         }
     );
 
     useEffect(() => {
-        setUserId(() => principalData?.data.userId);
+        setAccountId(() => principalData?.data.accountId);
         const today = new Date();
         const isSameDate = today.getDate() === selectDate.getDate();
         const isSameMonth = today.getMonth() === selectDate.getMonth();
@@ -72,7 +72,7 @@ function UserReservationPage(props) {
         } else {
             setPossibleTimes(() => schedule.filter((time) => !reservedTimeId.includes(time.timeId)));
         }
-    }, [selectDate, selectTimeId]);
+    }, [selectDate, selectTimeId, reservedTimeId]);
 
     // #########################################클릭 핸들러######################################### //
 
@@ -98,7 +98,6 @@ function UserReservationPage(props) {
                     customInput={<CustomInput />}
                 />
             </div>
-
             <div css={s.periodBox}>
                 {possibleTimes.map((time) => {
                     return (
@@ -114,7 +113,7 @@ function UserReservationPage(props) {
                 })}
             </div>
             <div css={s.trainerBox}>
-                <TrainerBoardForReservation userId={userId} selectTimeId={selectTimeId} selectDate={selectDate} />
+                <TrainerBoardForReservation accountId={accountId} selectTimeId={selectTimeId} selectDate={selectDate} />
             </div>
         </div>
     );

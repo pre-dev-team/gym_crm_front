@@ -4,7 +4,7 @@ import { getUnreservedTrainersRequest, userReservationRequest } from "../../apis
 import { useMutation, useQuery } from "react-query";
 
 function TrainerBoardForReservation(props) {
-    const { userId, selectTimeId, selectDate } = props;
+    const { accountId, selectTimeId, selectDate } = props;
     const [unreservedTrainers, setUnreservedTrainers] = useState([]);
     const getUnreservedTrainersAtTimeQuery = useQuery(
         ["getUnreservedTrainersAtTimeQuery", selectTimeId],
@@ -17,7 +17,6 @@ function TrainerBoardForReservation(props) {
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
-                console.log(response.data);
                 setUnreservedTrainers(() => response.data);
             },
             onError: (error) => {
@@ -32,7 +31,8 @@ function TrainerBoardForReservation(props) {
         retry: 0,
 
         onSuccess: (response) => {
-            console.log(response.data.timeId);
+            alert("예약완료");
+            window.location.reload();
         },
 
         onError: (error) => {
@@ -43,7 +43,7 @@ function TrainerBoardForReservation(props) {
     const handleResevationClick = (trainerId) => {
         console.log(unreservedTrainers);
         console.log({
-            userId: userId,
+            accountId: accountId,
             trainderId: trainerId,
             timeId: selectTimeId,
             date: selectDate,
@@ -51,7 +51,7 @@ function TrainerBoardForReservation(props) {
 
         if (window.confirm("예약하시겠습니까?")) {
             userReservationMutation.mutate({
-                userId: userId,
+                accountId: accountId,
                 trainerId: trainerId,
                 timeId: selectTimeId,
                 date: selectDate,
@@ -62,12 +62,14 @@ function TrainerBoardForReservation(props) {
         <>
             {unreservedTrainers.map((trainer) => {
                 return (
-                    <TrainerCardForReservation
-                        key={trainer.trainderId}
-                        profileUrl={trainer.trainerProfileImgUrl}
-                        name={trainer.name}
-                        onClick={() => handleResevationClick(trainer.trainerId)}
-                    />
+                    <div key={trainer.trainderId}>
+                        <TrainerCardForReservation
+                            key={trainer.trainderId}
+                            profileUrl={trainer.trainerProfileImgUrl}
+                            name={trainer.name}
+                            onClick={() => handleResevationClick(trainer.trainerId)}
+                        />
+                    </div>
                 );
             })}
         </>
