@@ -6,7 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
 import { useQuery, useQueryClient } from "react-query";
-import { getDayReservationRequest, getReservationTimeRequest } from "../../../apis/api/reservation";
+import { getDayReservationRequest } from "../../../apis/api/reservation";
+import { getTimeRequest } from "../../../apis/api/common";
 import TrainerBoardForReservation from "../../../components/TrainerBoardForReservation/TrainerBoardForReservation";
 
 const CustomInput = ({ value, onClick }) => (
@@ -27,7 +28,7 @@ function UserReservationPage(props) {
 
     // #########################################시간관련######################################### //
     // 시간DB 가져옴
-    const getTimedurationQuery = useQuery(["getTimedurationQuery"], getReservationTimeRequest, {
+    const getTimedurationQuery = useQuery(["getTimedurationQuery"], getTimeRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
@@ -56,6 +57,7 @@ function UserReservationPage(props) {
                 setReservedTimeId(() => response.data.map((time) => time.timeId));
             },
             onError: (error) => {},
+            enabled: !!accountId,
         }
     );
 

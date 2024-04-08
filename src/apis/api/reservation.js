@@ -5,11 +5,6 @@ export const userReservationRequest = async (data) => {
     return response;
 };
 
-export const getReservationTimeRequest = async () => {
-    const response = await instance.get("/common/duration");
-    return response;
-};
-
 export const getDayReservationRequest = async (params) => {
     const response = await instance.get("/reservation/day", { params });
     return response;

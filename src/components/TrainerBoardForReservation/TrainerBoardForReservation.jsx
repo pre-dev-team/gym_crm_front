@@ -62,12 +62,14 @@ function TrainerBoardForReservation(props) {
         <>
             {unreservedTrainers.map((trainer) => {
                 return (
-                    <TrainerCardForReservation
-                        key={trainer.trainderId}
-                        profileUrl={trainer.trainerProfileImgUrl}
-                        name={trainer.name}
-                        onClick={() => handleResevationClick(trainer.trainerId)}
-                    />
+                    <div key={trainer.trainderId}>
+                        <TrainerCardForReservation
+                            key={trainer.trainderId}
+                            profileUrl={trainer.trainerProfileImgUrl}
+                            name={trainer.name}
+                            onClick={() => handleResevationClick(trainer.trainerId)}
+                        />
+                    </div>
                 );
             })}
         </>
