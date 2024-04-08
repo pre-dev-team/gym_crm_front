@@ -20,6 +20,7 @@ export const customButton = css`
 export const calenderBox = css`
     box-sizing: border-box;
     float: right;
+    margin: 15px 25px;
 `;
 
 export const tainerProfileBox = css`

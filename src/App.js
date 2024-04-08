@@ -13,9 +13,10 @@ import { useQuery } from "react-query";
 
 import TrainerInformation from "./components/TrainerInformation/TrainerInformation";
 import TrainerPage from "./pages/trainer/TrainerPage";
+import { getPrincipalRequest } from "./apis/api/principal";
 
 function App() {
-    const PrincipalQuery = useQuery(["PrincipalQuery"], null, {
+    const principalQuery = useQuery(["principalQuery"], getPrincipalRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
