@@ -13,9 +13,10 @@ import { useQuery } from "react-query";
 
 import TrainerInformation from "./components/TrainerInformation/TrainerInformation";
 import TrainerPage from "./pages/trainer/TrainerPage";
+import { getPrincipalRequest } from "./apis/api/principal";
 
 function App() {
-    const PrincipalQuery = useQuery(["PrincipalQuery"], null, {
+    const PrincipalQuery = useQuery(["PrincipalQuery"], getPrincipalRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
@@ -28,7 +29,7 @@ function App() {
 
     return (
         <>
-            <RootLayout>
+            {/* <RootLayout>
                 <RootHeader />
                 <Routes>
                     <Route path="/" element={<MainPage />} />
@@ -38,13 +39,13 @@ function App() {
                     <Route path="user/mypage" element={<TrainerInformation />} />
                 </Routes>
                 <NavigationButtonBar />
-            </RootLayout>
+            </RootLayout> */}
 
-            {/* <AdminRootLayout>
+        <AdminRootLayout>
             <Routes>
                 <Route path="trainer/*" element={<TrainerPage />} />
             </Routes>
-        </AdminRootLayout> */}
+        </AdminRootLayout>
         </>
     );
 }
