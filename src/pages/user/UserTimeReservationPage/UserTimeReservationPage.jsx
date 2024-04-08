@@ -5,10 +5,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { getDayReservationRequest } from "../../../apis/api/reservation";
 import { getTimeRequest } from "../../../apis/api/common";
 import TrainerBoardForReservation from "../../../components/TrainerBoardForReservation/TrainerBoardForReservation";
+import usePrincipal from "../../../hooks/usePrincipal";
+import useSchedule from "../../../hooks/useSchedule";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -19,25 +21,10 @@ const CustomInput = ({ value, onClick }) => (
 function UserReservationPage(props) {
     const [selectDate, setSelectDate] = useState(new Date());
     const [selectTimeId, setSelectTimeId] = useState(0);
-    const [schedule, setSchedule] = useState([]);
     const [possibleTimes, setPossibleTimes] = useState([]);
     const [reservedTimeId, setReservedTimeId] = useState([]);
-    const [accountId, setAccountId] = useState(0);
-    const queryClient = useQueryClient();
-    const principalData = queryClient.getQueryData("principalQuery");
-
-    // #########################################시간관련######################################### //
-    // 시간DB 가져옴
-    const getTimedurationQuery = useQuery(["getTimedurationQuery"], getTimeRequest, {
-        retry: 0,
-        refetchOnWindowFocus: false,
-        onSuccess: (response) => {
-            setSchedule(() => response.data);
-        },
-        onError: (error) => {
-            console.log(error);
-        },
-    });
+    const accountId = usePrincipal();
+    const schedule = useSchedule();
 
     //선택 날짜 예약정보를 통해 예약한 시간대는 불활성화 시킴
     const getDayReservationQuery = useQuery(
@@ -62,7 +49,6 @@ function UserReservationPage(props) {
     );
 
     useEffect(() => {
-        setAccountId(() => principalData?.data.accountId);
         const today = new Date();
         const isSameDate = today.getDate() === selectDate.getDate();
         const isSameMonth = today.getMonth() === selectDate.getMonth();

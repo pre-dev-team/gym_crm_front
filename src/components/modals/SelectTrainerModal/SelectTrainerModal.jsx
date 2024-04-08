@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import { getDayReservationRequest, userReservationRequest } from "../../../apis/api/reservation";
 import DatePicker from "react-datepicker";
 import { getTimeRequest } from "../../../apis/api/common";
+import usePrincipal from "../../../hooks/usePrincipal";
+import useSchedule from "../../../hooks/useSchedule";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -17,24 +19,11 @@ const CustomInput = ({ value, onClick }) => (
 function SelectTrainerModal(props) {
     const { trainerId, isClick, setIsClick } = props;
     const [selectDate, setSelectDate] = useState(new Date());
-    const [schedule, setSchedule] = useState([]);
     const [possibleTimes, setPossibleTimes] = useState([]);
     const [selectTimeId, setSelectTimeId] = useState(0);
-    const [accountId, setAccountId] = useState(0);
     const [reservedTimeIds, setReservedTimeIds] = useState([]);
-    const queryClient = useQueryClient();
-    const principalData = queryClient.getQueryData("principalQuery");
-
-    const getTimedurationQuery = useQuery(["getTimedurationQuery"], getTimeRequest, {
-        retry: 0,
-        refetchOnWindowFocus: false,
-        onSuccess: (response) => {
-            setSchedule(() => response.data);
-        },
-        onError: (error) => {
-            console.log(error);
-        },
-    });
+    const accountId = usePrincipal();
+    const schedule = useSchedule();
 
     const getDayReservationQuery = useQuery(
         ["getDayReservationQuery", selectDate],
@@ -57,7 +46,6 @@ function SelectTrainerModal(props) {
     );
 
     useEffect(() => {
-        setAccountId(() => principalData?.data.accountId);
         const today = new Date();
         const isSameDate = today.getDate() === selectDate.getDate();
         const isSameMonth = today.getMonth() === selectDate.getMonth();
