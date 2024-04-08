@@ -28,23 +28,23 @@ function App() {
 
     return (
         <>
-        {/* <RootLayout>
-            <RootHeader />
-            <Routes>
-                <Route path="/" element={<MainPage />} />
-                <Route path="admin/*" element={<AdminPage />} />
-                <Route path="user/*" element={<UserPage />} />
-                <Route path="auth/*" element={<AuthPage />} />
-                <Route path="user/mypage" element={<TrainerInformation />} />
-            </Routes>
-            <NavigationButtonBar />
-        </RootLayout> */}
+            <RootLayout>
+                <RootHeader />
+                <Routes>
+                    <Route path="/" element={<MainPage />} />
+                    <Route path="admin/*" element={<AdminPage />} />
+                    <Route path="user/*" element={<UserPage />} />
+                    <Route path="auth/*" element={<AuthPage />} />
+                    <Route path="user/mypage" element={<TrainerInformation />} />
+                </Routes>
+                <NavigationButtonBar />
+            </RootLayout>
 
-        <AdminRootLayout>
+            {/* <AdminRootLayout>
             <Routes>
                 <Route path="trainer/*" element={<TrainerPage />} />
             </Routes>
-        </AdminRootLayout>
+        </AdminRootLayout> */}
         </>
     );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import UserReservationPage from "./UserReservationPage/UserReservationPage";
+import UserReservationPage from "./UserTimeReservationPage/UserTimeReservationPage";
 import { useQuery } from "react-query";
 import { getPrincipalRequest } from "../../apis/api/principal";
 
@@ -20,7 +20,8 @@ function UserPage(props) {
     return (
         <Routes>
             <Route path="/reservation" element={<UserReservationPage />} />
-            <Route />
+            <Route path="/reservation/time" element={<UserReservationPage />} />
+            <Route path="/reservation/trainer" />
         </Routes>
     );
 }
