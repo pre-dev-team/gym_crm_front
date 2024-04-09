@@ -5,10 +5,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import * as s from "./style";
 import ko from "date-fns/locale/ko";
 import dayjs from "dayjs";
+
 import MyMembers from "../../../components/MyMembers/MyMembers";
 import { useQueryClient } from "react-query";
 import { trainerMyMembersRequest } from "../../../apis/api/trainer";
 import { getPrincipalRequest } from "../../../apis/api/principal";
+
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -21,6 +23,7 @@ function TrainerMyPage(props) {
     const [selectDate, setSelectDate] = useState(new Date());
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
+
     const [ membersList, setMembersList ] = useState([]);
 
     useEffect(() => {
@@ -39,10 +42,12 @@ function TrainerMyPage(props) {
   }, []);
 
 
+
     dayjs("2021-07-17").format("YYYY년 M월 D일");
 
     return (
         <>
+
         <div css={s.layout}>
           <div css={s.tainerProfileBox}>
             <div>트레이너 프로필</div>
@@ -72,6 +77,7 @@ function TrainerMyPage(props) {
           </div>
         </div>
       </>
+
     );
 }
 
