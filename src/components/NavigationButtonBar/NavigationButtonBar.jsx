@@ -7,17 +7,42 @@ import { RiLoginBoxFill } from "react-icons/ri";
 import { useRecoilState } from "recoil";
 import { loginState } from "../../atoms/loginAtom";
 import { useQuery, useQueryClient } from "react-query";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { accountInfoAtom } from "../../atoms/accountInfoAtom";
+import { getMyInfoRequest } from "../../apis/api/principal";
 
 function NavigationButtonBar(props) {
     const [isLogin, setLogin] = useRecoilState(loginState);
+    const [accountId, setAccountId] = useState(0);
+    const [accountInfo, setAccountInfo] = useRecoilState(accountInfoAtom);
 
     const queryClient = useQueryClient();
     const principalQueryState = queryClient.getQueryState("principalQuery");
 
     useEffect(() => {
         setLogin(() => principalQueryState.status === "success");
+        setAccountId(() => principalQueryState.data?.data.accountId);
     }, [principalQueryState.status]);
+
+    const getMyAccountInfoQuery = useQuery(
+        ["getMyAccountInfoQuery", accountId],
+        () =>
+            getMyInfoRequest({
+                accountId: accountId,
+            }),
+        {
+            enabled: !!accountId,
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                setAccountInfo(() => response.data);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
+    useEffect(() => {}, [accountId]);
 
     return (
         <div css={s.layout}>
@@ -41,7 +66,7 @@ function NavigationButtonBar(props) {
                     <span>MyPage</span>
                 </Link>
             ) : (
-                <Link css={s.buttonBox}>
+                <Link css={s.buttonBox} to={"auth/user/signin"}>
                     <div>
                         <RiLoginBoxFill />
                     </div>
