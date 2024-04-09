@@ -14,3 +14,8 @@ export const getUnreservedTrainersRequest = async (params) => {
     const response = await instance.get("/reservation/trainer/day", { params });
     return response;
 };
+
+export const getTodayReservationRequest = async (params) => {
+    const response = await instance.get("/reservation/trainer/schedulefor2days", { params });
+    return response;
+};

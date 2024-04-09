@@ -7,8 +7,10 @@ import ko from "date-fns/locale/ko";
 import dayjs from "dayjs";
 import MyMembers from "../../../components/MyMembers/MyMembers";
 import { useQueryClient } from "react-query";
-import { trainerMyMembersRequest } from "../../../apis/api/trainer";
+import { getTrainerIdByAccountIdRequest, trainerMyMembersRequest } from "../../../apis/api/trainer";
 import { getPrincipalRequest } from "../../../apis/api/principal";
+import TodayReservation from "../../../components/TodayReservation/TodayReservation";
+import { getTodayReservationRequest } from "../../../apis/api/reservation";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -22,21 +24,31 @@ function TrainerMyPage(props) {
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
     const [ membersList, setMembersList ] = useState([]);
+    const [trainerId, setTrainerId] = useState('');
+    const [today, setToday] = useState(new Date());
 
     useEffect(() => {
       const fetchData = async () => {
           try {
               const principalResponse = await getPrincipalRequest();
+              console.log(principalResponse);
               const accountId = principalResponse.data.accountId;
+
+              const trainerIdResponse = await getTrainerIdByAccountIdRequest({ accountId });
+              console.log(trainerIdResponse);
+              setTrainerId(trainerIdResponse.data.trainerId);
+
               const membersResponse = await trainerMyMembersRequest({ accountId });
-              setMembersList(membersResponse.data);
+              setMembersList(membersResponse.data);             
           } catch (error) {
               console.error("Error fetching data:", error);
           }
       };
 
       fetchData();
-  }, []);
+    }, []);
+
+    
 
 
     dayjs("2021-07-17").format("YYYY년 M월 D일");
@@ -49,6 +61,7 @@ function TrainerMyPage(props) {
           </div>
           <div css={s.todayScheduleBox}>
             <div>오늘 일정</div>
+            <TodayReservation trainerId={trainerId} today={today}/>
           </div>
         </div>
         <div css={s.myMembersBox}>
