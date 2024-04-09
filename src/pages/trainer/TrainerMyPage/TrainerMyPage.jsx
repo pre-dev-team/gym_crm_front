@@ -5,7 +5,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import * as s from "./style";
 import ko from "date-fns/locale/ko";
 import dayjs from "dayjs";
+
+import MyMembers from "../../../components/MyMembers/MyMembers";
 import { useQueryClient } from "react-query";
+import { trainerMyMembersRequest } from "../../../apis/api/trainer";
+import { getPrincipalRequest } from "../../../apis/api/principal";
+
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -18,41 +23,61 @@ function TrainerMyPage(props) {
     const [selectDate, setSelectDate] = useState(new Date());
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
-    const [membersList, setMembersList] = useState([]);
-    useEffect(() => {}, []);
+
+    const [ membersList, setMembersList ] = useState([]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const principalResponse = await getPrincipalRequest();
+              const accountId = principalResponse.data.accountId;
+              const membersResponse = await trainerMyMembersRequest({ accountId });
+              setMembersList(membersResponse.data);
+          } catch (error) {
+              console.error("Error fetching data:", error);
+          }
+      };
+
+      fetchData();
+  }, []);
+
+
 
     dayjs("2021-07-17").format("YYYY년 M월 D일");
 
     return (
         <>
-            <div css={s.layout}>
-                <div css={s.tainerProfileBox}>
-                    <div>트레이너 프로필</div>
-                </div>
-                <div css={s.todayScheduleBox}>
-                    <div>오늘 일정</div>
-                </div>
-            </div>
-            <div css={s.myMembersBox}>
-                <div>내 회원들</div>
-            </div>
-            <div css={s.layout}>
-                <div css={s.calenderBox}>
-                    <DatePicker
-                        onChange={(date) => {
-                            setSelectDate(date);
-                            console.log(date.toLocaleString("ko-KR"));
-                        }}
-                        selected={selectDate}
-                        minDate={new Date()}
-                        dateFormat="yyyy-MM-dd"
-                        locale={ko}
-                        todayButton={true}
-                        customInput={<CustomInput />}
-                    />
-                </div>
-            </div>
-        </>
+
+        <div css={s.layout}>
+          <div css={s.tainerProfileBox}>
+            <div>트레이너 프로필</div>
+          </div>
+          <div css={s.todayScheduleBox}>
+            <div>오늘 일정</div>
+          </div>
+        </div>
+        <div css={s.myMembersBox}>
+          <div>내 회원들</div>
+          <MyMembers membersList={membersList}/>
+        </div>
+        <div css={s.layout}>
+          <div css={s.calenderBox}>
+            <DatePicker
+              onChange={(date) => {
+                setSelectDate(date);
+                console.log(date.toLocaleString("ko-KR"));
+              }}
+              selected={selectDate}
+              minDate={new Date()}
+              dateFormat="yyyy-MM-dd"
+              locale={ko}
+              todayButton={true}
+              customInput={<CustomInput />}
+            />
+          </div>
+        </div>
+      </>
+
     );
 }
 

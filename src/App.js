@@ -10,11 +10,13 @@ import RootHeader from "./components/RootHeader/RootHeader";
 import AdminRootLayout from "./components/AdminRootLayout/AdminRootLayout";
 import { useQuery } from "react-query";
 import TrainerPage from "./pages/trainer/TrainerPage";
+
 import UserMyPage from "./pages/user/UserMyPage/UserMyPage";
 import { getPrincipalRequest } from "./apis/api/principal";
 
 function App() {
     const principalQuery = useQuery(["principalQuery"], getPrincipalRequest, {
+
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
@@ -29,6 +31,7 @@ function App() {
 
     return (
         <>
+
             {isTrainer ? (
                 <AdminRootLayout>
                     <Routes>
@@ -48,6 +51,7 @@ function App() {
                     <NavigationButtonBar />
                 </RootLayout>
             )}
+
         </>
     );
 }
