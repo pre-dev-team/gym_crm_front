@@ -2,6 +2,7 @@
 import * as s from "./style";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
+import { motion } from "framer-motion";
 import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
@@ -26,7 +27,6 @@ function UserReservationPage(props) {
     const accountId = usePrincipal();
     const schedule = useSchedule();
 
-    //선택 날짜 예약정보를 통해 예약한 시간대는 불활성화 시킴
     const getDayReservationQuery = useQuery(
         ["getDayReservationQuery", selectDate],
 
@@ -70,7 +70,13 @@ function UserReservationPage(props) {
     };
 
     return (
-        <div css={s.layout}>
+        <motion.div
+            transition={{ duration: 1, delay: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            css={s.layout}
+        >
             <div css={s.calenderBox}>
                 <DatePicker
                     onChange={(date) => {
@@ -101,7 +107,7 @@ function UserReservationPage(props) {
             <div css={s.trainerBox}>
                 <TrainerBoardForReservation accountId={accountId} selectTimeId={selectTimeId} selectDate={selectDate} />
             </div>
-        </div>
+        </motion.div>
     );
 }
 

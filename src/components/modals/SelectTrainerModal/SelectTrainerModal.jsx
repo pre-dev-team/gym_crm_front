@@ -22,6 +22,7 @@ function SelectTrainerModal(props) {
     const [possibleTimes, setPossibleTimes] = useState([]);
     const [selectTimeId, setSelectTimeId] = useState(0);
     const [reservedTimeIds, setReservedTimeIds] = useState([]);
+    const [isClose, setIsClose] = useState(true);
     const accountId = usePrincipal();
     const schedule = useSchedule();
 
@@ -64,6 +65,22 @@ function SelectTrainerModal(props) {
         }
     };
 
+    const userReservationMutation = useMutation({
+        mutationKey: "userReservationMutation",
+        mutationFn: userReservationRequest,
+        retry: 0,
+
+        onSuccess: (response) => {
+            setIsClick(() => false);
+            alert("예약완료");
+            window.location.reload();
+        },
+
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
     const handleReservationClick = () => {
         console.log({
             accountId: accountId,
@@ -82,21 +99,9 @@ function SelectTrainerModal(props) {
         }
     };
 
-    const userReservationMutation = useMutation({
-        mutationKey: "userReservationMutation",
-        mutationFn: userReservationRequest,
-        retry: 0,
-
-        onSuccess: (response) => {
-            setIsClick(() => false);
-            alert("예약완료");
-            window.location.reload();
-        },
-
-        onError: (error) => {
-            console.log(error);
-        },
-    });
+    const handleCloseClick = () => {
+        setIsClick(() => false);
+    };
 
     return (
         <motion.div
@@ -104,7 +109,7 @@ function SelectTrainerModal(props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            css={s.layout(isClick)}
+            css={s.layout(isClose)}
         >
             <DatePicker
                 onChange={(date) => {
@@ -131,9 +136,9 @@ function SelectTrainerModal(props) {
                     );
                 })}
             </div>
-            <div>
+            <div css={s.buttonBox}>
                 <button onClick={handleReservationClick}>예약하기</button>
-                <button onClick={() => setIsClick(() => false)}>닫기</button>
+                <button onClick={handleCloseClick}>닫기</button>
             </div>
         </motion.div>
     );
