@@ -45,7 +45,13 @@ export const periodButton = (isSelect) => css`
 export const trainerBox = css`
     width: 100%;
     height: 500px;
+    box-shadow: 3px 5px 5px 3px black;
     overflow-y: scroll;
+    padding: 20px 0px;
     &::-webkit-scrollbar {
+        width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #2f3542;
     }
 `;
