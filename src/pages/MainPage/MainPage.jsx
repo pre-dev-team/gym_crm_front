@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import KakaoMapAPI from "../../components/KakaoMapAPI/KakaoMapAPI";
+import ReviewAll from "../../components/ReviewAll/ReviewAll";
 import TrainerInformation from "../../components/TrainerInformation/TrainerInformation";
 import * as s from "./style";
 import { motion } from "framer-motion";
@@ -49,6 +50,8 @@ function MainPage(props) {
             >
                 Be A Man At Pre-Dev
             </motion.div>
+
+            <ReviewAll />
 
             <KakaoMapAPI />
         </div>

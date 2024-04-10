@@ -32,6 +32,7 @@ function App() {
     return (
         <>
 
+
             {isTrainer ? (
                 <AdminRootLayout>
                     <Routes>
@@ -51,6 +52,7 @@ function App() {
                     <NavigationButtonBar />
                 </RootLayout>
             )}
+
 
         </>
     );
