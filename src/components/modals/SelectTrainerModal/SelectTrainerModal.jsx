@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import { getDayReservationRequest, userReservationRequest } from "../../../apis/api/reservation";
 import DatePicker from "react-datepicker";
 import { getTimeRequest } from "../../../apis/api/common";
+import usePrincipal from "../../../hooks/usePrincipal";
+import useSchedule from "../../../hooks/useSchedule";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -17,24 +19,12 @@ const CustomInput = ({ value, onClick }) => (
 function SelectTrainerModal(props) {
     const { trainerId, isClick, setIsClick } = props;
     const [selectDate, setSelectDate] = useState(new Date());
-    const [schedule, setSchedule] = useState([]);
     const [possibleTimes, setPossibleTimes] = useState([]);
     const [selectTimeId, setSelectTimeId] = useState(0);
-    const [accountId, setAccountId] = useState(0);
     const [reservedTimeIds, setReservedTimeIds] = useState([]);
-    const queryClient = useQueryClient();
-    const principalData = queryClient.getQueryData("principalQuery");
-
-    const getTimedurationQuery = useQuery(["getTimedurationQuery"], getTimeRequest, {
-        retry: 0,
-        refetchOnWindowFocus: false,
-        onSuccess: (response) => {
-            setSchedule(() => response.data);
-        },
-        onError: (error) => {
-            console.log(error);
-        },
-    });
+    const [isClose, setIsClose] = useState(true);
+    const accountId = usePrincipal();
+    const schedule = useSchedule();
 
     const getDayReservationQuery = useQuery(
         ["getDayReservationQuery", selectDate],
@@ -57,7 +47,6 @@ function SelectTrainerModal(props) {
     );
 
     useEffect(() => {
-        setAccountId(() => principalData?.data.accountId);
         const today = new Date();
         const isSameDate = today.getDate() === selectDate.getDate();
         const isSameMonth = today.getMonth() === selectDate.getMonth();
@@ -73,24 +62,6 @@ function SelectTrainerModal(props) {
         setSelectTimeId(() => timeId);
         if (selectTimeId === timeId) {
             setSelectTimeId(() => 0);
-        }
-    };
-
-    const handleReservationClick = () => {
-        console.log({
-            accountId: accountId,
-            trainderId: trainerId,
-            timeId: selectTimeId,
-            date: selectDate,
-        });
-
-        if (window.confirm("예약하시겠습니까?")) {
-            userReservationMutation.mutate({
-                accountId: accountId,
-                trainerId: trainerId,
-                timeId: selectTimeId,
-                date: selectDate,
-            });
         }
     };
 
@@ -110,13 +81,35 @@ function SelectTrainerModal(props) {
         },
     });
 
+    const handleReservationClick = () => {
+        console.log({
+            accountId: accountId,
+            trainderId: trainerId,
+            timeId: selectTimeId,
+            date: selectDate,
+        });
+
+        if (window.confirm("예약하시겠습니까?")) {
+            userReservationMutation.mutate({
+                accountId: accountId,
+                trainerId: trainerId,
+                timeId: selectTimeId,
+                date: selectDate,
+            });
+        }
+    };
+
+    const handleCloseClick = () => {
+        setIsClick(() => false);
+    };
+
     return (
         <motion.div
             transition={{ duration: 0.2, delay: 0 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            css={s.layout(isClick)}
+            css={s.layout(isClose)}
         >
             <DatePicker
                 onChange={(date) => {
@@ -143,9 +136,9 @@ function SelectTrainerModal(props) {
                     );
                 })}
             </div>
-            <div>
+            <div css={s.buttonBox}>
                 <button onClick={handleReservationClick}>예약하기</button>
-                <button onClick={() => setIsClick(() => false)}>닫기</button>
+                <button onClick={handleCloseClick}>닫기</button>
             </div>
         </motion.div>
     );

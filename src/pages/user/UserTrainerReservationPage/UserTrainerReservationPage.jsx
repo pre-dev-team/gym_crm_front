@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
 import { useQuery } from "react-query";
@@ -16,7 +17,6 @@ function UserTrainerReservationPage(props) {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
-            console.log(response);
             setTrainers(() => response.data);
         },
         onError: (error) => {},
@@ -28,7 +28,13 @@ function UserTrainerReservationPage(props) {
     };
 
     return (
-        <div css={s.layout}>
+        <motion.div
+            transition={{ duration: 1, delay: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            css={s.layout}
+        >
             <div css={s.trainerBox}>
                 {trainers.map((trainer) => {
                     return (
@@ -50,7 +56,7 @@ function UserTrainerReservationPage(props) {
                     <></>
                 )}
             </div>
-        </div>
+        </motion.div>
     );
 }
 

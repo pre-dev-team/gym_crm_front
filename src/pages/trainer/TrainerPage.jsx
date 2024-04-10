@@ -1,6 +1,6 @@
-import React from 'react';
-import TrainerMyPage from './TrainerMyPage/TrainerMyPage';
-import { Route, Routes } from 'react-router-dom';
+import React from "react";
+import TrainerMyPage from "./TrainerMyPage/TrainerMyPage";
+import { Route, Routes } from "react-router-dom";
 
 function TrainerPage(props) {
     return (
