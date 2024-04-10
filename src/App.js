@@ -29,7 +29,7 @@ function App() {
 
     return (
         <>
-            {/* <RootLayout>
+            <RootLayout>
                 <RootHeader />
                 <Routes>
                     <Route path="/" element={<MainPage />} />
@@ -39,13 +39,13 @@ function App() {
                     <Route path="user/mypage" element={<TrainerInformation />} />
                 </Routes>
                 <NavigationButtonBar />
-            </RootLayout> */}
+            </RootLayout>
 
-        <AdminRootLayout>
+        {/* <AdminRootLayout>
             <Routes>
                 <Route path="trainer/*" element={<TrainerPage />} />
             </Routes>
-        </AdminRootLayout>
+        </AdminRootLayout> */}
         </>
     );
 }

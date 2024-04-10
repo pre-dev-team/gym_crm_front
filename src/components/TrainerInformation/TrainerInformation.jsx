@@ -1,7 +1,12 @@
 /** @jsxImportSource @emotion/react */
+import { useEffect, useState } from 'react';
 import * as s from './style';
+import instance from '../../apis/utils/instance';
 
 function TrainerInformation(props) {
+
+
+
   return (
     <div>
       <div css={{ textAlign: 'center' }}>트레이너 정보</div>
@@ -14,8 +19,8 @@ function TrainerInformation(props) {
         </div>
         <div></div>
         <div css={s.info}>
-          <div css={s.ratings}>별점</div>
-          <div css={s.reviews}>리뷰</div>
+              <div css={s.ratings}>별점</div>
+              <div css={s.reviews}>리뷰</div>
         </div>
       </div>
     </div>
