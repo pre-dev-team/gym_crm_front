@@ -13,6 +13,7 @@ import TrainerPage from "./pages/trainer/TrainerPage";
 
 import UserMyPage from "./pages/user/UserMyPage/UserMyPage";
 import { getPrincipalRequest } from "./apis/api/principal";
+import AdminMainPage from "./pages/admin/AdminMainPage/AdminMainPage";
 
 function App() {
     const principalQuery = useQuery(["principalQuery"], getPrincipalRequest, {
@@ -27,14 +28,21 @@ function App() {
     });
 
     const isTrainer = principalQuery.isSuccess && principalQuery.data.data.authorities[0].authority === "ROLE_TRAINER";
+    const isAdmin = principalQuery.isSuccess && principalQuery.data.data.authorities[0].authority === "ROLE_ADMIN";
 
     return (
         <>
-
-
-            {isTrainer ? (
+            {isAdmin ? (
                 <AdminRootLayout>
                     <Routes>
+                        <Route path="/" element={<AdminMainPage />} />
+                        <Route path="admin/*" element={<AdminPage />} />
+                    </Routes>
+                </AdminRootLayout>
+            ) : isTrainer ? (
+                <AdminRootLayout>
+                    <Routes>
+                        <Route path="/" element={<></>} />
                         <Route path="trainer/*" element={<TrainerPage />} />
                     </Routes>
                 </AdminRootLayout>
@@ -43,16 +51,12 @@ function App() {
                     <RootHeader />
                     <Routes>
                         <Route path="/" element={<MainPage />} />
-                        <Route path="admin/*" element={<AdminPage />} />
                         <Route path="user/*" element={<UserPage />} />
                         <Route path="auth/*" element={<AuthPage />} />
-                        <Route path="user/mypage" element={<UserMyPage />} />
                     </Routes>
                     <NavigationButtonBar />
                 </RootLayout>
             )}
-
-
         </>
     );
 }
