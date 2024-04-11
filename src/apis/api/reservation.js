@@ -19,6 +19,7 @@ export const getTodayReservationRequest = async (params) => {
     const response = await instance.get("/reservation/trainer/schedulefor2days", { params });
     return response;
 };
+
 export const getUserAllReservationRequest = async (params) => {
     const response = await instance.get("/reservation/user/find", { params });
     return response;
