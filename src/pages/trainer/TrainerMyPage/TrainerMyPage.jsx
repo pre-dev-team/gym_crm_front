@@ -9,7 +9,8 @@ import MyMembers from "../../../components/MyMembers/MyMembers";
 import { useQueryClient } from "react-query";
 import { trainerInfoRequest, trainerMyMembersRequest } from "../../../apis/api/trainer";
 import { getPrincipalRequest } from "../../../apis/api/principal";
-import TrainerProfile from "../../../components/Trainerinfo/TrainerProflie";
+import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
+
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
