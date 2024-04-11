@@ -8,9 +8,8 @@ import dayjs from "dayjs";
 
 import MyMembers from "../../../components/MyMembers/MyMembers";
 import { useQueryClient } from "react-query";
-import { trainerInfoRequest, trainerMyMembersRequest } from "../../../apis/api/trainer";
 import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
-import { getTrainerIdByAccountIdRequest, trainerMyMembersRequest } from "../../../apis/api/trainer";
+import { getTrainerIdByAccountIdRequest, trainerInfoRequest, trainerMyMembersRequest } from "../../../apis/api/trainer";
 import { getPrincipalRequest } from "../../../apis/api/principal";
 import TodayReservation from "../../../components/TodayReservation/TodayReservation";
 import { getTodayReservationRequest } from "../../../apis/api/reservation";
@@ -65,20 +64,12 @@ function TrainerMyPage(props) {
               setMembersList(membersResponse.data);
               const principalResponse = await getPrincipalRequest();
               console.log(principalResponse);
-              const accountId = principalResponse.data.accountId;
 
-        const membersResponse = await trainerMyMembersRequest({ accountId });
-        setMembersList(membersResponse.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
 
-    fetchData();
-  }, []);
+              const trainerIdResponse = await getTrainerIdByAccountIdRequest({ accountId });
+              console.log(trainerIdResponse);
+              setTrainerId(trainerIdResponse.data);        
 
-              const membersResponse = await trainerMyMembersRequest({ accountId });
-              setMembersList(membersResponse.data);             
 
           } catch (error) {
               console.error("Error fetching data:", error);
@@ -88,10 +79,6 @@ function TrainerMyPage(props) {
       fetchData();
 
   }, [principalData]);
-
-    }, []);
-
-  dayjs("2021-07-17").format("YYYY년 M월 D일");
 
     dayjs("2021-07-17").format("YYYY년 M월 D일");
 
