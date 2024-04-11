@@ -28,91 +28,63 @@ function TrainerMyPage(props) {
   const queryClient = useQueryClient();
   const principalData = queryClient.getQueryData("principalQuery");
   const [membersList, setMembersList] = useState([]);
+  const [trainerProfile, setTrainerProfile] = useState([]);
   const [trainerId, setTrainerId] = useState('');
   const [today, setToday] = useState(new Date());
-  
+
   useEffect(() => {
+    const accountId = principalData?.data.accountId;
+
     const fetchData = async () => {
       try {
+
+        const membersResponse = await trainerMyMembersRequest({ accountId });
+        setMembersList(membersResponse.data);
+        const trainerProfileResponse = await trainerInfoRequest({ accountId });
+        setTrainerProfile(trainerProfileResponse.data);
+
         const principalResponse = await getPrincipalRequest();
-        const accountId = principalResponse.data.accountId;
+        console.log(principalResponse);
+
 
         const trainerIdResponse = await getTrainerIdByAccountIdRequest({ accountId });
         setTrainerId(trainerIdResponse.data);
-        
-    const [ membersList, setMembersList ] = useState([]);
-    const [ trainerProfile, setTrainerProfile ] = useState([]);
-    const [trainerId, setTrainerId] = useState('');
-    const [today, setToday] = useState(new Date());
+        console.log(trainerIdResponse.data);
 
-    
-    useEffect(() => {
-      const accountId = principalData?.data.accountId;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-      const fetchData = async () => {
-          try {
-              
-            
-            console.log(accountId)
-            const membersResponse = await trainerMyMembersRequest({ accountId });
-
-              const trainerProfileResponse = await trainerInfoRequest({ accountId });
-              setTrainerProfile(trainerProfileResponse.data);
-              console.log(trainerProfileResponse.data);
-
-              console.log(membersResponse.data);
-              setMembersList(membersResponse.data);
-              const principalResponse = await getPrincipalRequest();
-              console.log(principalResponse);
-
-
-              const trainerIdResponse = await getTrainerIdByAccountIdRequest({ accountId });
-              console.log(trainerIdResponse);
-              setTrainerId(trainerIdResponse.data);        
-
-
-          } catch (error) {
-              console.error("Error fetching data:", error);
-          }
-      };
-
-      fetchData();
+    fetchData();
 
   }, [principalData]);
 
-    dayjs("2021-07-17").format("YYYY년 M월 D일");
+  dayjs("2021-07-17").format("YYYY년 M월 D일");
 
   return (
     <>
       <div css={s.layout}>
-        <div css={s.tainerProfileBox}>
-          <div>트레이너 프로필</div>
-        <div css={s.layout}>
         <div css={s.trainerProfileBox}>
           <div>트레이너 정보</div>
           <TrainerProfile trainerProfile={trainerProfile} />
-        </div>
-          <div css={s.todayScheduleBox}>
-            <div>오늘 일정</div>
-            <TodayReservation trainerId={trainerId} today={today}/>
-          </div>
         </div>
         <div css={s.todayScheduleBox}>
           <div>내 회원들</div>
           <MyMembers membersList={membersList} />
         </div>
         <DatePicker
-            onChange={(date) => {
-              setSelectDate(date);
-              console.log(date.toLocaleString("ko-KR"));
-            }}
-            selected={selectDate}
-            minDate={new Date()}
-            dateFormat="yyyy-MM-dd"
-            locale={ko}
-            todayButton={true}
-            customInput={<CustomInput />}
-          />
+          onChange={(date) => {
+            setSelectDate(date);
+            console.log(date.toLocaleString("ko-KR"));
+          }}
+          selected={selectDate}
+          minDate={new Date()}
+          dateFormat="yyyy-MM-dd"
+          locale={ko}
+          todayButton={true}
+          customInput={<CustomInput />}
+        />
       </div>
       <div css={s.myMembersBox}>
         <div>오늘 일정 및 내일 일정</div>
@@ -120,11 +92,9 @@ function TrainerMyPage(props) {
       </div>
       <div css={s.layout}>
         <div css={s.calenderBox}>
-
         </div>
       </div>
     </>
-
   );
 }
 
