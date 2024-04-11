@@ -16,7 +16,6 @@ import { getPrincipalRequest } from "./apis/api/principal";
 
 function App() {
     const principalQuery = useQuery(["principalQuery"], getPrincipalRequest, {
-
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {

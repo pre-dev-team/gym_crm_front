@@ -22,7 +22,7 @@ export const calenderBox = css`
     float: right;
 `;
 
-export const tainerProfileBox = css`
+export const trainerProfileBox = css`
     box-sizing: border-box;
     margin: 10px;
     border: 1px solid black;
@@ -31,6 +31,8 @@ export const tainerProfileBox = css`
     height: 300px;
     background-color: #fafafa;
 `;
+
+
 
 export const todayScheduleBox = css`
     box-sizing: border-box;
