@@ -22,9 +22,11 @@ export const tomorrowContainer = css`
 
 export const todayBox = css`
    box-sizing: border-box;
+   list-style-type: none;
 `;
 
 export const tomorrowBox = css`
+    list-style-type: none;
 `;
 
 

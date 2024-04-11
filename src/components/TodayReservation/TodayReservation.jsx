@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import * as s from './style';
 import { useQuery, useQueryClient } from "react-query";
 import { getTodayReservationRequest } from '../../apis/api/reservation';
+import RoutineModal from '../modals/RoutineModal/RoutineModal';
 
 function TodayReservation({ trainerId, today }) {
 
@@ -51,8 +52,9 @@ function TodayReservation({ trainerId, today }) {
                 <div>오늘 일정</div>
                 {reservations.map((reservation, index) => (
                     <li key={index}>
-                        <p>Trainer ID: {reservation.name}</p>
+                        <p>User ID: {reservation.name}</p>
                         <p>Time: {reservation.timeDuration}</p>
+                        <RoutineModal />
                     </li>
                 ))}
             </ul>
@@ -62,8 +64,9 @@ function TodayReservation({ trainerId, today }) {
                 <div>내일 일정</div>
                 {tomorrowReservation.map((reservation, index) => (
                     <li key={index}>
-                        <p>Trainer ID: {reservation.name}</p>
+                        <p>User ID: {reservation.name}</p>
                         <p>Time: {reservation.timeDuration}</p>
+                        <RoutineModal />
                     </li>
                 ))}
             </ul>
