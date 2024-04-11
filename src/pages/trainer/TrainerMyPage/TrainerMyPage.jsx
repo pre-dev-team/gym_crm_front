@@ -5,7 +5,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import * as s from "./style";
 import ko from "date-fns/locale/ko";
 import dayjs from "dayjs";
-
 import MyMembers from "../../../components/MyMembers/MyMembers";
 import { useQueryClient } from "react-query";
 import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
@@ -13,6 +12,7 @@ import { getTrainerIdByAccountIdRequest, trainerInfoRequest, trainerMyMembersReq
 import { getPrincipalRequest } from "../../../apis/api/principal";
 import TodayReservation from "../../../components/TodayReservation/TodayReservation";
 import { getTodayReservationRequest } from "../../../apis/api/reservation";
+
 
 function TrainerMyPage(props) {
   const dayjsDate = dayjs();
@@ -82,6 +82,7 @@ function TrainerMyPage(props) {
       </div>
     </>
   );
+
 }
 
 export default TrainerMyPage;
