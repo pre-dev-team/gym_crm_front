@@ -5,11 +5,16 @@ import "react-datepicker/dist/react-datepicker.css";
 import * as s from "./style";
 import ko from "date-fns/locale/ko";
 import dayjs from "dayjs";
+
 import MyMembers from "../../../components/MyMembers/MyMembers";
 import { useQueryClient } from "react-query";
 import { trainerInfoRequest, trainerMyMembersRequest } from "../../../apis/api/trainer";
-import { getPrincipalRequest } from "../../../apis/api/principal";
 import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
+import { getTrainerIdByAccountIdRequest, trainerMyMembersRequest } from "../../../apis/api/trainer";
+import { getPrincipalRequest } from "../../../apis/api/principal";
+import TodayReservation from "../../../components/TodayReservation/TodayReservation";
+import { getTodayReservationRequest } from "../../../apis/api/reservation";
+
 
 
 const CustomInput = ({ value, onClick }) => (
@@ -23,9 +28,11 @@ function TrainerMyPage(props) {
     const [selectDate, setSelectDate] = useState(new Date());
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
+
     const [ membersList, setMembersList ] = useState([]);
     const [ trainerProfile, setTrainerProfile ] = useState([]);
-
+    const [trainerId, setTrainerId] = useState('');
+    const [today, setToday] = useState(new Date());
 
     
     useEffect(() => {
@@ -44,18 +51,38 @@ function TrainerMyPage(props) {
 
               console.log(membersResponse.data);
               setMembersList(membersResponse.data);
+              const principalResponse = await getPrincipalRequest();
+              console.log(principalResponse);
+              const accountId = principalResponse.data.accountId;
+
+              const trainerIdResponse = await getTrainerIdByAccountIdRequest({ accountId });
+              console.log(trainerIdResponse);
+              setTrainerId(trainerIdResponse.data.trainerId);
+
+              const membersResponse = await trainerMyMembersRequest({ accountId });
+              setMembersList(membersResponse.data);             
+
           } catch (error) {
               console.error("Error fetching data:", error);
           }
       };
 
       fetchData();
+
   }, [principalData]);
+
+    }, []);
+
+    
+
+
+
 
     dayjs("2021-07-17").format("YYYY년 M월 D일");
 
     return (
         <>
+
         <div css={s.layout}>
         <div css={s.trainerProfileBox}>
           <div>트레이너 정보</div>
@@ -63,6 +90,7 @@ function TrainerMyPage(props) {
         </div>
           <div css={s.todayScheduleBox}>
             <div>오늘 일정</div>
+            <TodayReservation trainerId={trainerId} today={today}/>
           </div>
         </div>
         <div css={s.myMembersBox}>
@@ -86,6 +114,7 @@ function TrainerMyPage(props) {
           </div>
         </div>
       </>
+
     );
 }
 
