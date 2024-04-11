@@ -5,6 +5,14 @@ export const layout = css`
     margin: 0;
 `;
 
+export const container = css`
+
+`;
+
+export const trainerBox = css`
+    display: flex;
+`;
+
 export const customButton = css`
     box-sizing: border-box;
     width: 200px;
@@ -32,8 +40,6 @@ export const trainerProfileBox = css`
     background-color: #fafafa;
 `;
 
-
-
 export const todayScheduleBox = css`
     box-sizing: border-box;
     margin: 10px;
@@ -52,4 +58,13 @@ export const myMembersBox = css`
     width: 620px;
     height: 350px;
     background-color: #fafafa;
+`;
+
+export const allReservationBox = css`
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    width: 300px;
+    height: 670px;
 `;

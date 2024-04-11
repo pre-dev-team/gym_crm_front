@@ -46,8 +46,9 @@ function TodayReservation({ trainerId, today }) {
 
     return (
         <div css={s.layout}>
+            <div css={s.todayContainer}>
             <ul css={s.todayBox}>
-                <span>오늘 일정</span>
+                <div>오늘 일정</div>
                 {reservations.map((reservation, index) => (
                     <li key={index}>
                         <p>Trainer ID: {reservation.name}</p>
@@ -55,8 +56,10 @@ function TodayReservation({ trainerId, today }) {
                     </li>
                 ))}
             </ul>
+            </div>
+            <div css={s.tomorrowContainer}>
             <ul css={s.tomorrowBox}>
-                <span>내일 일정</span>
+                <div>내일 일정</div>
                 {tomorrowReservation.map((reservation, index) => (
                     <li key={index}>
                         <p>Trainer ID: {reservation.name}</p>
@@ -64,6 +67,7 @@ function TodayReservation({ trainerId, today }) {
                     </li>
                 ))}
             </ul>
+            </div>
         </div>
     );
 }
