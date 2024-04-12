@@ -17,15 +17,6 @@ export const layout = css`
     box-shadow: 3px 5px 10px 3px black;
 `;
 
-export const buttonBox = css`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    width: 80px;
-    font-size: 18px;
-    & > span {
-        font-size: 12px;
-    }
+export const membersBox = css`
+    list-style-type: none;
 `;

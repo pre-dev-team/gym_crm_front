@@ -2,8 +2,9 @@
 import { useState } from 'react';
 import { css } from '@emotion/react';
 import { useQuery } from 'react-query';
-import { getTodayReservationRequest } from '../../apis/api/reservation';
 import * as s from './style';
+import RoutineModal from '../modals/RoutineModal/RoutineModal';
+
 
 function TodayReservation({ trainerId, today }) {
     const [reservations, setReservations] = useState([]);
@@ -15,20 +16,20 @@ function TodayReservation({ trainerId, today }) {
     const getTodayReservationQuery = useQuery(['getTodayReservationQuery', trainerId], () =>
         getTodayReservationRequest({
             trainerId: trainerId,
-            today: today,
-        }),
-        {
-            enabled: !!trainerId,
-            retry: 0,
-            refetchOnWindowFocus: false,
-            onSuccess: (response) => {
-                setReservations(response.data);
-            },
-            onError: (error) => {
-                console.log(error);
-            },
-        }
-    );
+
+            today: today
+        }), {
+        enabled: !!trainerId,
+        retry: 0,
+        refetchOnWindowFocus: false,
+        onSuccess: (response) => {
+            setReservations(response.data);
+            console.log(response.data);
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
 
     const getTomorrowReservationQuery = useQuery(['getTomorrowReservationQuery', trainerId], () =>
         getTodayReservationRequest({
@@ -92,7 +93,7 @@ function TodayReservation({ trainerId, today }) {
                                         <td>{reservation.name}</td>
                                         <td>{reservation.timeDuration}</td>
                                         <td>
-                                            <button>비고</button>
+                                          <RoutineModal />
                                         </td>
                                     </tr>
                                 ))}

@@ -21,6 +21,7 @@ export const container = css`
     height: 100%;
 `;
 
+
 export const tableLayout = css`
     position: relative;
     width: 200px; 
@@ -29,6 +30,15 @@ export const tableLayout = css`
     width: max-content; 
     border: 1px solid black;
     margin: 10px;
+`;
+
+export const todayBox = css`
+   box-sizing: border-box;
+   list-style-type: none;
+`;
+
+export const tomorrowBox = css`
+    list-style-type: none;
 `;
 
 

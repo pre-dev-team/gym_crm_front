@@ -62,9 +62,11 @@ export const todayScheduleBox = css`
 
 export const allReservationBox = css`
     box-sizing: border-box;
-    margin: 10px;
-    padding: 10px;
     border: 1px solid black;
     width: 300px;
     height: 620px;
+`;
+
+export const allReservation = css`
+    list-style-type: none;
 `;
