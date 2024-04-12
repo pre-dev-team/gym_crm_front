@@ -1,13 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as s from "./style";
-import ko from "date-fns/locale/ko";
 import dayjs from "dayjs";
 import MyMembers from "../../../components/MyMembers/MyMembers";
 import { useQueryClient } from "react-query";
-import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
 import { getTrainerIdByAccountIdRequest, trainerInfoRequest, trainerMyMembersRequest } from "../../../apis/api/trainer";
 import { getPrincipalRequest } from "../../../apis/api/principal";
 import TodayReservation from "../../../components/TodayReservation/TodayReservation";
@@ -43,16 +40,18 @@ function TrainerMyPage(props) {
         const reservationResponse = await getSelectReservationAllUserRequest({ accountId });
         setReservationList(reservationResponse.data);
 
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+                const trainerIdResponse = await getTrainerIdByAccountIdRequest({ accountId });
+                setTrainerId(trainerIdResponse.data);
+                console.log(trainerIdResponse.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
 
-    fetchData();
+        fetchData();
+    }, [principalData]);
 
-  }, [principalData]);
-
-  dayjs("2021-07-17").format("YYYY년 M월 D일");
+    dayjs("2021-07-17").format("YYYY년 M월 D일");
 
   return (
     <>

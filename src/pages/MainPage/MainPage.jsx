@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
+import * as s from "./style";
+import { motion } from "framer-motion";
 import KakaoMapAPI from "../../components/KakaoMapAPI/KakaoMapAPI";
 import ReviewAll from "../../components/ReviewAll/ReviewAll";
 import TrainerInformation from "../../components/TrainerInformation/TrainerInformation";
-import * as s from "./style";
-import { motion } from "framer-motion";
 
 // 메인페이지입니다
 

@@ -8,7 +8,6 @@ import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
 import { useQuery } from "react-query";
 import { getDayReservationRequest } from "../../../apis/api/reservation";
-import { getTimeRequest } from "../../../apis/api/common";
 import TrainerBoardForReservation from "../../../components/TrainerBoardForReservation/TrainerBoardForReservation";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useSchedule from "../../../hooks/useSchedule";
