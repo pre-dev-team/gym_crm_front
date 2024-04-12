@@ -1,21 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { css } from '@emotion/react';
+import { useQuery } from 'react-query';
 import * as s from './style';
-import { useQuery, useQueryClient } from "react-query";
-import { getTodayReservationRequest } from '../../apis/api/reservation';
 import RoutineModal from '../modals/RoutineModal/RoutineModal';
 
-function TodayReservation({ trainerId, today }) {
 
+function TodayReservation({ trainerId, today }) {
     const [reservations, setReservations] = useState([]);
     const [tomorrowReservation, setTomorrowReservation] = useState([]);
 
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    const getTodayReservationQuery = useQuery(["getTodayReservationQuery", trainerId],
-        () => getTodayReservationRequest({
+    const getTodayReservationQuery = useQuery(['getTodayReservationQuery', trainerId], () =>
+        getTodayReservationRequest({
             trainerId: trainerId,
+
             today: today
         }), {
         enabled: !!trainerId,
@@ -30,47 +31,76 @@ function TodayReservation({ trainerId, today }) {
         },
     });
 
-    const getTomorrowReservationQuery = useQuery(["getTomorrowReservationQuery", trainerId],
-        () => getTodayReservationRequest({
+    const getTomorrowReservationQuery = useQuery(['getTomorrowReservationQuery', trainerId], () =>
+        getTodayReservationRequest({
             trainerId: trainerId,
-            today: tomorrow
-        }), {
-        enabled: !!trainerId,
-        retry: 0,
-        refetchOnWindowFocus: false,
-        onSuccess: (response) => {
-            setTomorrowReservation(response.data);
-        },
-        onError: (error) => {
-            console.log(error);
-        },
-    });
+            today: tomorrow,
+        }),
+        {
+            enabled: !!trainerId,
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                setTomorrowReservation(response.data);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
 
     return (
         <div css={s.layout}>
-            <div css={s.todayContainer}>
-            <ul css={s.todayBox}>
-                <div>오늘 일정</div>
-                {reservations.map((reservation, index) => (
-                    <li key={index}>
-                        <p>User ID: {reservation.name}</p>
-                        <p>Time: {reservation.timeDuration}</p>
-                        <RoutineModal />
-                    </li>
-                ))}
-            </ul>
-            </div>
-            <div css={s.tomorrowContainer}>
-            <ul css={s.tomorrowBox}>
-                <div>내일 일정</div>
-                {tomorrowReservation.map((reservation, index) => (
-                    <li key={index}>
-                        <p>User ID: {reservation.name}</p>
-                        <p>Time: {reservation.timeDuration}</p>
-                        <RoutineModal />
-                    </li>
-                ))}
-            </ul>
+            <div>
+                <div css={s.scheduleDiv}>
+                    <div>오늘일정</div>
+                    <div>내일일정</div>
+                </div>
+                    <div css={s.container}>
+                        <table css={s.tableLayout}>
+                            <thead>
+                                <tr>
+                                    <th>회원명</th>
+                                    <th>시간</th>
+                                    <th>비고</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {reservations.map((reservation, index) => (
+                                    <tr key={index}>
+                                        <td>{reservation.name}</td>
+                                        <td>{reservation.timeDuration}</td>
+                                        <td>
+                                            <button>비고</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    <div>
+                    
+                        <table css={s.tableLayout}>
+                            <thead>
+                                <tr>
+                                    <th>회원명</th>
+                                    <th>시간</th>
+                                    <th>비고</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {tomorrowReservation.map((reservation, index) => (
+                                    <tr key={index}>
+                                        <td>{reservation.name}</td>
+                                        <td>{reservation.timeDuration}</td>
+                                        <td>
+                                          <RoutineModal />
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     );
