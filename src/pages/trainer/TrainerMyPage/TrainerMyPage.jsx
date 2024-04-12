@@ -32,8 +32,8 @@ function TrainerMyPage(props) {
 
         const membersResponse = await trainerMyMembersRequest({ accountId });
         setMembersList(membersResponse.data);
-        // const trainerProfileResponse = await trainerInfoRequest({ accountId });
-        // setTrainerProfile(trainerProfileResponse.data);
+        const trainerProfileResponse = await trainerInfoRequest({ accountId });
+        setTrainerProfile(trainerProfileResponse.data);
 
         const principalResponse = await getPrincipalRequest();
         console.log(principalResponse);
@@ -61,14 +61,14 @@ function TrainerMyPage(props) {
           <div css={s.trainerBox}>
             <div css={s.trainerProfileBox}>
               <div>트레이너 정보</div>
-              {/* <TrainerProfile trainerProfile={trainerProfile} /> */}
+              <TrainerProfile trainerProfile={trainerProfile} />
             </div>
-            <div css={s.todayScheduleBox}>
+            <div css={s.myMembersBox}>
               <div>내 회원들</div>
               <MyMembers membersList={membersList} />
             </div>
           </div>
-          <div css={s.myMembersBox}>
+          <div css={s.todayScheduleBox}>
             <div>오늘 일정 및 내일 일정</div>
             <TodayReservation trainerId={trainerId} today={today} />
           </div>
