@@ -35,7 +35,7 @@ export const trainerProfileBox = css`
     background-color: #fafafa;
 `;
 
-export const todayScheduleBox = css`
+export const myMembersBox = css`
     box-sizing: border-box;
     margin: 10px;
     border: 1px solid #939393;
@@ -45,7 +45,7 @@ export const todayScheduleBox = css`
     background-color: #fafafa;
 `;
 
-export const myMembersBox = css`
+export const todayScheduleBox = css`
     box-sizing: border-box;
     margin: 10px;
     border: 1px solid #939393;
@@ -63,6 +63,7 @@ export const allReservationBox = css`
     width: 350px;
     height: 670px;
     background-color: #fafafa;
+
 `;
 
 export const allReservation = css`
