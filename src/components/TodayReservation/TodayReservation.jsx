@@ -53,8 +53,29 @@ function TodayReservation({ trainerId, today }) {
         <div css={s.layout}>
             <div>
                 <div css={s.scheduleDiv}>
-                    <div>오늘일정</div>
-                    <div>내일일정</div>
+                    <div css={s.todayContainer}>
+                <div>오늘 일정</div>
+                <ul css={s.todayBox}>
+                    {reservations.map((reservation, index) => (
+                        <li key={index}>
+                            <p>이름: {reservation.name}</p>
+                            <span>시간: {reservation.timeDuration}</span>
+                            <RoutineModal />
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div css={s.tomorrowContainer}>
+                <div>내일 일정</div>
+                <ul css={s.tomorrowBox}>
+                    {tomorrowReservation.map((reservation, index) => (
+                        <li key={index}>
+                            <p>이름: {reservation.name}</p>
+                            <span>시간: {reservation.timeDuration}</span>
+                            <RoutineModal />
+                        </li>
+                    ))}
+                </ul>
                 </div>
                     <div css={s.container}>
                         <table css={s.tableLayout}>

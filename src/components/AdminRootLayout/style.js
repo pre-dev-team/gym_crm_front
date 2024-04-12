@@ -19,7 +19,7 @@ export const layout = css`
     width: 1024px;
     height: 800px;
     overflow: hidden;
-    background-color: #fbfbfb;
+    background-color: #ededed;
 `;
 
 export const container = css`

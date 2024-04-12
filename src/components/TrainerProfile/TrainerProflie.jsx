@@ -10,6 +10,11 @@ function TrainerProfile({ trainerProfile }) {
         <div css={s.profileImg}>
           <img src={trainerProfileImgUrl} alt="Trainer Profile" />
         </div>
+        <div css={s.profileInfo}>
+          <div>아이디: {username}</div>
+          <div>전화번호: {phone}</div>
+          <div>이메일: {email}</div>
+        </div>
       </div>
       <div css={s.profileInfo}>
           <div>이름: {name}</div>
