@@ -6,7 +6,6 @@ import ko from "date-fns/locale/ko";
 import { motion } from "framer-motion";
 import { getDayReservationRequest, userReservationRequest } from "../../../apis/api/reservation";
 import DatePicker from "react-datepicker";
-import { getTimeRequest } from "../../../apis/api/common";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useSchedule from "../../../hooks/useSchedule";
 

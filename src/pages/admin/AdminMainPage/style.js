@@ -19,6 +19,7 @@ export const firstBox = css`
     justify-content: space-around;
     align-items: center;
 `;
+
 export const secoundBox = css`
     box-sizing: border-box;
     width: 100%;
@@ -26,7 +27,7 @@ export const secoundBox = css`
     padding: 5px;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    padding-top: 20px;
 `;
 
 export const reservationBox = css`
@@ -48,16 +49,15 @@ export const listName = css`
     box-sizing: border-box;
     display: flex;
     justify-content: center;
-    height: 25px;
     width: 100%;
     border-bottom: 1px solid black;
 `;
+
 export const list = css`
     box-sizing: border-box;
     width: 100%;
     padding: 10px 10px;
     height: 290px;
-    overflow-y: auto;
 `;
 
 export const graphbox = css`

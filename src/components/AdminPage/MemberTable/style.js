@@ -6,33 +6,41 @@ export const table = css`
 `;
 
 export const searchBox = css`
-    position: sticky;
-    top: 0;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    height: 10%;
+    height: 35px;
     width: 100%;
-    z-index: 2;
 `;
 export const tableBox = css`
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 250px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        box-sizing: border-box;
+        width: 10px;
+        height: 10px;
+        background-color: #fdfdfd;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        box-sizing: border-box;
+        border: 1px solid #fafafa;
+        background-color: #dbdbdb;
+    }
 `;
 export const th = css`
     font-size: 14px;
-    text-align: center;
     position: sticky;
-    top: 30px;
-    height: 20px;
+    top: 0;
+    text-align: center;
     width: 100%;
-    z-index: 2;
+    height: 20px;
+    background-color: #fafafa;
 `;
 export const tb = css`
     font-size: 14px;
     text-align: center;
-    overflow-y: auto;
 `;
 
 export const searchButton = css`

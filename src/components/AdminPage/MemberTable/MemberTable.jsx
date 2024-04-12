@@ -1,8 +1,24 @@
 /** @jsxImportSource @emotion/react */
+import { getUsersBynameRequest } from "../../../apis/api/admin";
 import * as s from "./style";
-import Select from "react-select";
+import { useQuery } from "react-query";
 
 function MemberTable(props) {
+    const getUsersByNameQuery = useQuery(
+        ["getUsersByNameQuery"],
+        () =>
+            getUsersBynameRequest({
+                name: "",
+            }),
+        {
+            refetchOnWindowFocus: false,
+            retry: 0,
+            onSuccess: (response) => {
+                console.log(response.data);
+            },
+        }
+    );
+
     return (
         <>
             <div css={s.searchBox}>
@@ -13,9 +29,9 @@ function MemberTable(props) {
                 <table css={s.table}>
                     <thead css={s.th}>
                         <tr>
-                            <th>회원 번호</th>
-                            <th>회원 이름</th>
-                            <th>예약 횟수</th>
+                            <th>회원번호</th>
+                            <th>회원이름</th>
+                            <th>예약횟수</th>
                             <th>작성리뷰 조회</th>
                             <th>인바디 조회</th>
                         </tr>

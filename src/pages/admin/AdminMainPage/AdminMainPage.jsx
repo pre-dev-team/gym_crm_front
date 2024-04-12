@@ -4,6 +4,7 @@ import MemberTable from "../../../components/AdminPage/MemberTable/MemberTable";
 import ReservationTable from "../../../components/AdminPage/ReservationTable/ReservationTable";
 import TrainerTable from "../../../components/AdminPage/TrainerTable/TrainerTable";
 import { motion } from "framer-motion";
+import ReservationSearch from "../../../components/AdminPage/ReservationSearch/ReservationSearch";
 
 function AdminMainPage(props) {
     return (
@@ -26,7 +27,7 @@ function AdminMainPage(props) {
                 <div css={s.reservationBox}>
                     <div css={s.listName}>전체 예약 조회</div>
                     <div css={s.list}>
-                        <ReservationTable />
+                        <ReservationSearch />
                     </div>
                 </div>
                 <div css={s.graphbox}>그래프</div>

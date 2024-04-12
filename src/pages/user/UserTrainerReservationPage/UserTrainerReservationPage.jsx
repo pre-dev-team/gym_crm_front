@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
 import { useQuery } from "react-query";
-import { getTrainersRequest } from "../../../apis/api/common";
+import { getTrainersRequest } from "../../../apis/api/trainer";
 import TrainerCardForReservation from "../../../components/TrainerCardForReservation/TrainerCardForReservation";
 import SelectTrainerModal from "../../../components/modals/SelectTrainerModal/SelectTrainerModal";
 
