@@ -11,7 +11,8 @@ import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
 import { getTrainerIdByAccountIdRequest, trainerInfoRequest, trainerMyMembersRequest } from "../../../apis/api/trainer";
 import { getPrincipalRequest } from "../../../apis/api/principal";
 import TodayReservation from "../../../components/TodayReservation/TodayReservation";
-import { getTodayReservationRequest } from "../../../apis/api/reservation";
+import { getSelectReservationAllUserRequest, getTodayReservationRequest } from "../../../apis/api/reservation";
+import SelectReservationAllUser from "../../../components/SelectReservationAllUser/SelectReservationAllUser";
 
 
 function TrainerMyPage(props) {
@@ -23,6 +24,7 @@ function TrainerMyPage(props) {
   const [trainerProfile, setTrainerProfile] = useState([]);
   const [trainerId, setTrainerId] = useState('');
   const [today, setToday] = useState(new Date());
+  const [reservationList, setReservationList] = useState([]);
 
   useEffect(() => {
     const accountId = principalData?.data.accountId;
@@ -37,6 +39,9 @@ function TrainerMyPage(props) {
 
         const trainerIdResponse = await getTrainerIdByAccountIdRequest({ accountId });
         setTrainerId(trainerIdResponse.data);
+
+        const reservationResponse = await getSelectReservationAllUserRequest({ accountId });
+        setReservationList(reservationResponse.data);
 
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -71,7 +76,7 @@ function TrainerMyPage(props) {
           <div css={s.allReservationBox}>
             <ul css={s.allReservation}>
               <div>전체 일정 조회</div>
-              <li></li>
+              <SelectReservationAllUser reservationList={reservationList}/>
             </ul>
           </div>
       </div>

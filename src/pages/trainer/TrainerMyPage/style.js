@@ -62,8 +62,6 @@ export const myMembersBox = css`
 
 export const allReservationBox = css`
     box-sizing: border-box;
-    margin: 10px;
-    padding: 10px;
     border: 1px solid black;
     width: 300px;
     height: 670px;
