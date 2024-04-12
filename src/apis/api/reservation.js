@@ -24,3 +24,8 @@ export const getUserAllReservationRequest = async (params) => {
     const response = await instance.get("/reservation/user/find", { params });
     return response;
 };
+
+export const getSelectReservationAllUserRequest = async (params) => {
+    const response = await instance.get("/reservation/trainer/searchall", { params });
+    return response;
+};

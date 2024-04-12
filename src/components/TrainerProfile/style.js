@@ -2,12 +2,13 @@ import { css } from '@emotion/react';
 
 export const profileContainer = css`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-around;
-  padding: 20px;
+  margin: 10px 5px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  padding: 10px;
 `;
 
 export const profileImg = css`
@@ -32,3 +33,4 @@ export const profileInfo = css`
   align-items: flex-start;
   margin-left: 20px;
 `;
+

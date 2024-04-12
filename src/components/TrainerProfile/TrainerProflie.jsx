@@ -2,7 +2,7 @@
 import * as s from './style';
 
 function TrainerProfile({ trainerProfile }) {
-  const { username, phone, email, trainerProfileImgUrl } = trainerProfile;
+  const { name, phone, email, trainerProfileImgUrl } = trainerProfile;
 
   return (
     <div>
@@ -11,12 +11,16 @@ function TrainerProfile({ trainerProfile }) {
           <img src={trainerProfileImgUrl} alt="Trainer Profile" />
         </div>
         <div css={s.profileInfo}>
-          <div>트레이너 아이디: {username}</div>
+          <div>아이디: {username}</div>
           <div>전화번호: {phone}</div>
           <div>이메일: {email}</div>
-          <div>프로필 이미지 URL: {trainerProfileImgUrl}</div>
         </div>
       </div>
+      <div css={s.profileInfo}>
+          <div>이름: {name}</div>
+          <div>phone: {phone}</div>
+          <div>email: {email}</div>
+        </div>
     </div>
   );
 }
