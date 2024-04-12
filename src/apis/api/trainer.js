@@ -5,12 +5,17 @@ export const trainerMyMembersRequest = async (params) => {
     return response;
 };
 
-export const getTrainerIdByAccountIdRequest = async(params) => {
+export const trainerInfoRequest = async (params) => {
+    const response = await instance.get("/trainer/mypage/trainerInfo", { params });
+    return response;
+};
+
+export const getTrainerIdByAccountIdRequest = async (params) => {
     const response = await instance.get("/auth/account/trainerid", { params });
     return response;
 }
 
-export const getTrainerReviews = async(params) => {
+export const getTrainerReviews = async (params) => {
     const response = await instance.get("/trainer/all", { params }); // 변경된 엔드포인트로 수정
     return response;
 }
