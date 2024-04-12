@@ -25,15 +25,10 @@ export const customButton = css`
     cursor: pointer;
 `;
 
-export const calenderBox = css`
-    box-sizing: border-box;
-    float: right;
-`;
-
 export const trainerProfileBox = css`
     box-sizing: border-box;
     margin: 10px;
-    border: 1px solid black;
+    border: 1px solid #939393;
     padding: 20px;
     width: 300px;
     height: 300px;
@@ -43,20 +38,20 @@ export const trainerProfileBox = css`
 export const todayScheduleBox = css`
     box-sizing: border-box;
     margin: 10px;
-    border: 1px solid black;
+    border: 1px solid #939393;
     padding: 20px;
-    width: 300px;
-    height: 300px;
+    width: 620px;
+    height: 350px;
     background-color: #fafafa;
 `;
 
 export const myMembersBox = css`
     box-sizing: border-box;
     margin: 10px;
-    border: 1px solid black;
+    border: 1px solid #939393;
     padding: 20px;
-    width: 620px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
     background-color: #fafafa;
 `;
 
@@ -64,9 +59,10 @@ export const allReservationBox = css`
     box-sizing: border-box;
     margin: 10px;
     padding: 10px;
-    border: 1px solid black;
-    width: 300px;
+    border: 1px solid #939393;
+    width: 350px;
     height: 670px;
+    background-color: #fafafa;
 `;
 
 export const allReservation = css`

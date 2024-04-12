@@ -7,7 +7,7 @@ import { trainerMyMembersRequest } from '../../apis/api/trainer';
 function MyMembers({ membersList }) {
 
     return (
-        <div>
+        <div css={s.layout}>
              <ul css={s.membersBox}>
                 {membersList.map(member => (
                     <li key={member.id}>{member.name}</li>
