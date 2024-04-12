@@ -35,13 +35,8 @@ function TrainerMyPage(props) {
         // const trainerProfileResponse = await trainerInfoRequest({ accountId });
         // setTrainerProfile(trainerProfileResponse.data);
 
-        const principalResponse = await getPrincipalRequest();
-        console.log(principalResponse);
-
-
         const trainerIdResponse = await getTrainerIdByAccountIdRequest({ accountId });
         setTrainerId(trainerIdResponse.data);
-        console.log(trainerIdResponse.data);
 
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -74,7 +69,7 @@ function TrainerMyPage(props) {
           </div>
         </div>
           <div css={s.allReservationBox}>
-            <ul>
+            <ul css={s.allReservation}>
               <div>전체 일정 조회</div>
               <li></li>
             </ul>

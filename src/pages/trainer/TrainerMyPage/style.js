@@ -68,3 +68,7 @@ export const allReservationBox = css`
     width: 300px;
     height: 670px;
 `;
+
+export const allReservation = css`
+    list-style-type: none;
+`;

@@ -8,7 +8,7 @@ function MyMembers({ membersList }) {
 
     return (
         <div>
-             <ul>
+             <ul css={s.membersBox}>
                 {membersList.map(member => (
                     <li key={member.id}>{member.name}</li>
                 ))}
