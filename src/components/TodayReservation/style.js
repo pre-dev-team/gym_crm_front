@@ -18,15 +18,11 @@ export const todayContainer = css`
 
 export const tomorrowContainer = css`
     box-sizing: border-box;
+    margin: 5px;
     border: 1px solid #dbdbdb;
     width: 250px;
     height: 250px;
     overflow: scroll;
-    justify-content: space-around;
-    align-items: center;
-    width: 560px;
-    height: 420px;
-    padding: 20px;
 `;
 
 export const scheduleDiv = css`

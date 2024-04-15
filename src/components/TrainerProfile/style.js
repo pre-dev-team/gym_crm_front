@@ -6,9 +6,6 @@ export const profileContainer = css`
   justify-content: center;
   align-items: center;
   margin: 10px 5px;
-  border: 1px solid #ccc;
-  margin-top: 10px;
-  padding: 10px;
 `;
 
 export const profileImg = css`
@@ -31,6 +28,9 @@ export const profileInfo = css`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-left: 20px;
+
+  & > div {
+    padding: 5px;
+  }
 `;
 
