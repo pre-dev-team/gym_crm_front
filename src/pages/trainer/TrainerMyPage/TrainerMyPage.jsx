@@ -10,38 +10,35 @@ import { getPrincipalRequest } from "../../../apis/api/principal";
 import TodayReservation from "../../../components/TodayReservation/TodayReservation";
 import { getSelectReservationAllUserRequest, getTodayReservationRequest } from "../../../apis/api/reservation";
 import SelectReservationAllUser from "../../../components/SelectReservationAllUser/SelectReservationAllUser";
-
+import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
 
 function TrainerMyPage(props) {
-  const dayjsDate = dayjs();
-  const [selectDate, setSelectDate] = useState(new Date());
-  const queryClient = useQueryClient();
-  const principalData = queryClient.getQueryData("principalQuery");
-  const [membersList, setMembersList] = useState([]);
-  const [trainerProfile, setTrainerProfile] = useState([]);
-  const [trainerId, setTrainerId] = useState('');
-  const [today, setToday] = useState(new Date());
-  const [reservationList, setReservationList] = useState([]);
+    const dayjsDate = dayjs();
+    const [selectDate, setSelectDate] = useState(new Date());
+    const queryClient = useQueryClient();
+    const principalData = queryClient.getQueryData("principalQuery");
+    const [membersList, setMembersList] = useState([]);
+    const [trainerProfile, setTrainerProfile] = useState([]);
+    const [trainerId, setTrainerId] = useState("");
+    const [today, setToday] = useState(new Date());
+    const [reservationList, setReservationList] = useState([]);
 
-  useEffect(() => {
-    const accountId = principalData?.data.accountId;
+    useEffect(() => {
+        const accountId = principalData?.data.accountId;
 
-    const fetchData = async () => {
-      try {
-
-        const membersResponse = await trainerMyMembersRequest({ accountId });
-        setMembersList(membersResponse.data);
-        const trainerProfileResponse = await trainerInfoRequest({ accountId });
-        setTrainerProfile(trainerProfileResponse.data);
-
-        const trainerIdResponse = await getTrainerIdByAccountIdRequest({ accountId });
-        setTrainerId(trainerIdResponse.data);
-
-        const reservationResponse = await getSelectReservationAllUserRequest({ accountId });
-        setReservationList(reservationResponse.data);
+        const fetchData = async () => {
+            try {
+                const membersResponse = await trainerMyMembersRequest({ accountId });
+                setMembersList(membersResponse.data);
+                const trainerProfileResponse = await trainerInfoRequest({ accountId });
+                setTrainerProfile(trainerProfileResponse.data);
 
                 const trainerIdResponse = await getTrainerIdByAccountIdRequest({ accountId });
                 setTrainerId(trainerIdResponse.data);
+
+                const reservationResponse = await getSelectReservationAllUserRequest({ accountId });
+                setReservationList(reservationResponse.data);
+
                 console.log(trainerIdResponse.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -53,35 +50,34 @@ function TrainerMyPage(props) {
 
     dayjs("2021-07-17").format("YYYY년 M월 D일");
 
-  return (
-    <>
-      <div css={s.layout}>
-        <div css={s.container}>
-          <div css={s.trainerBox}>
-            <div css={s.trainerProfileBox}>
-              <div>트레이너 정보</div>
-              <TrainerProfile trainerProfile={trainerProfile} />
+    return (
+        <>
+            <div css={s.layout}>
+                <div css={s.container}>
+                    <div css={s.trainerBox}>
+                        <div css={s.trainerProfileBox}>
+                            <div>트레이너 정보</div>
+                            <TrainerProfile trainerProfile={trainerProfile} />
+                        </div>
+                        <div css={s.myMembersBox}>
+                            <div>내 회원들</div>
+                            <MyMembers membersList={membersList} />
+                        </div>
+                    </div>
+                    <div css={s.todayScheduleBox}>
+                        <div>오늘 일정 및 내일 일정</div>
+                        <TodayReservation trainerId={trainerId} today={today} />
+                    </div>
+                </div>
+                <div css={s.allReservationBox}>
+                    <ul css={s.allReservation}>
+                        <div>전체 일정 조회</div>
+                        <SelectReservationAllUser reservationList={reservationList} />
+                    </ul>
+                </div>
             </div>
-            <div css={s.myMembersBox}>
-              <div>내 회원들</div>
-              <MyMembers membersList={membersList} />
-            </div>
-          </div>
-          <div css={s.todayScheduleBox}>
-            <div>오늘 일정 및 내일 일정</div>
-            <TodayReservation trainerId={trainerId} today={today} />
-          </div>
-        </div>
-          <div css={s.allReservationBox}>
-            <ul css={s.allReservation}>
-              <div>전체 일정 조회</div>
-              <SelectReservationAllUser reservationList={reservationList}/>
-            </ul>
-          </div>
-      </div>
-    </>
-  );
-
+        </>
+    );
 }
 
 export default TrainerMyPage;

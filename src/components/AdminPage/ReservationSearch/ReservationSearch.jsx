@@ -20,7 +20,8 @@ function ReservationSearch(props) {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [name, setName] = useState("");
-    const [searchType, SetSearchType] = useState(1);
+    const [searchType, setSearchType] = useState(1);
+    const [reservations, setReservations] = useState([]);
     const searchButtonRef = useRef();
     const handleInputChange = (e) => {
         if (e.key === "Enter") {
@@ -43,7 +44,7 @@ function ReservationSearch(props) {
             refetchOnWindowFocus: false,
             enabled: false,
             onSuccess: (response) => {
-                console.log(response);
+                setReservations(() => response.data);
             },
         }
     );
@@ -75,7 +76,7 @@ function ReservationSearch(props) {
                     styles={s.selectStyle2}
                     options={s.searchTypeOption}
                     defaultValue={s.searchTypeOption[0]}
-                    onChange={(e) => SetSearchType(() => e.value)}
+                    onChange={(e) => setSearchType(() => e.value)}
                 />
                 <div>
                     <input
@@ -95,7 +96,7 @@ function ReservationSearch(props) {
                     </button>
                 </div>
             </div>
-            <ReservationTable />
+            <ReservationTable reservations={reservations} />
         </>
     );
 }

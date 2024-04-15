@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
+import { useState } from "react";
 import * as s from "./style";
 
-function ReservationTable(props) {
+function ReservationTable({ reservations }) {
     return (
-        <>
+        <div css={s.tableBox}>
             <table css={s.table}>
                 <thead css={s.th}>
                     <tr>
@@ -16,19 +17,23 @@ function ReservationTable(props) {
                     </tr>
                 </thead>
                 <tbody css={s.tb}>
-                    <tr>
-                        <td>1</td>
-                        <td>2024-04-11</td>
-                        <td>11:00 ~ 12:00</td>
-                        <td>박화목</td>
-                        <td>피카츄</td>
-                        <td>
-                            <button>루틴조회</button>
-                        </td>
-                    </tr>
+                    {reservations.map((reservation) => {
+                        return (
+                            <tr>
+                                <td>{reservation.reservationId}</td>
+                                <td>{reservation.reservationDate}</td>
+                                <td>{reservation.timeDuration}</td>
+                                <td>{reservation.name}</td>
+                                <td>{reservation.trainerName}</td>
+                                <td>
+                                    <button>루틴조회</button>
+                                </td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
-        </>
+        </div>
     );
 }
 
