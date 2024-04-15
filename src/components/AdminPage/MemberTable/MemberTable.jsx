@@ -3,7 +3,7 @@ import { getUsersBynameRequest } from "../../../apis/api/admin";
 import * as s from "./style";
 import { useQuery } from "react-query";
 
-function MemberTable(props) {
+function MemberTable({ setIsInbodyModalOpen, setIsReviewModalOpen }) {
     const getUsersByNameQuery = useQuery(
         ["getUsersByNameQuery"],
         () =>
@@ -42,175 +42,10 @@ function MemberTable(props) {
                             <td>박화목</td>
                             <td>3</td>
                             <td>
-                                <button>작성리뷰 조회</button>
+                                <button onClick={() => setIsReviewModalOpen(() => true)}>작성리뷰 조회</button>
                             </td>
                             <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>박화목</td>
-                            <td>3</td>
-                            <td>
-                                <button>작성리뷰 조회</button>
-                            </td>
-                            <td>
-                                <button>인바디 조회</button>
+                                <button onClick={() => setIsInbodyModalOpen(() => true)}>인바디 조회</button>
                             </td>
                         </tr>
                     </tbody>
