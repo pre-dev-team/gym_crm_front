@@ -112,40 +112,40 @@ function UserReservationEditPage(props) {
             exit={{ opacity: 0 }}
             css={s.layout}
         >
+            <h1>나의예약</h1>
             <div css={s.reservationBox}>
-                <div>나의예약</div>
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>날짜</th>
-                                <th>시간</th>
-                                <th>담당트레이너</th>
-                                <th>변경</th>
-                                <th>취소</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {comingReservations.map((reservation) => {
-                                return (
-                                    <tr key={reservation.reservationId}>
-                                        <td>{reservation.reservationDate}</td>
-                                        <td>{reservation.timeDuration}</td>
-                                        <td>{reservation.trainerName}</td>
-                                        <td>
-                                            <button>예약변경</button>
-                                        </td>
-                                        <td>
-                                            <button>예약취소</button>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </div>
+                {comingReservations.length === 0 ? (
+                    <>예약 없음</>
+                ) : (
+                    comingReservations.map((reservation) => {
+                        return (
+                            <div css={s.reservationCard}>
+                                <table css={s.table}>
+                                    <thead>
+                                        <tr>
+                                            <th>날짜</th>
+                                            <th>시간</th>
+                                            <th>트레이너</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{reservation.reservationDate}</td>
+                                            <td>{reservation.timeDuration}</td>
+                                            <td>{reservation.trainerName}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div css={s.buttonBox}>
+                                    <button>변경</button>
+                                    <button>취소</button>
+                                </div>
+                            </div>
+                        );
+                    })
+                )}
             </div>
-            <DatePicker
+            {/* <DatePicker
                 onChange={(date) => {
                     setSelectDate(() => date);
                 }}
@@ -172,7 +172,7 @@ function UserReservationEditPage(props) {
             </div>
             <div css={s.trainerBox}>
                 <TrainerBoardForReservation accountId={accountId} selectTimeId={selectTimeId} selectDate={selectDate} />
-            </div>
+            </div> */}
         </motion.div>
     );
 }
