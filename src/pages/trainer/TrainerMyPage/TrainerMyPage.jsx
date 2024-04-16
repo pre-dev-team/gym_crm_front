@@ -32,14 +32,14 @@ function TrainerMyPage(props) {
                 setMembersList(membersResponse.data);
                 const trainerProfileResponse = await trainerInfoRequest({ accountId });
                 setTrainerProfile(trainerProfileResponse.data);
-
-                const trainerIdResponse = await getTrainerIdByAccountIdRequest({ accountId });
-                setTrainerId(trainerIdResponse.data);
-
+                
                 const reservationResponse = await getSelectReservationAllUserRequest({ accountId });
                 setReservationList(reservationResponse.data);
-
-                console.log(trainerIdResponse.data);
+                console.log(reservationResponse.data);
+                
+                const trainerIdResponse = await getTrainerIdByAccountIdRequest({ accountId });
+                setTrainerId(trainerIdResponse.data);
+                
             } catch (error) {
                 console.error("Error fetching data:", error);
             }

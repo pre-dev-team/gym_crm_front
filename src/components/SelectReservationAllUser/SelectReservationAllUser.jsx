@@ -10,7 +10,8 @@ function SelectReservationAllUser({ reservationList }) {
                 {reservationList.map(reservation => (
                     <li key={reservation.id}>
                         <p>{reservation.name}</p>
-                        <p>{reservation.timeDuration}</p>
+                        <span>{reservation.reservationDate}</span>
+                        <span>{reservation.timeDuration}</span>
                         <RoutineModal />
                     </li>
                 ))}
