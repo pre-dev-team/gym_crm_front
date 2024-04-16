@@ -7,10 +7,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
 import { useQuery } from "react-query";
-import { getDayReservationRequest } from "../../../apis/api/reservation";
+import { getDayReservationRequest, getUserAllReservationRequest } from "../../../apis/api/reservation";
 import TrainerBoardForReservation from "../../../components/TrainerBoardForReservation/TrainerBoardForReservation";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useSchedule from "../../../hooks/useSchedule";
+import { dateFormatter } from "../../../utils/dateFormatter";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -18,13 +19,42 @@ const CustomInput = ({ value, onClick }) => (
     </button>
 );
 
-function UserReservationPage(props) {
+function UserReservationEditPage(props) {
     const [selectDate, setSelectDate] = useState(new Date());
     const [selectTimeId, setSelectTimeId] = useState(0);
     const [possibleTimes, setPossibleTimes] = useState([]);
     const [reservedTimeId, setReservedTimeId] = useState([]);
+    const [allUserReservations, setAllUserReservations] = useState([]);
+    const [comingReservations, setComingReservations] = useState([]);
     const accountId = usePrincipal();
     const schedule = useSchedule();
+
+    const getUserAllReservationQuery = useQuery(
+        ["getUserAllReservationRequest"],
+        () =>
+            getUserAllReservationRequest({
+                accountId: accountId,
+            }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                setAllUserReservations(() =>
+                    response.data.map((res) => {
+                        return {
+                            reservationId: res.reservationId,
+                            reservationDate: res.reservationDate,
+                            trainerId: res.trainerId,
+                            trainerName: res.name,
+                            timeId: res.timeId,
+                            timeDuration: res.timeDuration,
+                        };
+                    })
+                );
+            },
+            enabled: !!accountId,
+        }
+    );
 
     const getDayReservationQuery = useQuery(
         ["getDayReservationQuery", selectDate],
@@ -46,6 +76,11 @@ function UserReservationPage(props) {
             enabled: !!accountId,
         }
     );
+
+    useEffect(() => {
+        const today = dateFormatter(new Date());
+        setComingReservations(() => allUserReservations.filter((res) => res.reservationDate >= today));
+    }, [allUserReservations]);
 
     useEffect(() => {
         const today = new Date();
@@ -76,19 +111,42 @@ function UserReservationPage(props) {
             exit={{ opacity: 0 }}
             css={s.layout}
         >
-            <div css={s.calenderBox}>
-                <DatePicker
-                    onChange={(date) => {
-                        setSelectDate(() => date);
-                    }}
-                    selected={selectDate}
-                    minDate={new Date()}
-                    dateFormat="yyyy-MM-dd"
-                    locale={ko}
-                    todayButton={true}
-                    customInput={<CustomInput />}
-                />
+            <div css={s.reservationBox}>
+                <div>나의예약</div>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>날짜</th>
+                                <th>시간</th>
+                                <th>담당트레이너</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {comingReservations.map((reservation) => {
+                                return (
+                                    <tr key={reservation.reservationId}>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <DatePicker
+                onChange={(date) => {
+                    setSelectDate(() => date);
+                }}
+                selected={selectDate}
+                minDate={new Date()}
+                dateFormat="yyyy-MM-dd"
+                locale={ko}
+                todayButton={true}
+                customInput={<CustomInput />}
+            />
             <div css={s.periodBox}>
                 {possibleTimes.map((time) => {
                     return (
@@ -110,4 +168,4 @@ function UserReservationPage(props) {
     );
 }
 
-export default UserReservationPage;
+export default UserReservationEditPage;

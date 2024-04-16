@@ -9,7 +9,7 @@ import { getTrainersRequest } from "../../../apis/api/trainer";
 import TrainerCardForReservation from "../../../components/TrainerCardForReservation/TrainerCardForReservation";
 import SelectTrainerModal from "../../../components/modals/SelectTrainerModal/SelectTrainerModal";
 
-function UserTrainerReservationPage(props) {
+function UserReservationPage(props) {
     const [trainers, setTrainers] = useState([]);
     const [isClick, setIsClick] = useState(false);
     const [selectTrainerId, setSelectTrainerId] = useState(0);
@@ -60,4 +60,4 @@ function UserTrainerReservationPage(props) {
     );
 }
 
-export default UserTrainerReservationPage;
+export default UserReservationPage;

@@ -13,7 +13,7 @@ export const layout = css`
     height: 90%;
 `;
 
-export const calenderBox = css``;
+export const reservationBox = css``;
 
 export const customButton = css`
     width: 200px;

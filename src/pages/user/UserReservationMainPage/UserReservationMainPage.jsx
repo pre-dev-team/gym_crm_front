@@ -20,7 +20,7 @@ const linkBox = css`
     justify-content: center;
     box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
     width: 200px;
-    height: 120px;
+    height: 100px;
     transition: transform 0.3s, box-shadow 0.3s;
     &:nth-of-type(1) {
         margin-bottom: 20px;
@@ -50,10 +50,10 @@ function UserReservationMainPage(props) {
             css={layout}
         >
             <div css={linkBox}>
-                <Link to={"/user/reservation/time"}>시간으로 예약</Link>
+                <Link to={"/user/reservation/make"}>예약하기</Link>
             </div>
             <div css={linkBox}>
-                <Link to={"/user/reservation/trainer"}>트레이너 예약</Link>
+                <Link to={"/user/reservation/edit"}>예약변경 / 취소</Link>
             </div>
         </motion.div>
     );
