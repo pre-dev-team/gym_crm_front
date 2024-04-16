@@ -9,10 +9,9 @@ export const layout = css`
     box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 1);
     width: 220px;
     height: 85px;
-    background-color: #ff9900;
-    padding: 15px;
     margin-bottom: 15px;
     transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #dbdbdb;
     &:hover {
         cursor: pointer;
         transform: translateY(2px);
@@ -25,16 +24,18 @@ export const photoBox = css`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80px;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: 10px;
     margin-right: 10px;
-    height: 80%;
 
     & > img {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 70px;
-        border-radius: 50%;
+        height: 100%;
     }
 `;
 export const infoBox = css`
@@ -44,6 +45,11 @@ export const infoBox = css`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #999999;
     width: 165px;
-    height: 90%;
+    height: 100%;
+    & > h1 {
+        font-size: 32px;
+        margin: 0;
+    }
 `;
