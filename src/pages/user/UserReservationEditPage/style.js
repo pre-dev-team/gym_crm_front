@@ -13,7 +13,17 @@ export const layout = css`
     height: 90%;
 `;
 
-export const reservationBox = css``;
+export const reservationBox = css`
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #c597b7;
+    font-size: 12px;
+    width: 100%;
+`;
+export const reservationBoxTitle = css``;
+export const tableBox = css``;
 
 export const customButton = css`
     width: 200px;

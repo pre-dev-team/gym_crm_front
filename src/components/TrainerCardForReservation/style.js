@@ -6,12 +6,18 @@ export const layout = css`
     justify-content: center;
     align-items: center;
     margin: 0px auto;
-    box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
-    width: 250px;
+    box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 1);
+    width: 220px;
     height: 85px;
-    background-color: #c0c0c0;
+    background-color: #ff9900;
     padding: 15px;
     margin-bottom: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    &:hover {
+        cursor: pointer;
+        transform: translateY(2px);
+        box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
 `;
 
 export const photoBox = css`
@@ -38,33 +44,6 @@ export const infoBox = css`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-left: 1px solid black;
     width: 165px;
     height: 90%;
-`;
-export const nameBox = css`
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-`;
-export const buttonBox = css`
-    box-sizing: border-box;
-    position: absolute;
-    bottom: 0;
-    & > button {
-        background-color: #e2e2e2;
-        box-shadow: 3px 1px 5px 1px black;
-        border: none;
-        transition: transform 0.3s, box-shadow 0.3s;
-        width: 100px;
-        height: 20px;
-        cursor: pointer;
-        &:hover {
-            box-shadow: inset 3px 1px 5px 1px black;
-            transform: translateY(2px);
-        }
-    }
 `;

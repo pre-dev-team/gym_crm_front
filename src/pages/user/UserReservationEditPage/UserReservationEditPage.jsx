@@ -87,6 +87,7 @@ function UserReservationEditPage(props) {
         const isSameDate = today.getDate() === selectDate.getDate();
         const isSameMonth = today.getMonth() === selectDate.getMonth();
         const isSameYear = today.getFullYear() === selectDate.getFullYear();
+        console.log(comingReservations);
         if (isSameDate && isSameMonth & isSameYear) {
             setPossibleTimes(() => schedule.filter((time) => time.timeId + 9 > new Date().getHours() + 1));
         } else {
@@ -120,15 +121,23 @@ function UserReservationEditPage(props) {
                                 <th>날짜</th>
                                 <th>시간</th>
                                 <th>담당트레이너</th>
+                                <th>변경</th>
+                                <th>취소</th>
                             </tr>
                         </thead>
                         <tbody>
                             {comingReservations.map((reservation) => {
                                 return (
                                     <tr key={reservation.reservationId}>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{reservation.reservationDate}</td>
+                                        <td>{reservation.timeDuration}</td>
+                                        <td>{reservation.trainerName}</td>
+                                        <td>
+                                            <button>예약변경</button>
+                                        </td>
+                                        <td>
+                                            <button>예약취소</button>
+                                        </td>
                                     </tr>
                                 );
                             })}

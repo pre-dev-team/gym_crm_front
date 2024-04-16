@@ -53,7 +53,7 @@ function UserReservationMainPage(props) {
                 <Link to={"/user/reservation/make"}>예약하기</Link>
             </div>
             <div css={linkBox}>
-                <Link to={"/user/reservation/edit"}>예약변경 / 취소</Link>
+                <Link to={"/user/reservation/edit"}>예약 변경 / 취소</Link>
             </div>
         </motion.div>
     );

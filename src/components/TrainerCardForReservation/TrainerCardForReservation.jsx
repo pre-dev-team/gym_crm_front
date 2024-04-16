@@ -8,10 +8,7 @@ function TrainerCardForReservation({ key, onClick, name, profileUrl }) {
                 <img src={profileUrl} />
             </div>
             <div css={s.infoBox}>
-                <div css={s.nameBox}>{name}</div>
-                <div css={s.buttonBox}>
-                    <button onClick={onClick}>예약하기</button>
-                </div>
+                <h1>{name}</h1>
             </div>
         </div>
     );

@@ -35,6 +35,7 @@ function UserReservationPage(props) {
             exit={{ opacity: 0 }}
             css={s.layout}
         >
+            <h1>트레이너를 선택하세요</h1>
             <div css={s.trainerBox}>
                 {trainers.map((trainer) => {
                     return (
