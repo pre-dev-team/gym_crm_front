@@ -6,7 +6,8 @@ import * as s from "./style";
 import RoutineModal from "../modals/RoutineModal/RoutineModal";
 import { getTodayReservationRequest } from "../../apis/api/reservation";
 
-function TodayReservation({ trainerId, today }) {
+function TodayReservation({ trainerId }) {
+    const [today, setToday] = useState(new Date());
     const [reservations, setReservations] = useState([]);
     const [tomorrowReservation, setTomorrowReservation] = useState([]);
 
