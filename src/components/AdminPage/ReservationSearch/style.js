@@ -18,6 +18,7 @@ export const customButton = css`
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
 `;
+
 export const selectStyle2 = {
     control: (baseStyles, state) => ({
         ...baseStyles,

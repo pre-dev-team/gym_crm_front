@@ -7,12 +7,14 @@ import ReservationSearch from "../../../components/AdminPage/ReservationSearch/R
 import AdminPageInbodyModal from "../../../components/modals/AdminPageInbodyModal/AdminPageInbodyModal";
 import AdminPageReviewModal from "../../../components/modals/AdminPageReviewModal/AdminPageReviewModal";
 import { useState } from "react";
+import MakeRoutine from "../../../components/MakeRoutine/MakeRoutine";
 
 function AdminMainPage(props) {
     const [isInbodyModalOpen, setIsInbodyModalOpen] = useState(false);
     const [isReviewyModalOpen, setIsReviewModalOpen] = useState(false);
     return (
         <div css={s.layout}>
+            <MakeRoutine />
             {isInbodyModalOpen ? <AdminPageInbodyModal setIsInbodyModalOpen={setIsInbodyModalOpen} /> : <></>}
             {isReviewyModalOpen ? <AdminPageReviewModal setIsReviewModalOpen={setIsReviewModalOpen} /> : <></>}
             <div css={s.firstBox}>
