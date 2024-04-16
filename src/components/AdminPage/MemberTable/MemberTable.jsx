@@ -3,7 +3,7 @@ import { getUsersBynameRequest } from "../../../apis/api/admin";
 import * as s from "./style";
 import { useQuery } from "react-query";
 
-function MemberTable(props) {
+function MemberTable({ setIsAdminReviewModalOpen }) {
     const getUsersByNameQuery = useQuery(
         ["getUsersByNameQuery"],
         () =>
@@ -45,7 +45,7 @@ function MemberTable(props) {
                                 <button>작성리뷰 조회</button>
                             </td>
                             <td>
-                                <button>인바디 조회</button>
+                                <button onClick={setIsAdminReviewModalOpen(() => true)}>인바디 조회</button>
                             </td>
                         </tr>
                         <tr>
