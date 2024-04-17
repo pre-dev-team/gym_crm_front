@@ -40,14 +40,13 @@ function TrainerMainPage(props) {
                 <div css={s.allReservationBox}>
                 <div css={s.dayoffBox}>
                         <div css={s.dayoff}>연차 설정</div>
-                        <DayoffRequest />
+                        <DayoffRequest accountId={accountId}/>
                         <div css={s.select}></div>
                     </div>
                     <div css={s.allReservation}>
-                        <div>나의 예약 검색</div>
+                        <div css={s.myReservation}>나의 예약 검색</div>
                         <SelectReservationAllUser accountId={accountId} />
                     </div>
-
                 </div>
             </div>
         </>

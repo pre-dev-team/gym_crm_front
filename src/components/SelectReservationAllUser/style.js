@@ -10,11 +10,13 @@ export const layout = css`
 export const selectBox = css`
    height: 400px;
    overflow-y: auto;
+
 `;
 
 export const reservationList = css`
     list-style-type: none;
     overflow: auto;
+    border: 1px solid #dbdbdb;
     padding: 15px;
     height: 200px;
 

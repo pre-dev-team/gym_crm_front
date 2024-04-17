@@ -13,7 +13,6 @@ function TodayReservation({ trainerId }) {
 
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    console.log(today)
 
     const getTodayReservationQuery = useQuery(
         ["getTodayReservationQuery", trainerId],

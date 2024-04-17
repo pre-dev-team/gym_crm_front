@@ -6,6 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
 import ReactSelect from "react-select";
+import { useQuery } from "react-query";
+import { trainerHolidayRequest } from "../../apis/api/trainer";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -13,9 +15,32 @@ const CustomInput = ({ value, onClick }) => (
     </button>
 );
 
-function DayoffRequest(props) {
+function DayoffRequest({accountId}) {
     const [selectDate, setSelectDate] = useState(new Date());
-    const [searchType, setSearchType] = useState(1);
+    const [ timeList, setTimeList ] = useState([]);
+    const [ confirm, setConfirm ] = useState(0);
+
+    const trainerHolidayQuery = useQuery(
+        ["trainerHolidayQuery"],
+        () =>
+            trainerHolidayRequest({
+                accountId: accountId,
+                holidayDate: selectDate,
+                time: timeList,
+                confirm: confirm,
+            }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            enabled: false,
+            onSuccess: (response) => {
+                console.log(response.data);
+                alert("연차 신청되었습니다.")
+            },
+        }
+    );
+
+    console.log(timeList);
 
     return (
         <div css={s.layout}>
@@ -31,19 +56,19 @@ function DayoffRequest(props) {
                 <div css={s.selectBox}>
                     <ReactSelect
                         styles={s.selectStyle2}
-                        options={s.searchTypeOption}
-                        defaultValue={s.searchTypeOption[0]}
-                        onChange={(e) => setSearchType(() => e.value)}
+                        options={s.searchTypeOption1}
+                        defaultValue={s.searchTypeOption1[0]}
+                        onChange={(e) => setTimeList(() => e.value)}
                     />
                     <span> - </span>
                     <ReactSelect
                         styles={s.selectStyle2}
-                        options={s.searchTypeOption}
-                        defaultValue={s.searchTypeOption[0]}
-                        onChange={(e) => setSearchType(() => e.value)}
+                        options={s.searchTypeOption2}
+                        defaultValue={s.searchTypeOption2[0]}
+                        onChange={(e) => setTimeList(() => e.value)}
                     />
                 </div>
-                <button css={s.searchButton}>신청하기</button>
+                <button css={s.searchButton} onClick={() => trainerHolidayQuery.refetch()}>신청하기</button>
             </div>
         </div>
     );

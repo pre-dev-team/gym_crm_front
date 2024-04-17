@@ -56,16 +56,30 @@ export const searchButton = css`
     border: 1px solid hsl(0, 0%, 80%);
 `;
 
-export const searchTypeOption = [
-    { value: 1, label: "10:00 ~ 11:00" },
-    { value: 2, label: "11:00 ~ 12:00" },
-    { value: 3, label: "12:00 ~ 13:00" },
-    { value: 4, label: "13:00 ~ 14:00" },
-    { value: 5, label: "14:00 ~ 15:00" },
-    { value: 6, label: "15:00 ~ 16:00" },
-    { value: 7, label: "16:00 ~ 17:00" },
-    { value: 8, label: "17:00 ~ 18:00" },
-    { value: 9, label: "18:00 ~ 19:00" },
-    { value: 10, label: "19:00 ~ 20:00" },
-    { value: 11, label: "20:00 ~ 21:00" },
+export const searchTypeOption1 = [
+    { value: 1, label: "10:00" },
+    { value: 2, label: "11:00" },
+    { value: 3, label: "12:00" },
+    { value: 4, label: "13:00" },
+    { value: 5, label: "14:00" },
+    { value: 6, label: "15:00" },
+    { value: 7, label: "16:00" },
+    { value: 8, label: "17:00" },
+    { value: 9, label: "18:00" },
+    { value: 10, label: "19:00" },
+    { value: 11, label: "20:00" }
+];
+
+export const searchTypeOption2 = [
+    { value: 1, label: "11:00" },
+    { value: 2, label: "12:00" },
+    { value: 3, label: "13:00" },
+    { value: 4, label: "14:00" },
+    { value: 5, label: "15:00" },
+    { value: 6, label: "16:00" },
+    { value: 7, label: "17:00" },
+    { value: 8, label: "18:00" },
+    { value: 9, label: "19:00" },
+    { value: 10, label: "20:00" },
+    { value: 11, label: "21:00" }
 ];

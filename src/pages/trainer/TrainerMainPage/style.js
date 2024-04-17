@@ -85,13 +85,13 @@ export const allReservationBox = css`
 export const allReservation = css`
     list-style-type: none;
     margin: 0px;
+`;
 
-    & > div {
-        border-bottom: 2px solid #939393;
-        padding: 10px;
-        font-size: 18px;
-        font-weight: 700;
-    }
+export const myReservation = css`
+    border-bottom: 2px solid #939393;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 700;
 `;
 
 export const dayoffBox = css`

@@ -13,10 +13,15 @@ export const membersBox = css`
 export const member = css`
     box-sizing: border-box;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     margin: 10px;
     border: 1px solid #ccc;
     width: 250px;
     height: 40px;
+`;
+
+export const selectUser = css`
+    margin-left: 5px;
+    padding: 2px;
 `;
