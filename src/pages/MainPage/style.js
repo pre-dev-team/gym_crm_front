@@ -2,7 +2,11 @@ import { css } from "@emotion/react";
 
 export const background = css`
     width: 100%;
-    height: 2040px;
+    height: 680px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 export const box1 = css`

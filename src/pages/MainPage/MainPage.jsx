@@ -8,44 +8,52 @@ import { useEffect, useRef, useState } from "react";
 // 메인페이지입니다
 
 function MainPage(props) {
-    const backgroundDivRef = useRef();
+    const backgoundRef = useRef();
 
-    useEffect(() => {
-        const backgroundDivRefCurrent = backgroundDivRef.current;
-
-        const ScrollWheelHandler = (e) => {
-            e.preventDefault();
-            const { deltaY } = e;
-            const { scrollTop } = backgroundDivRef.current;
-            console.log(scrollTop);
-            if (deltaY > 0) {
-                if (scrollTop >= 0 && scrollTop < 680) {
-                    backgroundDivRef.current.scrollTo(680);
-                } else if (scrollTop >= 680 && scrollTop < 680 * 2) {
-                    backgroundDivRef.current.scrollTo({
-                        top: 680 * 2,
-                        left: 0,
-                        behavior: "smooth",
-                    });
-                } else if (scrollTop >= 680 * 2 && scrollTop < 680 * 3) {
-                    backgroundDivRef.current.scrollTo({
-                        top: 680 * 3,
-                        left: 0,
-                        behavior: "smooth",
-                    });
-                }
+    const handleOnWheel = (e) => {
+        const { deltaY } = e;
+        const { scrollTop } = backgoundRef.current;
+        console.log(backgoundRef.current.scrollTo);
+        e.preventDefault();
+        if (deltaY > 0) {
+            if (scrollTop >= 0 && scrollTop < 680) {
+                backgoundRef.current.scrollTo({
+                    top: 680,
+                    left: 0,
+                    behavior: "smooth",
+                });
+            } else if (scrollTop >= 680 && scrollTop < 680 * 2) {
+                backgoundRef.current.scrollTo({
+                    top: 680 * 2,
+                    left: 0,
+                    behavior: "smooth",
+                });
+            } else if (scrollTop >= 680 * 2 && scrollTop < 680 * 3) {
+                backgoundRef.current.scrollTo({
+                    top: 680 * 3,
+                    left: 0,
+                    behavior: "smooth",
+                });
             }
-
-            backgroundDivRefCurrent.addEventListener("wheel", ScrollWheelHandler);
-        };
-
-        return () => {
-            backgroundDivRefCurrent.removeEventListener("wheel", ScrollWheelHandler);
-        };
-    }, []);
+        } else if (deltaY < 0) {
+            if (scrollTop < 680 * 3 && scrollTop >= 680 * 2) {
+                backgoundRef.current.scrollTo({
+                    top: 680,
+                    left: 0,
+                    behavior: "smooth",
+                });
+            } else if (scrollTop < 680 * 2 && scrollTop < 680) {
+                backgoundRef.current.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth",
+                });
+            }
+        }
+    };
 
     return (
-        <div ref={backgroundDivRef} css={s.background}>
+        <div onWheel={handleOnWheel} ref={backgoundRef} css={s.background}>
             <div css={s.box1} className="inner">
                 <motion.div
                     transition={{ duration: 1, delay: 0 }}
