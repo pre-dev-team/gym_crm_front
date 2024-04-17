@@ -29,3 +29,8 @@ export const getSelectReservationAllUserRequest = async (params) => {
     const response = await instance.get("/reservation/trainer/searchall", { params });
     return response;
 };
+
+export const cancelReservationByUserRequest = async (params) => {
+    const response = await instance.delete("/reservation/user", { params });
+    return response;
+};

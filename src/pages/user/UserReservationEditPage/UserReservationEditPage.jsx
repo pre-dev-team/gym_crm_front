@@ -1,16 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
 import { motion } from "framer-motion";
 import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
-import ko from "date-fns/locale/ko";
-import { useQuery } from "react-query";
-import { getDayReservationRequest, getUserAllReservationRequest } from "../../../apis/api/reservation";
-import TrainerBoardForReservation from "../../../components/TrainerBoardForReservation/TrainerBoardForReservation";
+import { useMutation, useQuery } from "react-query";
+import { cancelReservationByUserRequest, getUserAllReservationRequest } from "../../../apis/api/reservation";
 import usePrincipal from "../../../hooks/usePrincipal";
-import useSchedule from "../../../hooks/useSchedule";
 import { dateFormatter } from "../../../utils/dateFormatter";
 
 const CustomInput = ({ value, onClick }) => (
@@ -20,14 +16,18 @@ const CustomInput = ({ value, onClick }) => (
 );
 
 function UserReservationEditPage(props) {
-    const [selectDate, setSelectDate] = useState(new Date());
-    const [selectTimeId, setSelectTimeId] = useState(0);
-    const [possibleTimes, setPossibleTimes] = useState([]);
-    const [reservedTimeId, setReservedTimeId] = useState([]);
     const [allUserReservations, setAllUserReservations] = useState([]);
     const [comingReservations, setComingReservations] = useState([]);
     const accountId = usePrincipal();
-    const schedule = useSchedule();
+
+    const deleteReservationByUserMutation = useMutation({
+        mutationKey: "deleteReservationByUserMutation",
+        mutationFn: cancelReservationByUserRequest,
+        retry: 0,
+        onSuccess: (response) => {
+            alert(response.data);
+        },
+    });
 
     const getUserAllReservationQuery = useQuery(
         ["getUserAllReservationRequest"],
@@ -56,51 +56,19 @@ function UserReservationEditPage(props) {
         }
     );
 
-    const getDayReservationQuery = useQuery(
-        ["getDayReservationQuery", selectDate],
-
-        () =>
-            getDayReservationRequest({
-                date: selectDate,
-                accountId: accountId,
-                trainerId: 0,
-            }),
-
-        {
-            retry: 0,
-            refetchOnWindowFocus: false,
-            onSuccess: (response) => {
-                setReservedTimeId(() => response.data.map((time) => time.timeId));
-            },
-            onError: (error) => {},
-            enabled: !!accountId,
-        }
-    );
-
     useEffect(() => {
         const today = dateFormatter(new Date());
         setComingReservations(() => allUserReservations.filter((res) => res.reservationDate >= today));
     }, [allUserReservations]);
 
-    useEffect(() => {
-        const today = new Date();
-        const isSameDate = today.getDate() === selectDate.getDate();
-        const isSameMonth = today.getMonth() === selectDate.getMonth();
-        const isSameYear = today.getFullYear() === selectDate.getFullYear();
-        console.log(comingReservations);
-        if (isSameDate && isSameMonth & isSameYear) {
-            setPossibleTimes(() => schedule.filter((time) => time.timeId + 9 > new Date().getHours() + 1));
-        } else {
-            setPossibleTimes(() => schedule.filter((time) => !reservedTimeId.includes(time.timeId)));
-        }
-    }, [selectDate, selectTimeId, reservedTimeId]);
-
     // #########################################클릭 핸들러######################################### //
 
-    const handleTimeClick = (timeId) => {
-        setSelectTimeId(() => timeId);
-        if (selectTimeId === timeId) {
-            setSelectTimeId(() => 0);
+    const handleEditClick = (reservationId) => {};
+    const handleCancelClick = (reservationId) => {
+        if (window.confirm("취소하시겠습니까?")) {
+            deleteReservationByUserMutation.mutate({
+                reservationId: reservationId,
+            });
         }
     };
 
@@ -112,7 +80,7 @@ function UserReservationEditPage(props) {
             exit={{ opacity: 0 }}
             css={s.layout}
         >
-            <h1>나의예약</h1>
+            <h1>나의 예약</h1>
             <div css={s.reservationBox}>
                 {comingReservations.length === 0 ? (
                     <>예약 없음</>
@@ -137,8 +105,8 @@ function UserReservationEditPage(props) {
                                     </tbody>
                                 </table>
                                 <div css={s.buttonBox}>
-                                    <button>변경</button>
-                                    <button>취소</button>
+                                    <button onClick={() => handleEditClick(reservation.reservationId)}>변경</button>
+                                    <button onClick={() => handleCancelClick(reservation.reservationId)}>취소</button>
                                 </div>
                             </div>
                         );

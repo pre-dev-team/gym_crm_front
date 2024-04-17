@@ -22,6 +22,9 @@ export const reservationBox = css`
     width: 100%;
     height: 500px;
     overflow-y: scroll;
+    & > h1 {
+        color: white;
+    }
     &::-webkit-scrollbar {
         width: 5px;
     }
