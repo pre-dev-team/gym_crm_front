@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import KakaoMapAPI from "../../components/KakaoMapAPI/KakaoMapAPI";
 import ReviewAll from "../../components/ReviewAll/ReviewAll";
 import TrainerInformation from "../../components/TrainerInformation/TrainerInformation";
+import TopTrainersPage from "../../components/TopTrainerPage/TopTrainerPage";
 
 // 메인페이지입니다
 

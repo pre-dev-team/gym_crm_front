@@ -16,12 +16,12 @@ export const getTrainerIdByAccountIdRequest = async (params) => {
 }
 
 export const getTrainerReviews = async (params) => {
-    const response = await instance.get("/trainer/all", { params }); // 변경된 엔드포인트로 수정
+    const response = await instance.get("/review/all", { params }); // 변경된 엔드포인트로 수정
     return response;
 }
 
 export const getTopRatedTrainersInformationRequest = async () => {
-    const response = await instance.get("/trainer/toprated"); // 변경된 엔드포인트로 수정
+    const response = await instance.get("/review/toprated"); // 변경된 엔드포인트로 수정
     return response;
 };
 
