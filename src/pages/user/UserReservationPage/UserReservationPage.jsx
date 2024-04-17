@@ -8,11 +8,14 @@ import { useQuery } from "react-query";
 import { getTrainersRequest } from "../../../apis/api/trainer";
 import TrainerCardForReservation from "../../../components/TrainerCardForReservation/TrainerCardForReservation";
 import SelectTrainerModal from "../../../components/modals/SelectTrainerModal/SelectTrainerModal";
+import { useSearchParams } from "react-router-dom";
 
 function UserReservationPage(props) {
     const [trainers, setTrainers] = useState([]);
     const [isClick, setIsClick] = useState(false);
     const [selectTrainerId, setSelectTrainerId] = useState(0);
+    const [searchParams] = useSearchParams();
+    const prevReservationId = searchParams.get("reservationId");
     const getTrainers = useQuery(["getTrainers"], getTrainersRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
@@ -52,7 +55,12 @@ function UserReservationPage(props) {
                     );
                 })}
                 {!!isClick ? (
-                    <SelectTrainerModal setIsClick={setIsClick} isClick={isClick} trainerId={selectTrainerId} />
+                    <SelectTrainerModal
+                        setIsClick={setIsClick}
+                        isClick={isClick}
+                        trainerId={selectTrainerId}
+                        prevReservationId={prevReservationId}
+                    />
                 ) : (
                     <></>
                 )}

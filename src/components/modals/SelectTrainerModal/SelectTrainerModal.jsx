@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import ko from "date-fns/locale/ko";
 import { motion } from "framer-motion";
-import { getDayReservationRequest, userReservationRequest } from "../../../apis/api/reservation";
+import {
+    editReservationByUserRequest,
+    getDayReservationRequest,
+    userReservationRequest,
+} from "../../../apis/api/reservation";
 import DatePicker from "react-datepicker";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useSchedule from "../../../hooks/useSchedule";
@@ -15,8 +19,7 @@ const CustomInput = ({ value, onClick }) => (
     </button>
 );
 
-function SelectTrainerModal(props) {
-    const { trainerId, isClick, setIsClick } = props;
+function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId }) {
     const [selectDate, setSelectDate] = useState(new Date());
     const [possibleTimes, setPossibleTimes] = useState([]);
     const [selectTimeId, setSelectTimeId] = useState(0);
@@ -80,21 +83,50 @@ function SelectTrainerModal(props) {
         },
     });
 
-    const handleReservationClick = () => {
-        console.log({
-            accountId: accountId,
-            trainderId: trainerId,
-            timeId: selectTimeId,
-            date: selectDate,
-        });
+    const editReservationByUserMutation = useMutation({
+        mutationKey: "editReservationByUserMutation",
+        mutationFn: editReservationByUserRequest,
+        retry: 0,
+        onSuccess: (response) => {
+            alert(response);
+        },
+    });
 
-        if (window.confirm("예약하시겠습니까?")) {
-            userReservationMutation.mutate({
+    const handleReservationClick = (prevReservationId) => {
+        if (!!prevReservationId) {
+            console.log({
+                prevReservationId: prevReservationId,
                 accountId: accountId,
                 trainerId: trainerId,
                 timeId: selectTimeId,
                 date: selectDate,
             });
+            if (window.confirm("변경하시겠습니까?")) {
+                editReservationByUserMutation.mutate({
+                    prevReservationId: prevReservationId,
+                    accountId: accountId,
+                    trainerId: trainerId,
+                    timeId: selectTimeId,
+                    date: selectDate,
+                });
+            }
+        } else {
+            alert(prevReservationId);
+            console.log({
+                accountId: accountId,
+                trainderId: trainerId,
+                timeId: selectTimeId,
+                date: selectDate,
+            });
+
+            if (window.confirm("예약하시겠습니까?")) {
+                userReservationMutation.mutate({
+                    accountId: accountId,
+                    trainerId: trainerId,
+                    timeId: selectTimeId,
+                    date: selectDate,
+                });
+            }
         }
     };
 
@@ -136,7 +168,9 @@ function SelectTrainerModal(props) {
                 })}
             </div>
             <div css={s.buttonBox}>
-                <button onClick={handleReservationClick}>예약하기</button>
+                <button onClick={() => handleReservationClick(prevReservationId)}>
+                    {!!prevReservationId ? "예약 변경하기" : "예약하기"}
+                </button>
                 <button onClick={handleCloseClick}>닫기</button>
             </div>
         </motion.div>

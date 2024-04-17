@@ -8,6 +8,7 @@ import { useMutation, useQuery } from "react-query";
 import { cancelReservationByUserRequest, getUserAllReservationRequest } from "../../../apis/api/reservation";
 import usePrincipal from "../../../hooks/usePrincipal";
 import { dateFormatter } from "../../../utils/dateFormatter";
+import { useNavigate } from "react-router-dom";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -18,6 +19,7 @@ const CustomInput = ({ value, onClick }) => (
 function UserReservationEditPage(props) {
     const [allUserReservations, setAllUserReservations] = useState([]);
     const [comingReservations, setComingReservations] = useState([]);
+    const navigate = useNavigate();
     const accountId = usePrincipal();
 
     const deleteReservationByUserMutation = useMutation({
@@ -63,7 +65,11 @@ function UserReservationEditPage(props) {
 
     // #########################################클릭 핸들러######################################### //
 
-    const handleEditClick = (reservationId) => {};
+    const handleEditClick = (reservationId) => {
+        if (window.confirm("변경하시겠습니까?")) {
+            navigate(`/user/reservation/make?reservationId=${reservationId}`);
+        }
+    };
     const handleCancelClick = (reservationId) => {
         if (window.confirm("취소하시겠습니까?")) {
             deleteReservationByUserMutation.mutate({
