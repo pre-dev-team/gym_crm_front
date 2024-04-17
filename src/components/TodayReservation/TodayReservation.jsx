@@ -13,6 +13,7 @@ function TodayReservation({ trainerId }) {
 
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
+    console.log(today)
 
     const getTodayReservationQuery = useQuery(
         ["getTodayReservationQuery", trainerId],
@@ -57,8 +58,11 @@ function TodayReservation({ trainerId }) {
     return (
         <div css={s.layout}>
             <div css={s.scheduleDiv}>
+                <div css={s.schedule}>오늘 일정</div>
+                <div css={s.schedule}>내일 일정</div>
+            </div>
+            <div css={s.scheduleDiv}>
                 <div css={s.todayContainer}>
-                    <div>오늘 일정</div>
                     <ul css={s.todayBox}>
                         {reservations.map((reservation, index) => (
                             <li key={index}>
@@ -70,7 +74,6 @@ function TodayReservation({ trainerId }) {
                     </ul>
                 </div>
                 <div css={s.tomorrowContainer}>
-                    <div>내일 일정</div>
                     <ul css={s.tomorrowBox}>
                         {tomorrowReservation.map((reservation, index) => (
                             <li key={index}>

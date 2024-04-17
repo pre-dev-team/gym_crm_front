@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     box-sizing: border-box;
-    margin: 20px 0px;
+    margin: 20px 10px;
     border: 1px solid black;
     height: 400px;
 `;
@@ -29,7 +29,7 @@ export const reservationList = css`
 `;
 
 export const customButton = css`
-    width: 145px;
+    width: 130px;
     height: 35px;
     padding: 5px;
     font-size: 16px;

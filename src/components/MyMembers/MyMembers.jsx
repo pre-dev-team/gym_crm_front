@@ -10,7 +10,9 @@ function MyMembers({ membersList }) {
         <div css={s.layout}>
              <ul css={s.membersBox}>
                 {membersList.map(member => (
-                    <li key={member.id}>{member.name}</li>
+                    <li key={member.id} css={s.member}>
+                        <p>{member.name}</p>
+                    </li>
                 ))}
             </ul>
         </div>
