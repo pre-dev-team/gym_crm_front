@@ -11,6 +11,12 @@ export const layout = css`
     padding: 10px;
     width: 100%;
     height: 90%;
+    & > h1 {
+        color: #dbdbdb;
+        font-size: 36px;
+        margin: 0;
+        margin-bottom: 20px;
+    }
 `;
 
 export const periodBox = css`
