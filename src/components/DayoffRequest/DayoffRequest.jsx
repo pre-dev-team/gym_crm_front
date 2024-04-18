@@ -16,7 +16,7 @@ const CustomInput = ({ value, onClick }) => (
     </button>
 );
 
-function DayoffRequest({accountId}) {
+function DayoffRequest({ accountId }) {
     const [selectDate, setSelectDate] = useState(new Date());
     const [ startTimeId, setStartTimeId] = useState(0);
     const [ endTimeId, setEndTimeId] = useState(0);
@@ -62,7 +62,7 @@ function DayoffRequest({accountId}) {
                         styles={s.selectStyle2}
                         options={s.searchTypeOption1}
                         defaultValue={s.searchTypeOption1[0]}
-                        onChange={(e) => {setStartTimeId(() => e.value)}}
+                        onChange={(e) => {setStartTimeId(() => e.value) }}
                     />
                     <span> - </span>
                     <ReactSelect
