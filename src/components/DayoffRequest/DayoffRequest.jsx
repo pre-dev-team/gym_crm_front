@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as s from "./style";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
 import ReactSelect from "react-select";
-import { useQuery } from "react-query";
-import { trainerHolidayRequest } from "../../apis/api/trainer";
+import { useMutation, useQuery } from "react-query";
+import { trainerHolidayRequest } from "../../apis/api/holiday";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -15,32 +15,41 @@ const CustomInput = ({ value, onClick }) => (
     </button>
 );
 
-function DayoffRequest({accountId}) {
+function DayoffRequest({ accountId }) {
     const [selectDate, setSelectDate] = useState(new Date());
-    const [ timeList, setTimeList ] = useState([]);
-    const [ confirm, setConfirm ] = useState(0);
-
-    const trainerHolidayQuery = useQuery(
-        ["trainerHolidayQuery"],
-        () =>
-            trainerHolidayRequest({
-                accountId: accountId,
-                holidayDate: selectDate,
-                time: timeList,
-                confirm: confirm,
-            }),
-        {
-            retry: 0,
-            refetchOnWindowFocus: false,
-            enabled: false,
-            onSuccess: (response) => {
-                console.log(response.data);
-                alert("연차 신청되었습니다.")
-            },
+    const [startTimeId, setStartTimeId] = useState(0);
+    const [endTimeId, setEndTimeId] = useState(0);
+    const [availableOptions, setAvailabelOptions] = useState(s.searchTypeOption2)
+    const trainerHolidayMutation = useMutation({
+        mutationKey: "trainerHolidayMutation",
+        mutationFn: trainerHolidayRequest,
+        retry:0,
+        onSuccess: response => {
+            console.log(response);
         }
-    );
+        
+    })
+    //3 하면 2밑으로 불활성화
+    useEffect(() => {
+        setAvailabelOptions(() => availableOptions.filter(option => option.value >= startTimeId));
+    },[startTimeId])
 
-    console.log(timeList);
+    const handleApplyClick = () => {
+        console.log({
+            accountId : accountId,
+                holidayDate: selectDate,
+                startTimeId: startTimeId,
+                endTimeId: endTimeId
+        })
+        if(window.confirm("연차 신청하시겠습니까?")) {
+            trainerHolidayMutation.mutate({
+                accountId : accountId,
+                holidayDate: selectDate,
+                startTimeId: startTimeId,
+                endTimeId: endTimeId
+            })
+        }
+    }
 
     return (
         <div css={s.layout}>
@@ -58,17 +67,17 @@ function DayoffRequest({accountId}) {
                         styles={s.selectStyle2}
                         options={s.searchTypeOption1}
                         defaultValue={s.searchTypeOption1[0]}
-                        onChange={(e) => setTimeList(() => e.value)}
+                        onChange={(e) => {setStartTimeId(() => e.value) }}
                     />
                     <span> - </span>
                     <ReactSelect
                         styles={s.selectStyle2}
-                        options={s.searchTypeOption2}
+                        options={availableOptions}
                         defaultValue={s.searchTypeOption2[0]}
-                        onChange={(e) => setTimeList(() => e.value)}
+                        onChange={(e) => {setEndTimeId(() => e.value)}}
                     />
                 </div>
-                <button css={s.searchButton} onClick={() => trainerHolidayQuery.refetch()}>신청하기</button>
+                <button css={s.searchButton} onClick={handleApplyClick}>신청하기</button>
             </div>
         </div>
     );
