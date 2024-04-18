@@ -16,16 +16,16 @@ export const getTrainerIdByAccountIdRequest = async (params) => {
 };
 
 export const getTrainerReviews = async (params) => {
-    const response = await instance.get("/review/all", { params }); // 변경된 엔드포인트로 수정
-    return response;
-};
-
-export const getTopRatedTrainersInformationRequest = async () => {
-    const response = await instance.get("/review/toprated"); // 변경된 엔드포인트로 수정
+    const response = await instance.get("/trainer/all", { params }); // 변경된 엔드포인트로 수정
     return response;
 };
 
 export const getTrainersRequest = async () => {
     const response = await instance.get("trainer/trainers");
+    return response;
+};
+
+export const trainerHolidayRequest = async (data) => {
+    const response = await instance.post("/trainer/holiday/request", data);
     return response;
 };

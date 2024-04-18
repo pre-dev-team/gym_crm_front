@@ -94,13 +94,6 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId 
 
     const handleReservationClick = (prevReservationId) => {
         if (!!prevReservationId) {
-            console.log({
-                prevReservationId: prevReservationId,
-                accountId: accountId,
-                trainerId: trainerId,
-                timeId: selectTimeId,
-                date: selectDate,
-            });
             if (window.confirm("변경하시겠습니까?")) {
                 editReservationByUserMutation.mutate({
                     prevReservationId: prevReservationId,
@@ -111,14 +104,6 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId 
                 });
             }
         } else {
-            alert(prevReservationId);
-            console.log({
-                accountId: accountId,
-                trainderId: trainerId,
-                timeId: selectTimeId,
-                date: selectDate,
-            });
-
             if (window.confirm("예약하시겠습니까?")) {
                 userReservationMutation.mutate({
                     accountId: accountId,

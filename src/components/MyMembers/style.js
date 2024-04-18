@@ -6,10 +6,22 @@ export const layout = css`
 
 export const membersBox = css`
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #ccc;
-    padding: 10px;
     list-style-type: none;
+    padding: 0px;
+`;
+
+export const member = css`
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+    border: 1px solid #ccc;
+    width: 250px;
+    height: 40px;
+`;
+
+export const selectUser = css`
+    margin-left: 5px;
+    padding: 2px;
 `;
