@@ -25,7 +25,3 @@ export const getTrainersRequest = async () => {
     return response;
 };
 
-export const trainerHolidayRequest = async (data) => {
-    const response = await instance.post("/trainer/holiday/request", data);
-    return response;
-};
