@@ -60,10 +60,6 @@ function UserSigninPage(props) {
         >
             <h1>로그인</h1>
             <div css={s.loginBox}>
-                <div css={s.linkBox}>
-                    <Link to={"/auth/user/signin"}>👪유저로그인</Link>
-                    <Link to={"/auth/admin/signin"}>🔐관리자로그인</Link>
-                </div>
                 <div css={s.selectBox}>
                     <div css={s.inputBox}>
                         <InputWithMessagebox
@@ -81,12 +77,15 @@ function UserSigninPage(props) {
                             onChange={passwordChange}
                         />
                     </div>
-                    <div css={s.searchBox}>
-                        <Link>🔒 아이디찾기</Link>
-                        <Link>🔑 비밀번호찾기</Link>
-                    </div>
                     <div css={s.buttonBox}>
                         <button onClick={handleLoginClick}>로그인</button>
+                    </div>
+                    <div css={s.searchBox}>
+                        <Link>아이디찾기</Link>
+                        <span css={s.col}></span>
+                        <Link>비밀번호찾기</Link>
+                        <span css={s.col}></span>
+                        <Link to={"/auth/user/signup"}>회원가입</Link>
                     </div>
                     <span css={s.line}>
                         <span>또는</span>

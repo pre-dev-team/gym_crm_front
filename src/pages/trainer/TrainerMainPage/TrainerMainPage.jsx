@@ -10,6 +10,7 @@ import SelectReservationAllUser from "../../../components/SelectReservationAllUs
 import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useTrainerApis from "../../../hooks/useTrainerApis";
+import { Link } from "react-router-dom"; // Link 컴포넌트 import
 import DayoffRequest from "../../../components/DayoffRequest/DayoffRequest";
 
 function TrainerMainPage(props) {
