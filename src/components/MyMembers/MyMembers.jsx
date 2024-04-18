@@ -10,10 +10,13 @@ function MyMembers({ membersList }) {
         <div css={s.layout}>
             <ul css={s.membersBox}>
                 {membersList.map(member => (
-                    <li key={member.id}>
-                        {member.name}
+
+                    <li key={member.id} css={s.member}>
+                        <p>{member.name}</p>
+                        <button css={s.selectUser}>회원정보조회</button>
                         {/* Link 컴포넌트를 사용하여 Inbody 페이지로 이동 */}
                         <Link to="/inbody">Inbody 입력</Link>
+
                     </li>
                 ))}
             </ul>
