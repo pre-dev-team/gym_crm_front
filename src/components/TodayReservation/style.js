@@ -1,9 +1,6 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-top: 15px;
 `;
 
@@ -28,6 +25,11 @@ export const tomorrowContainer = css`
 export const scheduleDiv = css`
     display: flex;
     justify-content: space-around;
+`;
+
+export const schedule = css`
+    font-size: 16px;
+    font-weight: 600;
 `;
 
 export const container = css`

@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import KakaoMapAPI from "../../components/KakaoMapAPI/KakaoMapAPI";
 import ReviewAll from "../../components/ReviewAll/ReviewAll";
 import { useEffect, useRef, useState } from "react";
+import TrainerInformation from "../../components/TrainerInformation/TrainerInformation";
+
 
 // 메인페이지입니다
 
