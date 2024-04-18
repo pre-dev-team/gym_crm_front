@@ -31,6 +31,6 @@ export const getTrainersRequest = async () => {
 };
 
 export const trainerHolidayRequest = async (data) => {
-    const response = await instance.post("/trainer/holiday/request", data);
+    const response = await instance.post("/holiday/insert", data);
     return response;
 };
