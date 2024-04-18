@@ -37,4 +37,5 @@ export const cancelReservationByUserRequest = async (params) => {
 
 export const editReservationByUserRequest = async (data) => {
     const response = await instance.put("/reservation/user", data);
+    return response;
 };

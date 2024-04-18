@@ -6,9 +6,13 @@ import { accountInfoAtom } from "../../../atoms/accountInfoAtom";
 import MypageReservationReview from "../../../components/MypageReservationReview/MypageReservationReview";
 import { motion } from "framer-motion";
 import { FaChevronRight } from "react-icons/fa6";
+import EditPasswordModal from "../../../components/modals/EditPasswordModal/EditPasswordModal";
+import { useState } from "react";
+import UserInbodyModal from "../../../components/modals/UserInbodyModal/EditPasswordModal";
 function UserMyPage(props) {
     const [accountInfo, setAccountInfo] = useRecoilState(accountInfoAtom);
-
+    const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+    const [isInbodyModalOpen, setIsInbodyModalOpen] = useState(true);
     return (
         <motion.div
             transition={{ duration: 1, delay: 0 }}
@@ -17,6 +21,24 @@ function UserMyPage(props) {
             exit={{ opacity: 0 }}
             css={s.layout}
         >
+            {isPasswordModalOpen ? (
+                <EditPasswordModal
+                    accountId={accountInfo.accountId}
+                    isPasswordModalOpen={isPasswordModalOpen}
+                    setIsPasswordModalOpen={setIsPasswordModalOpen}
+                />
+            ) : (
+                <></>
+            )}
+            {isInbodyModalOpen ? (
+                <UserInbodyModal
+                    accountId={accountInfo.accountId}
+                    isInbodyModalOpen={isInbodyModalOpen}
+                    setIsInbodyModalOpen={setIsInbodyModalOpen}
+                />
+            ) : (
+                <></>
+            )}
             <div css={s.infoBox}>
                 <div css={s.info}>
                     <div css={s.names}>
@@ -28,11 +50,11 @@ function UserMyPage(props) {
                         <h2>{accountInfo.email}</h2>
                     </div>
                     <div css={s.buttonBox}>
-                        <button>
+                        <button onClick={() => setIsPasswordModalOpen(() => true)}>
                             <FaChevronRight fontSize={"10px"} />
                             비밀번호 변경
                         </button>
-                        <button>
+                        <button onClick={() => setIsInbodyModalOpen(() => true)}>
                             <FaChevronRight fontSize={"10px"} />
                             인바디 조회
                         </button>

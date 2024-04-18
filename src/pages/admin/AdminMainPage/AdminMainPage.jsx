@@ -5,10 +5,22 @@ import ReservationTable from "../../../components/AdminPage/ReservationTable/Res
 import TrainerTable from "../../../components/AdminPage/TrainerTable/TrainerTable";
 import { motion } from "framer-motion";
 import ReservationSearch from "../../../components/AdminPage/ReservationSearch/ReservationSearch";
+import { useState } from "react";
+import AdminModalLayout from "../../../components/modals/adminModal/AdminModalLayout/AdminModalLayout";
+import AdminReviewModal from "../../../components/modals/adminModal/AdminReviewModal/AdminReviewModal";
 
 function AdminMainPage(props) {
+    const [isAdminReviewModalOpen, setIsAdminReviewModalOpen] = useState(false);
+    const [isMemeberListModalOpen, setIsMemeberListModalOpen] = useState(false);
+    const [isReservationListModalOpen, setIsReservationListModalOpen] = useState(false);
+
     return (
         <div css={s.layout}>
+            {/* {isAdminReviewModalOpen ? (
+                <AdminReviewModal setIsAdminReviewModalOpen={setIsAdminReviewModalOpen} />
+            ) : (
+                <></>
+            )} */}
             <div css={s.firstBox}>
                 <div css={s.listBox}>
                     <div css={s.listName}>전체 트레이너 명단</div>
@@ -19,7 +31,7 @@ function AdminMainPage(props) {
                 <div css={s.listBox}>
                     <div css={s.listName}>전체 회원 명단</div>
                     <div css={s.list}>
-                        <MemberTable />
+                        <MemberTable setIsAdminReviewModalOpen={setIsAdminReviewModalOpen} />
                     </div>
                 </div>
             </div>

@@ -20,11 +20,6 @@ export const getTrainerReviews = async (params) => {
     return response;
 };
 
-export const getTopRatedTrainersInformationRequest = async () => {
-    const response = await instance.get("/trainer/toprated"); // 변경된 엔드포인트로 수정
-    return response;
-};
-
 export const getTrainersRequest = async () => {
     const response = await instance.get("trainer/trainers");
     return response;

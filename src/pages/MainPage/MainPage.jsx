@@ -3,9 +3,7 @@ import * as s from "./style";
 import { motion } from "framer-motion";
 import KakaoMapAPI from "../../components/KakaoMapAPI/KakaoMapAPI";
 import ReviewAll from "../../components/ReviewAll/ReviewAll";
-import { useEffect, useRef, useState } from "react";
-import TrainerInformation from "../../components/TrainerInformation/TrainerInformation";
-
+import { useRef } from "react";
 
 // 메인페이지입니다
 
