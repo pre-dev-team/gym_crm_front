@@ -27,4 +27,7 @@ export const tableBox = css`
 export const table = css`
     text-align: center;
     width: 100%;
+    & td {
+        font-size: 14px;
+    }
 `;

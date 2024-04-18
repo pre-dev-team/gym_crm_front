@@ -46,14 +46,21 @@ export const contact = css`
     margin-bottom: 10px;
 `;
 export const buttonBox = css`
+    margin-top: 20px;
     padding: 10px 0px;
     & > button {
         width: 100%;
         height: 30px;
         background-color: #ededed;
         border: none;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         cursor: pointer;
+        &:hover {
+            background-color: #dbdbdb;
+        }
+        &:active {
+            background-color: #999999;
+        }
     }
 `;
 export const listBox = css`

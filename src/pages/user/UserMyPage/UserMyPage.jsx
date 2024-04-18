@@ -36,10 +36,6 @@ function UserMyPage(props) {
                             <FaChevronRight fontSize={"10px"} />
                             인바디 조회
                         </button>
-                        <button>
-                            <FaChevronRight fontSize={"10px"} />
-                            문의 하기
-                        </button>
                     </div>
                 </div>
             </div>

@@ -16,7 +16,6 @@ function MypageReservationReview({ accountId }) {
     const [reviewedTrainerIds, setReviewedTrainerIds] = useState([]);
 
     useEffect(() => {
-        console.log(allUserReservations);
         const today = dateFormatter(new Date());
         setPrevReservations(() => allUserReservations.filter((res) => res.reservationDate < today));
         setComingReservations(() => allUserReservations.filter((res) => res.reservationDate >= today));
@@ -38,6 +37,7 @@ function MypageReservationReview({ accountId }) {
                             reservationDate: res.reservationDate,
                             trainerId: res.trainerId,
                             trainerName: res.name,
+                            timeDuration: res.timeDuration,
                         };
                     })
                 );
@@ -85,6 +85,7 @@ function MypageReservationReview({ accountId }) {
                     <thead>
                         <tr>
                             <th>날짜</th>
+                            <th>시간</th>
                             <th>트레이너</th>
                             <th>기타</th>
                         </tr>
@@ -94,6 +95,7 @@ function MypageReservationReview({ accountId }) {
                             return (
                                 <tr key={reservation.reservationId}>
                                     <td>{reservation.reservationDate}</td>
+                                    <td>{reservation.timeDuration}</td>
                                     <td>{reservation.trainerName}</td>
                                     <td>
                                         <button>루틴확인하기</button>
@@ -106,10 +108,11 @@ function MypageReservationReview({ accountId }) {
                         {prevReservations
                             .sort((a, b) => a.reservationDate - b.reservationDate)
                             .reverse()
-                            .map((reservation) => {
+                            .map((reservation, index) => {
                                 return (
-                                    <tr key={reservation.reservationId}>
+                                    <tr key={index}>
                                         <td>{reservation.reservationDate}</td>
+                                        <td>{reservation.timeDuration}</td>
                                         <td>{reservation.trainerName}</td>
                                         <td>
                                             <button

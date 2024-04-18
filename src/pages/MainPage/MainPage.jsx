@@ -42,7 +42,7 @@ function MainPage(props) {
                     left: 0,
                     behavior: "smooth",
                 });
-            } else if (scrollTop < 680 * 2 && scrollTop < 680) {
+            } else if (scrollTop < 680 * 2 && scrollTop < 720) {
                 backgoundRef.current.scrollTo({
                     top: 0,
                     left: 0,
