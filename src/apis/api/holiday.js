@@ -8,4 +8,10 @@ export const trainerHolidayRequest = async (data) => {
 export const deleteHolidayRequest = async (data) => {
     const response = await instance.delete("/holiday/delete", {data});
     return response;
-}
+};
+
+export const selectHolidayRequest = async (params) => {
+    const response = await instance.get("/holiday/select", {params});
+    return response;
+};
+

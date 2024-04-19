@@ -19,11 +19,12 @@ export const modalContainer = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #dbdbdb;
+    background-color: #4d4d4d4b;
+    z-index: 1;
 `;
 
 export const modalContent = css`
-    background-color: #ffffff;
+    background-color: white;
     width: 700px;
     height: 800px;
     padding: 15px;

@@ -18,8 +18,8 @@ const CustomInput = ({ value, onClick }) => (
 
 function DayoffRequest({ accountId }) {
     const [selectDate, setSelectDate] = useState(new Date());
-    const [ startTimeId, setStartTimeId] = useState(0);
-    const [ endTimeId, setEndTimeId] = useState(0);
+    const [startTimeId, setStartTimeId] = useState(0);
+    const [endTimeId, setEndTimeId] = useState(0);
     const [availableOptions, setAvailabelOptions] = useState(s.searchTypeOption2)
 
     const trainerHolidayMutation = useMutation({
@@ -43,7 +43,10 @@ function DayoffRequest({ accountId }) {
                 startTimeId: startTimeId,
                 endTimeId: endTimeId
             })
+        }else {
+            
         }
+        alert("신청되었습니다");
     }
 
     return (
@@ -73,7 +76,7 @@ function DayoffRequest({ accountId }) {
                     />
                 </div>
                 <button css={s.searchButton} onClick={handleApplyClick}>신청하기</button>
-                <SelectAndCancelDayOffModal />
+                <SelectAndCancelDayOffModal selectDate={selectDate} />
             </div>
         </div>
     );
