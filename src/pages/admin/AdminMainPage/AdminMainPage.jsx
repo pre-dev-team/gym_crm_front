@@ -11,12 +11,12 @@ import MakeRoutine from "../../../components/MakeRoutine/MakeRoutine";
 
 function AdminMainPage(props) {
     const [isInbodyModalOpen, setIsInbodyModalOpen] = useState(false);
-    const [isReviewyModalOpen, setIsReviewModalOpen] = useState(false);
+    const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
     return (
         <div css={s.layout}>
             <MakeRoutine />
             {isInbodyModalOpen ? <AdminPageInbodyModal setIsInbodyModalOpen={setIsInbodyModalOpen} /> : <></>}
-            {isReviewyModalOpen ? <AdminPageReviewModal setIsReviewModalOpen={setIsReviewModalOpen} /> : <></>}
+            {isReviewModalOpen ? <AdminPageReviewModal setIsReviewModalOpen={setIsReviewModalOpen} /> : <></>}
             <div css={s.firstBox}>
                 <div css={s.listBox}>
                     <div css={s.listName}>전체 트레이너 명단</div>

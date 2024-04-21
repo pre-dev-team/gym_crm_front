@@ -23,15 +23,52 @@ export const layout = css`
     height: 80%;
     background-color: white;
 `;
+
+export const boxLayout = css`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+`;
+
+export const inLayout = css`
+    display: flex;
+    justify-content: space-around;
+`;
+
 export const routineSelectBox = css`
     box-sizing: border-box;
-    width: 35%;
-    height: 90%;
+    width: 225px;
+    height: 556px;
     border: 1px solid black;
 `;
-export const selectBox = css``;
-
 export const routineOption = css``;
-export const iconBox = css``;
+
+
+
+export const selectBox = css`
+    box-sizing: border-box;
+    width: 225px;
+    height: 556px;
+    border: 1px solid black;
+`;
+
+
+export const iconBox = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+export const arrowRight = css`
+    font-size: 66px;
+    margin: 0px 20px 0px 20px;
+`;
+export const card = css`
+    margin: 10px;
+    border: 1px solid #dbdbdb;
+`;
+
 export const dragBox = css``;
-export const confirmBox = css``;

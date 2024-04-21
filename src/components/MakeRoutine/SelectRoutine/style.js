@@ -12,13 +12,12 @@ export const selectStyle2 = {
     }),
 };
 
-export const selectLayout = css`
-    display: flex;
-    flex-direction: column;
+export const inputButtonLayout = css`
+    
 `;
-
 export const confirmBox = css`
     display: flex;
     justify-content: center;
     
 `;
+

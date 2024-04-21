@@ -9,3 +9,18 @@ export const findWorkoutsByWorkoutCategoryId = async (params) => {
     const response = await instance.get("/options/category/workouts", { params });
     return response;
 };
+
+export const getSetsRequest = async() => {
+    const response = await instance.get("/options/category/sets");
+    return response;
+};
+
+export const getWeightsRequest = async() => {
+    const response = await instance.get("/options/category/weights");
+    return response;
+};
+
+export const getCountsRequest = async() => {
+    const response = await instance.get("/options/category/counts");
+    return response;
+}
