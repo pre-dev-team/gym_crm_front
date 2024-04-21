@@ -1,10 +1,36 @@
 /** @jsxImportSource @emotion/react */
 import { useRef, useState } from "react";
 import * as s from "./style";
+import useTrainerApis from "../../../hooks/useTrainerApis";
+import { useMutation } from "react-query";
+import { deleteHolidayRequest } from "../../../apis/api/holiday";
 
-function SelectAndCancelDayOffModal(props) {
+function SelectAndCancelDayOffModal({accountId, selectDate}) {
     const [modalOpen, setModalOpen] = useState(false);
     const modalBackground = useRef();
+    const { holidayList } = useTrainerApis(accountId);
+
+
+    const deleteHolidayMutation = useMutation({
+        mutationKey: "deleteHolidayMutation",
+        mutationFn: deleteHolidayRequest,
+        retry: 0,
+        onSuccess: response => {
+            console.log(response)
+        }
+    })
+
+    const handleDeleteClick = () => {
+        if(window.confirm("연차 취소하시겠습니까?")) {
+            deleteHolidayMutation.mutate({
+                accountId: accountId,
+                holidayDate: selectDate
+            })
+        }else {
+            
+        }
+        alert("취소되었습니다");
+    }
 
     return (
         <>
@@ -30,21 +56,23 @@ function SelectAndCancelDayOffModal(props) {
                                     </tr>
                                 </thead>
                                 <tbody css={s.body}>
-                                    <tr css={s.btr}>
-                                        <td>1</td>
-                                        <td>2024-04-18</td>
-                                        <td>10:00 ~ 18:00</td>
-                                        <td>김세진</td>
-                                        <td>
-                                            <button>연차 취소</button>
-                                        </td>
-                                    </tr>
+                                    {holidayList.map(holiday => (
+                                        <tr key={holiday.id} css={s.btr}>
+                                            <td>{holiday.holidayId}</td>
+                                            <td>{holiday.holidayDate}</td>
+                                            <td>{holiday.timeId}</td>
+                                            <td>{holiday.name}</td>
+                                            <td>
+                                                <button onClick={handleDeleteClick}>연차 취소</button>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
-                            <button css={s.modalCloseBtn} onClick={() => setModalOpen(false)}>
-                                모달 닫기
-                            </button>
+                        <button css={s.modalCloseBtn} onClick={() => setModalOpen(false)}>
+                            모달 닫기
+                        </button>
                     </div>
                 </div>
             }

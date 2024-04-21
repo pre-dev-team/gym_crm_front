@@ -40,5 +40,6 @@ export const customButton = css`
     border: 1px solid hsl(0, 0%, 80%);
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
+    z-index: 5;
 `;
 

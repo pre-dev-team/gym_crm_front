@@ -19,7 +19,8 @@ const CustomInput = ({ value, onClick }) => (
 function SelectReservationAllUser({ accountId }) {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const [reservationList, setReservationList] = useState([])
+    const [reservationList, setReservationList] = useState([]);
+    
     const selectReservationAllUserQuery = useQuery(
         ["selectReservationAllUserQuery"],
         () =>

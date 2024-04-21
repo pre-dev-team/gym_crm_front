@@ -14,7 +14,7 @@ function MyMembers({ membersList }) {
                     <li key={member.id} css={s.member}>
                         <p>{member.name}</p>
                         <button css={s.selectUser}>회원정보조회</button>
-                        <Link to={`/inbody/${member.userId}`}>Inbody 입력</Link>
+                        <Link to={`/inbody/${member.userId}`}><button>Inbody 입력</button></Link>
 
                     </li>
                 ))}
