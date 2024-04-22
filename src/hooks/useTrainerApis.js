@@ -7,7 +7,7 @@ const useTrainerApis = (accountId) => {
     const [membersList, setMembersList] = useState([]);
     const [trainerProfile, setTrainerProfile] = useState([]);
     const [trainerId, setTrainerId] = useState("");
-    const [holidayList, setHolidayList] = useState([]);
+    const [allHolidayList, setAllHolidayList] = useState([]);
 
     const trainerMyMembersQuery = useQuery(["trainerMyMembersQuery"], () => trainerMyMembersRequest({accountId}),{
         retry: 0,
@@ -38,11 +38,11 @@ const useTrainerApis = (accountId) => {
         refetchOnWindowFocus: false,
         enabled: !!accountId,
         onSuccess: response => {
-            setHolidayList(() => response.data);
+            setAllHolidayList(() => response.data);
         }
     });
 
-    return {trainerId, trainerProfile, membersList, holidayList };
+    return {trainerId, trainerProfile, membersList, allHolidayList };
 };
 
 export default useTrainerApis;

@@ -4,7 +4,7 @@ import { getUsersBynameRequest } from "../../../apis/api/admin";
 import * as s from "./style";
 import { useQuery } from "react-query";
 
-function MemberTable({ setIsInbodyModalOpen, setIsReviewModalOpen }) {
+function MemberTable(props) {
     const [members, setMembers] = useState([]);
     const getUsersByNameQuery = useQuery(
         ["getUsersByNameQuery"],
@@ -46,10 +46,10 @@ function MemberTable({ setIsInbodyModalOpen, setIsReviewModalOpen }) {
                                     <td>{member.name}</td>
                                     <td>{member.reservationCount}</td>
                                     <td>
-                                        <button onClick={() => setIsReviewModalOpen(() => true)}>작성리뷰 조회</button>
+                                        <button>작성리뷰 조회</button>
                                     </td>
                                     <td>
-                                        <button onClick={() => setIsInbodyModalOpen(() => true)}>인바디 조회</button>
+                                        <button>인바디 조회</button>
                                     </td>
                                 </tr>
                             );
