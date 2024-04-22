@@ -22,7 +22,7 @@ export const cardBox = css`
 export const card = css`
     box-sizing: border-box;
     padding: 10px;
-    width: 90%;
+    width: 354px;
     height: 150px;
     display: flex;
     justify-content: center;
