@@ -37,6 +37,7 @@ function MypageReservationReview({ accountId }) {
                             reservationDate: res.reservationDate,
                             trainerId: res.trainerId,
                             trainerName: res.name,
+                            timeDuration: res.timeDuration,
                         };
                     })
                 );
@@ -78,38 +79,54 @@ function MypageReservationReview({ accountId }) {
             ) : (
                 <></>
             )}
-            <div css={s.reservationCard}>
-                <span>이전예약</span>
-                <div css={s.reservationList}>
-                    {prevReservations.map((res, index) => {
-                        return (
-                            <ul key={index}>
-                                <li>{res.reservationDate}</li>
-                                <li>트레이너: {res.trainerName}</li>
-                                <button
-                                    disabled={reviewedTrainerIds.includes(res.trainerId)}
-                                    onClick={() => handleReviewModalOpenClick(res.trainerId)}
-                                >
-                                    리뷰남기기
-                                </button>
-                            </ul>
-                        );
-                    })}
-                </div>
-            </div>
-            <div css={s.reservationCard}>
-                <span>오는예약</span>
-                <div css={s.reservationList}>
-                    {comingReservations.map((res, index) => {
-                        return (
-                            <ul key={index}>
-                                <li>{res.reservationDate}</li>
-                                <li>트레이너: {res.trainerName}</li>
-                                <button>루틴보기</button>
-                            </ul>
-                        );
-                    })}
-                </div>
+            <div css={s.tableBox}>
+                <h2>예약확인</h2>
+                <table css={s.table}>
+                    <thead>
+                        <tr>
+                            <th>날짜</th>
+                            <th>시간</th>
+                            <th>트레이너</th>
+                            <th>기타</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {comingReservations.map((reservation) => {
+                            return (
+                                <tr key={reservation.reservationId}>
+                                    <td>{reservation.reservationDate}</td>
+                                    <td>{reservation.timeDuration}</td>
+                                    <td>{reservation.trainerName}</td>
+                                    <td>
+                                        <button>루틴확인하기</button>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                    <tbody>
+                        {prevReservations
+                            .sort((a, b) => a.reservationDate - b.reservationDate)
+                            .reverse()
+                            .map((reservation, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{reservation.reservationDate}</td>
+                                        <td>{reservation.timeDuration}</td>
+                                        <td>{reservation.trainerName}</td>
+                                        <td>
+                                            <button
+                                                onClick={() => handleReviewModalOpenClick(reservation.trainerId)}
+                                                disabled={reviewedTrainerIds.includes(reservation.trainerId)}
+                                            >
+                                                리뷰작성하기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                    </tbody>
+                </table>
             </div>
         </div>
     );

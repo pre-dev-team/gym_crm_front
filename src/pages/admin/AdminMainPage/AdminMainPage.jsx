@@ -4,18 +4,24 @@ import MemberTable from "../../../components/AdminPage/MemberTable/MemberTable";
 import TrainerTable from "../../../components/AdminPage/TrainerTable/TrainerTable";
 import { motion } from "framer-motion";
 import ReservationSearch from "../../../components/AdminPage/ReservationSearch/ReservationSearch";
+import AdminModalLayout from "../../../components/modals/adminModal/AdminModalLayout/AdminModalLayout";
+import AdminReviewModal from "../../../components/modals/adminModal/AdminReviewModal/AdminReviewModal";
 import AdminPageInbodyModal from "../../../components/modals/AdminPageInbodyModal/AdminPageInbodyModal";
 import AdminPageReviewModal from "../../../components/modals/AdminPageReviewModal/AdminPageReviewModal";
 import { useState } from "react";
-import MakeRoutine from "../../../components/MakeRoutine/MakeRoutine";
 
 function AdminMainPage(props) {
-    const [isInbodyModalOpen, setIsInbodyModalOpen] = useState(false);
-    const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+    const [isAdminReviewModalOpen, setIsAdminReviewModalOpen] = useState(false);
+    const [isMemeberListModalOpen, setIsMemeberListModalOpen] = useState(false);
+    const [isReservationListModalOpen, setIsReservationListModalOpen] = useState(false);
+
     return (
         <div css={s.layout}>
-            {isInbodyModalOpen ? <AdminPageInbodyModal setIsInbodyModalOpen={setIsInbodyModalOpen} /> : <></>}
-            {isReviewModalOpen ? <AdminPageReviewModal setIsReviewModalOpen={setIsReviewModalOpen} /> : <></>}
+            {/* {isAdminReviewModalOpen ? (
+                <AdminReviewModal setIsAdminReviewModalOpen={setIsAdminReviewModalOpen} />
+            ) : (
+                <></>
+            )} */}
             <div css={s.firstBox}>
                 <div css={s.listBox}>
                     <div css={s.listName}>전체 트레이너 명단</div>
@@ -27,8 +33,6 @@ function AdminMainPage(props) {
                     <div css={s.listName}>전체 회원 명단</div>
                     <div css={s.list}>
                         <MemberTable
-                            setIsInbodyModalOpen={setIsInbodyModalOpen}
-                            setIsReviewModalOpen={setIsReviewModalOpen}
                         />
                     </div>
                 </div>

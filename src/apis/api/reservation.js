@@ -25,7 +25,17 @@ export const getUserAllReservationRequest = async (params) => {
     return response;
 };
 
-export const getSelectReservationAllUserRequest = async (params) => {
+export const selectReservationAllUserRequest = async (params) => {
     const response = await instance.get("/reservation/trainer/searchall", { params });
+    return response;
+};
+
+export const cancelReservationByUserRequest = async (params) => {
+    const response = await instance.delete("/reservation/user", { params });
+    return response;
+};
+
+export const editReservationByUserRequest = async (data) => {
+    const response = await instance.put("/reservation/user", data);
     return response;
 };

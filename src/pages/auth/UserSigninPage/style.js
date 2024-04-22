@@ -22,13 +22,13 @@ export const loginBox = css`
     justify-content: center;
     margin-top: 20px;
     width: 350px;
-    height: 430px;
+    height: 400px;
     box-shadow: 1px 0px 2px 1px black;
 `;
 
 export const selectBox = css`
     position: absolute;
-    top: 54px;
+    top: 30px;
     width: 348px;
     height: 300px;
 `;
@@ -36,6 +36,7 @@ export const selectBox = css`
 export const linkBox = css`
     position: absolute;
     display: flex;
+    justify-content: flex-end;
     top: 0;
     box-sizing: border-box;
     width: 100%;
@@ -47,12 +48,11 @@ export const linkBox = css`
         display: flex;
         align-items: center;
         justify-content: center;
+        margin: 5px;
         height: 100%;
-        width: 50%;
+        width: 30%;
         border-collapse: collapse;
-    }
-    & > a:nth-of-type(1) {
-        box-shadow: inset 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
+        border-bottom: 2px solid #1a1a1a;
     }
 `;
 
@@ -74,23 +74,17 @@ export const searchBox = css`
     justify-content: center;
     height: 50px;
     & > a {
-        padding: 10px 20px;
-        font-size: 12px;
+        font-size: 11px;
         color: #ffffff;
         text-decoration: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
-        margin: 0px 10px;
-        transition: transform 0.3s, box-shadow 0.3s;
-        &:hover {
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            transform: translateY(2px);
-        }
-        &:active {
-            box-shadow: inset 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
-        }
+    }
+`;
+
+export const col = css`
+    &::before,
+    ::after {
+        margin: 0px 5px;
+        content: "";
     }
 `;
 

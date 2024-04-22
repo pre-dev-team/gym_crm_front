@@ -29,30 +29,48 @@ export const trainerProfileBox = css`
     box-sizing: border-box;
     margin: 10px;
     border: 1px solid #939393;
-    padding: 20px;
     width: 300px;
     height: 300px;
     background-color: #fafafa;
+`;
+
+export const trainer = css`
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 2px solid #939393;
+    padding: 10px;
 `;
 
 export const myMembersBox = css`
     box-sizing: border-box;
     margin: 10px;
     border: 1px solid #939393;
-    padding: 20px;
     width: 300px;
     height: 300px;
     background-color: #fafafa;
+`;
+
+export const myMembers = css`
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 2px solid #939393;
+    padding: 10px;
 `;
 
 export const todayScheduleBox = css`
     box-sizing: border-box;
     margin: 10px;
     border: 1px solid #939393;
-    padding: 20px;
     width: 620px;
     height: 350px;
     background-color: #fafafa;
+`;
+
+export const todaySchedule = css`
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 2px solid #939393;
+    padding: 10px;
 `;
 
 export const allReservationBox = css`
@@ -66,6 +84,29 @@ export const allReservationBox = css`
 
 export const allReservation = css`
     list-style-type: none;
-    padding: 15px;
     margin: 0px;
+`;
+
+export const myReservation = css`
+    border-bottom: 2px solid #939393;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 700;
+`;
+
+export const dayoffBox = css`
+    margin: auto;
+`;
+
+export const dayoff = css`
+    box-sizing: border-box;
+    border-bottom: 2px solid #939393;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 700;
+`;
+
+export const select = css`
+    border: 1px solid #939393;
+    margin-top: 10px;
 `;

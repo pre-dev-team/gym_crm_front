@@ -6,7 +6,8 @@ import * as s from "./style";
 import RoutineModal from "../modals/RoutineModal/RoutineModal";
 import { getTodayReservationRequest } from "../../apis/api/reservation";
 
-function TodayReservation({ trainerId, today }) {
+function TodayReservation({ trainerId }) {
+    const [today, setToday] = useState(new Date());
     const [reservations, setReservations] = useState([]);
     const [tomorrowReservation, setTomorrowReservation] = useState([]);
 
@@ -56,8 +57,11 @@ function TodayReservation({ trainerId, today }) {
     return (
         <div css={s.layout}>
             <div css={s.scheduleDiv}>
+                <div css={s.schedule}>오늘 일정</div>
+                <div css={s.schedule}>내일 일정</div>
+            </div>
+            <div css={s.scheduleDiv}>
                 <div css={s.todayContainer}>
-                    <div>오늘 일정</div>
                     <ul css={s.todayBox}>
                         {reservations.map((reservation, index) => (
                             <li key={index}>
@@ -69,7 +73,6 @@ function TodayReservation({ trainerId, today }) {
                     </ul>
                 </div>
                 <div css={s.tomorrowContainer}>
-                    <div>내일 일정</div>
                     <ul css={s.tomorrowBox}>
                         {tomorrowReservation.map((reservation, index) => (
                             <li key={index}>

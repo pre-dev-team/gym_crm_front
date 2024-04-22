@@ -8,11 +8,14 @@ import { useQuery } from "react-query";
 import { getTrainersRequest } from "../../../apis/api/trainer";
 import TrainerCardForReservation from "../../../components/TrainerCardForReservation/TrainerCardForReservation";
 import SelectTrainerModal from "../../../components/modals/SelectTrainerModal/SelectTrainerModal";
+import { useSearchParams } from "react-router-dom";
 
-function UserTrainerReservationPage(props) {
+function UserReservationPage(props) {
     const [trainers, setTrainers] = useState([]);
     const [isClick, setIsClick] = useState(false);
     const [selectTrainerId, setSelectTrainerId] = useState(0);
+    const [searchParams] = useSearchParams();
+    const prevReservationId = searchParams.get("reservationId");
     const getTrainers = useQuery(["getTrainers"], getTrainersRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
@@ -35,6 +38,7 @@ function UserTrainerReservationPage(props) {
             exit={{ opacity: 0 }}
             css={s.layout}
         >
+            <h1>트레이너를 선택하세요</h1>
             <div css={s.trainerBox}>
                 {trainers.map((trainer) => {
                     return (
@@ -51,7 +55,12 @@ function UserTrainerReservationPage(props) {
                     );
                 })}
                 {!!isClick ? (
-                    <SelectTrainerModal setIsClick={setIsClick} isClick={isClick} trainerId={selectTrainerId} />
+                    <SelectTrainerModal
+                        setIsClick={setIsClick}
+                        isClick={isClick}
+                        trainerId={selectTrainerId}
+                        prevReservationId={prevReservationId}
+                    />
                 ) : (
                     <></>
                 )}
@@ -60,4 +69,4 @@ function UserTrainerReservationPage(props) {
     );
 }
 
-export default UserTrainerReservationPage;
+export default UserReservationPage;

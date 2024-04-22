@@ -31,11 +31,12 @@ export const buttonBox = css`
         cursor: pointer;
     }
 
-    &:nth-of-type(2) {
-        font-size: 12px;
-        width: auto;
-    }
     & > img {
-        width: 100%;
+        width: 150%;
+    }
+
+    &:nth-of-type(3) {
+        font-size: 20px;
+        cursor: pointer;
     }
 `;

@@ -5,9 +5,15 @@ import { useRecoilState } from "recoil";
 import { accountInfoAtom } from "../../../atoms/accountInfoAtom";
 import MypageReservationReview from "../../../components/MypageReservationReview/MypageReservationReview";
 import { motion } from "framer-motion";
-
+import { FaChevronRight } from "react-icons/fa6";
+import EditPasswordModal from "../../../components/modals/EditPasswordModal/EditPasswordModal";
+import { useEffect, useRef, useState } from "react";
+import UserInbodyModal from "../../../components/modals/UserInbodyModal/UserInbodyModal";
 function UserMyPage(props) {
     const [accountInfo, setAccountInfo] = useRecoilState(accountInfoAtom);
+    const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+    const [isInbodyModalOpen, setIsInbodyModalOpen] = useState(false);
+    const modalRef = useRef();
 
     return (
         <motion.div
@@ -17,30 +23,43 @@ function UserMyPage(props) {
             exit={{ opacity: 0 }}
             css={s.layout}
         >
+            {isPasswordModalOpen ? (
+                <EditPasswordModal
+                    accountId={accountInfo.accountId}
+                    isPasswordModalOpen={isPasswordModalOpen}
+                    setIsPasswordModalOpen={setIsPasswordModalOpen}
+                />
+            ) : (
+                <></>
+            )}
+            {isInbodyModalOpen ? (
+                <UserInbodyModal
+                    accountId={accountInfo.accountId}
+                    isInbodyModalOpen={isInbodyModalOpen}
+                    setIsInbodyModalOpen={setIsInbodyModalOpen}
+                />
+            ) : (
+                <></>
+            )}
             <div css={s.infoBox}>
                 <div css={s.info}>
-                    <h1>내정보</h1>
-                    <div>
-                        <div>ID {accountInfo.username}</div>
-                        <div>NAME {accountInfo.name}</div>
-                        <div>📞 {accountInfo.phone}</div>
-                        <div>📧 {accountInfo.email}</div>
-                        <button>비밀번호 변경</button>
+                    <div css={s.names}>
+                        <h2>{accountInfo.name} 님</h2>
+                        <div>@{accountInfo.username}</div>
                     </div>
-                </div>
-                <div css={s.inbodyBox}>
-                    <h1>인바디</h1>
-                    <div css={s.listBox}>
-                        <div css={s.inbodyDateBox}>
-                            <Link>2024-04-09</Link>
-                            <div>
-                                <ul>
-                                    <li>몸무게: 70kg</li>
-                                    <li>근육량:</li>
-                                    <li>체지방량:</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div css={s.contact}>
+                        <h2>{accountInfo.phone}</h2>
+                        <h2>{accountInfo.email}</h2>
+                    </div>
+                    <div css={s.buttonBox}>
+                        <button onClick={() => setIsPasswordModalOpen(() => true)}>
+                            <FaChevronRight fontSize={"10px"} />
+                            비밀번호 변경
+                        </button>
+                        <button onClick={() => setIsInbodyModalOpen(() => true)}>
+                            <FaChevronRight fontSize={"10px"} />
+                            인바디 조회
+                        </button>
                     </div>
                 </div>
             </div>
