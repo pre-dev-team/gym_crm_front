@@ -27,7 +27,10 @@ function UserReservationEditPage(props) {
         mutationFn: cancelReservationByUserRequest,
         retry: 0,
         onSuccess: (response) => {
-            alert(response.data);
+            window.location.reload();
+        },
+        onError: (error) => {
+            alert(error.response.data);
         },
     });
 

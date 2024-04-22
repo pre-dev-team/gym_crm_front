@@ -7,10 +7,14 @@ import MypageReservationReview from "../../../components/MypageReservationReview
 import { motion } from "framer-motion";
 import { FaChevronRight } from "react-icons/fa6";
 import EditPasswordModal from "../../../components/modals/EditPasswordModal/EditPasswordModal";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import UserInbodyModal from "../../../components/modals/UserInbodyModal/UserInbodyModal";
 function UserMyPage(props) {
     const [accountInfo, setAccountInfo] = useRecoilState(accountInfoAtom);
-    const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(true);
+    const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+    const [isInbodyModalOpen, setIsInbodyModalOpen] = useState(false);
+    const modalRef = useRef();
+
     return (
         <motion.div
             transition={{ duration: 1, delay: 0 }}
@@ -24,6 +28,15 @@ function UserMyPage(props) {
                     accountId={accountInfo.accountId}
                     isPasswordModalOpen={isPasswordModalOpen}
                     setIsPasswordModalOpen={setIsPasswordModalOpen}
+                />
+            ) : (
+                <></>
+            )}
+            {isInbodyModalOpen ? (
+                <UserInbodyModal
+                    accountId={accountInfo.accountId}
+                    isInbodyModalOpen={isInbodyModalOpen}
+                    setIsInbodyModalOpen={setIsInbodyModalOpen}
                 />
             ) : (
                 <></>
@@ -43,7 +56,7 @@ function UserMyPage(props) {
                             <FaChevronRight fontSize={"10px"} />
                             비밀번호 변경
                         </button>
-                        <button>
+                        <button onClick={() => setIsInbodyModalOpen(() => true)}>
                             <FaChevronRight fontSize={"10px"} />
                             인바디 조회
                         </button>
