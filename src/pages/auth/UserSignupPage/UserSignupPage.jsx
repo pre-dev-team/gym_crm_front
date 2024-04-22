@@ -50,8 +50,8 @@ function UserSignupPage(props) {
         mutationFn: userSignupRequest,
         onSuccess: (response) => {
             console.log(response);
-            // alert("회원가입 성공");
-            // window.location.replace("/");
+            alert("회원가입 성공");
+            window.location.replace("/");
         },
         onError: (error) => {
             if (error.response.status === 400) {

@@ -4,6 +4,7 @@ import useInput from "../../../hooks/useInput";
 import InputWithMessagebox from "../../InputWithMessageBox/InputWithMessagebox";
 import * as s from "./style";
 import { motion } from "framer-motion";
+
 import { editUserPasswordRequest } from "../../../apis/api/account";
 import { useEffect, useState } from "react";
 
@@ -69,6 +70,7 @@ function EditPasswordModal({ accountId, isPasswordModalOpen, setIsPasswordModalO
                         placeholder={"기존 패스워드"}
                         value={prevPassword}
                         onChange={handlePrevPasswordChange}
+                        message={prevPasswordMessage}
                         name={"prevPassword"}
                     />
                     <InputWithMessagebox

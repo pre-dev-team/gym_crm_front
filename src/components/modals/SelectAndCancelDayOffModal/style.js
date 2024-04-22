@@ -37,23 +37,32 @@ export const modalCloseBtn = css`
     margin-left: auto;
 `;
 
-export const routineLayout = css`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+export const layout = css`
+    margin: auto;
+
 `;
 
-export const routine = css`
+export const table = css`
     box-sizing: border-box;
     border: 1px solid black;
-    width: 300px;
+    width: 700px;
     height: 600px;
 `;
 
-export const right = css`
-    font-size: 55px;
+export const head = css`
+    text-align: center;
 `;
 
-export const routineBox = css`
-    list-style-type: none;
+export const tr = css`
+    font-size: 20px;
+`;
+
+export const btr = css`
+
+    & > td {
+        text-align: center;
+    }
+`;
+
+export const body = css`
 `;
