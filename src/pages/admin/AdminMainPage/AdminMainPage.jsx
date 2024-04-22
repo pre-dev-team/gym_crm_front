@@ -14,7 +14,6 @@ function AdminMainPage(props) {
     const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
     return (
         <div css={s.layout}>
-            <MakeRoutine />
             {isInbodyModalOpen ? <AdminPageInbodyModal setIsInbodyModalOpen={setIsInbodyModalOpen} /> : <></>}
             {isReviewModalOpen ? <AdminPageReviewModal setIsReviewModalOpen={setIsReviewModalOpen} /> : <></>}
             <div css={s.firstBox}>

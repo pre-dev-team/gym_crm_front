@@ -69,6 +69,13 @@ export const arrowRight = css`
 export const card = css`
     margin: 10px;
     border: 1px solid #dbdbdb;
+    cursor: pointer;
 `;
 
 export const dragBox = css``;
+
+export const submit = css`
+    position: absolute;
+    right: 166px;
+    bottom: 100px;
+`;

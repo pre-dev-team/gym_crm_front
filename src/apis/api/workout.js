@@ -24,3 +24,9 @@ export const getCountsRequest = async() => {
     const response = await instance.get("/options/category/counts");
     return response;
 }
+
+
+export const userRoutineRequest = async (data) => {
+    const response = await instance.post("/auth/user/signup", data);
+    return response;
+};

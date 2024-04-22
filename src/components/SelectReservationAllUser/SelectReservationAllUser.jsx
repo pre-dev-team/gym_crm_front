@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import MakeRoutine from '../MakeRoutine/MakeRoutine';
 import RoutineModal from '../modals/RoutineModal/RoutineModal';
 import * as s from './style';
 
@@ -12,7 +13,7 @@ function SelectReservationAllUser({ reservationList }) {
                         <p>{reservation.name}</p>
                         <span>{reservation.reservationDate}</span>
                         <span>{reservation.timeDuration}</span>
-                        <RoutineModal />
+                        <MakeRoutine /> 
                     </li>
                 ))}
             </ul>

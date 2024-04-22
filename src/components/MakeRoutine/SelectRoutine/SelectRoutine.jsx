@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function SelectRoutine({ routineInfoList, setRoutineInfoList, selectedWorkout }) {
+function SelectRoutine({ routineInfoList, setRoutineInfoList, selectedWorkout, clickedRoutine }) {
   const [weights, setWeights] = useState("");
   const [counts, setCounts] = useState("");
   const [sets, setSets] = useState("");
+
+  useEffect(()=>{
+    if(!!clickedRoutine){ 
+      setWeights(()=>clickedRoutine?.weights)
+      setCounts(()=>clickedRoutine?.counts)
+      setSets(()=>clickedRoutine?.sets)
+    }
+  },[clickedRoutine]);
 
   const handleSubmitClick = () => {
     if (selectedWorkout && weights !== "" && counts !== "" && sets !== "") {
@@ -26,8 +34,7 @@ function SelectRoutine({ routineInfoList, setRoutineInfoList, selectedWorkout })
 
   return (
     <div>
-      {/* 운동 선택, 입력 항목들 */}
-      <button onClick={handleSubmitClick}>제출</button>
+      {/* <button onClick={handleSubmitClick}>제출</button> */}
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import Select from "react-select";
 import * as s from "./style";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useWorkouts from "../../../hooks/useWorkouts";
+import { useMutation } from "react-query";
 
-function WorkoutSelect({ routineInfoList, setRoutineInfoList }) {
+function WorkoutSelect({ routineInfoList, setRoutineInfoList, clickedRoutine, clickedIndex, setClickedIndex }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
     const [selectedId, setSelectedId] = useState(null);
@@ -14,11 +15,24 @@ function WorkoutSelect({ routineInfoList, setRoutineInfoList }) {
 
     const [workouts, workoutCategories] = useWorkouts(selectedId);
 
+    useEffect(() => {
+        if (!!clickedRoutine) {
+            setShowInputs(true);
+            setSelectedCategory(clickedRoutine.category);
+            setSelectedWorkout(clickedRoutine.workout);
+            setWeights(clickedRoutine.weights);
+            setCounts(clickedRoutine.counts);
+            setSets(clickedRoutine.sets);
+        }
+    }, [clickedRoutine]);
+
+    
+
     const handleCategoryChange = (e) => {
         setSelectedCategory(e);
         setSelectedId(e?.value);
         setSelectedWorkout(null); // 카테고리 변경 시 운동 선택 초기화
-        setShowInputs(true); // 입력 부분 숨기기
+        setShowInputs(true); // 입력 부분 보이기
         resetInputs(); // 입력값 초기화
     };
 
@@ -46,13 +60,30 @@ function WorkoutSelect({ routineInfoList, setRoutineInfoList }) {
         setCounts((prevCounts) => prevCounts + value);
     };
 
+    const handleEditClick = () => {
+        if (clickedIndex !== null && selectedWorkout) {
+            const updatedRoutineList = [...routineInfoList];
+            updatedRoutineList[clickedIndex] = {
+                category: selectedCategory,
+                workout: selectedWorkout,
+                weights: weights,
+                counts: counts,
+                sets: sets,
+            };
+            setRoutineInfoList(updatedRoutineList); // 수정된 루틴 정보를 MakeRoutine으로 전달
+            setShowInputs(false); // 입력 부분 숨기기
+            setSelectedId(null); // 카테고리 선택 초기화
+            setClickedIndex(null); // 수정 완료 후 clickedIndex 초기화
+        }
+    };
+
     const handleSubmitClick = () => {
         if (selectedWorkout) {
             const updatedRoutineInfoList = [
                 ...routineInfoList,
                 {
-                    category: selectedCategory?.label,
-                    workout: selectedWorkout?.label,
+                    category: selectedCategory,
+                    workout: selectedWorkout,
                     weights,
                     counts,
                     sets,
@@ -64,7 +95,7 @@ function WorkoutSelect({ routineInfoList, setRoutineInfoList }) {
             // 선택 상태 초기화
             setSelectedCategory(null);
             setSelectedWorkout(null);
-            setSelectedId(null); // 카테고리 선택도 초기화
+            setSelectedId(null); // 카테고리 선택 초기화
         }
     };
 
@@ -132,7 +163,11 @@ function WorkoutSelect({ routineInfoList, setRoutineInfoList }) {
                             <button onClick={() => handleCountIncrement(20)}>+20</button>
                         </div>
                         <div css={s.confirmBox}>
-                            <button onClick={handleSubmitClick}>제출</button>
+                            {clickedIndex !== null ? (
+                                <button onClick={handleEditClick}>수정 완료</button>
+                            ) : (
+                                <button onClick={handleSubmitClick}>제출</button>
+                            )}
                         </div>
                     </div>
                 </div>
