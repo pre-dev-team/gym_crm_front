@@ -11,16 +11,20 @@ import AdminReviewModal from "../../../components/modals/adminModal/AdminReviewM
 
 function AdminMainPage(props) {
     const [isAdminReviewModalOpen, setIsAdminReviewModalOpen] = useState(false);
+    const [clickedReviewId, setClickedReviewId] = useState(0);
     const [isMemeberListModalOpen, setIsMemeberListModalOpen] = useState(false);
     const [isReservationListModalOpen, setIsReservationListModalOpen] = useState(false);
 
     return (
         <div css={s.layout}>
-            {/* {isAdminReviewModalOpen ? (
-                <AdminReviewModal setIsAdminReviewModalOpen={setIsAdminReviewModalOpen} />
+            {isAdminReviewModalOpen ? (
+                <AdminReviewModal
+                    setIsAdminReviewModalOpen={setIsAdminReviewModalOpen}
+                    clickedReviewId={clickedReviewId}
+                />
             ) : (
                 <></>
-            )} */}
+            )}
             <div css={s.firstBox}>
                 <div css={s.listBox}>
                     <div css={s.listName}>전체 트레이너 명단</div>
@@ -31,7 +35,10 @@ function AdminMainPage(props) {
                 <div css={s.listBox}>
                     <div css={s.listName}>전체 회원 명단</div>
                     <div css={s.list}>
-                        <MemberTable setIsAdminReviewModalOpen={setIsAdminReviewModalOpen} />
+                        <MemberTable
+                            setIsAdminReviewModalOpen={setIsAdminReviewModalOpen}
+                            setClickedReviewId={setClickedReviewId}
+                        />
                     </div>
                 </div>
             </div>
