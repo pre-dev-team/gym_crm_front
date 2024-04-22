@@ -9,7 +9,7 @@ import { editUserPasswordRequest } from "../../../apis/api/account";
 import { useEffect, useState } from "react";
 
 function EditPasswordModal({ accountId, isPasswordModalOpen, setIsPasswordModalOpen }) {
-    const [prevPassword, handlePrevPasswordChange] = useInput();
+    const [prevPassword, handlePrevPasswordChange, prevPasswordMessage] = useInput();
     const [password, handlePasswordChange, passwordMessage, setPassword] = useInput("password");
     const [checkPassword, handleCheckPasswordChange, checkPasswordMessage, setCheckPassword, setCheckPasswordMessage] =
         useInput();

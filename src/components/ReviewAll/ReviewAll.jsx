@@ -1,8 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from "react";
 import * as s from "./style"; // 스타일 파일 불러오기
-import { useQueryClient } from "react-query";
 import { getTopRatedTrainersInformationRequest } from "../../apis/api/review"; // 트레이너 API 함수 불러오기
+import { FaStar } from "react-icons/fa";
+
+const makeStarByScore = (score) => {
+    let stars = [];
+    for (let i = 0; i < score; i++) {
+        stars.push(<FaStar color="gold" key={i} />);
+    }
+    return stars;
+};
 
 function ReviewAll(props) {
     const [trainerReviews, setTrainerReviews] = useState([]); // 트레이너 리뷰 상태 관리
@@ -37,18 +45,25 @@ function ReviewAll(props) {
 
     return (
         <div css={s.container}>
-            <div css={s.title}>우리 Gym의 트레이너들을 확인하세요</div>
-            <div css={s.table}>
-                {trainerReviews.map((review, index) => {
+            <h1>@TOP3 TRAINERS</h1>
+            <div css={s.cardBox}>
+                {trainerReviews.map((trainer, index) => {
                     return (
-                        <div css={s.row} key={index}>
-                            <div css={s.cell}>
-                                <img css={s.img} src={review.trainerProfileImgUrl} alt="Trainer" />
+                        <div css={s.card} key={index}>
+                            <div css={s.leftBox}>
+                                <div css={s.photoBox}>
+                                    <img src={trainer.trainerProfileImgUrl} alt="trainer" />
+                                </div>
                             </div>
-                            <div css={s.cell}>
-                                <div css={s.trainerName}>{review.trainerName}</div>
-                                <div css={s.ratings}>{review.reviewScore}점</div>
-                                <div css={s.reviews}>{review.reviewText}</div>
+                            <div css={s.rightBox}>
+                                <h1>
+                                    @{index + 1}
+                                    {trainer.trainerName}
+                                </h1>
+                                <div css={s.starBox}>
+                                    {makeStarByScore(trainer.reviewScore)}({trainer.reviewScore}/10)
+                                </div>
+                                <div css={s.textBox}>"{trainer.reviewText}"</div>
                             </div>
                         </div>
                     );
