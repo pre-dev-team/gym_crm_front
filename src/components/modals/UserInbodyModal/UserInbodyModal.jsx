@@ -2,12 +2,18 @@
 import { useMutation, useQuery } from "react-query";
 import * as s from "./style";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getUserInbodyRequest } from "../../../apis/api/inbody";
+import { useNavigate } from "react-router-dom";
 
 function UserInbodyModal({ accountId, isInbodyModalOpen, setIsInbodyModalOpen }) {
     const [inbodyInfos, setInbodyInfos] = useState([]);
     const [selectedInbodyImgUrl, setSelectedInbodyImgUrl] = useState("");
+    const navigator = useNavigate();
+    useEffect(() => {
+        console.log(selectedInbodyImgUrl);
+    }, [selectedInbodyImgUrl]);
+
     const getUserInbodyQuery = useQuery(
         ["getUserInbodyQuery"],
         () =>
@@ -49,7 +55,7 @@ function UserInbodyModal({ accountId, isInbodyModalOpen, setIsInbodyModalOpen })
                         <tr>
                             <th>날짜</th>
                             <th>체중</th>
-                            <th>근골격량</th>
+                            <th>골격근량</th>
                             <th>체지방량</th>
                             <th>스캔조회</th>
                         </tr>
@@ -59,11 +65,16 @@ function UserInbodyModal({ accountId, isInbodyModalOpen, setIsInbodyModalOpen })
                             return (
                                 <tr key={info.inbodyId}>
                                     <td>{info.date}</td>
-                                    <td>{info.muscleMass}</td>
-                                    <td>{info.weight}</td>
-                                    <td>{info.fatMass}</td>
+                                    <td>{info.muscleMass}kg</td>
+                                    <td>{info.weight}kg</td>
+                                    <td>{info.fatMass}kg</td>
                                     <td>
-                                        <button onClick={() => setSelectedInbodyImgUrl(info.inbodyUrl)}>조회</button>
+                                        <button
+                                            disabled={info.inbodyUrl.length === 0}
+                                            onClick={() => setSelectedInbodyImgUrl(info.inbodyUrl)}
+                                        >
+                                            조회
+                                        </button>
                                     </td>
                                 </tr>
                             );
@@ -72,8 +83,11 @@ function UserInbodyModal({ accountId, isInbodyModalOpen, setIsInbodyModalOpen })
                 </table>
             </div>
             <div css={s.imgBox}>
-                <img src={selectedInbodyImgUrl} alt="" />
+                <img src={selectedInbodyImgUrl} onClick={() => window.open(selectedInbodyImgUrl)} />
             </div>
+            <button css={s.close} onClick={() => setIsInbodyModalOpen(() => false)}>
+                닫기
+            </button>
         </motion.div>
     );
 }

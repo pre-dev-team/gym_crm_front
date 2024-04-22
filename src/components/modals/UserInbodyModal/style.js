@@ -20,10 +20,32 @@ export const layout = (isOpen) => css`
 
 export const tableBox = css`
     width: 100%;
-    height: 30%;
+    height: 20%;
+    overflow-y: scroll;
+    margin-bottom: 5px;
 `;
-export const table = css``;
+export const table = css`
+    width: 100%;
+    text-align: center;
+    color: #fafafa;
+
+    & td > button:hover {
+        cursor: pointer;
+    }
+`;
 export const imgBox = css`
     width: 100%;
     height: 70%;
+    & > img {
+        width: 150%;
+        cursor: pointer;
+    }
+    overflow: auto;
+`;
+
+export const close = css`
+    margin-top: 8px;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
 `;

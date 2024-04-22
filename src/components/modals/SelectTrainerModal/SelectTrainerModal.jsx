@@ -88,7 +88,8 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId 
         mutationFn: editReservationByUserRequest,
         retry: 0,
         onSuccess: (response) => {
-            alert(response);
+            alert("변경완료");
+            window.location.reload();
         },
     });
 
