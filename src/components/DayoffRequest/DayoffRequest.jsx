@@ -27,7 +27,8 @@ function DayoffRequest({ accountId }) {
         mutationFn: trainerHolidayRequest,
         retry: 0,
         onSuccess: response => {
-            console.log(response)
+            alert("신청되었습니다");
+            window.location.replace("/")
         }
     })
 
@@ -46,7 +47,6 @@ function DayoffRequest({ accountId }) {
         }else {
             
         }
-        alert("신청되었습니다");
     }
 
     return (
@@ -76,7 +76,7 @@ function DayoffRequest({ accountId }) {
                     />
                 </div>
                 <button css={s.searchButton} onClick={handleApplyClick}>신청하기</button>
-                <SelectAndCancelDayOffModal selectDate={selectDate} />
+                <SelectAndCancelDayOffModal selectDate={selectDate} availableOptions={availableOptions} accountId={accountId} />
             </div>
         </div>
     );
