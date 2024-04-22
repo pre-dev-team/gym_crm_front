@@ -22,6 +22,12 @@ export const tableBox = css`
     width: 100%;
     height: 20%;
     overflow-y: scroll;
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #2f3542;
+    }
     margin-bottom: 5px;
 `;
 export const table = css`
@@ -34,13 +40,22 @@ export const table = css`
     }
 `;
 export const imgBox = css`
+    box-sizing: border-box;
     width: 100%;
     height: 70%;
+    padding: 20px;
     & > img {
-        width: 150%;
+        width: 170%;
         cursor: pointer;
     }
     overflow: auto;
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #2f3542;
+    }
 `;
 
 export const close = css`
