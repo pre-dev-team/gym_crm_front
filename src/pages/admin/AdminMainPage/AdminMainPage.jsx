@@ -11,17 +11,14 @@ import AdminReviewModal from "../../../components/modals/adminModal/AdminReviewM
 
 function AdminMainPage(props) {
     const [isAdminReviewModalOpen, setIsAdminReviewModalOpen] = useState(false);
-    const [clickedReviewId, setClickedReviewId] = useState(0);
+    const [clickedUserId, setClickedUserId] = useState(0);
     const [isMemeberListModalOpen, setIsMemeberListModalOpen] = useState(false);
     const [isReservationListModalOpen, setIsReservationListModalOpen] = useState(false);
 
     return (
         <div css={s.layout}>
             {isAdminReviewModalOpen ? (
-                <AdminReviewModal
-                    setIsAdminReviewModalOpen={setIsAdminReviewModalOpen}
-                    clickedReviewId={clickedReviewId}
-                />
+                <AdminReviewModal setIsAdminReviewModalOpen={setIsAdminReviewModalOpen} clickedUserId={clickedUserId} />
             ) : (
                 <></>
             )}
@@ -37,7 +34,7 @@ function AdminMainPage(props) {
                     <div css={s.list}>
                         <MemberTable
                             setIsAdminReviewModalOpen={setIsAdminReviewModalOpen}
-                            setClickedReviewId={setClickedReviewId}
+                            setClickedUserId={setClickedUserId}
                         />
                     </div>
                 </div>

@@ -4,7 +4,7 @@ import { getUsersBynameRequest } from "../../../apis/api/admin";
 import * as s from "./style";
 import { useQuery } from "react-query";
 
-function MemberTable({ setIsAdminReviewModalOpen, setClickedReviewId }) {
+function MemberTable({ setIsAdminReviewModalOpen, setClickedUserId }) {
     const [members, setMembers] = useState([]);
     const [name, setName] = useState("");
     const searchButtonRef = useRef();
@@ -32,7 +32,7 @@ function MemberTable({ setIsAdminReviewModalOpen, setClickedReviewId }) {
 
     const handleReviewClick = (id) => {
         setIsAdminReviewModalOpen(() => true);
-        setClickedReviewId(() => id);
+        setClickedUserId(() => id);
     };
     return (
         <>
