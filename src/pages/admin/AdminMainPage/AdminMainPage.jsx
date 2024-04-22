@@ -1,13 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import MemberTable from "../../../components/AdminPage/MemberTable/MemberTable";
-import ReservationTable from "../../../components/AdminPage/ReservationTable/ReservationTable";
 import TrainerTable from "../../../components/AdminPage/TrainerTable/TrainerTable";
 import { motion } from "framer-motion";
 import ReservationSearch from "../../../components/AdminPage/ReservationSearch/ReservationSearch";
-import { useState } from "react";
 import AdminModalLayout from "../../../components/modals/adminModal/AdminModalLayout/AdminModalLayout";
 import AdminReviewModal from "../../../components/modals/adminModal/AdminReviewModal/AdminReviewModal";
+import AdminPageInbodyModal from "../../../components/modals/AdminPageInbodyModal/AdminPageInbodyModal";
+import AdminPageReviewModal from "../../../components/modals/AdminPageReviewModal/AdminPageReviewModal";
+import { useState } from "react";
 
 function AdminMainPage(props) {
     const [isAdminReviewModalOpen, setIsAdminReviewModalOpen] = useState(false);
@@ -31,7 +32,8 @@ function AdminMainPage(props) {
                 <div css={s.listBox}>
                     <div css={s.listName}>전체 회원 명단</div>
                     <div css={s.list}>
-                        <MemberTable setIsAdminReviewModalOpen={setIsAdminReviewModalOpen} />
+                        <MemberTable
+                        />
                     </div>
                 </div>
             </div>

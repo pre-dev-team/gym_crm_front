@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
+import * as s from "./style";
 import { useState } from "react";
 import StarScore from "../../StarScore/StarScore";
-import * as s from "./style";
 import { motion } from "framer-motion";
 import { useMutation, useQuery } from "react-query";
 import { userReviewRequest } from "../../../apis/api/review";
