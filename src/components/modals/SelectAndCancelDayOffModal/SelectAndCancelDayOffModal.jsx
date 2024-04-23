@@ -5,13 +5,13 @@ import useTrainerApis from "../../../hooks/useTrainerApis";
 import { useMutation } from "react-query";
 import { deleteHolidayRequest } from "../../../apis/api/holiday";
 
-function SelectAndCancelDayOffModal({ accountId, selectDate, availableOptions }) {
+function SelectAndCancelDayOffModal({ accountId }) {
     const [modalOpen, setModalOpen] = useState(false);
     const modalBackground = useRef();
     const { allHolidayList } = useTrainerApis(accountId);
     const [ holidayListDayByDay, setHolidayListDayByDay] = useState([]);
-    const [startTimeId, setStartTimeId] = useState("");
-    const [endTimeId, setEndTimeId] = useState("");
+    const [availableOptions, setAvailabelOptions] = useState(s.searchTypeOption2)
+    const [confirm, setConfirm] = useState(0);
 
     const deleteHolidayMutation = useMutation({
         mutationKey: "deleteHolidayMutation",
@@ -25,6 +25,7 @@ function SelectAndCancelDayOffModal({ accountId, selectDate, availableOptions })
             console.log(error.response.data)
         }
     })
+
     useEffect(() => {
         const groupByDate = allHolidayList.reduce((groups, holiday) => {
             const { holidayDate } = holiday;
@@ -34,21 +35,27 @@ function SelectAndCancelDayOffModal({ accountId, selectDate, availableOptions })
             groups[holidayDate].push(holiday);
             return groups;
         }, {});
-        console.log(groupByDate)
-        console.log(Object.keys(groupByDate))
+
         setHolidayListDayByDay(() => Object.keys(groupByDate).map(date => {
-            return{
+            return {
                 holidayDate: date,
                 startTimeId: groupByDate[date][0]["timeId"],
                 endTimeId: groupByDate[date][groupByDate[date].length - 1]["timeId"],
-                name: groupByDate[date][0]["name"]
+                name: groupByDate[date][0]["name"],
+                confirm: groupByDate[date][0]["confirm"]
             }
-        }))
+        }).sort((a,b) => new Date(b.holidayDate) - new Date(a.holidayDate)))
                 
     }, [allHolidayList]);
+
+    useEffect(() => {
+        setAvailabelOptions(() => availableOptions.filter(option => option.value === confirm));
+    }, [confirm])
+
+    console.log(availableOptions)
     
     useEffect(() => {
-        console.log(holidayListDayByDay)
+        console.log(holidayListDayByDay.sort((a,b) => a.holidayDate - b.holidayDate))
     },[modalOpen])
 
     const handleDeleteClick = (date) => {
@@ -83,6 +90,7 @@ function SelectAndCancelDayOffModal({ accountId, selectDate, availableOptions })
                                         <th>날짜</th>
                                         <th>시간</th>
                                         <th>이름</th>
+                                        <th>승인</th>
                                         <th>연차</th>
                                     </tr>
                                 </thead>
@@ -93,6 +101,7 @@ function SelectAndCancelDayOffModal({ accountId, selectDate, availableOptions })
                                             <td>{holiday.holidayDate}</td>
                                             <td>{holiday.startTimeId + 10}:00 ~ {holiday.endTimeId + 10}:00</td>
                                             <td>{holiday.name}</td>
+                                            <td>{holiday.confirm}</td>
                                             <td>
                                                 <button onClick={() => handleDeleteClick(holiday.holidayDate)}>연차 취소</button>
                                             </td>

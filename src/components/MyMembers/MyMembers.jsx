@@ -1,8 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from 'react';
 import * as s from './style';
-import { useQuery } from 'react-query';
-import { trainerMyMembersRequest } from '../../apis/api/trainer';
 import { Link } from 'react-router-dom'; // Link 컴포넌트 import
 
 function MyMembers({ membersList }) {

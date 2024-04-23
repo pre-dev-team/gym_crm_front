@@ -1,7 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useState } from "react";
 import * as s from "./style";
-import instance from "../../apis/utils/instance";
 
 function TrainerInformation(props) {
     return (

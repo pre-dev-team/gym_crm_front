@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from "react";
-import { css } from "@emotion/react";
 import { useQuery } from "react-query";
 import * as s from "./style";
 import RoutineModal from "../modals/RoutineModal/RoutineModal";
