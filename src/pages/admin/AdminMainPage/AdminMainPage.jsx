@@ -8,30 +8,38 @@ import ReservationSearch from "../../../components/AdminPage/ReservationSearch/R
 import { useState } from "react";
 import AdminModalLayout from "../../../components/modals/adminModal/AdminModalLayout/AdminModalLayout";
 import AdminReviewModal from "../../../components/modals/adminModal/AdminReviewModal/AdminReviewModal";
+import AdminHolidayModal from "../../../components/modals/adminModal/AdminHolidayModal/AdminHolidayModal";
 
 function AdminMainPage(props) {
     const [isAdminReviewModalOpen, setIsAdminReviewModalOpen] = useState(false);
+    const [clickedUserId, setClickedUserId] = useState(0);
+    const [isAdminHolidayModalOpen, setIsAdminHolidayModalOpen] = useState(false);
     const [isMemeberListModalOpen, setIsMemeberListModalOpen] = useState(false);
     const [isReservationListModalOpen, setIsReservationListModalOpen] = useState(false);
 
     return (
         <div css={s.layout}>
-            {/* {isAdminReviewModalOpen ? (
-                <AdminReviewModal setIsAdminReviewModalOpen={setIsAdminReviewModalOpen} />
+            {isAdminReviewModalOpen ? (
+                <AdminReviewModal setIsAdminReviewModalOpen={setIsAdminReviewModalOpen} clickedUserId={clickedUserId} />
+            ) : isAdminHolidayModalOpen ? (
+                <AdminHolidayModal setIsAdminHolidayModalOpen={setIsAdminHolidayModalOpen} />
             ) : (
                 <></>
-            )} */}
+            )}
             <div css={s.firstBox}>
                 <div css={s.listBox}>
                     <div css={s.listName}>전체 트레이너 명단</div>
                     <div css={s.list}>
-                        <TrainerTable />
+                        <TrainerTable setIsAdminHolidayModalOpen={setIsAdminHolidayModalOpen} />
                     </div>
                 </div>
                 <div css={s.listBox}>
                     <div css={s.listName}>전체 회원 명단</div>
                     <div css={s.list}>
-                        <MemberTable setIsAdminReviewModalOpen={setIsAdminReviewModalOpen} />
+                        <MemberTable
+                            setIsAdminReviewModalOpen={setIsAdminReviewModalOpen}
+                            setClickedUserId={setClickedUserId}
+                        />
                     </div>
                 </div>
             </div>

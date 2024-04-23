@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import * as s from "./style"; // 스타일 파일 불러오기
 import { useQueryClient } from "react-query";
 import { getTopRatedTrainersInformationRequest } from "../../apis/api/review"; // 트레이너 API 함수 불러오기
+import { makeStarByScore } from "../../utils/makeStarByScore";
+
 
 function ReviewAll(props) {
     const [trainerReviews, setTrainerReviews] = useState([]); // 트레이너 리뷰 상태 관리

@@ -14,12 +14,23 @@ export const layout = css`
     box-sizing: border-box;
     position: relative;
     display: flex;
+    flex-direction: column;
     margin: 30px auto;
     padding: 10px;
     width: 1024px;
     height: 800px;
     overflow: hidden;
     background-color: #ededed;
+`;
+
+export const header = css`
+    font-size: 14px;
+`;
+export const logoutBox = css`
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 `;
 
 export const container = css`

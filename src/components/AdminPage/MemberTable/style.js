@@ -48,6 +48,7 @@ export const searchButton = css`
     border: none;
     height: 30px;
     width: 100px;
+    cursor: pointer;
 `;
 
 export const searchInput = css`

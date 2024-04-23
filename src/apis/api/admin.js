@@ -14,3 +14,18 @@ export const searchReservationByNameRequset = async (params) => {
     const response = await instance.get("/admin/reservations", { params });
     return response;
 };
+
+export const getUnconfirmedHolidayAppliesRequest = async () => {
+    const response = await instance.get("/admin/holidays/unconfirmed");
+    return response;
+};
+
+export const getConfirmedHolidayAppliesRequest = async () => {
+    const response = await instance.get("/admin/holidays/confirmed");
+    return response;
+};
+
+export const decideHolidayAppliesRequest = async (data) => {
+    const response = await instance.put("/admin/holidays/decide", data);
+    return response;
+};
