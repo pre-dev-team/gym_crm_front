@@ -5,7 +5,7 @@ import "dayjs/locale/ko";
 import DatePicker from "react-datepicker";
 import ko from "date-fns/locale/ko";
 import ReactSelect from "react-select";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ReservationTable from "../ReservationTable/ReservationTable";
 import { useQuery } from "react-query";
 import { searchReservationByNameRequset } from "../../../apis/api/admin";

@@ -42,7 +42,7 @@ const useTrainerApis = (accountId) => {
         }
     });
 
-    return {trainerId, trainerProfile, membersList, allHolidayList };
+    return {trainerId, trainerProfile, setTrainerProfile, membersList, allHolidayList };
 };
 
 export default useTrainerApis;

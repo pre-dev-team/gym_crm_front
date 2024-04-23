@@ -1,23 +1,18 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import * as s from "./style";
-import dayjs from "dayjs";
 import MyMembers from "../../../components/MyMembers/MyMembers";
-import { useQueryClient } from "react-query";
 import TodayReservation from "../../../components/TodayReservation/TodayReservation";
 import SelectReservationAllUser from "../../../components/SelectReservationAllUser/SelectReservationAllUser";
 import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useTrainerApis from "../../../hooks/useTrainerApis";
-import { Link } from "react-router-dom"; // Link 컴포넌트 import
 import DayoffRequest from "../../../components/DayoffRequest/DayoffRequest";
 
 function TrainerMainPage(props) {
 
-    const [reservationList] = useState([]);
     const accountId = usePrincipal();
-    const { trainerId, trainerProfile, membersList } = useTrainerApis(accountId);
+    const { trainerId, trainerProfile, setTrainerProfile, membersList } = useTrainerApis(accountId);
 
     return (
         <>
@@ -26,7 +21,7 @@ function TrainerMainPage(props) {
                     <div css={s.trainerBox}>
                         <div css={s.trainerProfileBox}>
                             <div css={s.trainer}>트레이너 정보</div>
-                            <TrainerProfile trainerProfile={trainerProfile} />
+                            <TrainerProfile trainerProfile={trainerProfile} setTrainerProfile={setTrainerProfile} accountId={accountId} />
                         </div>
                         <div css={s.myMembersBox}>
                             <div css={s.myMembers}>내 회원들</div>

@@ -25,7 +25,7 @@ export const getTrainersRequest = async () => {
     return response;
 };
 
-export const trainerHolidayRequest = async (data) => {
-    const response = await instance.post("/holiday/insert", data);
+export const updateTrainerImgRequest = async (data) => {
+    const response = await instance.put("/trainer/mypage/trainerimg", data);
     return response;
 };
