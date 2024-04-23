@@ -7,7 +7,6 @@ import { FaArrowRight } from "react-icons/fa";
 import { useMutation } from "react-query";
 import {userRoutineRequest} from "../../../apis/api/workout"
 
-
 function RoutineModal({reservationId}) {
   const [modalOpen, setModalOpen] = useState(false);
   const modalBackground = useRef();

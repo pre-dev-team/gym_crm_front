@@ -1,6 +1,4 @@
 /** @jsxImportSource @emotion/react */
-
-import MakeRoutine from '../MakeRoutine/MakeRoutine';
 import { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";

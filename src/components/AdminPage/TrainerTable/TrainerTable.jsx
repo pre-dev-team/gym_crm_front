@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 
-function TrainerTable(props) {
+function TrainerTable({ setIsAdminHolidayModalOpen }) {
     return (
         <div>
             <table css={s.table}>
@@ -21,7 +21,7 @@ function TrainerTable(props) {
                         <td>3</td>
                         <td>8</td>
                         <td>
-                            <button>연차조회</button>
+                            <button onClick={() => setIsAdminHolidayModalOpen(() => true)}>연차조회</button>
                         </td>
                     </tr>
                 </tbody>

@@ -1,35 +1,66 @@
 /** @jsxImportSource @emotion/react */
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as s from "./style";
 import useTrainerApis from "../../../hooks/useTrainerApis";
 import { useMutation } from "react-query";
 import { deleteHolidayRequest } from "../../../apis/api/holiday";
 
-function SelectAndCancelDayOffModal({accountId, selectDate}) {
+function SelectAndCancelDayOffModal({ accountId, selectDate, availableOptions }) {
     const [modalOpen, setModalOpen] = useState(false);
     const modalBackground = useRef();
-    const { holidayList } = useTrainerApis(accountId);
-
+    const { allHolidayList } = useTrainerApis(accountId);
+    const [ holidayListDayByDay, setHolidayListDayByDay] = useState([]);
+    const [startTimeId, setStartTimeId] = useState("");
+    const [endTimeId, setEndTimeId] = useState("");
 
     const deleteHolidayMutation = useMutation({
         mutationKey: "deleteHolidayMutation",
         mutationFn: deleteHolidayRequest,
         retry: 0,
         onSuccess: response => {
-            console.log(response)
+            alert("취소되었습니다");
+            window.location.replace("/")
+        },
+        error: error => {
+            console.log(error.response.data)
         }
     })
+    useEffect(() => {
+        const groupByDate = allHolidayList.reduce((groups, holiday) => {
+            const { holidayDate } = holiday;
+            if (!groups[holidayDate]) {
+                groups[holidayDate] = [];
+            }
+            groups[holidayDate].push(holiday);
+            return groups;
+        }, {});
+        console.log(groupByDate)
+        console.log(Object.keys(groupByDate))
+        setHolidayListDayByDay(() => Object.keys(groupByDate).map(date => {
+            return{
+                holidayDate: date,
+                startTimeId: groupByDate[date][0]["timeId"],
+                endTimeId: groupByDate[date][groupByDate[date].length - 1]["timeId"],
+                name: groupByDate[date][0]["name"]
+            }
+        }))
+                
+    }, [allHolidayList]);
+    
+    useEffect(() => {
+        console.log(holidayListDayByDay)
+    },[modalOpen])
 
-    const handleDeleteClick = () => {
+    const handleDeleteClick = (date) => {
         if(window.confirm("연차 취소하시겠습니까?")) {
             deleteHolidayMutation.mutate({
                 accountId: accountId,
-                holidayDate: selectDate
+                holidayDate: date
             })
+            
         }else {
             
         }
-        alert("취소되었습니다");
     }
 
     return (
@@ -56,14 +87,14 @@ function SelectAndCancelDayOffModal({accountId, selectDate}) {
                                     </tr>
                                 </thead>
                                 <tbody css={s.body}>
-                                    {holidayList.map(holiday => (
-                                        <tr key={holiday.id} css={s.btr}>
-                                            <td>{holiday.holidayId}</td>
+                                    {holidayListDayByDay.map((holiday,index) => (
+                                        <tr key={index} css={s.btr}>
+                                            <td>{index + 1}</td>
                                             <td>{holiday.holidayDate}</td>
-                                            <td>{holiday.timeId}</td>
+                                            <td>{holiday.startTimeId + 10}:00 ~ {holiday.endTimeId + 10}:00</td>
                                             <td>{holiday.name}</td>
                                             <td>
-                                                <button onClick={handleDeleteClick}>연차 취소</button>
+                                                <button onClick={() => handleDeleteClick(holiday.holidayDate)}>연차 취소</button>
                                             </td>
                                         </tr>
                                     ))}
