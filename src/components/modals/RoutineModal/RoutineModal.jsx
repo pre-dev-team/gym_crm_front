@@ -2,43 +2,117 @@
 import * as s from "./style";
 import { useRef, useState } from "react";
 import { FaRightLong } from "react-icons/fa6";
+import WorkoutSelect from "../../MakeRoutine/WorkoutSelect/WorkoutSelect";
+import { FaArrowRight } from "react-icons/fa";
+import { useMutation } from "react-query";
+import {userRoutineRequest} from "../../../apis/api/workout"
 
-function RoutineModal(props) {
-    const [modalOpen, setModalOpen] = useState(false);
-    const modalBackground = useRef();
+function RoutineModal({reservationId}) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const modalBackground = useRef();
+  const [routineInfoList, setRoutineInfoList] = useState([]);
+  const [clickedRoutine, setClickedRoutine] = useState(null);
+  const [clickedIndex, setClickedIndex] = useState(null);
+  const handleRoutineclick = (index) => {
+    setClickedIndex(()=>index);
+}
 
-    return (
-        <>
-            <div css={s.btnWrapper}>
-                <button css={s.modalOpenBtn} onClick={() => setModalOpen(true)}>
-                    모달 열기
-                </button>
-            </div>
-            {modalOpen && (
-                <div css={s.modalContainer} ref={modalBackground}>
-                    <div css={s.modalContent}>
-                        <h1>ROUTINE</h1>
-                        <div css={s.routineLayout}>
-                            <div css={s.routine}>
-                                <ul css={s.routineBox}>
-                                    <li>가슴</li>
-                                </ul>
-                            </div>
-                            <FaRightLong css={s.right} />
-                            <div css={s.routine}>
-                                <ul css={s.routineBox}>
-                                    <li>벤치프레스</li>
-                                </ul>
-                            </div>
+const handleEditClick = (routine) => {
+    setClickedRoutine(()=>routine);
+}
+
+const handleDeleteClick = () => {
+    if (clickedIndex !== null) {
+        // 클릭된 인덱스의 루틴 정보를 제외한 새로운 배열을 생성하여 업데이트
+        const updatedRoutineList = routineInfoList.filter((index) => index !== clickedIndex);
+        setRoutineInfoList(updatedRoutineList);
+        setClickedIndex(null); // 삭제 후 클릭된 인덱스 초기화
+    }
+}
+
+const userRoutineMutation = useMutation({
+    mutationKey: "userRoutineMutation",
+    mutationFn: userRoutineRequest,
+    onSuccess: (response) => {
+        alert("전송 완료");
+        // window.location.replace("/");
+    }
+
+    
+})
+
+const handleSubmitClick = () => {
+  console.log(reservationId);
+  const sendingList = routineInfoList.map((routineInfo, index) => ({
+        reservationId: reservationId,
+        workoutId: routineInfo.workout.value,
+        workoutRoutineCount: routineInfo.counts,
+        workoutRoutineSet: routineInfo.sets,
+        workoutRoutineWeight: routineInfo.weights,
+        workoutRoutineOrder: index + 1
+  }));
+  console.log(sendingList);
+  userRoutineMutation.mutate(sendingList);
+  
+};
+
+  return (
+    <>
+      <div css={s.btnWrapper}>
+        <button css={s.modalOpenBtn} onClick={() => setModalOpen(true)}>
+          모달 열기
+        </button>
+      </div>
+      {
+        modalOpen &&
+        <div css={s.background}>
+            <div css={s.layout}>
+                <div css={s.boxLayout}>
+                    
+                    <div css={s.inLayout}>
+                        <div css={s.routineSelectBox}>
+                         <WorkoutSelect routineInfoList={routineInfoList} setRoutineInfoList={setRoutineInfoList} clickedRoutine={clickedRoutine} clickedIndex={clickedIndex} setClickedIndex={setClickedIndex} />
+                            
                         </div>
-                        <button css={s.modalCloseBtn} onClick={() => setModalOpen(false)}>
-                            모달 닫기
-                        </button>
+                    
+                    <div css={s.iconBox}>
+                        <FaArrowRight css={s.arrowRight} />
+                    </div>
+                    <div css={s.selectBox}>
+                            {routineInfoList.map((routine, index) => (
+                                        <div css={s.card} key={index} onClick={() => handleRoutineclick(index)} >
+                                            <div>순서: {index + 1}</div>
+                                            <div>운동부위: {routine.category?.label}</div>
+                                            <div>운동: {routine.workout?.label}</div>
+                                            <div>무게: {routine.weights}</div>
+                                            <div>세트 x 개수: {routine.sets} X {routine.counts}</div>
+                                            <div>총개수: {routine.sets * routine.counts}</div>
+                                            {
+                                                index === clickedIndex ?
+                                            <div>
+                                                <button onClick={() => handleEditClick(routine)}>수정</button>
+                                                <button onClick={handleDeleteClick}>삭제</button>
+                                            </div>    : <></>
+                                            }
+                                            
+                                        </div>
+                                    ))}
+                        <button css={s.submit} onClick={handleSubmitClick}>전송</button>
+                    </div>
                     </div>
                 </div>
-            )}
-        </>
-    );
+                  
+                <div css={s.dragBox}>
+                   
+                </div>
+                <div css={s.submit}>
+                    <button css={s.modalClose} onClick={() => setModalOpen(false)}>모달 닫기</button>
+                </div>
+            </div>
+        </div>
+      }
+    </>
+  );
 }
 
 export default RoutineModal;
