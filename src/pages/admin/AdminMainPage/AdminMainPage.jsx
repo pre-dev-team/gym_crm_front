@@ -13,6 +13,7 @@ import AdminHolidayModal from "../../../components/modals/adminModal/AdminHolida
 function AdminMainPage(props) {
     const [isAdminReviewModalOpen, setIsAdminReviewModalOpen] = useState(false);
     const [clickedUserId, setClickedUserId] = useState(0);
+    const [clickedTrainerId, setClickedTrainerId] = useState(0);
     const [isAdminHolidayModalOpen, setIsAdminHolidayModalOpen] = useState(false);
     const [isMemeberListModalOpen, setIsMemeberListModalOpen] = useState(false);
     const [isReservationListModalOpen, setIsReservationListModalOpen] = useState(false);
@@ -32,7 +33,10 @@ function AdminMainPage(props) {
                 <div css={s.listBox}>
                     <div css={s.listName}>전체 트레이너 명단</div>
                     <div css={s.list}>
-                        <TrainerTable setIsAdminHolidayModalOpen={setIsAdminHolidayModalOpen} />
+                        <TrainerTable
+                            setClickedTrainerId={setClickedTrainerId}
+                            setIsAdminHolidayModalOpen={setIsAdminHolidayModalOpen}
+                        />
                     </div>
                 </div>
                 <div css={s.listBox}>

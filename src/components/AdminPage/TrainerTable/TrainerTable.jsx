@@ -1,7 +1,25 @@
 /** @jsxImportSource @emotion/react */
+import { useQuery } from "react-query";
+import { getAllTrainersRequest } from "../../../apis/api/admin";
 import * as s from "./style";
+import { useEffect, useState } from "react";
 
-function TrainerTable({ setIsAdminHolidayModalOpen }) {
+function TrainerTable({ setIsAdminHolidayModalOpen, setClickedTrainerId }) {
+    const [trainers, setTrainers] = useState([]);
+
+    const getAllTrainersQuery = useQuery([""], getAllTrainersRequest, {
+        retry: 0,
+        refetchOnWindowFocus: false,
+        onSuccess: (response) => {
+            setTrainers(() => response.data);
+        },
+    });
+
+    const handleHolidayViewClick = (id) => {
+        setIsAdminHolidayModalOpen(() => true);
+        setClickedTrainerId(() => id);
+    };
+
     return (
         <div>
             <table css={s.table}>
@@ -15,15 +33,19 @@ function TrainerTable({ setIsAdminHolidayModalOpen }) {
                     </tr>
                 </thead>
                 <tbody css={s.tb}>
-                    <tr>
-                        <td>1</td>
-                        <td>피카츄</td>
-                        <td>3</td>
-                        <td>8</td>
-                        <td>
-                            <button onClick={() => setIsAdminHolidayModalOpen(() => true)}>연차조회</button>
-                        </td>
-                    </tr>
+                    {trainers.map((trainer) => {
+                        return (
+                            <tr>
+                                <td>{trainer.trainerId}</td>
+                                <td>{trainer.name}</td>
+                                <td>{trainer.memberCount}</td>
+                                <td>{trainer.avgScore === null ? 0 : trainer.avgScore}</td>
+                                <td>
+                                    <button onClick={() => handleHolidayViewClick(trainer.trainerId)}>연차조회</button>
+                                </td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
         </div>
