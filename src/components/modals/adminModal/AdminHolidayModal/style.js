@@ -1,41 +1,46 @@
 import { css } from "@emotion/react";
 
-export const background = css`
-    box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background-color: #00000042;
-    z-index: 99;
-`;
-
 export const container = css`
-    box-sizing: border-box;
+    width: 95%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 70%;
-    height: 60%;
-    padding: 5px 10px;
-    background-color: #ededed;
+    justify-content: center;
+    text-align: center;
+`;
 
-    & > button {
-        cursor: pointer;
-        margin-top: 15px;
-        width: 150px;
+export const uncheckedBox = css`
+    width: 100%;
+    height: 45%;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    overflow-y: auto;
+`;
+export const uncheckedTable = css`
+    & th,
+    & td {
+        width: 120px;
+    }
+    & th:nth-of-type(1),
+    & td:nth-of-type(1) {
+        width: 70px;
+    }
+    & th:nth-of-type(3),
+    & td:nth-of-type(3) {
+        width: 70px;
     }
 `;
 
-export const layout = css`
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+export const checkedBox = css`
     width: 100%;
-    height: 90%;
+    height: 45%;
+    border: 1px solid black;
+    overflow-y: auto;
+`;
+
+export const checkedTable = css`
+    & th,
+    & td {
+        width: 120px;
+    }
 `;
