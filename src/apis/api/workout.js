@@ -27,6 +27,6 @@ export const getCountsRequest = async() => {
 
 
 export const userRoutineRequest = async (data) => {
-    const response = await instance.post("/auth/user/signup", data);
+    const response = await instance.post("/routine/trainer", data);
     return response;
 };

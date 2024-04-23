@@ -68,11 +68,11 @@ function SelectReservationAllUser({ accountId }) {
             <div css={s.selectBox}>
                 <ul css={s.reservationList}>
                     {reservationList.map(reservation => (
-                        <li key={reservation.id}>
+                        <li key={reservation.reservationId}>
                             <p>{reservation.name}</p>
                             <span>{reservation.reservationDate}</span>
                             <span>{reservation.timeDuration}</span>
-                            <RoutineModal />
+                            <RoutineModal reservationId={reservation.reservationId} />
                         </li>
                     ))}
                 </ul>
