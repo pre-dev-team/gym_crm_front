@@ -3,68 +3,56 @@ import { css } from "@emotion/react";
 export const container = css`
     overflow: auto;
     flex-direction: column;
+    align-items: center;
     width: 100%;
-    height: 680px;
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
     font-size: 10px;
-    color: #ededed;
-    & > h1 {
-        font-size: 32px;
-        margin-bottom: 50px;
-    }
-`;
-export const cardBox = css`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
-export const card = css`
-    box-sizing: border-box;
-    padding: 10px;
-    width: 354px;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-    background-color: #ededed;
-    color: black;
-    box-shadow: 1px 1px 1px 1px;
 `;
 
-export const leftBox = css`
-    width: 40%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
+export const title = css`
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
 `;
-export const photoBox = css`
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
+
+export const table = css`
+    overflow: auto;
+    flex-direction: column;
+    width: 100%;
+    font-size: 18px;
+`;
+
+export const row = css`
+    display: flex;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+`;
+
+export const cell = css`
+    flex: 1;
+    padding: 10px;
+    font-weight: 800;
+`;
+
+export const img = css`
+    width: 70x;
+    height: 70px;
     border-radius: 50%;
-    & > img {
-        width: 100%;
-    }
 `;
-export const rightBox = css`
-    width: 55%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    & > h1 {
-        margin: 0;
-    }
-`;
-export const starBox = css`
-    width: 100%;
-    font-size: 16px;
+
+export const trainerName = css`
+    font-weight: bold;
     margin-bottom: 5px;
+    font-size: 20px;
 `;
-export const textBox = css`
-    width: 100%;
-    font-size: 14px;
+
+export const ratings = css`
+    margin-bottom: 5px;
+    color: #666;
+`;
+
+export const reviews = css`
+    color: #444;
 `;
