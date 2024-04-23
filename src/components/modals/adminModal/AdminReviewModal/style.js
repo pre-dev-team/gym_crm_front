@@ -1,8 +1,18 @@
 import { css } from "@emotion/react";
 
+export const container = css`
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+`;
+
 export const listBox = css`
     width: 100%;
-    height: 50%;
+    height: 40%;
     overflow-y: auto;
     margin-bottom: 5px;
     border-collapse: collapse;
@@ -31,6 +41,10 @@ export const table = css`
     & th:nth-of-type(2),
     & td:nth-of-type(2) {
         width: 50%;
+    }
+
+    & button {
+        cursor: pointer;
     }
 `;
 
@@ -63,6 +77,7 @@ export const tbody = css`
         padding-top: 10px;
     }
     & td {
+        text-align: left;
         padding-top: 5px;
         width: 70%;
     }
