@@ -19,13 +19,15 @@ function AdminMainPage(props) {
 
     return (
         <div css={s.layout}>
-            {isAdminReviewModalOpen ? (
-                <AdminReviewModal setIsAdminReviewModalOpen={setIsAdminReviewModalOpen} clickedUserId={clickedUserId} />
-            ) : isAdminHolidayModalOpen ? (
-                <AdminHolidayModal setIsAdminHolidayModalOpen={setIsAdminHolidayModalOpen} />
-            ) : (
-                <></>
-            )}
+            <AdminReviewModal
+                isOpen={isAdminReviewModalOpen}
+                setIsAdminReviewModalOpen={setIsAdminReviewModalOpen}
+                clickedUserId={clickedUserId}
+            />
+            <AdminHolidayModal
+                isOpen={isAdminHolidayModalOpen}
+                setIsAdminHolidayModalOpen={setIsAdminHolidayModalOpen}
+            />
             <div css={s.firstBox}>
                 <div css={s.listBox}>
                     <div css={s.listName}>전체 트레이너 명단</div>

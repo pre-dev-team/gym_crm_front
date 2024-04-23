@@ -7,7 +7,7 @@ import { useState } from "react";
 import { makeStarByScore } from "../../../../utils/makeStarByScore";
 import { dateFormatter } from "../../../../utils/dateFormatter";
 
-function AdminReviewModal({ setIsAdminReviewModalOpen, clickedUserId }) {
+function AdminReviewModal({ isOpen, setIsAdminReviewModalOpen, clickedUserId }) {
     const [userReviews, setUserReviews] = useState([]);
     const [clickedReview, setClickedReview] = useState(null);
     const getUserReviewQuery = useQuery(
@@ -37,7 +37,7 @@ function AdminReviewModal({ setIsAdminReviewModalOpen, clickedUserId }) {
     );
 
     return (
-        <AdminModalLayout setIsAdminReviewModalOpen={setIsAdminReviewModalOpen}>
+        <AdminModalLayout isOpen={isOpen} setIsModalOpen={setIsAdminReviewModalOpen}>
             <div css={s.container}>
                 <div css={s.listBox}>
                     <table css={s.table}>
