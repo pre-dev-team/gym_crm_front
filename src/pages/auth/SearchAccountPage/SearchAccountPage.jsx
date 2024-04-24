@@ -10,10 +10,31 @@ import kakaoImg from "../../../assets/icons/kakao.png";
 import { useMutation } from "react-query";
 import { SigninRequest } from "../../../apis/api/signin";
 import { searchUsernameByEmailRequest } from "../../../apis/api/account";
+import { useEffect, useState } from "react";
+
+const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+};
 
 function SearchAccountPage(props) {
     const [name, handleNameChange] = useInput();
     const [email, handleEmailChange] = useInput();
+    const [secound, setSecound] = useState(180);
+    const [isMailSended, setIsMailSended] = useState(false);
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setSecound((prevSecound) => {
+                if (prevSecound === 0) {
+                    clearInterval(timer);
+                    return 0;
+                }
+                return prevSecound - 1;
+            });
+        }, 1000);
+        return () => clearInterval(timer);
+    }, [isMailSended]);
 
     const searchUsernameByEmailMutation = useMutation({
         mutationKey: "searchUsernameByEmailMutation",
@@ -25,6 +46,11 @@ function SearchAccountPage(props) {
                 return;
             }
             alert("해당 메일로 계정이름을 전송하였습니다.");
+            setIsMailSended(() => true);
+            setSecound(() => 180);
+            setTimeout(() => {
+                setIsMailSended(() => false);
+            }, 180000);
         },
     });
 
@@ -64,9 +90,12 @@ function SearchAccountPage(props) {
                             onChange={handleEmailChange}
                         />
                     </div>
-                    <div css={s.buttonBox}>
-                        <button onClick={handleEmailSendClick}>메일 전송</button>
+                    <div css={s.buttonBox(isMailSended)}>
+                        <button disabled={isMailSended} onClick={handleEmailSendClick}>
+                            메일 전송
+                        </button>
                     </div>
+                    {isMailSended ? <h4 css={s.timer}>다음 메일 전송까지 {formatTime(secound)}</h4> : <></>}
                 </div>
             </div>
         </motion.div>

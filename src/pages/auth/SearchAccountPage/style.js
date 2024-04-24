@@ -75,7 +75,7 @@ export const col = css`
     }
 `;
 
-export const buttonBox = css`
+export const buttonBox = (isActive) => css`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -84,60 +84,26 @@ export const buttonBox = css`
     & > button {
         width: 100px;
         height: 30px;
-        background-color: transparent;
+        background-color: ${isActive ? "white" : "transparent"};
         color: #999999;
         font-size: 14px;
         box-shadow: 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
         transition: transform 0.3s, box-shadow 0.3s;
         cursor: pointer;
         &:hover {
-            transform: translateY(2px);
+            transform: ${isActive ? "translateY(0px)" : "translateY(2px)"};
         }
         &:active {
-            box-shadow: inset 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
+            ${isActive ? "" : "box-shadow: inset 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411)"};
         }
     }
 `;
 
-export const line = css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+export const timer = css`
+    position: absolute;
+    color: red;
     font-size: 12px;
-    cursor: default;
-    &::before,
-    ::after {
-        margin: 0px 5px;
-        content: "―――――――――";
-    }
-`;
-
-export const oauthBox = css`
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 30px;
-    margin-top: 10px;
-    & > a {
-        height: 25px;
-        width: 25px;
-        padding: 5px;
-        color: #ffffff;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0px 15px;
-        & > img {
-            height: 100%;
-        }
-    }
-`;
-export const blank = css`
-    flex-grow: 0.4;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
 `;
