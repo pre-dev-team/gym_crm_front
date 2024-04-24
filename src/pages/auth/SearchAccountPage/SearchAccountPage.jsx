@@ -1,14 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { Link } from "react-router-dom";
 import * as s from "./style";
 import { motion } from "framer-motion";
 import InputWithMessagebox from "../../../components/InputWithMessageBox/InputWithMessagebox";
 import useInput from "../../../hooks/useInput";
-import googleImg from "../../../assets/icons/google.png";
-import naverImg from "../../../assets/icons/naver.png";
-import kakaoImg from "../../../assets/icons/kakao.png";
 import { useMutation } from "react-query";
-import { SigninRequest } from "../../../apis/api/signin";
 import { searchUsernameByEmailRequest } from "../../../apis/api/account";
 import { useEffect, useState } from "react";
 
@@ -23,6 +18,7 @@ function SearchAccountPage(props) {
     const [email, handleEmailChange] = useInput();
     const [secound, setSecound] = useState(180);
     const [isMailSended, setIsMailSended] = useState(false);
+
     useEffect(() => {
         const timer = setInterval(() => {
             setSecound((prevSecound) => {
