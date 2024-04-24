@@ -1,16 +1,26 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
 
 // Inbody 컴포넌트의 스타일 정의
 export const layout = css`
+    background-color: #ededed;
+    display: flex;
+    position: absolute;
     margin: auto;
-    width: 50%; /* 원하는 너비로 조정하세요 */
+    padding: 10px;
+    width: 300px; /* 원하는 너비로 조정하세요 */
+    height: 300px;
+    overflow: hidden;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 export const inbodyForm = css`
     display: flex;
     flex-direction: column;
-
+    justify-content: center;
+    margin: 0px auto;
     & > label {
         margin-bottom: 5px;
     }

@@ -15,7 +15,7 @@ import UserMyPage from "./pages/user/UserMyPage/UserMyPage";
 import { getPrincipalRequest } from "./apis/api/principal";
 import AdminMainPage from "./pages/admin/AdminMainPage/AdminMainPage";
 import TrainerMainPage from "./pages/trainer/TrainerMainPage/TrainerMainPage";
-import Inbody from "./components/Inbody/Inbody";
+import TrainerInbodyInputPage from "./pages/trainer/TrainerInbodyInputPage/TrainerInbodyInputPage";
 
 function App() {
     const principalQuery = useQuery(["principalQuery"], getPrincipalRequest, {
@@ -42,13 +42,27 @@ function App() {
                     </Routes>
                 </AdminRootLayout>
             ) : isTrainer ? (
-                <AdminRootLayout>
+                <>
                     <Routes>
-                        <Route path="/" element={<TrainerMainPage />} />
-                        <Route path="trainer/*" element={<TrainerPage />} />
-                        <Route path="/inbody" element={<Inbody />} />
+                        <Route
+                            path="/"
+                            element={
+                                <AdminRootLayout>
+                                    <TrainerMainPage />
+                                </AdminRootLayout>
+                            }
+                        />
+                        <Route
+                            path="trainer/*"
+                            element={
+                                <AdminRootLayout>
+                                    <TrainerPage />
+                                </AdminRootLayout>
+                            }
+                        />
+                        <Route path="/inbody" element={<TrainerInbodyInputPage />} />
                     </Routes>
-                </AdminRootLayout>
+                </>
             ) : (
                 <RootLayout>
                     <RootHeader />
