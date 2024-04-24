@@ -7,6 +7,7 @@ export const container = css`
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    transform: tra;
 `;
 
 export const uncheckedBox = css`

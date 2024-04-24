@@ -5,7 +5,7 @@ import useAdminHolidayApis from "../../../../hooks/useAdminHolidayApis";
 import { useMutation } from "react-query";
 import { decideHolidayAppliesRequest } from "../../../../apis/api/admin";
 
-function AdminHolidayModal({ setIsAdminHolidayModalOpen }) {
+function AdminHolidayModal({ isOpen, setIsAdminHolidayModalOpen }) {
     const { unconfirmedHolidayApplies, confirmedHolidayApplies } = useAdminHolidayApis();
 
     const decideHolidayAppliesMutation = useMutation({
@@ -42,7 +42,7 @@ function AdminHolidayModal({ setIsAdminHolidayModalOpen }) {
     };
 
     return (
-        <AdminModalLayout setIsAdminHolidayModalOpen={setIsAdminHolidayModalOpen}>
+        <AdminModalLayout isOpen={isOpen} setIsModalOpen={setIsAdminHolidayModalOpen}>
             <div css={s.container}>
                 <div css={s.uncheckedBox}>
                     <table css={s.uncheckedTable}>

@@ -81,7 +81,7 @@ function UserSigninPage(props) {
                         <button onClick={handleLoginClick}>로그인</button>
                     </div>
                     <div css={s.searchBox}>
-                        <Link>아이디찾기</Link>
+                        <Link to={"/auth/user/search/username"}>아이디찾기</Link>
                         <span css={s.col}></span>
                         <Link>비밀번호찾기</Link>
                         <span css={s.col}></span>

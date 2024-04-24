@@ -19,8 +19,8 @@ export const container = css`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 70%;
-    height: 60%;
+    width: 100%;
+    height: 100%;
     padding: 5px 10px;
     background-color: #ededed;
 
