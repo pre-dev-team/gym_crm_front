@@ -1,18 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import * as s from './style';
-import { Link } from 'react-router-dom'; // Link 컴포넌트 import
+import * as s from "./style";
 
 function MyMembers({ membersList }) {
+    const handleInbodyClick = (id) => {
+        window.open(`http://localhost:3000/inbody?dlsqkel=${id + 11}`, "_blank", " width=355, height=360");
+    };
     return (
         <div css={s.layout}>
             <ul css={s.membersBox}>
-                {membersList.map(member => (
-
-                    <li key={member.id} css={s.member}>
+                {membersList.map((member) => (
+                    <li key={member.userId} css={s.member}>
                         <p>{member.name}</p>
-                        <button css={s.selectUser}>회원정보조회</button>
-                        <Link to={`/inbody/${member.userId}`}><button>Inbody 입력</button></Link>
-
+                        <button css={s.memeberInfoButton} onClick={() => console.log(membersList)}>
+                            회원정보조회
+                        </button>
+                        <button css={s.memeberInfoButton}>
+                            <a onClick={() => handleInbodyClick(member.userId)}>인바디입력</a>
+                        </button>
                     </li>
                 ))}
             </ul>
@@ -21,4 +25,3 @@ function MyMembers({ membersList }) {
 }
 
 export default MyMembers;
-
