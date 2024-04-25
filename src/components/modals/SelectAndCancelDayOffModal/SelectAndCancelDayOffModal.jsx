@@ -9,9 +9,7 @@ function SelectAndCancelDayOffModal({ accountId }) {
     const [modalOpen, setModalOpen] = useState(false);
     const modalBackground = useRef();
     const { allHolidayList } = useTrainerApis(accountId);
-    const [ holidayListDayByDay, setHolidayListDayByDay] = useState([]);
-    const [availableOptions, setAvailabelOptions] = useState(s.searchTypeOption2)
-    const [confirm, setConfirm] = useState(0);
+    const [holidayListDayByDay, setHolidayListDayByDay] = useState([]);
 
     const deleteHolidayMutation = useMutation({
         mutationKey: "deleteHolidayMutation",
@@ -44,29 +42,23 @@ function SelectAndCancelDayOffModal({ accountId }) {
                 name: groupByDate[date][0]["name"],
                 confirm: groupByDate[date][0]["confirm"]
             }
-        }).sort((a,b) => new Date(b.holidayDate) - new Date(a.holidayDate)))
-                
+        }).sort((a, b) => new Date(b.holidayDate) - new Date(a.holidayDate)))
+
     }, [allHolidayList]);
 
     useEffect(() => {
-        setAvailabelOptions(() => availableOptions.filter(option => option.value === confirm));
-    }, [confirm])
-
-    console.log(availableOptions)
-    
-    useEffect(() => {
-        console.log(holidayListDayByDay.sort((a,b) => a.holidayDate - b.holidayDate))
-    },[modalOpen])
+        console.log(holidayListDayByDay.sort((a, b) => a.holidayDate - b.holidayDate))
+    }, [modalOpen])
 
     const handleDeleteClick = (date) => {
-        if(window.confirm("연차 취소하시겠습니까?")) {
+        if (window.confirm("연차 취소하시겠습니까?")) {
             deleteHolidayMutation.mutate({
                 accountId: accountId,
                 holidayDate: date
             })
-            
-        }else {
-            
+
+        } else {
+
         }
     }
 
@@ -95,15 +87,18 @@ function SelectAndCancelDayOffModal({ accountId }) {
                                     </tr>
                                 </thead>
                                 <tbody css={s.body}>
-                                    {holidayListDayByDay.map((holiday,index) => (
+                                    {holidayListDayByDay.map((holiday, index) => (
                                         <tr key={index} css={s.btr}>
                                             <td>{index + 1}</td>
                                             <td>{holiday.holidayDate}</td>
                                             <td>{holiday.startTimeId + 10}:00 ~ {holiday.endTimeId + 10}:00</td>
                                             <td>{holiday.name}</td>
-                                            <td>{holiday.confirm}</td>
+                                            <td>{s.searchTypeOption2.find(option => option.value === holiday.confirm).label}</td>
                                             <td>
-                                                <button onClick={() => handleDeleteClick(holiday.holidayDate)}>연차 취소</button>
+                                                <button
+                                                    onClick={() => handleDeleteClick(holiday.holidayDate)}
+                                                    disabled={holiday.confirm !== 0}
+                                                >연차 취소</button>
                                             </td>
                                         </tr>
                                     ))}
