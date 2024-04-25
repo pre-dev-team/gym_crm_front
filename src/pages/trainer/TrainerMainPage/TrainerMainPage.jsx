@@ -8,12 +8,11 @@ import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useTrainerApis from "../../../hooks/useTrainerApis";
 import DayoffRequest from "../../../components/DayoffRequest/DayoffRequest";
+import { useState } from "react";
 
 function TrainerMainPage(props) {
-
     const accountId = usePrincipal();
     const { trainerId, trainerProfile, setTrainerProfile, membersList } = useTrainerApis(accountId);
-
     return (
         <>
             <div css={s.layout}>
@@ -21,7 +20,11 @@ function TrainerMainPage(props) {
                     <div css={s.trainerBox}>
                         <div css={s.trainerProfileBox}>
                             <div css={s.trainer}>트레이너 정보</div>
-                            <TrainerProfile trainerProfile={trainerProfile} setTrainerProfile={setTrainerProfile} accountId={accountId} />
+                            <TrainerProfile
+                                trainerProfile={trainerProfile}
+                                setTrainerProfile={setTrainerProfile}
+                                accountId={accountId}
+                            />
                         </div>
                         <div css={s.myMembersBox}>
                             <div css={s.myMembers}>내 회원들</div>
@@ -34,9 +37,9 @@ function TrainerMainPage(props) {
                     </div>
                 </div>
                 <div css={s.allReservationBox}>
-                <div css={s.dayoffBox}>
+                    <div css={s.dayoffBox}>
                         <div css={s.dayoff}>연차 설정</div>
-                        <DayoffRequest accountId={accountId}/>
+                        <DayoffRequest accountId={accountId} />
                         <div css={s.select}></div>
                     </div>
                     <div css={s.allReservation}>

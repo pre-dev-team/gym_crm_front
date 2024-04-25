@@ -7,8 +7,6 @@ export const editUserPasswordRequest = async (data) => {
 };
 
 export const searchUsernameByEmailRequest = async (data) => {
-    const response = await axios.post("http://localhost:8080/mail/send", data, {
-        withCredentials: true,
-    });
+    const response = await axios.post("http://localhost:8080/mail/send", data);
     return response;
 };

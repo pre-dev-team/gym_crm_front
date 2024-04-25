@@ -21,7 +21,8 @@ export const member = css`
     height: 40px;
 `;
 
-export const selectUser = css`
+export const memeberInfoButton = css`
     margin-left: 5px;
     padding: 2px;
+    cursor: pointer;
 `;

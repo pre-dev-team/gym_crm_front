@@ -68,7 +68,7 @@ export const body = css`
 `;
 
 export const searchTypeOption2 = [
-    { value: 0, label: "승인 대기중" },
-    { value: 1, label: "승인완료" },
-    { value: 2, label: "승인반려" }
+    { value: 0, label: "승인 대기 중" },
+    { value: 1, label: "승인 완료" },
+    { value: 2, label: "승인 반려" }
 ];
