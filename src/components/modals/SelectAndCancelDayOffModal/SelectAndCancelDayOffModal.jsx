@@ -51,8 +51,6 @@ function SelectAndCancelDayOffModal({ accountId }) {
     useEffect(() => {
         setAvailabelOptions(() => availableOptions.filter(option => option.value === confirm));
     }, [confirm])
-
-    console.log(availableOptions)
     
     useEffect(() => {
         console.log(holidayListDayByDay.sort((a,b) => a.holidayDate - b.holidayDate))

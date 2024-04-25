@@ -11,9 +11,6 @@ function TrainerProfile({ trainerProfile, setTrainerProfile, accountId }) {
     const { name, phone, email, username, trainerProfileImgUrl } = trainerProfile;
     const fileRef = useRef();
 
-    useEffect(() => {
-        console.log(trainerProfileImgUrl)
-    },[trainerProfileImgUrl])
     const trainerImgMutation = useMutation({
         mutationKey: "trainerImgMutation",
         mutationFn: updateTrainerImgRequest,
