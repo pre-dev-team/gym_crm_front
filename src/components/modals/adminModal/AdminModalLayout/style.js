@@ -1,19 +1,5 @@
 import { css } from "@emotion/react";
 
-export const background = css`
-    box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background-color: #00000042;
-    z-index: 99;
-`;
-
 export const container = css`
     box-sizing: border-box;
     display: flex;

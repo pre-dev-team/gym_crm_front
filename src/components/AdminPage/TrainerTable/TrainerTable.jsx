@@ -25,11 +25,12 @@ function TrainerTable({ setIsAdminHolidayModalOpen, setClickedTrainerId }) {
             <table css={s.table}>
                 <thead css={s.th}>
                     <tr>
-                        <th>트레이너 번호</th>
-                        <th>트레이너 이름</th>
+                        <th>번호</th>
+                        <th>이름</th>
                         <th>담당회원 수</th>
                         <th>평균평점</th>
                         <th>연차정보조회</th>
+                        <th>퇴사</th>
                     </tr>
                 </thead>
                 <tbody css={s.tb}>
@@ -42,6 +43,9 @@ function TrainerTable({ setIsAdminHolidayModalOpen, setClickedTrainerId }) {
                                 <td>{trainer.avgScore === null ? 0 : trainer.avgScore}</td>
                                 <td>
                                     <button onClick={() => handleHolidayViewClick(trainer.trainerId)}>연차조회</button>
+                                </td>
+                                <td>
+                                    <button>퇴사</button>
                                 </td>
                             </tr>
                         );

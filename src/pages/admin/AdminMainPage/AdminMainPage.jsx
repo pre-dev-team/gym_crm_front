@@ -28,10 +28,15 @@ function AdminMainPage(props) {
             <AdminHolidayModal
                 isOpen={isAdminHolidayModalOpen}
                 setIsAdminHolidayModalOpen={setIsAdminHolidayModalOpen}
+                clickedTrainerId={clickedTrainerId}
+                setClickedTrainerId={setClickedTrainerId}
             />
             <div css={s.firstBox}>
                 <div css={s.listBox}>
-                    <div css={s.listName}>전체 트레이너 명단</div>
+                    <div css={s.listName}>
+                        전체 트레이너 명단
+                        <button>트레이너 등록</button>
+                    </div>
                     <div css={s.list}>
                         <TrainerTable
                             setClickedTrainerId={setClickedTrainerId}

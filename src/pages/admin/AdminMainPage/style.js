@@ -38,6 +38,7 @@ export const reservationBox = css`
 
 export const listBox = css`
     box-sizing: border-box;
+    position: relative;
     width: 45%;
     height: 100%;
     display: flex;
@@ -50,7 +51,13 @@ export const listName = css`
     display: flex;
     justify-content: center;
     width: 100%;
+    height: 30px;
     border-bottom: 1px solid black;
+    & > button {
+        position: absolute;
+        right: 0;
+        top: 0px;
+    }
 `;
 
 export const list = css`
