@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import MyMembersModal from '../modals/MyMembersModal/MyMembersModal';
 import * as s from './style';
 import { Link } from 'react-router-dom'; // Link 컴포넌트 import
 
@@ -10,7 +11,7 @@ function MyMembers({ membersList }) {
 
                     <li key={member.id} css={s.member}>
                         <p>{member.name}</p>
-                        <button css={s.selectUser}>회원정보조회</button>
+                        <MyMembersModal />
                         <Link to={`/inbody/${member.userId}`}><button>Inbody 입력</button></Link>
 
                     </li>

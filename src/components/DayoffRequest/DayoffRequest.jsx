@@ -29,6 +29,9 @@ function DayoffRequest({ accountId }) {
         onSuccess: response => {
             alert("신청되었습니다");
             window.location.replace("/")
+        },
+        onError: error => {
+            alert(error.response.data);
         }
     })
 
