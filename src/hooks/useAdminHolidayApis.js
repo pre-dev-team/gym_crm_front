@@ -18,24 +18,7 @@ const useAdminHolidayApis = (trainerId) => {
             refetchOnWindowFocus: false,
             enabled: !!trainerId,
             onSuccess: (response) => {
-                setUnconfirmedHolidayApplies(() => []);
-                const responseMap = response.data;
-                const keys = Object.keys(responseMap);
-                for (let key of keys) {
-                    const tempList = responseMap[key];
-                    const startTimeId =
-                        tempList[0].timeId > tempList[1].timeId ? tempList[1].timeId : tempList[0].timeId;
-                    const endTimeId = tempList[0].timeId > tempList[1].timeId ? tempList[0].timeId : tempList[1].timeId;
-                    setUnconfirmedHolidayApplies((prev) => [
-                        ...prev,
-                        {
-                            ...tempList[0],
-                            createDate: dateFormatter(tempList[0].createDate),
-                            startTimeId: startTimeId,
-                            endTimeId: endTimeId,
-                        },
-                    ]);
-                }
+                setUnconfirmedHolidayApplies(() => response.data);
             },
         }
     );
@@ -51,7 +34,7 @@ const useAdminHolidayApis = (trainerId) => {
             refetchOnWindowFocus: false,
             enabled: !!trainerId,
             onSuccess: (response) => {
-                console.log(response.data);
+                setConfirmedHolidayApplies(() => response.data);
             },
         }
     );

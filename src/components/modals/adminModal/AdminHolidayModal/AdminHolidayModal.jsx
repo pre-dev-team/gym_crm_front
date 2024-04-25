@@ -60,7 +60,7 @@ function AdminHolidayModal({ isOpen, setIsAdminHolidayModalOpen, clickedTrainerI
                                     <tr key={holiday.holidayId}>
                                         <td>{index + 1}</td>
                                         <td>{holiday.createDate}</td>
-                                        <td>{holiday.trainerName}</td>
+                                        <td>{holiday.name}</td>
                                         <td>{holiday.holidayDate}</td>
                                         <td>
                                             {holiday.startTimeId + 9}:00 ~ {holiday.endTimeId + 9}:00
@@ -96,7 +96,7 @@ function AdminHolidayModal({ isOpen, setIsAdminHolidayModalOpen, clickedTrainerI
                                     <tr key={holiday.holidayId}>
                                         <td>{index + 1}</td>
                                         <td>{holiday.createDate}</td>
-                                        <td>{holiday.trainerName}</td>
+                                        <td>{holiday.name}</td>
                                         <td>{holiday.holidayDate}</td>
                                         <td>
                                             {holiday.startTimeId + 9}:00 ~ {holiday.endTimeId + 9}:00

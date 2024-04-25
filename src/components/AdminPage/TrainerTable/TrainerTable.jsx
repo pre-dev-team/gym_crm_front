@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 function TrainerTable({ setIsAdminHolidayModalOpen, setClickedTrainerId }) {
     const [trainers, setTrainers] = useState([]);
 
-    const getAllTrainersQuery = useQuery([""], getAllTrainersRequest, {
+    const getAllTrainersQuery = useQuery(["getAllTrainersQuery"], getAllTrainersRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
