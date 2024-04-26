@@ -29,3 +29,8 @@ export const decideHolidayAppliesRequest = async (data) => {
     const response = await instance.put("/admin/holidays/decide", data);
     return response;
 };
+
+export const deleteTrainerRequest = async (params) => {
+    const response = await instance.delete("/auth/trainer", { params });
+    return response;
+};

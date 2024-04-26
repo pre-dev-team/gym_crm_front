@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { useQuery } from "react-query";
-import { getAllTrainersRequest } from "../../../apis/api/admin";
+import { useMutation, useQuery } from "react-query";
+import { deleteTrainerRequest, getAllTrainersRequest } from "../../../apis/api/admin";
 import * as s from "./style";
 import { useEffect, useState } from "react";
 
@@ -15,9 +15,33 @@ function TrainerTable({ setIsAdminHolidayModalOpen, setClickedTrainerId }) {
         },
     });
 
+    const deleteTrainerMutation = useMutation({
+        mutationKey: "deleteTrainerMutation",
+        mutationFn: deleteTrainerRequest,
+        retry: 0,
+        onSuccess: (response) => {
+            console.log(response);
+        },
+        onError: (error) => {
+            console.log(error.response.data);
+        },
+    });
+
     const handleHolidayViewClick = (id) => {
         setIsAdminHolidayModalOpen(() => true);
         setClickedTrainerId(() => id);
+    };
+
+    const handleDeleteTrainerClick = (trainer) => {
+        if (
+            window.confirm(
+                `${trainer.name}트레이너를 삭제하시겠습니까? \n해당 트레이너와 관련된 데이터가 모두 삭제됩니다.`
+            )
+        ) {
+            deleteTrainerMutation.mutate({
+                trainerId: trainer.trainerId,
+            });
+        }
     };
 
     return (
@@ -45,7 +69,7 @@ function TrainerTable({ setIsAdminHolidayModalOpen, setClickedTrainerId }) {
                                     <button onClick={() => handleHolidayViewClick(trainer.trainerId)}>연차조회</button>
                                 </td>
                                 <td>
-                                    <button>퇴사</button>
+                                    <button onClick={() => handleDeleteTrainerClick(trainer)}>퇴사</button>
                                 </td>
                             </tr>
                         );
