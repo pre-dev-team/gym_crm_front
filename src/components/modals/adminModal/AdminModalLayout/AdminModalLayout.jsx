@@ -4,7 +4,7 @@ import * as s from "./style";
 ReactModal.setAppElement("#root");
 
 function AdminModalLayout({ children, isOpen, setIsModalOpen, setValue }) {
-    const handleCloseClick = (e) => {
+    const handleCloseClick = () => {
         setIsModalOpen(false);
     };
 

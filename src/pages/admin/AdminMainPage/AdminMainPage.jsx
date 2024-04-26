@@ -10,9 +10,9 @@ import AdminHolidayModal from "../../../components/modals/adminModal/AdminHolida
 
 function AdminMainPage(props) {
     const [isAdminReviewModalOpen, setIsAdminReviewModalOpen] = useState(false);
+    const [isAdminHolidayModalOpen, setIsAdminHolidayModalOpen] = useState(false);
     const [clickedUserId, setClickedUserId] = useState(0);
     const [clickedTrainerId, setClickedTrainerId] = useState(0);
-    const [isAdminHolidayModalOpen, setIsAdminHolidayModalOpen] = useState(false);
 
     const handleTrainerRegisterClick = () => {
         window.open(`http://localhost:3000/admin/register/trainer`, "_blank", " width=300px, height=400px");

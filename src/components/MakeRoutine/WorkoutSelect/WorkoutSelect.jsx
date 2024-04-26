@@ -1,177 +1,190 @@
-import Select from "react-select";
+/** @jsxImportSource @emotion/react */
 import * as s from "./style";
+import Select from "react-select";
 import { useState, useEffect } from "react";
+import { IoIosArrowDown } from "react-icons/io";
 import useWorkouts from "../../../hooks/useWorkouts";
-import { useMutation } from "react-query";
 
-function WorkoutSelect({ routineInfoList, setRoutineInfoList, clickedRoutine, clickedIndex, setClickedIndex }) {
-    const [selectedCategory, setSelectedCategory] = useState(null);
-    const [selectedWorkout, setSelectedWorkout] = useState(null);
-    const [selectedId, setSelectedId] = useState(null);
-    const [weights, setWeights] = useState(0);
-    const [counts, setCounts] = useState(0);
-    const [sets, setSets] = useState(0);
-    const [showInputs, setShowInputs] = useState(false); // 입력 부분 보이기 여부 상태
+function WorkoutSelect({ setRoutineList }) {
+    const [workoutOptions, setWorkoutOptions] = useState(s.initialWorkoutOption);
+    const [isNameSelect, setIsNameSelect] = useState(s.initialSelectNameState);
+    const [workouts, workoutCategories] = useWorkouts(workoutOptions.category.value);
 
-    const [workouts, workoutCategories] = useWorkouts(selectedId);
-
-    useEffect(() => {
-        if (!!clickedRoutine) {
-            setShowInputs(true);
-            setSelectedCategory(clickedRoutine.category);
-            setSelectedWorkout(clickedRoutine.workout);
-            setWeights(clickedRoutine.weights);
-            setCounts(clickedRoutine.counts);
-            setSets(clickedRoutine.sets);
-        }
-    }, [clickedRoutine]);
-
-    
-
-    const handleCategoryChange = (e) => {
-        setSelectedCategory(e);
-        setSelectedId(e?.value);
-        setSelectedWorkout(null); // 카테고리 변경 시 운동 선택 초기화
-        setShowInputs(true); // 입력 부분 보이기
-        resetInputs(); // 입력값 초기화
-    };
-
-    const handleWorkoutChange = (e) => {
-        setSelectedWorkout(e);
-        setShowInputs(true); // 운동 선택 시 입력 부분 보이기
-        resetInputs(); // 입력값 초기화
-    };
-
-    const resetInputs = () => {
-        setWeights(0);
-        setCounts(0);
-        setSets(0);
-    };
-
-    const handleWeightIncrement = (value) => {
-        setWeights((prevWeights) => prevWeights + value);
-    };
-
-    const handleSetIncrement = (value) => {
-        setSets((prevSets) => prevSets + value);
-    };
-
-    const handleCountIncrement = (value) => {
-        setCounts((prevCounts) => prevCounts + value);
-    };
-
-    const handleEditClick = () => {
-        if (clickedIndex !== null && selectedWorkout) {
-            const updatedRoutineList = [...routineInfoList];
-            updatedRoutineList[clickedIndex] = {
-                category: selectedCategory,
-                workout: selectedWorkout,
-                weights: weights,
-                counts: counts,
-                sets: sets,
+    const handleSelectChange = (e, name) => {
+        setWorkoutOptions((prev) => {
+            return {
+                ...prev,
+                [name]: e,
             };
-            setRoutineInfoList(updatedRoutineList); // 수정된 루틴 정보를 MakeRoutine으로 전달
-            setShowInputs(false); // 입력 부분 숨기기
-            setSelectedId(null); // 카테고리 선택 초기화
-            setClickedIndex(null); // 수정 완료 후 clickedIndex 초기화
-        }
+        });
+        setIsNameSelect((prev) => {
+            return {
+                ...prev,
+                [name]: true,
+            };
+        });
     };
 
-    const handleSubmitClick = () => {
-        if (selectedWorkout) {
-            const updatedRoutineInfoList = [
-                ...routineInfoList,
-                {
-                    category: selectedCategory,
-                    workout: selectedWorkout,
-                    weights,
-                    counts,
-                    sets,
-                },
-            ];
-            setRoutineInfoList(updatedRoutineInfoList);
-            resetInputs(); // 입력값 초기화
-            setShowInputs(false); // 입력 부분 숨기기
-            // 선택 상태 초기화
-            setSelectedCategory(null);
-            setSelectedWorkout(null);
-            setSelectedId(null); // 카테고리 선택 초기화
+    const handleValueChange = (e, val) => {
+        const { name, value } = e.target;
+        if (val !== null) {
+            if (val === 0) {
+                setWorkoutOptions((prev) => {
+                    return {
+                        ...prev,
+                        [name]: 0,
+                    };
+                });
+            } else {
+                setWorkoutOptions((prev) => {
+                    return {
+                        ...prev,
+                        [name]: parseInt(prev[name]) + parseInt(val),
+                    };
+                });
+            }
+        } else {
+            setWorkoutOptions((prev) => {
+                return {
+                    ...prev,
+                    [name]: value,
+                };
+            });
         }
+
+        setIsNameSelect((prev) => {
+            return {
+                ...prev,
+                [name]: true,
+            };
+        });
+    };
+
+    const handleConfirmClick = () => {
+        setRoutineList((prev) => [...prev, { routine: workoutOptions, index: prev.length }]);
+        setWorkoutOptions(() => s.initialWorkoutOption);
+        setIsNameSelect(() => s.initialSelectNameState);
     };
 
     return (
         <>
-            <div css={s.selectLayout}>
+            <div css={s.selectBox}>
                 <Select
-                    styles={s.selectStyle2}
+                    styles={s.selectStyle}
                     options={workoutCategories}
-                    value={selectedCategory}
-                    onChange={(e) => handleCategoryChange(e)}
+                    value={workoutOptions.category}
+                    onChange={(e) => handleSelectChange(e, "category")}
                     placeholder="부위"
                 />
                 <Select
-                    styles={s.selectStyle2}
+                    styles={s.selectStyle}
                     options={workouts}
-                    value={selectedWorkout}
-                    onChange={(e) => handleWorkoutChange(e)}
-                    placeholder="종목"
-                    isDisabled={!selectedCategory}
+                    value={workoutOptions.workout}
+                    onChange={(e) => handleSelectChange(e, "workout")}
+                    placeholder="운동선택"
+                    isDisabled={!isNameSelect.category}
                 />
             </div>
-            {showInputs && selectedWorkout && (
-                <div>
-                    <div>
+            <div css={s.cards}>
+                <div css={s.inputCard}>
+                    <div css={s.cardTitle}>
                         <h3>무게 입력</h3>
-                        <input
-                            type="text"
-                            value={weights}
-                            onChange={(e) => setWeights(e.target.value)}
-                            placeholder="무게 입력"
-                        />
-                        <div>
-                            <button onClick={() => handleWeightIncrement(5)}>+5</button>
-                            <button onClick={() => handleWeightIncrement(10)}>+10</button>
-                            <button onClick={() => handleWeightIncrement(20)}>+20</button>
-                        </div>
+                        <button name="weight" onClick={(e) => handleValueChange(e, 0)}>
+                            초기화
+                        </button>
                     </div>
-                    <div>
-                        <h3>세트 입력</h3>
-                        <input
-                            type="text"
-                            value={sets}
-                            onChange={(e) => setSets(e.target.value)}
-                            placeholder="세트 입력"
-                        />
-                        <div>
-                            <button onClick={() => handleSetIncrement(1)}>+1</button>
-                            <button onClick={() => handleSetIncrement(3)}>+3</button>
-                            <button onClick={() => handleSetIncrement(5)}>+5</button>
-                        </div>
-                    </div>
-                    <div>
-                        <h3>개수 입력</h3>
-                        <input
-                            type="text"
-                            value={counts}
-                            onChange={(e) => setCounts(e.target.value)}
-                            placeholder="개수 입력"
-                        />
-                        <div>
-                            <button onClick={() => handleCountIncrement(1)}>+1</button>
-                            <button onClick={() => handleCountIncrement(8)}>+8</button>
-                            <button onClick={() => handleCountIncrement(12)}>+12</button>
-                            <button onClick={() => handleCountIncrement(20)}>+20</button>
-                        </div>
-                        <div css={s.confirmBox}>
-                            {clickedIndex !== null ? (
-                                <button onClick={handleEditClick}>수정 완료</button>
-                            ) : (
-                                <button onClick={handleSubmitClick}>제출</button>
-                            )}
-                        </div>
+                    <input
+                        name={"weight"}
+                        type="text"
+                        value={workoutOptions.weight}
+                        onChange={(e) => handleValueChange(e)}
+                        placeholder="무게 입력"
+                        disabled={!isNameSelect.workout}
+                    />
+                    <div css={s.buttonBox}>
+                        <button
+                            name={"weight"}
+                            onClick={(e) => handleValueChange(e, 5)}
+                            disabled={!isNameSelect.workout}
+                        >
+                            +5
+                        </button>
+                        <button
+                            name={"weight"}
+                            onClick={(e) => handleValueChange(e, 10)}
+                            disabled={!isNameSelect.workout}
+                        >
+                            +10
+                        </button>
+                        <button
+                            name={"weight"}
+                            onClick={(e) => handleValueChange(e, 20)}
+                            disabled={!isNameSelect.workout}
+                        >
+                            +20
+                        </button>
                     </div>
                 </div>
-            )}
+                <div css={s.inputCard}>
+                    <div css={s.cardTitle}>
+                        <h3>세트 입력</h3>
+                        <button name="set" onClick={(e) => handleValueChange(e, 0)}>
+                            초기화
+                        </button>
+                    </div>
+                    <input
+                        name={"set"}
+                        type="text"
+                        value={workoutOptions.set}
+                        onChange={(e) => handleValueChange(e)}
+                        placeholder="세트 입력"
+                        disabled={!isNameSelect.weight}
+                    />
+                    <div css={s.buttonBox}>
+                        <button name={"set"} onClick={(e) => handleValueChange(e, 1)} disabled={!isNameSelect.weight}>
+                            +1
+                        </button>
+                        <button name={"set"} onClick={(e) => handleValueChange(e, 3)} disabled={!isNameSelect.weight}>
+                            +3
+                        </button>
+                        <button name={"set"} onClick={(e) => handleValueChange(e, 5)} disabled={!isNameSelect.weight}>
+                            +5
+                        </button>
+                    </div>
+                </div>
+                <div css={s.inputCard}>
+                    <div css={s.cardTitle}>
+                        <h3>개수 입력</h3>
+                        <button name="count" onClick={(e) => handleValueChange(e, 0)}>
+                            초기화
+                        </button>
+                    </div>
+                    <input
+                        name={"count"}
+                        type="text"
+                        value={workoutOptions.count}
+                        onChange={(e) => handleValueChange(e)}
+                        placeholder="개수 입력"
+                        disabled={!isNameSelect.set}
+                    />
+                    <div css={s.buttonBox}>
+                        <button name={"count"} onClick={(e) => handleValueChange(e, 1)} disabled={!isNameSelect.set}>
+                            +1
+                        </button>
+                        <button name={"count"} onClick={(e) => handleValueChange(e, 8)} disabled={!isNameSelect.set}>
+                            +5
+                        </button>
+                        <button name={"count"} onClick={(e) => handleValueChange(e, 12)} disabled={!isNameSelect.set}>
+                            +10
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div css={s.confirmBox}>
+                <button onClick={handleConfirmClick} disabled={Object.values(isNameSelect).includes(false)}>
+                    <IoIosArrowDown size={"20px"} />
+                </button>
+            </div>
         </>
     );
 }
