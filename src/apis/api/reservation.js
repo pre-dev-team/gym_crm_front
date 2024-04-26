@@ -39,3 +39,8 @@ export const editReservationByUserRequest = async (data) => {
     const response = await instance.put("/reservation/user", data);
     return response;
 };
+
+export const selectMymemberInformationRequest = async (params) => {
+    const response = await instance.get("/reservation/user/information", { params });
+    return response;
+};
