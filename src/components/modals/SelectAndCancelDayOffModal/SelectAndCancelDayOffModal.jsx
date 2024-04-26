@@ -46,10 +46,6 @@ function SelectAndCancelDayOffModal({ accountId }) {
 
     }, [allHolidayList]);
 
-    useEffect(() => {
-        console.log(holidayListDayByDay.sort((a, b) => a.holidayDate - b.holidayDate))
-    }, [modalOpen])
-
     const handleDeleteClick = (date) => {
         if (window.confirm("연차 취소하시겠습니까?")) {
             deleteHolidayMutation.mutate({
@@ -106,7 +102,7 @@ function SelectAndCancelDayOffModal({ accountId }) {
                             </table>
                         </div>
                         <button css={s.modalCloseBtn} onClick={() => setModalOpen(false)}>
-                            모달 닫기
+                            창 닫기
                         </button>
                     </div>
                 </div>

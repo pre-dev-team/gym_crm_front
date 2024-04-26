@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import * as s from "./style";
+import MyMembersModal from '../modals/MyMembersModal/MyMembersModal';
+import * as s from './style';
+import { Link } from 'react-router-dom'; 
 
 function MyMembers({ membersList }) {
     const handleInbodyClick = (id) => {
@@ -11,9 +13,7 @@ function MyMembers({ membersList }) {
                 {membersList.map((member) => (
                     <li key={member.userId} css={s.member}>
                         <p>{member.name}</p>
-                        <button css={s.memeberInfoButton} onClick={() => console.log(membersList)}>
-                            회원정보조회
-                        </button>
+                        <MyMembersModal />
                         <button css={s.memeberInfoButton}>
                             <a onClick={() => handleInbodyClick(member.userId)}>인바디입력</a>
                         </button>
