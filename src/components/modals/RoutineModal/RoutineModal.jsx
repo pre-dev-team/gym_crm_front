@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import WorkoutSelect from "../../MakeRoutine/WorkoutSelect/WorkoutSelect";
 import { useMutation } from "react-query";
 import { userRoutineRequest } from "../../../apis/api/workout";
-import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 
 function RoutineModal({ reservationId }) {
     const [modalOpen, setModalOpen] = useState(false);
@@ -20,7 +19,7 @@ function RoutineModal({ reservationId }) {
         dragOverItem.current = position;
     };
 
-    const drop = (e) => {
+    const drop = () => {
         const copyListItems = [...routineList];
         const dragItemContent = copyListItems[dragItem.current];
         copyListItems.splice(dragItem.current, 1);
@@ -69,8 +68,8 @@ function RoutineModal({ reservationId }) {
                                     css={s.routineCard}
                                     key={index}
                                     draggable={true}
-                                    onDragStart={(e) => dargStart(e, item.index)}
-                                    onDragEnter={(e) => dragEnter(e, item.index)}
+                                    onDragStart={() => dargStart(item.index)}
+                                    onDragEnter={() => dragEnter(item.index)}
                                     onDragEnd={drop}
                                     onDragOver={(e) => e.preventDefault()}
                                 >
@@ -80,12 +79,12 @@ function RoutineModal({ reservationId }) {
                                     </div>
                                     <div css={s.routineInfoBox}>
                                         <div css={s.catrgoryBox}>
-                                            <h4>{item.routine.workout?.label}</h4>
+                                            <h4>{item?.routine.workout?.label}</h4>
                                         </div>
                                         <div css={s.routineDetailBox}>
-                                            <h4>{item.routine.weight}kg</h4>
-                                            <h4>{item.routine.set}set</h4>
-                                            <h4>{item.routine.count}회</h4>
+                                            <h4>{item?.routine.weight}kg</h4>
+                                            <h4>{item?.routine.set}set</h4>
+                                            <h4>{item?.routine.count}회</h4>
                                         </div>
                                     </div>
                                 </li>

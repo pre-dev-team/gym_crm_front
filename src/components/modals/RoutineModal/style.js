@@ -84,7 +84,7 @@ export const workoutImgBox = css`
         font-size: 70px;
         left: 50%;
         transform: translate(-50%, -65%);
-        color: #dbdbdb;
+        color: #dbdbdb88;
     }
 `;
 export const routineInfoBox = css`
