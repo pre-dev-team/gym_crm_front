@@ -3,12 +3,30 @@ import * as s from "./style";
 import Select from "react-select";
 import { useState, useEffect } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-import useWorkouts from "../../../hooks/useWorkouts";
+import useWorkouts from "../../hooks/useWorkouts";
 
-function WorkoutSelect({ setRoutineList }) {
+function WorkoutSelect({ setRoutineList, routineList }) {
     const [workoutOptions, setWorkoutOptions] = useState(s.initialWorkoutOption);
     const [isNameSelect, setIsNameSelect] = useState(s.initialSelectNameState);
     const [workouts, workoutCategories] = useWorkouts(workoutOptions.category.value);
+
+    useEffect(() => {
+        setWorkoutOptions((prev) => {
+            return {
+                ...prev,
+                workout: {
+                    value: 0,
+                    label: "",
+                },
+            };
+        });
+        setIsNameSelect(() => {
+            return {
+                ...s.initialSelectNameState,
+                category: true,
+            };
+        });
+    }, [workoutOptions.category]);
 
     const handleSelectChange = (e, name) => {
         setWorkoutOptions((prev) => {
@@ -33,6 +51,12 @@ function WorkoutSelect({ setRoutineList }) {
                     return {
                         ...prev,
                         [name]: 0,
+                    };
+                });
+                setIsNameSelect((prev) => {
+                    return {
+                        ...prev,
+                        [name]: false,
                     };
                 });
             } else {
@@ -61,6 +85,10 @@ function WorkoutSelect({ setRoutineList }) {
     };
 
     const handleConfirmClick = () => {
+        if (routineList.length === 3) {
+            alert("최대 루틴은 3종류까지 가능합니다");
+            return;
+        }
         setRoutineList((prev) => [...prev, { routine: workoutOptions, index: prev.length }]);
         setWorkoutOptions(() => s.initialWorkoutOption);
         setIsNameSelect(() => s.initialSelectNameState);
@@ -89,7 +117,11 @@ function WorkoutSelect({ setRoutineList }) {
                 <div css={s.inputCard}>
                     <div css={s.cardTitle}>
                         <h3>무게 입력</h3>
-                        <button name="weight" onClick={(e) => handleValueChange(e, 0)}>
+                        <button
+                            name="weight"
+                            onClick={(e) => handleValueChange(e, 0)}
+                            disabled={workoutOptions.weight === 0}
+                        >
                             초기화
                         </button>
                     </div>
@@ -128,7 +160,7 @@ function WorkoutSelect({ setRoutineList }) {
                 <div css={s.inputCard}>
                     <div css={s.cardTitle}>
                         <h3>세트 입력</h3>
-                        <button name="set" onClick={(e) => handleValueChange(e, 0)}>
+                        <button name="set" onClick={(e) => handleValueChange(e, 0)} disabled={workoutOptions.set === 0}>
                             초기화
                         </button>
                     </div>
@@ -155,7 +187,11 @@ function WorkoutSelect({ setRoutineList }) {
                 <div css={s.inputCard}>
                     <div css={s.cardTitle}>
                         <h3>개수 입력</h3>
-                        <button name="count" onClick={(e) => handleValueChange(e, 0)}>
+                        <button
+                            name="count"
+                            onClick={(e) => handleValueChange(e, 0)}
+                            disabled={workoutOptions.count === 0}
+                        >
                             초기화
                         </button>
                     </div>
@@ -171,10 +207,10 @@ function WorkoutSelect({ setRoutineList }) {
                         <button name={"count"} onClick={(e) => handleValueChange(e, 1)} disabled={!isNameSelect.set}>
                             +1
                         </button>
-                        <button name={"count"} onClick={(e) => handleValueChange(e, 8)} disabled={!isNameSelect.set}>
+                        <button name={"count"} onClick={(e) => handleValueChange(e, 5)} disabled={!isNameSelect.set}>
                             +5
                         </button>
-                        <button name={"count"} onClick={(e) => handleValueChange(e, 12)} disabled={!isNameSelect.set}>
+                        <button name={"count"} onClick={(e) => handleValueChange(e, 10)} disabled={!isNameSelect.set}>
                             +10
                         </button>
                     </div>

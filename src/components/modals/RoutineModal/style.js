@@ -16,11 +16,19 @@ export const layout = css`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    position: relative;
     align-items: center;
     padding: 25px;
     width: 70%;
     height: 80%;
     background-color: white;
+    & > span {
+        position: absolute;
+        font-size: 12px;
+        right: 4%;
+        top: 49%;
+        cursor: default;
+    }
 `;
 
 export const btnWrapper = css`
@@ -62,6 +70,9 @@ export const routineCard = css`
     border: 2px solid #dbdbdb;
     padding: 5px;
     margin-right: 5px;
+    &:nth-of-type(1) {
+        margin-left: 5px;
+    }
     cursor: grab;
     &:active:hover {
         cursor: grabbing;
@@ -69,22 +80,32 @@ export const routineCard = css`
 `;
 
 export const workoutImgBox = css`
-    border: 1px solid black;
     border-radius: 50%;
     width: 120px;
     height: 120px;
     margin-bottom: 10px;
     position: relative;
     & > img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 100%;
         overflow: hidden;
     }
     & > h1 {
         position: absolute;
-        font-size: 70px;
+        font-size: 140px;
         left: 50%;
-        transform: translate(-50%, -65%);
-        color: #dbdbdb88;
+        top: 50%;
+        transform: translate(-50%, -100%);
+        color: #dbdbdbab;
+    }
+    & > button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(50%, -30%);
+        width: 60px;
     }
 `;
 export const routineInfoBox = css`
@@ -94,19 +115,28 @@ export const routineInfoBox = css`
 export const catrgoryBox = css`
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 150px;
     height: 20px;
     margin-bottom: 5px;
     font-size: 12px;
 `;
 export const routineDetailBox = css`
     display: flex;
-    width: 100%;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    width: 150px;
+    height: 30px;
+    font-size: 16px;
 `;
 
-export const modalClose = css`
-    position: absolute;
-    right: 166px;
-    bottom: 100px;
+export const buttonBox = css`
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    width: 100%;
+    height: 40px;
+    & > button {
+        width: 180px;
+        height: 30px;
+        cursor: pointer;
+    }
 `;
