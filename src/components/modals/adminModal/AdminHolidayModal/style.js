@@ -7,7 +7,6 @@ export const container = css`
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    transform: tra;
 `;
 
 export const uncheckedBox = css`
@@ -21,14 +20,6 @@ export const uncheckedTable = css`
     & th,
     & td {
         width: 120px;
-    }
-    & th:nth-of-type(1),
-    & td:nth-of-type(1) {
-        width: 70px;
-    }
-    & th:nth-of-type(3),
-    & td:nth-of-type(3) {
-        width: 70px;
     }
 `;
 

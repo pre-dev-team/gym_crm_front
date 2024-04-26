@@ -5,8 +5,8 @@ import useAdminHolidayApis from "../../../../hooks/useAdminHolidayApis";
 import { useMutation } from "react-query";
 import { decideHolidayAppliesRequest } from "../../../../apis/api/admin";
 
-function AdminHolidayModal({ isOpen, setIsAdminHolidayModalOpen }) {
-    const { unconfirmedHolidayApplies, confirmedHolidayApplies } = useAdminHolidayApis();
+function AdminHolidayModal({ isOpen, setIsAdminHolidayModalOpen, clickedTrainerId, setClickedTrainerId }) {
+    const { unconfirmedHolidayApplies, confirmedHolidayApplies } = useAdminHolidayApis(clickedTrainerId);
 
     const decideHolidayAppliesMutation = useMutation({
         mutationFn: decideHolidayAppliesRequest,
@@ -42,7 +42,7 @@ function AdminHolidayModal({ isOpen, setIsAdminHolidayModalOpen }) {
     };
 
     return (
-        <AdminModalLayout isOpen={isOpen} setIsModalOpen={setIsAdminHolidayModalOpen}>
+        <AdminModalLayout isOpen={isOpen} setIsModalOpen={setIsAdminHolidayModalOpen} setValue={setClickedTrainerId}>
             <div css={s.container}>
                 <div css={s.uncheckedBox}>
                     <table css={s.uncheckedTable}>
@@ -60,7 +60,7 @@ function AdminHolidayModal({ isOpen, setIsAdminHolidayModalOpen }) {
                                     <tr key={holiday.holidayId}>
                                         <td>{index + 1}</td>
                                         <td>{holiday.createDate}</td>
-                                        <td>{holiday.trainerName}</td>
+                                        <td>{holiday.name}</td>
                                         <td>{holiday.holidayDate}</td>
                                         <td>
                                             {holiday.startTimeId + 9}:00 ~ {holiday.endTimeId + 9}:00
@@ -96,7 +96,7 @@ function AdminHolidayModal({ isOpen, setIsAdminHolidayModalOpen }) {
                                     <tr key={holiday.holidayId}>
                                         <td>{index + 1}</td>
                                         <td>{holiday.createDate}</td>
-                                        <td>{holiday.trainerName}</td>
+                                        <td>{holiday.name}</td>
                                         <td>{holiday.holidayDate}</td>
                                         <td>
                                             {holiday.startTimeId + 9}:00 ~ {holiday.endTimeId + 9}:00

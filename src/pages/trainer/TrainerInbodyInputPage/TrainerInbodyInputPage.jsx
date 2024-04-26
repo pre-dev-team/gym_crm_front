@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as s from "./style";
 import { useSearchParams } from "react-router-dom";
 import { useMutation } from "react-query";
@@ -11,6 +11,13 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 function TrainerInbodyInputPage() {
     const [searchParams] = useSearchParams();
     const userId = parseInt(searchParams.get("dlsqkel")) - 11;
+
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, []);
 
     const [inbodyInfo, setInbodyInfo] = useState({
         inbodyImage: null,

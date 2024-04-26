@@ -3,7 +3,7 @@ import ReactModal from "react-modal";
 import * as s from "./style";
 ReactModal.setAppElement("#root");
 
-function AdminModalLayout({ children, isOpen, setIsModalOpen }) {
+function AdminModalLayout({ children, isOpen, setIsModalOpen, setValue }) {
     const handleCloseClick = (e) => {
         setIsModalOpen(false);
     };
@@ -18,8 +18,8 @@ function AdminModalLayout({ children, isOpen, setIsModalOpen }) {
                     transform: "translate(-50%, -50%)",
                     top: "50%",
                     left: "50%",
-                    width: "70%",
-                    height: "60%",
+                    width: "840px",
+                    height: "570px",
                 },
             }}
         >

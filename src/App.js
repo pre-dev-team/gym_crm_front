@@ -16,6 +16,7 @@ import { getPrincipalRequest } from "./apis/api/principal";
 import AdminMainPage from "./pages/admin/AdminMainPage/AdminMainPage";
 import TrainerMainPage from "./pages/trainer/TrainerMainPage/TrainerMainPage";
 import TrainerInbodyInputPage from "./pages/trainer/TrainerInbodyInputPage/TrainerInbodyInputPage";
+import AdminTrainerRegisterPage from "./pages/admin/AdminTrainerRegisterPage/AdminTrainerRegisterPage";
 
 function App() {
     const principalQuery = useQuery(["principalQuery"], getPrincipalRequest, {
@@ -35,12 +36,17 @@ function App() {
     return (
         <>
             {isAdmin ? (
-                <AdminRootLayout>
-                    <Routes>
-                        <Route path="/" element={<AdminMainPage />} />
-                        <Route path="admin/*" element={<AdminPage />} />
-                    </Routes>
-                </AdminRootLayout>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <AdminRootLayout>
+                                <AdminMainPage />
+                            </AdminRootLayout>
+                        }
+                    />
+                    <Route path="/admin/register/trainer" element={<AdminTrainerRegisterPage />} />
+                </Routes>
             ) : isTrainer ? (
                 <>
                     <Routes>
