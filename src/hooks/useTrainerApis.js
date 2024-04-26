@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useState } from "react";
+import { useQuery } from "react-query";
 import { getTrainerIdByAccountIdRequest, trainerInfoRequest, trainerMyMembersRequest } from "../apis/api/trainer";
-import { deleteHolidayRequest, selectHolidayRequest } from "../apis/api/holiday";
+import { selectHolidayRequest } from "../apis/api/holiday";
 
 const useTrainerApis = (accountId) => {
     const [membersList, setMembersList] = useState([]);

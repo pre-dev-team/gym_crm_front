@@ -8,7 +8,6 @@ import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useTrainerApis from "../../../hooks/useTrainerApis";
 import DayoffRequest from "../../../components/DayoffRequest/DayoffRequest";
-import { useState } from "react";
 
 function TrainerMainPage(props) {
     const accountId = usePrincipal();
@@ -28,7 +27,7 @@ function TrainerMainPage(props) {
                         </div>
                         <div css={s.myMembersBox}>
                             <div css={s.myMembers}>내 회원들</div>
-                            <MyMembers membersList={membersList} />
+                            <MyMembers membersList={membersList} accountId={accountId}/>
                         </div>
                     </div>
                     <div css={s.todayScheduleBox}>

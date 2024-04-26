@@ -14,3 +14,8 @@ export const addUserInbodyInfoRequest = async (data) => {
     const response = await instance.post("/inbody/add", data);
     return response;
 };
+
+export const getInbodyInformationRequest = async (params) => {
+    const response = await instance.get("/inbody/user/information", { params });
+    return response;
+};

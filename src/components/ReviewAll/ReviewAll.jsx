@@ -19,12 +19,10 @@ function ReviewAll(props) {
         const fetchTopRatedTrainersInformation = async () => {
             try {
                 // Step 1: 상위 3명의 트레이너 정보를 가져옵니다.
-                console.log("Fetching top rated trainers information...");
                 const response = await getTopRatedTrainersInformationRequest(); // API 호출
                 const topRatedTrainers = response.data; // 상위 트레이너 정보
 
                 // Step 2: 각 트레이너의 가장 높은 점수를 가진 리뷰를 선택합니다.
-                console.log("Selecting top reviews for each trainer...");
                 const topReviews = topRatedTrainers.map((trainer) => ({
                     trainerName: trainer.trainerName,
                     trainerProfileImgUrl: trainer.trainerProfileImgUrl,
@@ -33,7 +31,6 @@ function ReviewAll(props) {
                 }));
 
                 // 선택된 리뷰를 상태에 설정
-                console.log("Setting trainer reviews to state...");
                 setTrainerReviews(topReviews);
             } catch (error) {
                 console.log("Error occurred while fetching top rated trainers information:", error);
