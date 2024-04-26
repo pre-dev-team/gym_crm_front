@@ -17,6 +17,7 @@ import AdminMainPage from "./pages/admin/AdminMainPage/AdminMainPage";
 import TrainerMainPage from "./pages/trainer/TrainerMainPage/TrainerMainPage";
 import TrainerInbodyInputPage from "./pages/trainer/TrainerInbodyInputPage/TrainerInbodyInputPage";
 import AdminTrainerRegisterPage from "./pages/admin/AdminTrainerRegisterPage/AdminTrainerRegisterPage";
+import TestModal from "./components/modals/TestModal/TestModal";
 
 function App() {
     const principalQuery = useQuery(["principalQuery"], getPrincipalRequest, {
@@ -81,6 +82,7 @@ function App() {
                 </RootLayout>
             )}
         </>
+        // <TestModal />
     );
 }
 

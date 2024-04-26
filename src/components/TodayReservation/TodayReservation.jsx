@@ -18,7 +18,7 @@ function TodayReservation({ trainerId }) {
         () =>
             getTodayReservationRequest({
                 trainerId: trainerId,
-                today: today
+                today: today,
             }),
         {
             enabled: !!trainerId,
@@ -66,7 +66,7 @@ function TodayReservation({ trainerId }) {
                             <li key={index}>
                                 <p>이름: {reservation.name}</p>
                                 <span>시간: {reservation.timeDuration}</span>
-                                <RoutineModal />
+                                <RoutineModal reservationId={reservation.reservationId} />
                             </li>
                         ))}
                     </ul>
