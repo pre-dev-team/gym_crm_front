@@ -3,7 +3,7 @@ import * as s from "./style";
 import { useRef, useState } from "react";
 import WorkoutSelect from "../../WorkoutSelect/WorkoutSelect";
 import { useMutation } from "react-query";
-import { userRoutineRequest } from "../../../apis/api/workout";
+import { makeRoutineRequest } from "../../../apis/api/workout";
 import { workout } from "../../../assets/workoutImg/workoutImg";
 
 function MakeRoutineModal({ reservationId }) {
@@ -32,10 +32,11 @@ function MakeRoutineModal({ reservationId }) {
 
     const userRoutineMutation = useMutation({
         mutationKey: "userRoutineMutation",
-        mutationFn: userRoutineRequest,
+        mutationFn: makeRoutineRequest,
         retry: 0,
         onSuccess: (response) => {
             alert("등록 완료");
+            handleCloseClick();
         },
         onError: (error) => {
             alert("에러");
