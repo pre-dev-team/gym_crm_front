@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { getConfirmedHolidayAppliesRequest, getUnconfirmedHolidayAppliesRequest } from "../apis/api/admin";
-import { dateFormatter } from "../utils/dateFormatter";
 
 const useAdminHolidayApis = (trainerId) => {
     const [unconfirmedHolidayApplies, setUnconfirmedHolidayApplies] = useState([]);

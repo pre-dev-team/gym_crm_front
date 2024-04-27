@@ -27,11 +27,10 @@ function TrainerMainPage(props) {
                         </div>
                         <div css={s.myMembersBox}>
                             <div css={s.myMembers}>내 회원들</div>
-                            <MyMembers membersList={membersList} accountId={accountId}/>
+                            <MyMembers membersList={membersList} accountId={accountId} />
                         </div>
                     </div>
                     <div css={s.todayScheduleBox}>
-                        <div css={s.todaySchedule}>오늘 일정 및 내일 일정</div>
                         <TodayReservation trainerId={trainerId} />
                     </div>
                 </div>

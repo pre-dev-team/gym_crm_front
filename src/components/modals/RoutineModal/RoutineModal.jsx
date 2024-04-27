@@ -83,7 +83,7 @@ function RoutineModal({ reservationId }) {
         <>
             <div css={s.btnWrapper}>
                 <button css={s.modalOpenBtn} onClick={() => setModalOpen(true)}>
-                    모달 열기
+                    루틴 생성
                 </button>
             </div>
             {modalOpen && (

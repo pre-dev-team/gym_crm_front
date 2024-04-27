@@ -4,11 +4,12 @@ import { useQuery } from "react-query";
 import * as s from "./style";
 import RoutineModal from "../modals/RoutineModal/RoutineModal";
 import { getTodayReservationRequest } from "../../apis/api/reservation";
+import { timeList } from "./time";
 
 function TodayReservation({ trainerId }) {
     const [today, setToday] = useState(new Date());
-    const [reservations, setReservations] = useState([]);
-    const [tomorrowReservation, setTomorrowReservation] = useState([]);
+    const [todayReservations, setTodayReservations] = useState([]);
+    const [tomorrowReservations, setTomorrowReservations] = useState([]);
 
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -25,7 +26,7 @@ function TodayReservation({ trainerId }) {
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
-                setReservations(response.data);
+                setTodayReservations(response.data);
             },
             onError: (error) => {
                 console.log(error);
@@ -45,7 +46,8 @@ function TodayReservation({ trainerId }) {
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
-                setTomorrowReservation(response.data);
+                console.log(response.data);
+                setTomorrowReservations(response.data);
             },
             onError: (error) => {
                 console.log(error);
@@ -55,34 +57,75 @@ function TodayReservation({ trainerId }) {
 
     return (
         <div css={s.layout}>
-            <div css={s.scheduleDiv}>
-                <div css={s.schedule}>오늘 일정</div>
-                <div css={s.schedule}>내일 일정</div>
-            </div>
-            <div css={s.scheduleDiv}>
-                <div css={s.todayContainer}>
-                    <ul css={s.todayBox}>
-                        {reservations.map((reservation, index) => (
-                            <li key={index}>
-                                <p>이름: {reservation.name}</p>
-                                <span>시간: {reservation.timeDuration}</span>
-                                <RoutineModal reservationId={reservation.reservationId} />
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div css={s.tomorrowContainer}>
-                    <ul css={s.tomorrowBox}>
-                        {tomorrowReservation.map((reservation, index) => (
-                            <li key={index}>
-                                <p>이름: {reservation.name}</p>
-                                <span>시간: {reservation.timeDuration}</span>
-                                <RoutineModal />
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
+            <table css={s.table}>
+                <thead css={s.head}>
+                    <tr>
+                        <th rowSpan={2}>시간</th>
+                        <th colSpan={3}>오늘일정</th>
+                        <th colSpan={3}>내일일정</th>
+                    </tr>
+                    <tr>
+                        <th>고객이름</th>
+                        <th>조회버튼</th>
+                        <th>생성버튼</th>
+                        <th>고객이름</th>
+                        <th>조회버튼</th>
+                        <th>생성버튼</th>
+                    </tr>
+                </thead>
+                <tbody css={s.body}>
+                    {timeList.map((time) => {
+                        const reservationTodayThisTime = todayReservations.filter(
+                            (reservation) => reservation.timeId === time.id
+                        );
+                        const isReservedTimeToday = reservationTodayThisTime.length !== 0;
+                        const reservationTommorowThisTime = tomorrowReservations.filter(
+                            (reservation) => reservation.timeId === time.id
+                        );
+                        const isReservedTimeTomorrow = reservationTommorowThisTime.length !== 0;
+                        return (
+                            <tr key={time.id}>
+                                <td>{time.value}</td>
+                                {isReservedTimeToday ? (
+                                    // 오늘 시간대가 예약되었을 때
+                                    <>
+                                        <td>{reservationTodayThisTime[0].name}</td>
+                                        <td>
+                                            <button>루틴조회</button>
+                                        </td>
+                                        <td>
+                                            <RoutineModal />
+                                        </td>
+                                    </>
+                                ) : (
+                                    <>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </>
+                                )}
+                                {isReservedTimeTomorrow ? (
+                                    <>
+                                        <td>{reservationTommorowThisTime[0].name}</td>
+                                        <td>
+                                            <button>루틴조회</button>
+                                        </td>
+                                        <td>
+                                            <RoutineModal />
+                                        </td>
+                                    </>
+                                ) : (
+                                    <>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </>
+                                )}
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
         </div>
     );
 }

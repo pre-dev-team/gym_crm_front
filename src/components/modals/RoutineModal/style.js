@@ -22,11 +22,12 @@ export const layout = css`
     width: 70%;
     height: 80%;
     background-color: white;
+    text-align: start;
     & > span {
         position: absolute;
         font-size: 12px;
         right: 4%;
-        top: 49%;
+        top: 48%;
         cursor: default;
     }
 `;
@@ -39,6 +40,12 @@ export const btnWrapper = css`
 export const modalOpenBtn = css`
     cursor: pointer;
     margin-left: auto;
+    background-color: #dbdbdb;
+    border: none;
+    width: 80px;
+    &:hover {
+        background-color: #cccccc;
+    }
 `;
 
 export const routineCardBox = css`

@@ -3,7 +3,6 @@ import RootLayout from "./components/RootLayout/RootLayout";
 import NavigationButtonBar from "./components/NavigationButtonBar/NavigationButtonBar";
 import MainPage from "./pages/MainPage/MainPage";
 import { Route, Routes } from "react-router-dom";
-import AdminPage from "./pages/admin/AdminPage";
 import UserPage from "./pages/user/UserPage";
 import AuthPage from "./pages/auth/AuthPage";
 import RootHeader from "./components/RootHeader/RootHeader";
@@ -11,13 +10,11 @@ import AdminRootLayout from "./components/AdminRootLayout/AdminRootLayout";
 import { useQuery } from "react-query";
 import TrainerPage from "./pages/trainer/TrainerPage";
 
-import UserMyPage from "./pages/user/UserMyPage/UserMyPage";
 import { getPrincipalRequest } from "./apis/api/principal";
 import AdminMainPage from "./pages/admin/AdminMainPage/AdminMainPage";
 import TrainerMainPage from "./pages/trainer/TrainerMainPage/TrainerMainPage";
 import TrainerInbodyInputPage from "./pages/trainer/TrainerInbodyInputPage/TrainerInbodyInputPage";
 import AdminTrainerRegisterPage from "./pages/admin/AdminTrainerRegisterPage/AdminTrainerRegisterPage";
-import TestModal from "./components/modals/TestModal/TestModal";
 
 function App() {
     const principalQuery = useQuery(["principalQuery"], getPrincipalRequest, {
@@ -82,7 +79,6 @@ function App() {
                 </RootLayout>
             )}
         </>
-        // <TestModal />
     );
 }
 
