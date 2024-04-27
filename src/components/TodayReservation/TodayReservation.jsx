@@ -84,14 +84,14 @@ function TodayReservation({ trainerId }) {
                         );
                         const isReservedTimeTomorrow = reservationTommorowThisTime.length !== 0;
                         return (
-                            <tr key={time.id}>
+                            <tr key={time.id} css={s.tr(isReservedTimeToday, isReservedTimeTomorrow)}>
                                 <td>{time.value}</td>
                                 {isReservedTimeToday ? (
                                     // 오늘 시간대가 예약되었을 때
                                     <>
                                         <td>{reservationTodayThisTime[0].name}</td>
                                         <td>
-                                            <button>루틴조회</button>
+                                            <button>루틴 조회</button>
                                         </td>
                                         <td>
                                             <RoutineModal />
@@ -108,7 +108,7 @@ function TodayReservation({ trainerId }) {
                                     <>
                                         <td>{reservationTommorowThisTime[0].name}</td>
                                         <td>
-                                            <button>루틴조회</button>
+                                            <button>루틴 조회</button>
                                         </td>
                                         <td>
                                             <RoutineModal />

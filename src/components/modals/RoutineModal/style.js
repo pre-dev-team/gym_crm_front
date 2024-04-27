@@ -40,11 +40,11 @@ export const btnWrapper = css`
 export const modalOpenBtn = css`
     cursor: pointer;
     margin-left: auto;
-    background-color: #dbdbdb;
+    background-color: #a5c9ff;
     border: none;
     width: 80px;
     &:hover {
-        background-color: #cccccc;
+        background-color: #65a2ff;
     }
 `;
 
