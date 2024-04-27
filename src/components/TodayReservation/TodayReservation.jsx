@@ -2,9 +2,10 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import * as s from "./style";
-import RoutineModal from "../modals/RoutineModal/RoutineModal";
+import MakeRoutineModal from "../modals/MakeRoutineModal/MakeRoutineModal";
 import { getTodayReservationRequest } from "../../apis/api/reservation";
 import { timeList } from "./time";
+import SelectRoutineModal from "../modals/SelectRoutineModal/SelectRoutineModal";
 
 function TodayReservation({ trainerId }) {
     const [today, setToday] = useState(new Date());
@@ -91,10 +92,14 @@ function TodayReservation({ trainerId }) {
                                     <>
                                         <td>{reservationTodayThisTime[0].name}</td>
                                         <td>
-                                            <button>루틴 조회</button>
+                                            <SelectRoutineModal
+                                                reservationId={reservationTodayThisTime[0].reservationId}
+                                            />
                                         </td>
                                         <td>
-                                            <RoutineModal />
+                                            <MakeRoutineModal
+                                                reservationId={reservationTodayThisTime[0].reservationId}
+                                            />
                                         </td>
                                     </>
                                 ) : (
@@ -108,10 +113,14 @@ function TodayReservation({ trainerId }) {
                                     <>
                                         <td>{reservationTommorowThisTime[0].name}</td>
                                         <td>
-                                            <button>루틴 조회</button>
+                                            <SelectRoutineModal
+                                                reservationId={reservationTommorowThisTime[0].reservationId}
+                                            />
                                         </td>
                                         <td>
-                                            <RoutineModal />
+                                            <MakeRoutineModal
+                                                reservationId={reservationTommorowThisTime[0].reservationId}
+                                            />
                                         </td>
                                     </>
                                 ) : (

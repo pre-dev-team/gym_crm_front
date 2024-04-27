@@ -6,7 +6,7 @@ import { useMutation } from "react-query";
 import { userRoutineRequest } from "../../../apis/api/workout";
 import { workout } from "../../../assets/workoutImg/workoutImg";
 
-function RoutineModal({ reservationId }) {
+function SelectRoutineModal({ reservationId }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [routineList, setRoutineList] = useState([]);
     const dragItem = useRef();
@@ -83,14 +83,12 @@ function RoutineModal({ reservationId }) {
         <>
             <div css={s.btnWrapper}>
                 <button css={s.modalOpenBtn} onClick={() => setModalOpen(true)}>
-                    루틴 생성
+                    루틴 조회
                 </button>
             </div>
             {modalOpen && (
                 <div css={s.background}>
                     <div css={s.layout}>
-                        <WorkoutSelect setRoutineList={setRoutineList} routineList={routineList} />
-                        <span>등록한 카드를 좌우로 드래그하여 순서변경</span>
                         <ul css={s.routineCardBox}>
                             {routineList.map((item, index) => {
                                 return (
@@ -139,4 +137,4 @@ function RoutineModal({ reservationId }) {
     );
 }
 
-export default RoutineModal;
+export default SelectRoutineModal;
