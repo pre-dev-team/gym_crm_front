@@ -1,13 +1,11 @@
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
 
 export const layout = css`
     display: flex;
     margin: 0;
 `;
 
-export const container = css`
-
-`;
+export const container = css``;
 
 export const trainerBox = css`
     display: flex;
@@ -60,7 +58,6 @@ export const myMembers = css`
 export const todayScheduleBox = css`
     box-sizing: border-box;
     margin: 10px;
-    border: 1px solid #939393;
     width: 620px;
     height: 350px;
     background-color: #fafafa;
