@@ -2,13 +2,67 @@
 import * as s from "./style";
 import { useRef, useState } from "react";
 import WorkoutSelect from "../../WorkoutSelect/WorkoutSelect";
-import { useMutation } from "react-query";
-import { makeRoutineRequest } from "../../../apis/api/workout";
+import { useMutation, useQuery } from "react-query";
+import { editRoutineRequest, getRoutineByReservationIdRequest, makeRoutineRequest } from "../../../apis/api/workout";
 import { workout } from "../../../assets/workoutImg/workoutImg";
 
 function SelectRoutineModal({ reservationId }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [routineList, setRoutineList] = useState([]);
+    const handleModalOpenClick = () => {
+        setModalOpen(() => true);
+        getRoutineByReservationIdQuery.refetch();
+    };
+
+    const getRoutineByReservationIdQuery = useQuery(
+        ["getRoutineByReservationIdQuery"],
+        () =>
+            getRoutineByReservationIdRequest({
+                reservationId: reservationId,
+            }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            enabled: false,
+            onSuccess: (response) => {
+                setRoutineList(() =>
+                    response.data.map((res) => {
+                        return {
+                            routineId: res.workoutRoutineId,
+                            index: res.workoutRoutineOrder,
+                            routine: {
+                                category: {
+                                    value: res.workoutCategoryId,
+                                    label: res.workoutCategoryName,
+                                },
+                                workout: {
+                                    value: res.workoutId,
+                                    label: res.workoutName,
+                                },
+                                count: res.workoutRoutineCount,
+                                set: res.workoutRoutineSet,
+                                weight: res.workoutRoutineWeight,
+                            },
+                        };
+                    })
+                );
+            },
+        }
+    );
+
+    const editRoutineMutation = useMutation({
+        mutationKey: "userRoutineMutation",
+        mutationFn: editRoutineRequest,
+        retry: 0,
+        onSuccess: (response) => {
+            alert("등록 완료");
+            handleCloseClick();
+        },
+        onError: (error) => {
+            alert("에러");
+        },
+    });
+
     const dragItem = useRef();
     const dragOverItem = useRef();
 
@@ -30,37 +84,14 @@ function SelectRoutineModal({ reservationId }) {
         setRoutineList(() => copyListItems);
     };
 
-    const userRoutineMutation = useMutation({
-        mutationKey: "userRoutineMutation",
-        mutationFn: makeRoutineRequest,
-        retry: 0,
-        onSuccess: (response) => {
-            alert("등록 완료");
-        },
-        onError: (error) => {
-            alert("에러");
-        },
-    });
-
     const handleDeleteClick = (index) => {
         const copyListItem = [...routineList];
         copyListItem.splice(index, 1);
         setRoutineList(() => copyListItem);
     };
+
     const handleSubmitClick = () => {
-        console.log(
-            routineList.map((workoutRoutine, index) => {
-                return {
-                    reservationId: reservationId,
-                    workoutId: workoutRoutine.routine.workout.value,
-                    workoutRoutineCount: workoutRoutine.routine.count,
-                    workoutRoutineSet: workoutRoutine.routine.set,
-                    workoutRoutineWeight: workoutRoutine.routine.weight,
-                    workoutRoutineOrder: index + 1,
-                };
-            })
-        );
-        userRoutineMutation.mutate(
+        editRoutineMutation.mutate(
             routineList.map((workoutRoutine, index) => {
                 return {
                     reservationId: reservationId,
@@ -82,7 +113,7 @@ function SelectRoutineModal({ reservationId }) {
     return (
         <>
             <div css={s.btnWrapper}>
-                <button css={s.modalOpenBtn} onClick={() => setModalOpen(true)}>
+                <button css={s.modalOpenBtn} onClick={handleModalOpenClick}>
                     루틴 조회
                 </button>
             </div>

@@ -14,3 +14,13 @@ export const makeRoutineRequest = async (data) => {
     const response = await instance.post("/routine/trainer", data);
     return response;
 };
+
+export const editRoutineRequest = async (data) => {
+    const response = await instance.post("/routine/edit", data);
+    return response;
+};
+
+export const getRoutineByReservationIdRequest = async (params) => {
+    const response = await instance.get("/routine/trainer", { params });
+    return response;
+};
