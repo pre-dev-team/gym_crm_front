@@ -8,6 +8,7 @@ import * as s from "./style";
 import MakeRoutineModal from "../modals/MakeRoutineModal/MakeRoutineModal";
 import { selectReservationAllUserRequest } from "../../apis/api/reservation";
 import { useQuery } from "react-query";
+import SelectRoutineModal from "../modals/SelectRoutineModal/SelectRoutineModal";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -41,7 +42,7 @@ function SelectReservationAllUser({ accountId }) {
 
     return (
         <div css={s.layout}>
-            <div>
+            <div css={s.dateBox}>
                 <DatePicker
                     onChange={(date) => setStartDate(() => date)}
                     selected={startDate}
@@ -63,16 +64,28 @@ function SelectReservationAllUser({ accountId }) {
                 <button onClick={() => selectReservationAllUserQuery.refetch()}>검색</button>
             </div>
             <div css={s.selectBox}>
-                <ul css={s.reservationList}>
-                    {reservationList.map((reservation) => (
-                        <li key={reservation.reservationId}>
-                            <p>{reservation.name}</p>
-                            <span>{reservation.reservationDate}</span>
-                            <span>{reservation.timeDuration}</span>
-                            <MakeRoutineModal reservationId={reservation.reservationId} />
-                        </li>
-                    ))}
-                </ul>
+                <table css={s.table}>
+                    {reservationList.map((res) => {
+                        return (
+                            <tbody key={res.reservationId}>
+                                <tr>
+                                    <th rowSpan={2}>{res.name}</th>
+                                    <th>{res.reservationDate}</th>
+                                    <td>
+                                        <SelectRoutineModal reservationId={res.reservationId} />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{res.timeDuration}</th>
+
+                                    <td>
+                                        <MakeRoutineModal reservationId={res.reservationId} />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        );
+                    })}
+                </table>
             </div>
         </div>
     );

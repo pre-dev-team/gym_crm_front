@@ -39,7 +39,8 @@ function MakeRoutineModal({ reservationId }) {
             handleCloseClick();
         },
         onError: (error) => {
-            alert("에러");
+            alert(error.response.data.error);
+            alert("조회하여 수정기능을 이용 하소");
         },
     });
 
