@@ -12,6 +12,7 @@ import {
 import DatePicker from "react-datepicker";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useSchedule from "../../../hooks/useSchedule";
+import { getDayTrainerHolidayRequst } from "../../../apis/api/holiday";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -44,6 +45,23 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId 
                 setReservedTimeIds(() => response.data.map((time) => time.timeId));
             },
             onError: (error) => {},
+            enabled: !!trainerId,
+        }
+    );
+
+    const getDayTrainerHolidayQuery = useQuery(
+        ["getDayTrainerHolidayQuery", selectDate],
+        () =>
+            getDayTrainerHolidayRequst({
+                trainerId: trainerId,
+                holidayDate: selectDate,
+            }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                console.log(response.data);
+            },
             enabled: !!trainerId,
         }
     );
