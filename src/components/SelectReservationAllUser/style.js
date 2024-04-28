@@ -2,31 +2,44 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     box-sizing: border-box;
-    margin: 20px 10px;
-    border: 1px solid black;
-    height: 400px;
+    height: 300px;
+`;
+
+export const dateBox = css`
+    display: flex;
+    justify-content: space-between;
+    height: 35px;
+    padding: 5px;
+    & > button {
+        width: 50px;
+        background-color: #dbdbdb;
+        border: none;
+    }
+    border-bottom: 1px solid #dbdbdb;
 `;
 
 export const selectBox = css`
-   height: 400px;
-   overflow-y: auto;
-
+    height: 360px;
+    overflow-y: auto;
 `;
 
-export const reservationList = css`
-    list-style-type: none;
-    overflow: auto;
-    border: 1px solid #dbdbdb;
-    padding: 15px;
-    height: 200px;
-
-    & > li > p {
-        margin: 0px;
-        padding: 5px;
+export const table = css`
+    border-collapse: collapse;
+    & th,
+    td {
+        border: 1px solid #dbdbdb;
     }
-
-    & > li > span {
-        padding: 5px;
+    & th:nth-of-type(1) {
+        width: 100px;
+    }
+    & th:nth-of-type(2) {
+        width: 140px;
+    }
+    & td {
+        width: 80px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
     }
 `;
 
@@ -42,4 +55,3 @@ export const customButton = css`
     transition: transform 0.3s, box-shadow 0.3s;
     z-index: 5;
 `;
-
