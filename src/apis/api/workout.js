@@ -10,23 +10,17 @@ export const findWorkoutsByWorkoutCategoryId = async (params) => {
     return response;
 };
 
-export const getSetsRequest = async() => {
-    const response = await instance.get("/options/category/sets");
-    return response;
-};
-
-export const getWeightsRequest = async() => {
-    const response = await instance.get("/options/category/weights");
-    return response;
-};
-
-export const getCountsRequest = async() => {
-    const response = await instance.get("/options/category/counts");
-    return response;
-}
-
-
-export const userRoutineRequest = async (data) => {
+export const makeRoutineRequest = async (data) => {
     const response = await instance.post("/routine/trainer", data);
+    return response;
+};
+
+export const editRoutineRequest = async (data) => {
+    const response = await instance.post("/routine/edit", data);
+    return response;
+};
+
+export const getRoutineByReservationIdRequest = async (params) => {
+    const response = await instance.get("/routine/trainer", { params });
     return response;
 };

@@ -51,7 +51,7 @@ const useWorkouts = (categoryId) => {
         },
     });
 
-    return [workouts, workoutCategories];
+    return { workouts, workoutCategories };
 };
 
 export default useWorkouts;

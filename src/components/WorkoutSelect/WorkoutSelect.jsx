@@ -8,7 +8,7 @@ import useWorkouts from "../../hooks/useWorkouts";
 function WorkoutSelect({ setRoutineList, routineList }) {
     const [workoutOptions, setWorkoutOptions] = useState(s.initialWorkoutOption);
     const [isNameSelect, setIsNameSelect] = useState(s.initialSelectNameState);
-    const [workouts, workoutCategories] = useWorkouts(workoutOptions.category.value);
+    const { workouts, workoutCategories } = useWorkouts(workoutOptions.category.value);
 
     useEffect(() => {
         setWorkoutOptions((prev) => {

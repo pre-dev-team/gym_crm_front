@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from 'react';
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
-import RoutineModal from '../modals/RoutineModal/RoutineModal';
-import * as s from './style';
-import { selectReservationAllUserRequest } from '../../apis/api/reservation';
-import { useQuery } from 'react-query';
+import * as s from "./style";
+import MakeRoutineModal from "../modals/MakeRoutineModal/MakeRoutineModal";
+import { selectReservationAllUserRequest } from "../../apis/api/reservation";
+import { useQuery } from "react-query";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -19,7 +19,7 @@ function SelectReservationAllUser({ accountId }) {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [reservationList, setReservationList] = useState([]);
-    
+
     const selectReservationAllUserQuery = useQuery(
         ["selectReservationAllUserQuery"],
         () =>
@@ -33,15 +33,15 @@ function SelectReservationAllUser({ accountId }) {
             refetchOnWindowFocus: false,
             enabled: false,
             onSuccess: (response) => {
-                console.log(response.data)
-                setReservationList(() => response.data)
+                console.log(response.data);
+                setReservationList(() => response.data);
             },
-        }  
+        }
     );
 
     return (
         <div css={s.layout}>
-            <div >
+            <div>
                 <DatePicker
                     onChange={(date) => setStartDate(() => date)}
                     selected={startDate}
@@ -64,12 +64,12 @@ function SelectReservationAllUser({ accountId }) {
             </div>
             <div css={s.selectBox}>
                 <ul css={s.reservationList}>
-                    {reservationList.map(reservation => (
+                    {reservationList.map((reservation) => (
                         <li key={reservation.reservationId}>
                             <p>{reservation.name}</p>
                             <span>{reservation.reservationDate}</span>
                             <span>{reservation.timeDuration}</span>
-                            <RoutineModal reservationId={reservation.reservationId} />
+                            <MakeRoutineModal reservationId={reservation.reservationId} />
                         </li>
                     ))}
                 </ul>
