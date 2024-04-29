@@ -4,11 +4,13 @@ import * as s from "./style";
 import { useQuery } from "react-query";
 import { selectMymemberInformationRequest } from "../../../apis/api/reservation";
 import SelectInbodyModal from "../SelectInbodyModal/SelectInbodyModal";
+import { getInbodyInformationRequest } from "../../../apis/api/inbody";
 
 function MyMembersModal({ accountId, userId }) {
     const [modalOpen, setModalOpen] = useState(false);
     const modalBackground = useRef();
     const [userInformationList, setUserInformationList] = useState([]);
+    const [inbodyInformation, setInbodyInformation] = useState([]);
 
     const userInformationQuery = useQuery(
         ["userInformationQuery", userId],
@@ -20,17 +22,40 @@ function MyMembersModal({ accountId, userId }) {
         {
             retry: 0,
             refetchOnWindowFocus: false,
-            enabled: !!accountId && !!userId,
+            enabled: false,
             onSuccess: response => {
+                console.log(response.data)
                 setUserInformationList(() => response.data);
             }
         }
     );
 
+    const userInbodyQuery = useQuery(
+        ["userInbodyQuery", userId],
+        () =>
+            getInbodyInformationRequest({
+                userId: userId
+            }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            enabled: !!userId,
+            onSuccess: response => {
+                console.log(response.data)
+                setInbodyInformation(response.data);
+            }
+        }
+    );
+
+    const handleModalOpenClick = () => {
+        setModalOpen(() => true);
+        userInformationQuery.refetch();
+    }
+
     return (
         <>
             <div css={s.btnWrapper}>
-                <button css={s.modalOpenBtn} onClick={() => setModalOpen(true)}>
+                <button css={s.modalOpenBtn} onClick={handleModalOpenClick}>
                     회원정보조회
                 </button>
             </div>
@@ -52,7 +77,6 @@ function MyMembersModal({ accountId, userId }) {
                                             <th>시간</th>
                                             <th>이름</th>
                                             <th>전화번호</th>
-                                            <th>인바디 조회</th>
                                         </tr>
                                     </thead>
                                     <tbody css={s.body}>
@@ -63,9 +87,6 @@ function MyMembersModal({ accountId, userId }) {
                                                 <td>{information.timeDuration}</td>
                                                 <td>{information.name}</td>
                                                 <td>{information.phone}</td>
-                                                <td>
-                                                    <button>인바디 조회</button>
-                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -73,25 +94,18 @@ function MyMembersModal({ accountId, userId }) {
                             </div>
                             <div css={s.test}>
                                 <table css={s.table2}>
-                                    <h1>조회시 내용표시</h1>
-
-                                    {/* <thead css={s.head}>
-                                        <tr css={s.tr}>
-                                            <th>번호</th>
-                                            <th>날짜</th>
-                                            <th>시간</th>
-                                            <th>이름</th>
-                                            <th>승인</th>
-                                            <th>연차</th>
-                                        </tr>
-                                    </thead> */}
                                     <tbody>
-                                        <SelectInbodyModal userId={userId} />
+                                        {
+                                            inbodyInformation.map((inbody) => (
+                                                inbody.userId === 0
+                                                ? <h1 css={s.h1}>등록된 인바디가 없습니다.</h1>
+                                                : <SelectInbodyModal inbodyInformation={inbodyInformation} />
+                                            ))
+                                        }
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-
                     </div>
                 </div>
             }

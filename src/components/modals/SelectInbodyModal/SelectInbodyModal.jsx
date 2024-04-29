@@ -4,28 +4,12 @@ import * as s from "./style";
 import { useQuery } from "react-query";
 import { getInbodyInformationRequest } from "../../../apis/api/inbody";
 
-function SelectInbodyModal({userId}) {
-    const [inbodyInformation, setInbodyInformation] = useState("");
+function SelectInbodyModal({ inbodyInformation }) {
 
-    const userInformationQuery = useQuery(
-        ["userInformationQuery", userId],
-        () =>
-            getInbodyInformationRequest({
-                userId: userId
-            }),
-        {
-            retry: 0,
-            refetchOnWindowFocus: false,
-            enabled: !!userId,
-            onSuccess: response => {
-                console.log(response.data);
-                setInbodyInformation(response.data);
-            }
-        }
-    );
 
-    console.log(inbodyInformation)
-
+    const handleInbodyClick = (inbodyUrl) => {
+        window.open(`${inbodyUrl}`, "_blank", " width=768, height=900")
+    }
 
     return (
         <div css={s.test}>
@@ -34,14 +18,23 @@ function SelectInbodyModal({userId}) {
                     <tr css={s.tr}>
                         <th>번호</th>
                         <th>이름</th>
-                        <th>시간</th>
-                        <th>이름</th>
-                        <th>승인</th>
-                        <th>연차</th>
+                        <th>몸무게</th>
+                        <th>근육량</th>
+                        <th>체지방량</th>
+                        <th>인바디</th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    {inbodyInformation.map((inbody, index) => (
+                        <tr css={s.tr2} key={inbody.userId}>
+                            <td>{index + 1}</td>
+                            <td>{inbody.name}</td>
+                            <td>{inbody.weight} Kg</td>
+                            <td>{inbody.muscleMass} Kg</td>
+                            <td>{inbody.fatMass} Kg</td>
+                            <button onClick={() => handleInbodyClick(inbody.inbodyUrl)}>인바디</button>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
