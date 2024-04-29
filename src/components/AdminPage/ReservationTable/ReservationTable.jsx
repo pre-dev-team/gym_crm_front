@@ -13,7 +13,6 @@ function ReservationTable({ reservations }) {
                         <th>시간</th>
                         <th>회원이름</th>
                         <th>담당트레이너</th>
-                        <th>루틴조회</th>
                     </tr>
                 </thead>
                 <tbody css={s.tb}>
@@ -25,9 +24,6 @@ function ReservationTable({ reservations }) {
                                 <td>{reservation.timeDuration}</td>
                                 <td>{reservation.name}</td>
                                 <td>{reservation.trainerName}</td>
-                                <td>
-                                    <button>루틴조회</button>
-                                </td>
                             </tr>
                         );
                     })}

@@ -67,8 +67,11 @@ export const list = css`
     height: 290px;
 `;
 
-export const graphbox = css`
+export const chartBox = css`
     box-sizing: border-box;
-    width: 40%;
-    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    height: 320px;
 `;

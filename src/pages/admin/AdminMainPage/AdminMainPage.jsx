@@ -7,6 +7,7 @@ import ReservationSearch from "../../../components/AdminPage/ReservationSearch/R
 import { useState } from "react";
 import AdminReviewModal from "../../../components/modals/adminModal/AdminReviewModal/AdminReviewModal";
 import AdminHolidayModal from "../../../components/modals/adminModal/AdminHolidayModal/AdminHolidayModal";
+import AdminReservationChart from "../../../components/AdminPage/AdminReservationChart/AdminReservationChart";
 
 function AdminMainPage(props) {
     const [isAdminReviewModalOpen, setIsAdminReviewModalOpen] = useState(false);
@@ -61,7 +62,10 @@ function AdminMainPage(props) {
                         <ReservationSearch />
                     </div>
                 </div>
-                <div css={s.graphbox}>그래프</div>
+                <div css={s.chartBox}>
+                    <div css={s.listName}>예약 현황 차트</div>
+                    <AdminReservationChart />
+                </div>
             </div>
         </div>
     );
