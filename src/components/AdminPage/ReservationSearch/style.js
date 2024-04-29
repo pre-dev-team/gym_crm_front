@@ -8,7 +8,7 @@ export const dateSelectBox = css`
     justify-content: space-between;
 `;
 export const customButton = css`
-    width: 275px;
+    width: 200px;
     height: 35px;
     padding: 5px;
     font-size: 16px;
@@ -26,7 +26,7 @@ export const selectStyle2 = {
         outline: "none",
         padding: "none",
         boxShadow: "none",
-        width: "275px",
+        width: "200px",
     }),
 };
 
@@ -41,7 +41,7 @@ export const selectAndNameInputBox = css`
 
 export const nameInput = css`
     box-sizing: border-box;
-    width: 220px;
+    width: 145px;
     height: 38px;
     outline: none;
     border: 1px solid hsl(0, 0%, 80%);

@@ -32,7 +32,7 @@ export const secoundBox = css`
 
 export const reservationBox = css`
     box-sizing: border-box;
-    width: 60%;
+    width: 45%;
     height: 50%;
 `;
 
@@ -67,8 +67,11 @@ export const list = css`
     height: 290px;
 `;
 
-export const graphbox = css`
+export const chartBox = css`
     box-sizing: border-box;
-    width: 40%;
-    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+    height: 320px;
 `;
