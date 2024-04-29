@@ -7,9 +7,9 @@ function formatDate(date) {
 
 function getWeeksOfMonthObjects(date) {
     var weeks = [];
-    var firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    var firstMonday = new Date(firstDayOfMonth);
-    firstMonday.setDate(firstDayOfMonth.getDate() - firstDayOfMonth.getDay() + 1);
+    var lastDayOfPreviousMonth = new Date(date.getFullYear(), date.getMonth(), 0);
+    var firstMonday = new Date(lastDayOfPreviousMonth);
+    firstMonday.setDate(lastDayOfPreviousMonth.getDate() - lastDayOfPreviousMonth.getDay() + 1);
 
     for (var i = 0; i < 4; i++) {
         var monday = new Date(firstMonday);
