@@ -21,6 +21,6 @@ export const editRoutineRequest = async (data) => {
 };
 
 export const getRoutineByReservationIdRequest = async (params) => {
-    const response = await instance.get("/routine/trainer", { params });
+    const response = await instance.get("/routine/find", { params });
     return response;
 };

@@ -2,9 +2,10 @@
 import { useEffect, useState } from "react";
 import { getUserAllReservationRequest } from "../../apis/api/reservation";
 import * as s from "./style";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { dateFormatter } from "../../utils/dateFormatter";
 import MakeReviewModal from "../modals/MakeReviewModal/MakeReviewModal";
+import UserRoutineModal from "../modals/UserRoutineModal/UserRoutineModal";
 import { getUserReviewRequest } from "../../apis/api/review";
 
 function MypageReservationReview({ accountId }) {
@@ -12,7 +13,9 @@ function MypageReservationReview({ accountId }) {
     const [prevReservations, setPrevReservations] = useState([]);
     const [comingReservations, setComingReservations] = useState([]);
     const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+    const [isRoutineModalOpen, setIsRoutineModalOpen] = useState(false);
     const [clickedTrinerId, setClickedTrainerId] = useState(0);
+    const [clickedReservationId, setClickedReservationId] = useState(0);
     const [reviewedTrainerIds, setReviewedTrainerIds] = useState([]);
 
     useEffect(() => {
@@ -34,6 +37,7 @@ function MypageReservationReview({ accountId }) {
                 setAllUserReservations(() =>
                     response.data.map((res) => {
                         return {
+                            reservationId: res.reservationId,
                             reservationDate: res.reservationDate,
                             trainerId: res.trainerId,
                             trainerName: res.name,
@@ -67,6 +71,11 @@ function MypageReservationReview({ accountId }) {
         setClickedTrainerId(() => trainerId);
     };
 
+    const handleRoutineClick = (reservationId) => {
+        setIsRoutineModalOpen(() => true);
+        setClickedReservationId(() => reservationId);
+    };
+
     return (
         <div css={s.reservationBoard}>
             {isReviewModalOpen ? (
@@ -75,6 +84,15 @@ function MypageReservationReview({ accountId }) {
                     trainerId={clickedTrinerId}
                     setIsReviewModalOpen={setIsReviewModalOpen}
                     isReviewModalOpen={isReviewModalOpen}
+                />
+            ) : (
+                <></>
+            )}
+            {isRoutineModalOpen ? (
+                <UserRoutineModal
+                    setIsModalOpen={setIsRoutineModalOpen}
+                    isModalOpen={isRoutineModalOpen}
+                    clickedReservationId={clickedReservationId}
                 />
             ) : (
                 <></>
@@ -98,7 +116,9 @@ function MypageReservationReview({ accountId }) {
                                     <td>{reservation.timeDuration}</td>
                                     <td>{reservation.trainerName}</td>
                                     <td>
-                                        <button>루틴확인하기</button>
+                                        <button onClick={() => handleRoutineClick(reservation.reservationId)}>
+                                            루틴확인하기
+                                        </button>
                                     </td>
                                 </tr>
                             );
