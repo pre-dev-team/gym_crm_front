@@ -35,7 +35,7 @@ export const deleteTrainerRequest = async (params) => {
     return response;
 };
 
-export const getMonthReservationsCountRequest = async (params) => {
-    const response = await instance.get("/admin/reservations/month/count", { params });
+export const getMonthReservationsCountRequest = async () => {
+    const response = await instance.get("/admin/reservations/month/count");
     return response;
 };
