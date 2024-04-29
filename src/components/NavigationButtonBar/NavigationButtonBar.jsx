@@ -46,7 +46,7 @@ function NavigationButtonBar(props) {
 
     return (
         <div css={s.layout}>
-            <Link css={s.buttonBox} to={isLogin ? "/user/reservation" : "/user/signin"}>
+            <Link css={s.buttonBox} to={isLogin ? "/user/reservation" : "/auth/user/signin"}>
                 <div>
                     <FaCalendarDays />
                 </div>

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import WorkoutSelect from "../../WorkoutSelect/WorkoutSelect";
 import { useMutation, useQuery } from "react-query";
 import { editRoutineRequest, getRoutineByReservationIdRequest } from "../../../apis/api/workout";
@@ -14,6 +14,9 @@ function SelectRoutineModal({ reservationId }) {
         getRoutineByReservationIdQuery.refetch();
     };
 
+    useEffect(() => {
+        console.log(routineList);
+    }, [routineList]);
     const getRoutineByReservationIdQuery = useQuery(
         ["getRoutineByReservationIdQuery"],
         () =>
@@ -29,7 +32,7 @@ function SelectRoutineModal({ reservationId }) {
                     response.data.map((res) => {
                         return {
                             routineId: res.workoutRoutineId,
-                            index: res.workoutRoutineOrder,
+                            index: res.workoutRoutineOrder - 1,
                             routine: {
                                 category: {
                                     value: res.workoutCategoryId,
