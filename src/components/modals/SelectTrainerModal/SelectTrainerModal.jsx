@@ -12,6 +12,7 @@ import {
 import DatePicker from "react-datepicker";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useSchedule from "../../../hooks/useSchedule";
+import { getDayTrainerHolidayRequst } from "../../../apis/api/holiday";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
@@ -24,6 +25,7 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId 
     const [possibleTimes, setPossibleTimes] = useState([]);
     const [selectTimeId, setSelectTimeId] = useState(0);
     const [reservedTimeIds, setReservedTimeIds] = useState([]);
+    const [holidayTimeIds, setHolidayTimeIds] = useState([]);
     const [isClose, setIsClose] = useState(true);
     const accountId = usePrincipal();
     const schedule = useSchedule();
@@ -48,6 +50,23 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId 
         }
     );
 
+    const getDayTrainerHolidayQuery = useQuery(
+        ["getDayTrainerHolidayQuery", selectDate],
+        () =>
+            getDayTrainerHolidayRequst({
+                trainerId: trainerId,
+                holidayDate: selectDate,
+            }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                setHolidayTimeIds(() => response.data);
+            },
+            enabled: !!trainerId,
+        }
+    );
+
     useEffect(() => {
         const today = new Date();
         const isSameDate = today.getDate() === selectDate.getDate();
@@ -56,9 +75,11 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId 
         if (isSameDate && isSameMonth & isSameYear) {
             setPossibleTimes(() => schedule.filter((time) => time.timeId + 9 > new Date().getHours() + 1));
         } else {
-            setPossibleTimes(() => schedule.filter((time) => !reservedTimeIds.includes(time.timeId)));
+            setPossibleTimes(() =>
+                schedule.filter((time) => ![...reservedTimeIds, ...holidayTimeIds].includes(time.timeId))
+            );
         }
-    }, [selectDate, selectTimeId, reservedTimeIds]);
+    }, [selectDate, selectTimeId, reservedTimeIds, holidayTimeIds]);
 
     const handleTimeClick = (timeId) => {
         setSelectTimeId(() => timeId);
