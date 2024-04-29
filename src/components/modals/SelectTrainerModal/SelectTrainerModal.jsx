@@ -25,6 +25,7 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId 
     const [possibleTimes, setPossibleTimes] = useState([]);
     const [selectTimeId, setSelectTimeId] = useState(0);
     const [reservedTimeIds, setReservedTimeIds] = useState([]);
+    const [holidayTimeIds, setHolidayTimeIds] = useState([]);
     const [isClose, setIsClose] = useState(true);
     const accountId = usePrincipal();
     const schedule = useSchedule();
@@ -60,7 +61,7 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId 
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
-                console.log(response.data);
+                setHolidayTimeIds(() => response.data);
             },
             enabled: !!trainerId,
         }
@@ -74,9 +75,11 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId 
         if (isSameDate && isSameMonth & isSameYear) {
             setPossibleTimes(() => schedule.filter((time) => time.timeId + 9 > new Date().getHours() + 1));
         } else {
-            setPossibleTimes(() => schedule.filter((time) => !reservedTimeIds.includes(time.timeId)));
+            setPossibleTimes(() =>
+                schedule.filter((time) => ![...reservedTimeIds, ...holidayTimeIds].includes(time.timeId))
+            );
         }
-    }, [selectDate, selectTimeId, reservedTimeIds]);
+    }, [selectDate, selectTimeId, reservedTimeIds, holidayTimeIds]);
 
     const handleTimeClick = (timeId) => {
         setSelectTimeId(() => timeId);
