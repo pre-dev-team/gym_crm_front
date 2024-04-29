@@ -47,7 +47,6 @@ function TodayReservation({ trainerId }) {
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
-                console.log(response.data);
                 setTomorrowReservations(response.data);
             },
             onError: (error) => {

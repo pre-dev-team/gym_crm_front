@@ -33,7 +33,7 @@ export const modalContent = css`
 export const modalCloseBtn = css`
     cursor: pointer;
     float: right;
-    margin-top: 20px;
+    margin-bottom: 20px;
     margin-left: auto;
 `;
 
@@ -80,4 +80,8 @@ export const body = css`
 export const table2 = css`
     box-sizing: border-box;
     width: 100%;
+`;
+
+export const h1 = css`
+    text-align: center;
 `;
