@@ -92,15 +92,13 @@ function MyMembersModal({ accountId, userId }) {
                                     </tbody>
                                 </table>
                             </div>
-                            <div css={s.test}>
+                            <div css={s.test2}>
                                 <table css={s.table2}>
                                     <tbody>
                                         {
-                                            inbodyInformation.map((inbody) => (
-                                                inbody.userId === 0
+                                            inbodyInformation.length === 0
                                                 ? <h1 css={s.h1}>등록된 인바디가 없습니다.</h1>
                                                 : <SelectInbodyModal inbodyInformation={inbodyInformation} />
-                                            ))
                                         }
                                     </tbody>
                                 </table>
