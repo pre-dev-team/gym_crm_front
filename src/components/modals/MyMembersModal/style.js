@@ -28,12 +28,16 @@ export const modalContent = css`
     width: 700px;
     height: 800px;
     padding: 15px;
+
+    & > h1 {
+        margin-bottom: 0px;
+    }
 `;
 
 export const modalCloseBtn = css`
     cursor: pointer;
     float: right;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-left: auto;
 `;
 
@@ -75,6 +79,14 @@ export const btr = css`
 export const body = css`
     height: 200px;
     text-align: center;
+`;
+
+export const test2 = css`
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-top: none;
+    width: 100%;
+    height: 300px;
 `;
 
 export const table2 = css`

@@ -38,8 +38,7 @@ export const modalCloseBtn = css`
 `;
 
 export const layout = css`
-    margin: auto;
-
+    margin: 0;
 `;
 
 export const table = css`
@@ -50,21 +49,25 @@ export const table = css`
 `;
 
 export const head = css`
-    text-align: center;
+
 `;
 
 export const tr = css`
     font-size: 20px;
+
 `;
 
 export const btr = css`
 
     & > td {
         text-align: center;
+        font-weight: 600;
+        font-size: 16px;
     }
 `;
 
 export const body = css`
+    
 `;
 
 export const searchTypeOption2 = [
