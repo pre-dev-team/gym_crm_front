@@ -9,3 +9,7 @@ export const trainerSignupRequest = async (data) => {
     const response = await instance.post("/auth/trainer/signup", data);
     return response;
 };
+
+export const oAuth2SignupRequest = async(data) => {
+    return await instance.post("/auth/oauth2/signup", data);
+}

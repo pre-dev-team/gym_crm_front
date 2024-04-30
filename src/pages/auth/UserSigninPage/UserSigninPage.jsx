@@ -10,7 +10,11 @@ import kakaoImg from "../../../assets/icons/kakao.png";
 import { useMutation } from "react-query";
 import { SigninRequest } from "../../../apis/api/signin";
 
+
+
 function UserSigninPage(props) {
+
+
     const [username, usernameChange, usernameMessage, setUsername] = useInput();
     const [password, passwordChange, passwordMessage, setPassword] = useInput();
 
@@ -91,13 +95,13 @@ function UserSigninPage(props) {
                         <span>또는</span>
                     </span>
                     <div css={s.oauthBox}>
-                        <Link>
+                        <Link to={"http://localhost:8080/oauth2/authorization/google"}>
                             <img src={googleImg} alt="구글로그인" />
                         </Link>
-                        <Link>
+                        <Link to={"http://localhost:8080/oauth2/authorization/naver"}>
                             <img src={naverImg} alt="네이버로그인" />
                         </Link>
-                        <Link>
+                        <Link to={"http://localhost:8080/oauth2/authorization/kakao"}>
                             <img src={kakaoImg} alt="카카오로그인" />
                         </Link>
                     </div>
