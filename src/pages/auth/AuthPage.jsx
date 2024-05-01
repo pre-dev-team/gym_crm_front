@@ -8,6 +8,7 @@ import OAuth2SignupPage from "../OAuth2SignupPage/OAuth2SignupPage";
 import { useQueryClient } from "react-query";
 import OAuth2SigninPage from "../OAuth2SigninPage/OAuth2SigninPage";
 import OAuth2MergePage from "../OAuth2MergePage/OAuth2MergePage";
+import JoinPresenter from "../../components/JoinPresenter/JoinPresenter";
 
 function AuthPage(props) {
 
@@ -16,6 +17,7 @@ function AuthPage(props) {
             <Route path="/user/signup" element={<UserSignupPage />} />
             <Route path="/user/signin" element={<UserSigninPage />} />
             <Route path="/user/search/username" element={<SearchAccountPage />} />
+            <Route path="/user/agree" element={<JoinPresenter />} />
             <Route path='/oauth2' element={ <OAuth2Page /> } />
             <Route path='/oauth2/signin' element={ <OAuth2SigninPage /> } />
             <Route path='/oauth2/merge' element={<OAuth2MergePage />} />

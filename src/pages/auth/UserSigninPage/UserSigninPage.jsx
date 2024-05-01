@@ -89,7 +89,7 @@ function UserSigninPage(props) {
                         <span css={s.col}></span>
                         <Link>비밀번호찾기</Link>
                         <span css={s.col}></span>
-                        <Link to={"/auth/user/signup"}>회원가입</Link>
+                        <Link to={"/auth/user/agree"}>회원가입</Link>
                     </div>
                     <span css={s.line}>
                         <span>또는</span>
