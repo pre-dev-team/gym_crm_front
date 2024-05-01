@@ -1,5 +1,5 @@
-importScripts("https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js");
+importScripts("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js");
+importScripts("https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js");
 
 const firebaseConfig = {
     apiKey: "AIzaSyC6yZPhk-g7UgUDV5oCIcCXSyTG7ku2ggY",
@@ -21,4 +21,9 @@ messaging.onBackgroundMessage(function (payload) {
     };
 
     self.registration.showNotification(notificationTitle, notificationOptions);
+    const notification = {
+        title: notificationTitle,
+        body: payload.notification.body,
+    };
+    localStorage.setItem("notification", JSON.stringify(notification));
 });
