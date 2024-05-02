@@ -22,34 +22,12 @@ self.addEventListener("activate", function (e) {
     console.log("fcm service worker가 실행되었습니다.");
 });
 
-messaging.onBackgroundMessage(function (payload) {
-    console.log("[firebase-messaging-sw.js] Received background message ", payload);
+messaging.onBackgroundMessage((payload) => {
+    console.log("백그라운드 푸쉬 알림 수신", payload);
     const notificationTitle = payload.notification.title;
     const notificationOptions = {
         body: payload.notification.body,
     };
 
     self.registration.showNotification(notificationTitle, notificationOptions);
-
-    const notification = {
-        title: notificationTitle,
-        body: payload.notification.body,
-    };
-
-    localStorage.setItem("notification", JSON.stringify(notification));
-});
-
-messaging.onMessage(function (payload) {
-    console.log("onMessage: ", payload);
-    const notificationTitle = payload.notification.title;
-    const notificationOptions = {
-        body: payload.notification.body,
-    };
-
-    self.registration.showNotification(notificationTitle, notificationOptions);
-    const notification = {
-        title: notificationTitle,
-        body: payload.notification.body,
-    };
-    localStorage.setItem("notification", JSON.stringify(notification));
 });
