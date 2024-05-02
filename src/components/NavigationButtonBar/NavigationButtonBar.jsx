@@ -10,7 +10,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { useEffect, useState } from "react";
 import { accountInfoAtom } from "../../atoms/accountInfoAtom";
 import { getMyInfoRequest } from "../../apis/api/principal";
-import { requestForFCMToken } from "../../apis/api/firebase/firebaseConfig";
+import { registerServiceWorker, requestForFCMToken } from "../../apis/api/firebase/firebaseConfig";
 
 function NavigationButtonBar(props) {
     const [isLogin, setLogin] = useRecoilState(loginState);
@@ -25,6 +25,7 @@ function NavigationButtonBar(props) {
         setAccountId(() => principalQueryState.data?.data.accountId);
         if (principalQueryState.status === "success") {
             requestForFCMToken();
+            registerServiceWorker();
         }
     }, [principalQueryState.status]);
 

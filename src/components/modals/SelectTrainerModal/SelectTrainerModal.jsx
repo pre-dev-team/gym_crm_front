@@ -73,7 +73,11 @@ function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId 
         const isSameMonth = today.getMonth() === selectDate.getMonth();
         const isSameYear = today.getFullYear() === selectDate.getFullYear();
         if (isSameDate && isSameMonth & isSameYear) {
-            setPossibleTimes(() => schedule.filter((time) => time.timeId + 9 > new Date().getHours() + 1));
+            setPossibleTimes(() =>
+                schedule
+                    .filter((time) => time.timeId + 9 > new Date().getHours() + 1)
+                    .filter((time) => ![...reservedTimeIds, ...holidayTimeIds].includes(time.timeId))
+            );
         } else {
             setPossibleTimes(() =>
                 schedule.filter((time) => ![...reservedTimeIds, ...holidayTimeIds].includes(time.timeId))
