@@ -21,6 +21,9 @@ export const signupBox = css`
     }
 `;
 
+export const listBox = css`
+    margin-top: 30px;
+`;
 
 export const inputBox = css`
     margin-bottom: 10px;
@@ -37,4 +40,7 @@ export const btnPrimary = css`
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+`;
+export const selectHeader = css`
+    cursor: pointer;
 `;
