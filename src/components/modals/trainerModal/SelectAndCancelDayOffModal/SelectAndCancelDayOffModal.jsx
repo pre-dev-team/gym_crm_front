@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useRef, useState } from "react";
 import * as s from "./style";
-import useTrainerApis from "../../../hooks/useTrainerApis";
+import useTrainerApis from "../../../../hooks/useTrainerApis";
 import { useMutation } from "react-query";
-import { deleteHolidayRequest } from "../../../apis/api/holiday";
+import { deleteHolidayRequest } from "../../../../apis/api/holiday";
 
 function SelectAndCancelDayOffModal({ accountId }) {
     const [modalOpen, setModalOpen] = useState(false);
@@ -15,14 +15,14 @@ function SelectAndCancelDayOffModal({ accountId }) {
         mutationKey: "deleteHolidayMutation",
         mutationFn: deleteHolidayRequest,
         retry: 0,
-        onSuccess: response => {
+        onSuccess: (response) => {
             alert("취소되었습니다");
-            window.location.replace("/")
+            window.location.replace("/");
         },
-        error: error => {
-            console.log(error.response.data)
-        }
-    })
+        error: (error) => {
+            console.log(error.response.data);
+        },
+    });
 
     useEffect(() => {
         const groupByDate = allHolidayList.reduce((groups, holiday) => {
@@ -34,29 +34,30 @@ function SelectAndCancelDayOffModal({ accountId }) {
             return groups;
         }, {});
 
-        setHolidayListDayByDay(() => Object.keys(groupByDate).map(date => {
-            return {
-                holidayDate: date,
-                startTimeId: groupByDate[date][0]["timeId"],
-                endTimeId: groupByDate[date][groupByDate[date].length - 1]["timeId"],
-                name: groupByDate[date][0]["name"],
-                confirm: groupByDate[date][0]["confirm"]
-            }
-        }).sort((a, b) => new Date(b.holidayDate) - new Date(a.holidayDate)))
-
+        setHolidayListDayByDay(() =>
+            Object.keys(groupByDate)
+                .map((date) => {
+                    return {
+                        holidayDate: date,
+                        startTimeId: groupByDate[date][0]["timeId"],
+                        endTimeId: groupByDate[date][groupByDate[date].length - 1]["timeId"],
+                        name: groupByDate[date][0]["name"],
+                        confirm: groupByDate[date][0]["confirm"],
+                    };
+                })
+                .sort((a, b) => new Date(b.holidayDate) - new Date(a.holidayDate))
+        );
     }, [allHolidayList]);
 
     const handleDeleteClick = (date) => {
         if (window.confirm("연차 취소하시겠습니까?")) {
             deleteHolidayMutation.mutate({
                 accountId: accountId,
-                holidayDate: date
-            })
-
+                holidayDate: date,
+            });
         } else {
-
         }
-    }
+    };
 
     return (
         <>
@@ -65,8 +66,7 @@ function SelectAndCancelDayOffModal({ accountId }) {
                     연차 조회
                 </button>
             </div>
-            {
-                modalOpen &&
+            {modalOpen && (
                 <div css={s.modalContainer} ref={modalBackground}>
                     <div css={s.modalContent}>
                         <h1>연차 조회</h1>
@@ -87,14 +87,24 @@ function SelectAndCancelDayOffModal({ accountId }) {
                                         <tr key={index} css={s.btr}>
                                             <td>{index + 1}</td>
                                             <td>{holiday.holidayDate}</td>
-                                            <td>{holiday.startTimeId + 10}:00 ~ {holiday.endTimeId + 10}:00</td>
+                                            <td>
+                                                {holiday.startTimeId + 10}:00 ~ {holiday.endTimeId + 10}:00
+                                            </td>
                                             <td>{holiday.name}</td>
-                                            <td>{s.searchTypeOption2.find(option => option.value === holiday.confirm).label}</td>
+                                            <td>
+                                                {
+                                                    s.searchTypeOption2.find(
+                                                        (option) => option.value === holiday.confirm
+                                                    ).label
+                                                }
+                                            </td>
                                             <td>
                                                 <button
                                                     onClick={() => handleDeleteClick(holiday.holidayDate)}
                                                     disabled={holiday.confirm !== 0}
-                                                >연차 취소</button>
+                                                >
+                                                    연차 취소
+                                                </button>
                                             </td>
                                         </tr>
                                     ))}
@@ -106,7 +116,7 @@ function SelectAndCancelDayOffModal({ accountId }) {
                         </button>
                     </div>
                 </div>
-            }
+            )}
         </>
     );
 }

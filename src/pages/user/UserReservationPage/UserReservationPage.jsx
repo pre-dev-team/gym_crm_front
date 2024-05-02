@@ -7,7 +7,7 @@ import "dayjs/locale/ko";
 import { useQuery } from "react-query";
 import { getTrainersRequest } from "../../../apis/api/trainer";
 import TrainerCardForReservation from "../../../components/user/TrainerCardForReservation/TrainerCardForReservation";
-import SelectTrainerModal from "../../../components/modals/SelectTrainerModal/SelectTrainerModal";
+import SelectTrainerModal from "../../../components/modals/userModal/SelectTrainerModal/SelectTrainerModal";
 import { useSearchParams } from "react-router-dom";
 
 function UserReservationPage(props) {

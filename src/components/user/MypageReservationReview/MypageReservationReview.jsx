@@ -4,7 +4,7 @@ import { getUserAllReservationRequest } from "../../../apis/api/reservation";
 import * as s from "./style";
 import { useQuery } from "react-query";
 import { dateFormatter } from "../../../utils/dateFormatter";
-import MakeReviewModal from "../../modals/MakeReviewModal/MakeReviewModal";
+import MakeReviewModal from "../../modals/userModal/MakeReviewModal/MakeReviewModal";
 import UserRoutineModal from "../../modals/userModal/UserRoutineModal/UserRoutineModal";
 import { getUserReviewRequest } from "../../../apis/api/review";
 

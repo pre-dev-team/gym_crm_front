@@ -10,7 +10,7 @@ import useTrainerApis from "../../../hooks/useTrainerApis";
 import DayoffRequest from "../../../components/trainer/DayoffRequest/DayoffRequest";
 import AdminRootLayout from "../../../components/layouts/AdminRootLayout/AdminRootLayout";
 import { useState } from "react";
-import EditPasswordModal from "../../../components/modals/EditPasswordModal/EditPasswordModal";
+import EditPasswordModal from "../../../components/modals/userModal/EditPasswordModal/EditPasswordModal";
 import { accountInfoAtom } from "../../../atoms/accountInfoAtom";
 import { useRecoilState } from "recoil";
 import { FaChevronRight } from "react-icons/fa";

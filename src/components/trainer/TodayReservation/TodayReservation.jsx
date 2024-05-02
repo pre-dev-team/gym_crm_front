@@ -2,10 +2,10 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import * as s from "./style";
-import MakeRoutineModal from "../../modals/MakeRoutineModal/MakeRoutineModal";
+import MakeRoutineModal from "../../modals/trainerModal/MakeRoutineModal/MakeRoutineModal";
 import { getTodayReservationRequest } from "../../../apis/api/reservation";
 import { timeList } from "./time";
-import SelectRoutineModal from "../../modals/SelectRoutineModal/SelectRoutineModal";
+import SelectRoutineModal from "../../modals/trainerModal/SelectRoutineModal/SelectRoutineModal";
 
 function TodayReservation({ trainerId }) {
     const [today, setToday] = useState(new Date());

@@ -8,7 +8,7 @@ import ko from "date-fns/locale/ko";
 import ReactSelect from "react-select";
 import { useMutation } from "react-query";
 import { trainerHolidayRequest } from "../../../apis/api/holiday";
-import SelectAndCancelDayOffModal from "../../modals/SelectAndCancelDayOffModal/SelectAndCancelDayOffModal";
+import SelectAndCancelDayOffModal from "../../modals/trainerModal/SelectAndCancelDayOffModal/SelectAndCancelDayOffModal";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>

@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from "react";
-import StarScore from "../../common/StarScore/StarScore";
+import StarScore from "../../../common/StarScore/StarScore";
 import * as s from "./style";
 import { motion } from "framer-motion";
 import { useMutation } from "react-query";
-import { userReviewRequest } from "../../../apis/api/review";
+import { userReviewRequest } from "../../../../apis/api/review";
 
 function MakeReviewModal({ accountId, trainerId, isReviewModalOpen, setIsReviewModalOpen }) {
     const [score, setScore] = useState(0);

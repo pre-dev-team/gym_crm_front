@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import * as s from "./style";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { getUserInbodyRequest } from "../../../apis/api/inbody";
+import { useEffect, useState } from "react";
+import { getUserInbodyRequest } from "../../../../apis/api/inbody";
 import { useNavigate } from "react-router-dom";
 
 function UserInbodyModal({ accountId, isInbodyModalOpen, setIsInbodyModalOpen }) {

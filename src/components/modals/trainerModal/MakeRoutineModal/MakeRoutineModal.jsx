@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useRef, useState } from "react";
-import WorkoutSelect from "../../trainer/WorkoutSelect/WorkoutSelect";
+import WorkoutSelect from "../../../trainer/WorkoutSelect/WorkoutSelect";
 import { useMutation } from "react-query";
-import { makeRoutineRequest } from "../../../apis/api/workout";
-import { workout } from "../../../assets/workoutImg/workoutImg";
+import { makeRoutineRequest } from "../../../../apis/api/workout";
+import { workout } from "../../../../assets/workoutImg/workoutImg";
 
 function MakeRoutineModal({ reservationId }) {
     const [modalOpen, setModalOpen] = useState(false);

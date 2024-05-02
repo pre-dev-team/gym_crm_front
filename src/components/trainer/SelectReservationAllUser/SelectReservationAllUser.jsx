@@ -5,10 +5,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
 import ko from "date-fns/locale/ko";
 import * as s from "./style";
-import MakeRoutineModal from "../../modals/MakeRoutineModal/MakeRoutineModal";
+import MakeRoutineModal from "../../modals/trainerModal/MakeRoutineModal/MakeRoutineModal";
 import { selectReservationAllUserRequest } from "../../../apis/api/reservation";
 import { useQuery } from "react-query";
-import SelectRoutineModal from "../../modals/SelectRoutineModal/SelectRoutineModal";
+import SelectRoutineModal from "../../modals/trainerModal/SelectRoutineModal/SelectRoutineModal";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>

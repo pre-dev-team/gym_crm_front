@@ -8,11 +8,11 @@ import {
     editReservationByUserRequest,
     getDayReservationRequest,
     userReservationRequest,
-} from "../../../apis/api/reservation";
+} from "../../../../apis/api/reservation";
 import DatePicker from "react-datepicker";
-import usePrincipal from "../../../hooks/usePrincipal";
-import useSchedule from "../../../hooks/useSchedule";
-import { getDayTrainerHolidayRequst } from "../../../apis/api/holiday";
+import usePrincipal from "../../../../hooks/usePrincipal";
+import useSchedule from "../../../../hooks/useSchedule";
+import { getDayTrainerHolidayRequst } from "../../../../apis/api/holiday";
 
 const CustomInput = ({ value, onClick }) => (
     <button css={s.customButton} onClick={onClick}>
