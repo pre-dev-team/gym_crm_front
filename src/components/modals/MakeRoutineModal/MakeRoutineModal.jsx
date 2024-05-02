@@ -28,6 +28,7 @@ function MakeRoutineModal({ reservationId }) {
         dragItem.current = null;
         dragOverItem.current = null;
         setRoutineList(() => copyListItems);
+        console.log(routineList);
     };
 
     const userRoutineMutation = useMutation({
@@ -48,7 +49,9 @@ function MakeRoutineModal({ reservationId }) {
         const copyListItem = [...routineList];
         copyListItem.splice(index, 1);
         setRoutineList(() => copyListItem);
+        console.log(routineList);
     };
+
     const handleSubmitClick = () => {
         console.log(
             routineList.map((workoutRoutine, index) => {
@@ -100,8 +103,8 @@ function MakeRoutineModal({ reservationId }) {
                                         css={s.routineCard}
                                         key={index}
                                         draggable={true}
-                                        onDragStart={() => dargStart(item.index)}
-                                        onDragEnter={() => dragEnter(item.index)}
+                                        onDragStart={() => dargStart(index)}
+                                        onDragEnter={() => dragEnter(index)}
                                         onDragEnd={drop}
                                         onDragOver={(e) => e.preventDefault()}
                                     >
