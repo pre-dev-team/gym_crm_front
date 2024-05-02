@@ -27,7 +27,7 @@ export const profileInfo = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 
   & > div {
     padding: 5px;
