@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import MyMembersModal from "../../modals/MyMembersModal/MyMembersModal";
+import MyMembersModal from "../../modals/trainerModal/MyMembersModal/MyMembersModal";
 import * as s from "./style";
 
 function MyMembers({ membersList, accountId }) {

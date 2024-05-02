@@ -2,14 +2,12 @@
 import { useRef, useState } from "react";
 import * as s from "./style";
 import { useQuery } from "react-query";
-import { getInbodyInformationRequest } from "../../../apis/api/inbody";
+import { getInbodyInformationRequest } from "../../../../apis/api/inbody";
 
 function SelectInbodyModal({ inbodyInformation }) {
-
-
     const handleInbodyClick = (inbodyUrl) => {
-        window.open(`${inbodyUrl}`, "_blank", " width=768, height=900")
-    }
+        window.open(`${inbodyUrl}`, "_blank", " width=768, height=900");
+    };
 
     return (
         <div css={s.test}>

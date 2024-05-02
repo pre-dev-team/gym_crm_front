@@ -3,10 +3,10 @@ import { useMutation, useQuery } from "react-query";
 import * as s from "./style";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { getUserInbodyRequest } from "../../../apis/api/inbody";
+import { getUserInbodyRequest } from "../../../../apis/api/inbody";
 import { useNavigate } from "react-router-dom";
-import { workout } from "../../../assets/workoutImg/workoutImg";
-import { getRoutineByReservationIdRequest } from "../../../apis/api/workout";
+import { workout } from "../../../../assets/workoutImg/workoutImg";
+import { getRoutineByReservationIdRequest } from "../../../../apis/api/workout";
 
 function UserRoutineModal({ isModalOpen, setIsModalOpen, clickedReservationId }) {
     const [routines, setRoutines] = useState([]);

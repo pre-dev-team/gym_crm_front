@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useEffect, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import ko from "date-fns/locale/ko";
 import { motion } from "framer-motion";
 import {
@@ -20,7 +20,7 @@ const CustomInput = ({ value, onClick }) => (
     </button>
 );
 
-function SelectTrainerModal({ trainerId, isClick, setIsClick, prevReservationId }) {
+function SelectTrainerModal({ trainerId, setIsClick, prevReservationId }) {
     const [selectDate, setSelectDate] = useState(new Date());
     const [possibleTimes, setPossibleTimes] = useState([]);
     const [selectTimeId, setSelectTimeId] = useState(0);

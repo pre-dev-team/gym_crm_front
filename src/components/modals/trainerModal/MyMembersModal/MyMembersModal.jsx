@@ -2,9 +2,9 @@
 import { useEffect, useRef, useState } from "react";
 import * as s from "./style";
 import { useQuery } from "react-query";
-import { selectMymemberInformationRequest } from "../../../apis/api/reservation";
+import { selectMymemberInformationRequest } from "../../../../apis/api/reservation";
 import SelectInbodyModal from "../SelectInbodyModal/SelectInbodyModal";
-import { getInbodyInformationRequest } from "../../../apis/api/inbody";
+import { getInbodyInformationRequest } from "../../../../apis/api/inbody";
 
 function MyMembersModal({ accountId, userId }) {
     const [modalOpen, setModalOpen] = useState(false);
@@ -17,16 +17,16 @@ function MyMembersModal({ accountId, userId }) {
         () =>
             selectMymemberInformationRequest({
                 accountId: accountId,
-                userId: userId
+                userId: userId,
             }),
         {
             retry: 0,
             refetchOnWindowFocus: false,
             enabled: false,
-            onSuccess: response => {
-                console.log(response.data)
+            onSuccess: (response) => {
+                console.log(response.data);
                 setUserInformationList(() => response.data);
-            }
+            },
         }
     );
 
@@ -34,23 +34,23 @@ function MyMembersModal({ accountId, userId }) {
         ["userInbodyQuery", userId],
         () =>
             getInbodyInformationRequest({
-                userId: userId
+                userId: userId,
             }),
         {
             retry: 0,
             refetchOnWindowFocus: false,
             enabled: !!userId,
-            onSuccess: response => {
-                console.log(response.data)
+            onSuccess: (response) => {
+                console.log(response.data);
                 setInbodyInformation(response.data);
-            }
+            },
         }
     );
 
     const handleModalOpenClick = () => {
         setModalOpen(() => true);
         userInformationQuery.refetch();
-    }
+    };
 
     return (
         <>
@@ -59,8 +59,7 @@ function MyMembersModal({ accountId, userId }) {
                     회원정보조회
                 </button>
             </div>
-            {
-                modalOpen &&
+            {modalOpen && (
                 <div css={s.modalContainer} ref={modalBackground}>
                     <div css={s.modalContent}>
                         <h1>회원 정보 조회</h1>
@@ -95,18 +94,18 @@ function MyMembersModal({ accountId, userId }) {
                             <div css={s.test2}>
                                 <table css={s.table2}>
                                     <tbody>
-                                        {
-                                            inbodyInformation.length === 0
-                                                ? <h1 css={s.h1}>등록된 인바디가 없습니다.</h1>
-                                                : <SelectInbodyModal inbodyInformation={inbodyInformation} />
-                                        }
+                                        {inbodyInformation.length === 0 ? (
+                                            <h1 css={s.h1}>등록된 인바디가 없습니다.</h1>
+                                        ) : (
+                                            <SelectInbodyModal inbodyInformation={inbodyInformation} />
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            }
+            )}
         </>
     );
 }
