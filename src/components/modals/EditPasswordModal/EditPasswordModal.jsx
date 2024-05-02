@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { useMutation } from "react-query";
 import useInput from "../../../hooks/useInput";
-import InputWithMessagebox from "../../InputWithMessageBox/InputWithMessagebox";
+import InputWithMessagebox from "../../auth/InputWithMessageBox/InputWithMessagebox";
 import * as s from "./style";
 import { motion } from "framer-motion";
 
 import { editUserPasswordRequest } from "../../../apis/api/account";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function EditPasswordModal({ accountId, isPasswordModalOpen, setIsPasswordModalOpen }) {
     const [prevPassword, handlePrevPasswordChange, prevPasswordMessage] = useInput();

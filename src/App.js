@@ -1,11 +1,11 @@
 import "./App.css";
-import RootLayout from "./components/RootLayout/RootLayout";
-import NavigationButtonBar from "./components/NavigationButtonBar/NavigationButtonBar";
+import RootLayout from "./components/layouts/RootLayout/RootLayout";
+import NavigationButtonBar from "./components/layouts/NavigationButtonBar/NavigationButtonBar";
 import MainPage from "./pages/MainPage/MainPage";
 import { Route, Routes } from "react-router-dom";
 import UserPage from "./pages/user/UserPage";
 import AuthPage from "./pages/auth/AuthPage";
-import RootHeader from "./components/RootHeader/RootHeader";
+import RootHeader from "./components/layouts/RootHeader/RootHeader";
 import { useQuery } from "react-query";
 import { getPrincipalRequest } from "./apis/api/principal";
 import AdminMainPage from "./pages/admin/AdminMainPage/AdminMainPage";

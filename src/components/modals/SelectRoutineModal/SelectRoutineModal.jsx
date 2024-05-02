@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useEffect, useRef, useState } from "react";
-import WorkoutSelect from "../../WorkoutSelect/WorkoutSelect";
+import WorkoutSelect from "../../trainer/WorkoutSelect/WorkoutSelect";
 import { useMutation, useQuery } from "react-query";
 import { editRoutineRequest, getRoutineByReservationIdRequest } from "../../../apis/api/workout";
 import { workout } from "../../../assets/workoutImg/workoutImg";

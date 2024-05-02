@@ -1,26 +1,25 @@
 /** @jsxImportSource @emotion/react */
 import "react-datepicker/dist/react-datepicker.css";
 import * as s from "./style";
-import MyMembers from "../../../components/MyMembers/MyMembers";
-import TodayReservation from "../../../components/TodayReservation/TodayReservation";
-import SelectReservationAllUser from "../../../components/SelectReservationAllUser/SelectReservationAllUser";
-import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
+import MyMembers from "../../../components/trainer/MyMembers/MyMembers";
+import TodayReservation from "../../../components/trainer/TodayReservation/TodayReservation";
+import SelectReservationAllUser from "../../../components/trainer/SelectReservationAllUser/SelectReservationAllUser";
+import TrainerProfile from "../../../components/trainer/TrainerProfile/TrainerProflie";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useTrainerApis from "../../../hooks/useTrainerApis";
-import DayoffRequest from "../../../components/DayoffRequest/DayoffRequest";
-import AdminRootLayout from "../../../components/AdminRootLayout/AdminRootLayout";
+import DayoffRequest from "../../../components/trainer/DayoffRequest/DayoffRequest";
+import AdminRootLayout from "../../../components/layouts/AdminRootLayout/AdminRootLayout";
 import { useState } from "react";
 import EditPasswordModal from "../../../components/modals/EditPasswordModal/EditPasswordModal";
 import { accountInfoAtom } from "../../../atoms/accountInfoAtom";
 import { useRecoilState } from "recoil";
 import { FaChevronRight } from "react-icons/fa";
 
-
 function TrainerMainPage(props) {
     const accountId = usePrincipal();
     const { trainerId, trainerProfile, setTrainerProfile, membersList } = useTrainerApis(accountId);
     const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
-    const [accountInfo, setAccountInfo] = useRecoilState(accountInfoAtom);
+    const [accountInfo] = useRecoilState(accountInfoAtom);
 
     console.log(accountInfo);
 
@@ -32,18 +31,18 @@ function TrainerMainPage(props) {
                         <div css={s.trainerProfileBox}>
                             <div css={s.trainer}>트레이너 정보</div>
                             {isPasswordModalOpen ? (
-                <EditPasswordModal
-                    accountId={accountInfo.accountId}
-                    isPasswordModalOpen={isPasswordModalOpen}
-                    setIsPasswordModalOpen={setIsPasswordModalOpen}
-                />
-            ) : (
-                <></>
-            )}
+                                <EditPasswordModal
+                                    accountId={accountInfo.accountId}
+                                    isPasswordModalOpen={isPasswordModalOpen}
+                                    setIsPasswordModalOpen={setIsPasswordModalOpen}
+                                />
+                            ) : (
+                                <></>
+                            )}
                             <button onClick={() => setIsPasswordModalOpen(() => true)}>
-                            <FaChevronRight fontSize={"10px"} />
-                            비밀번호 변경
-                        </button>
+                                <FaChevronRight fontSize={"10px"} />
+                                비밀번호 변경
+                            </button>
                             <TrainerProfile
                                 trainerProfile={trainerProfile}
                                 setTrainerProfile={setTrainerProfile}

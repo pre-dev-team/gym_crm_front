@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import * as s from "./style";
 import { useRecoilState } from "recoil";
 import { accountInfoAtom } from "../../../atoms/accountInfoAtom";
-import MypageReservationReview from "../../../components/MypageReservationReview/MypageReservationReview";
+import MypageReservationReview from "../../../components/user/MypageReservationReview/MypageReservationReview";
 import { motion } from "framer-motion";
 import { FaChevronRight } from "react-icons/fa6";
 import EditPasswordModal from "../../../components/modals/EditPasswordModal/EditPasswordModal";

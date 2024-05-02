@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import * as s from "./style";
 import { motion } from "framer-motion";
-import InputWithMessagebox from "../../../components/InputWithMessageBox/InputWithMessagebox";
+import InputWithMessagebox from "../../../components/auth/InputWithMessageBox/InputWithMessagebox";
 import useInput from "../../../hooks/useInput";
 import googleImg from "../../../assets/icons/google.png";
 import naverImg from "../../../assets/icons/naver.png";
@@ -10,11 +10,7 @@ import kakaoImg from "../../../assets/icons/kakao.png";
 import { useMutation } from "react-query";
 import { SigninRequest } from "../../../apis/api/signin";
 
-
-
 function UserSigninPage(props) {
-
-
     const [username, usernameChange, usernameMessage, setUsername] = useInput();
     const [password, passwordChange, passwordMessage, setPassword] = useInput();
 
