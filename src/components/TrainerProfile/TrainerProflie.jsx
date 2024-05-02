@@ -70,9 +70,9 @@ function TrainerProfile({ trainerProfile, setTrainerProfile, accountId }) {
                     <img src={trainerProfileImgUrl} alt="Trainer Profile" />
                 </div>
                 <div css={s.profileInfo}>
-                    <div>아이디: {name}</div>
-                    <div>전화번호: {phone}</div>
-                    <div>이메일: {email}</div>
+                    <div>{name}</div>
+                    <div>{phone}</div>
+                    <div>{email}</div>
                 </div>
             </div>
         </div>
