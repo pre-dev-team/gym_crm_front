@@ -8,17 +8,42 @@ import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useTrainerApis from "../../../hooks/useTrainerApis";
 import DayoffRequest from "../../../components/DayoffRequest/DayoffRequest";
+import AdminRootLayout from "../../../components/AdminRootLayout/AdminRootLayout";
+import { useState } from "react";
+import EditPasswordModal from "../../../components/modals/EditPasswordModal/EditPasswordModal";
+import { accountInfoAtom } from "../../../atoms/accountInfoAtom";
+import { useRecoilState } from "recoil";
+import { FaChevronRight } from "react-icons/fa";
+
 
 function TrainerMainPage(props) {
     const accountId = usePrincipal();
     const { trainerId, trainerProfile, setTrainerProfile, membersList } = useTrainerApis(accountId);
+    const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+    const [accountInfo, setAccountInfo] = useRecoilState(accountInfoAtom);
+
+    console.log(accountInfo);
+
     return (
-        <>
+        <AdminRootLayout>
             <div css={s.layout}>
                 <div css={s.container}>
                     <div css={s.trainerBox}>
                         <div css={s.trainerProfileBox}>
                             <div css={s.trainer}>트레이너 정보</div>
+                            {isPasswordModalOpen ? (
+                <EditPasswordModal
+                    accountId={accountInfo.accountId}
+                    isPasswordModalOpen={isPasswordModalOpen}
+                    setIsPasswordModalOpen={setIsPasswordModalOpen}
+                />
+            ) : (
+                <></>
+            )}
+                            <button onClick={() => setIsPasswordModalOpen(() => true)}>
+                            <FaChevronRight fontSize={"10px"} />
+                            비밀번호 변경
+                        </button>
                             <TrainerProfile
                                 trainerProfile={trainerProfile}
                                 setTrainerProfile={setTrainerProfile}
@@ -46,7 +71,7 @@ function TrainerMainPage(props) {
                     </div>
                 </div>
             </div>
-        </>
+        </AdminRootLayout>
     );
 }
 

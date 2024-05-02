@@ -10,3 +10,8 @@ export const searchUsernameByEmailRequest = async (data) => {
     const response = await axios.post("http://localhost:8080/mail/send", data);
     return response;
 };
+
+export const searchPasswordByEmailRequest = async (data) => {
+    const response = await axios.post("http://localhost:8080/mail/send/temporary/password", data);
+    return response;
+};

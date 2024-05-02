@@ -132,8 +132,8 @@ function SelectRoutineModal({ reservationId }) {
                                         css={s.routineCard}
                                         key={index}
                                         draggable={true}
-                                        onDragStart={() => dargStart(item.index)}
-                                        onDragEnter={() => dragEnter(item.index)}
+                                        onDragStart={() => dargStart(index)}
+                                        onDragEnter={() => dragEnter(index)}
                                         onDragEnd={drop}
                                         onDragOver={(e) => e.preventDefault()}
                                     >

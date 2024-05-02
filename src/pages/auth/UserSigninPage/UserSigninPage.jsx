@@ -87,7 +87,7 @@ function UserSigninPage(props) {
                     <div css={s.searchBox}>
                         <Link to={"/auth/user/search/username"}>아이디찾기</Link>
                         <span css={s.col}></span>
-                        <Link>비밀번호찾기</Link>
+                        <Link to={"/auth/user/search/password"}>비밀번호찾기</Link>
                         <span css={s.col}></span>
                         <Link to={"/auth/user/agree"}>회원가입</Link>
                     </div>

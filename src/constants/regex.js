@@ -23,6 +23,10 @@ export const REGEX = {
         regexr: /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
         text: "이메일 형식이어야 합니다",
     },
+    prevPassword: {
+        regexr: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,128}$/,
+        text: "영문자,숫자,특수문자 포함 5 ~ 128자",
+    },
     get: function (name) {
         return this[name];
     },
