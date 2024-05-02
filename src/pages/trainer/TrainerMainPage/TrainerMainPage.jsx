@@ -8,12 +8,13 @@ import TrainerProfile from "../../../components/TrainerProfile/TrainerProflie";
 import usePrincipal from "../../../hooks/usePrincipal";
 import useTrainerApis from "../../../hooks/useTrainerApis";
 import DayoffRequest from "../../../components/DayoffRequest/DayoffRequest";
+import AdminRootLayout from "../../../components/AdminRootLayout/AdminRootLayout";
 
 function TrainerMainPage(props) {
     const accountId = usePrincipal();
     const { trainerId, trainerProfile, setTrainerProfile, membersList } = useTrainerApis(accountId);
     return (
-        <>
+        <AdminRootLayout>
             <div css={s.layout}>
                 <div css={s.container}>
                     <div css={s.trainerBox}>
@@ -46,7 +47,7 @@ function TrainerMainPage(props) {
                     </div>
                 </div>
             </div>
-        </>
+        </AdminRootLayout>
     );
 }
 

@@ -6,9 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import UserPage from "./pages/user/UserPage";
 import AuthPage from "./pages/auth/AuthPage";
 import RootHeader from "./components/RootHeader/RootHeader";
-import AdminRootLayout from "./components/AdminRootLayout/AdminRootLayout";
 import { useQuery } from "react-query";
-import TrainerPage from "./pages/trainer/TrainerPage";
 import { getPrincipalRequest } from "./apis/api/principal";
 import AdminMainPage from "./pages/admin/AdminMainPage/AdminMainPage";
 import TrainerMainPage from "./pages/trainer/TrainerMainPage/TrainerMainPage";
@@ -17,6 +15,7 @@ import AdminTrainerRegisterPage from "./pages/admin/AdminTrainerRegisterPage/Adm
 import { useEffect } from "react";
 import { messaging } from "./apis/api/firebase/firebaseConfig";
 import { onMessage } from "firebase/messaging";
+import EditAdminPasswordPage from "./pages/admin/EditAdminPasswordPage/EditAdminPasswordPage";
 
 function App() {
     const principalQuery = useQuery(["principalQuery"], getPrincipalRequest, {
@@ -61,35 +60,14 @@ function App() {
         <>
             {isAdmin ? (
                 <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <AdminRootLayout>
-                                <AdminMainPage />
-                            </AdminRootLayout>
-                        }
-                    />
+                    <Route path="/" element={<AdminMainPage />} />
                     <Route path="/admin/register/trainer" element={<AdminTrainerRegisterPage />} />
+                    <Route path="/admin/edit/password" element={<EditAdminPasswordPage />} />
                 </Routes>
             ) : isTrainer ? (
                 <>
                     <Routes>
-                        <Route
-                            path="/"
-                            element={
-                                <AdminRootLayout>
-                                    <TrainerMainPage />
-                                </AdminRootLayout>
-                            }
-                        />
-                        <Route
-                            path="trainer/*"
-                            element={
-                                <AdminRootLayout>
-                                    <TrainerPage />
-                                </AdminRootLayout>
-                            }
-                        />
+                        <Route path="/" element={<TrainerMainPage />} />
                         <Route path="/inbody" element={<TrainerInbodyInputPage />} />
                     </Routes>
                 </>
