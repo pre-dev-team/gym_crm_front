@@ -30,6 +30,8 @@ export const logoutBox = css`
     box-sizing: border-box;
     display: flex;
     align-items: center;
+    width: 100px;
+    height: 25px;
     cursor: pointer;
 `;
 

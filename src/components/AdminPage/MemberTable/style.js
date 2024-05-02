@@ -36,7 +36,7 @@ export const th = css`
     text-align: center;
     width: 100%;
     height: 20px;
-    background-color: #fafafa;
+    background-color: #ededed;
 `;
 export const tb = css`
     font-size: 14px;

@@ -1,5 +1,12 @@
 import { css } from "@emotion/react";
 
+export const editAdminPwButton = css`
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+`;
+
 export const layout = css`
     box-sizing: border-box;
     width: 100%;

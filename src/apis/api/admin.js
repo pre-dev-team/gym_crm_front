@@ -39,3 +39,8 @@ export const getMonthReservationsCountRequest = async () => {
     const response = await instance.get("/admin/reservations/month/count");
     return response;
 };
+
+export const editAdminPasswordRequest = async (data) => {
+    const response = await instance.put("/admin/edit/password", data);
+    return response;
+};
