@@ -6,13 +6,12 @@ import MypageReservationReview from "../../../components/user/MypageReservationR
 import { motion } from "framer-motion";
 import { FaChevronRight } from "react-icons/fa6";
 import EditPasswordModal from "../../../components/modals/userModal/EditPasswordModal/EditPasswordModal";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import UserInbodyModal from "../../../components/modals/userModal/UserInbodyModal/UserInbodyModal";
 function UserMyPage(props) {
     const [accountInfo, setAccountInfo] = useRecoilState(accountInfoAtom);
     const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
     const [isInbodyModalOpen, setIsInbodyModalOpen] = useState(false);
-    const modalRef = useRef();
 
     return (
         <motion.div

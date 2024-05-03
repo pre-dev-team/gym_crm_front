@@ -1,8 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useRef, useState } from "react";
 import * as s from "./style";
-import { useQuery } from "react-query";
-import { getInbodyInformationRequest } from "../../../../apis/api/inbody";
 
 function SelectInbodyModal({ inbodyInformation }) {
     const handleInbodyClick = (inbodyUrl) => {
