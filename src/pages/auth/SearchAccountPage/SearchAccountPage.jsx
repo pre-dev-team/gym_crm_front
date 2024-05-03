@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { motion } from "framer-motion";
-import InputWithMessagebox from "../../../components/InputWithMessageBox/InputWithMessagebox";
+import InputWithMessagebox from "../../../components/auth/InputWithMessageBox/InputWithMessagebox";
 import useInput from "../../../hooks/useInput";
 import { useMutation } from "react-query";
 import { searchUsernameByEmailRequest } from "../../../apis/api/account";

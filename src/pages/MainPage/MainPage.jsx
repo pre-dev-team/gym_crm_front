@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { motion } from "framer-motion";
-import KakaoMapAPI from "../../components/KakaoMapAPI/KakaoMapAPI";
-import ReviewAll from "../../components/ReviewAll/ReviewAll";
+import KakaoMapAPI from "../../components/main/KakaoMapAPI/KakaoMapAPI";
+import ReviewAll from "../../components/main/ReviewAll/ReviewAll";
 import { useRef } from "react";
 import logo from "../../assets/image/test.png";
 

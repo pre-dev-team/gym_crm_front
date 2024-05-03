@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { motion } from "framer-motion";
-import InputWithMessagebox from "../../../components/InputWithMessageBox/InputWithMessagebox";
+import InputWithMessagebox from "../../../components/auth/InputWithMessageBox/InputWithMessagebox";
 import { useEffect, useState } from "react";
 import useInput from "../../../hooks/useInput";
 import { useMutation } from "react-query";
@@ -9,11 +9,8 @@ import { userSignupRequest } from "../../../apis/api/signup";
 import { agreedState } from "../../../atoms/agreed";
 import { useRecoilState } from "recoil";
 
-
-
-
 function UserSignupPage() {
-    const [ agreed, setAgreed ] = useRecoilState(agreedState);
+    const [agreed, setAgreed] = useRecoilState(agreedState);
 
     const [username, usernameChange, usernameMessage, setUsername, setUsernameMessage] = useInput("username");
     const [password, passwordChange, passwordMessage, setPassword] = useInput("password");
@@ -23,17 +20,15 @@ function UserSignupPage() {
     const [email, emailChange, emailMessage, setEmail] = useInput("email");
     const [checkPasswordMessage, setCheckPasswordMessage] = useState(null);
 
-
     useEffect(() => {
         if (!agreed) {
-          alert('약관에 동의해야 회원가입 페이지에 접근할 수 있습니다.');
-          window.location.href = "/"; 
+            alert("약관에 동의해야 회원가입 페이지에 접근할 수 있습니다.");
+            window.location.href = "/";
         }
-        return ()=>{
+        return () => {
             setAgreed(false);
-        }
-      }, [agreed]);
-    
+        };
+    }, [agreed]);
 
     useEffect(() => {
         if (!checkPassword || !password) {
@@ -87,13 +82,11 @@ function UserSignupPage() {
     });
 
     const handleSubmitClick = () => {
-       
-    
         if (!password) {
-            alert('비밀번호를 입력하세요.');
+            alert("비밀번호를 입력하세요.");
             return;
         }
-    
+
         const checkFlags = [
             usernameMessage?.type,
             passwordMessage?.type,
@@ -102,12 +95,12 @@ function UserSignupPage() {
             phoneMessage?.type,
             emailMessage?.type,
         ];
-    
-        if (checkFlags.includes('error') || checkFlags.includes(undefined) || checkFlags.includes(null)) {
-            alert('가입 정보를 다시 확인하세요.');
+
+        if (checkFlags.includes("error") || checkFlags.includes(undefined) || checkFlags.includes(null)) {
+            alert("가입 정보를 다시 확인하세요.");
             return;
         }
-    
+
         userSignupMutation.mutate({
             username: username,
             password: password,
@@ -115,12 +108,10 @@ function UserSignupPage() {
             phone: phone,
             email: email,
         });
-        
-        alert('회원가입이 완료되었습니다.');
+
+        alert("회원가입이 완료되었습니다.");
         window.location.href = "/";
     };
-
-  
 
     return (
         <motion.div

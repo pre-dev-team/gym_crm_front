@@ -1,14 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import MemberTable from "../../../components/AdminPage/MemberTable/MemberTable";
-import TrainerTable from "../../../components/AdminPage/TrainerTable/TrainerTable";
-import { motion } from "framer-motion";
-import ReservationSearch from "../../../components/AdminPage/ReservationSearch/ReservationSearch";
+import MemberTable from "../../../components/admin/MemberTable/MemberTable";
+import TrainerTable from "../../../components/admin/TrainerTable/TrainerTable";
+import ReservationSearch from "../../../components/admin/ReservationSearch/ReservationSearch";
 import { useState } from "react";
 import AdminReviewModal from "../../../components/modals/adminModal/AdminReviewModal/AdminReviewModal";
 import AdminHolidayModal from "../../../components/modals/adminModal/AdminHolidayModal/AdminHolidayModal";
-import AdminReservationChart from "../../../components/AdminPage/AdminReservationChart/AdminReservationChart";
-import AdminRootLayout from "../../../components/AdminRootLayout/AdminRootLayout";
+import AdminReservationChart from "../../../components/admin/AdminReservationChart/AdminReservationChart";
+import AdminRootLayout from "../../../components/layouts/AdminRootLayout/AdminRootLayout";
 
 function AdminMainPage(props) {
     const [isAdminReviewModalOpen, setIsAdminReviewModalOpen] = useState(false);

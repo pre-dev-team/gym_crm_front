@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { motion } from "framer-motion";
-import InputWithMessagebox from "../../../components/InputWithMessageBox/InputWithMessagebox";
+import InputWithMessagebox from "../../../components/auth/InputWithMessageBox/InputWithMessagebox";
 import useInput from "../../../hooks/useInput";
 import * as s from "./style";
 import { useMutation } from "react-query";
@@ -50,7 +50,7 @@ function SearchPasswordPage(props) {
         mutationFn: searchPasswordByEmailRequest,
         retry: 0,
         onSuccess: (response) => {
-            console.log(response)
+            console.log(response);
             if (response.data === false) {
                 alert("해당 사용자가 존재하지 않습니다");
                 return;
@@ -61,7 +61,7 @@ function SearchPasswordPage(props) {
             setTimeout(() => {
                 setIsMailSended(() => false);
             }, 180000);
-        }
+        },
     });
 
     const handleEmailSendClick = () => {
@@ -72,7 +72,6 @@ function SearchPasswordPage(props) {
             });
         }
     };
-
 
     return (
         <motion.div
