@@ -9,8 +9,8 @@ import { loginState } from "../../../atoms/loginAtom";
 import { useQuery, useQueryClient } from "react-query";
 import { useEffect, useState } from "react";
 import { accountInfoAtom } from "../../../atoms/accountInfoAtom";
-import { getMyInfoRequest } from "../../../apis/api/principal";
 import { registerServiceWorker, requestForFCMToken } from "../../../apis/api/firebase/firebaseConfig";
+import { getUserAccountInfoRequest } from "../../../apis/api/account";
 
 function NavigationButtonBar(props) {
     const [isLogin, setLogin] = useRecoilState(loginState);
@@ -32,7 +32,7 @@ function NavigationButtonBar(props) {
     const getMyAccountInfoQuery = useQuery(
         ["getMyAccountInfoQuery", accountId],
         () =>
-            getMyInfoRequest({
+            getUserAccountInfoRequest({
                 accountId: accountId,
             }),
         {

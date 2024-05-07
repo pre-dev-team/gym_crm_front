@@ -11,7 +11,7 @@ export const trainerInfoRequest = async (params) => {
 };
 
 export const getTrainerIdByAccountIdRequest = async (params) => {
-    const response = await instance.get("/auth/account/trainerid", { params });
+    const response = await instance.get("/auth/trainer/id", { params });
     return response;
 };
 

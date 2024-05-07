@@ -1,7 +1,7 @@
 import instance from "../utils/instance";
 
 export const userReservationRequest = async (data) => {
-    const response = await instance.post("/reservation/user/make", data);
+    const response = await instance.post("/reservation/user", data);
     return response;
 };
 
@@ -21,12 +21,12 @@ export const getTodayReservationRequest = async (params) => {
 };
 
 export const getUserAllReservationRequest = async (params) => {
-    const response = await instance.get("/reservation/user/find", { params });
+    const response = await instance.get("/reservation/user/all", { params });
     return response;
 };
 
 export const selectReservationAllUserRequest = async (params) => {
-    const response = await instance.get("/reservation/trainer/searchall", { params });
+    const response = await instance.get("/reservation/trainer/all", { params });
     return response;
 };
 

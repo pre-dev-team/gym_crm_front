@@ -9,40 +9,46 @@ const useTrainerApis = (accountId) => {
     const [trainerId, setTrainerId] = useState("");
     const [allHolidayList, setAllHolidayList] = useState([]);
 
-    const trainerMyMembersQuery = useQuery(["trainerMyMembersQuery"], () => trainerMyMembersRequest({accountId}),{
+    const trainerMyMembersQuery = useQuery(["trainerMyMembersQuery"], () => trainerMyMembersRequest({ accountId }), {
         retry: 0,
         refetchOnWindowFocus: false,
         enabled: !!accountId,
-        onSuccess: response => {
+        onSuccess: (response) => {
             setMembersList(() => response.data);
-        }
-    });
-    const trainerInfoQuery = useQuery(["trainerInfoQuery"], () => trainerInfoRequest({accountId}),{
-        retry: 0,
-        refetchOnWindowFocus: false,
-        enabled: !!accountId,
-        onSuccess: response => {
-            setTrainerProfile(() => response.data);
-        }
-    });
-    const getTrainerIdByAccountIdQuery = useQuery(["getTrainerIdByAccountIdQuery"], () => getTrainerIdByAccountIdRequest({accountId}),{
-        retry: 0,
-        refetchOnWindowFocus: false,
-        enabled: !!accountId,
-        onSuccess: response => {
-            setTrainerId(() => response.data);
-        }
-    });
-    const selectHolidayQuery = useQuery(["selectHolidayQuery"], () => selectHolidayRequest({accountId}), {
-        retry: 0,
-        refetchOnWindowFocus: false,
-        enabled: !!accountId,
-        onSuccess: response => {
-            setAllHolidayList(() => response.data);
-        }
+        },
     });
 
-    return {trainerId, trainerProfile, setTrainerProfile, membersList, allHolidayList };
+    const trainerInfoQuery = useQuery(["trainerInfoQuery"], () => trainerInfoRequest({ accountId }), {
+        retry: 0,
+        refetchOnWindowFocus: false,
+        enabled: !!accountId,
+        onSuccess: (response) => {
+            setTrainerProfile(() => response.data);
+        },
+    });
+
+    const getTrainerIdByAccountIdQuery = useQuery(
+        ["getTrainerIdByAccountIdQuery"],
+        () => getTrainerIdByAccountIdRequest({ accountId }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            enabled: !!accountId,
+            onSuccess: (response) => {
+                setTrainerId(() => response.data);
+            },
+        }
+    );
+    const selectHolidayQuery = useQuery(["selectHolidayQuery"], () => selectHolidayRequest({ accountId }), {
+        retry: 0,
+        refetchOnWindowFocus: false,
+        enabled: !!accountId,
+        onSuccess: (response) => {
+            setAllHolidayList(() => response.data);
+        },
+    });
+
+    return { trainerId, trainerProfile, setTrainerProfile, membersList, allHolidayList };
 };
 
 export default useTrainerApis;

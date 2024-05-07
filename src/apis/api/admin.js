@@ -6,7 +6,7 @@ export const getUsersBynameRequest = async (params) => {
 };
 
 export const getAllTrainersRequest = async () => {
-    const response = await instance.get("/admin/trainers");
+    const response = await instance.get("/trainer/admin/trainers");
     return response;
 };
 
@@ -31,7 +31,7 @@ export const decideHolidayAppliesRequest = async (data) => {
 };
 
 export const deleteTrainerRequest = async (params) => {
-    const response = await instance.delete("/auth/trainer", { params });
+    const response = await instance.delete("/auth/admin/trainer/resign", { params });
     return response;
 };
 

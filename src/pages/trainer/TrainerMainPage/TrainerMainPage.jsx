@@ -21,8 +21,6 @@ function TrainerMainPage(props) {
     const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
     const [accountInfo] = useRecoilState(accountInfoAtom);
 
-    console.log(accountInfo);
-
     return (
         <AdminRootLayout>
             <div css={s.layout}>
