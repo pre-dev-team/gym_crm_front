@@ -7,9 +7,8 @@ import { updateTrainerImgRequest } from "../../../apis/api/trainer";
 import { useMutation } from "react-query";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
-function TrainerProfile({ trainerProfile, setTrainerProfile, accountId }) {
+function TrainerProfile({ trainerProfile, setTrainerProfile, accountId, fileRef }) {
     const { name, phone, email, username, trainerProfileImgUrl } = trainerProfile;
-    const fileRef = useRef();
 
     const trainerImgMutation = useMutation({
         mutationKey: "trainerImgMutation",
@@ -47,8 +46,8 @@ function TrainerProfile({ trainerProfile, setTrainerProfile, accountId }) {
 
         uploadTask.on(
             "state_changed",
-            (snapshot) => {},
-            (error) => {},
+            (snapshot) => { },
+            (error) => { },
             () => {
                 alert("업로드를 완료하셨습니다.");
                 getDownloadURL(storageRef).then((url) => {
@@ -64,9 +63,11 @@ function TrainerProfile({ trainerProfile, setTrainerProfile, accountId }) {
     return (
         <div>
             <div css={s.profileContainer}>
-                <div css={s.profileImg} onClick={() => fileRef.current.click()}>
-                    <input style={{ display: "none" }} type="file" ref={fileRef} onChange={handleFileChange} />
-                    <img src={trainerProfileImgUrl} alt="Trainer Profile" />
+                <div css={s.profileBox}>
+                    <div css={s.profileImg} onClick={() => fileRef.current.click()}>
+                        <input style={{ display: "none" }} type="file" ref={fileRef} onChange={handleFileChange} />
+                        <img src={trainerProfileImgUrl} alt="Trainer Profile" />
+                    </div>
                 </div>
                 <div css={s.profileInfo}>
                     <div>{name}</div>

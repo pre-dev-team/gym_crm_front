@@ -9,14 +9,15 @@ import usePrincipal from "../../../hooks/usePrincipal";
 import useTrainerApis from "../../../hooks/useTrainerApis";
 import DayoffRequest from "../../../components/trainer/DayoffRequest/DayoffRequest";
 import AdminRootLayout from "../../../components/layouts/AdminRootLayout/AdminRootLayout";
-import { useState } from "react";
-import EditPasswordModal from "../../../components/modals/userModal/EditPasswordModal/EditPasswordModal";
-import { FaChevronRight } from "react-icons/fa";
+import { useRef } from "react";
 
 function TrainerMainPage(props) {
     const accountId = usePrincipal();
     const { trainerId, trainerProfile, setTrainerProfile, membersList } = useTrainerApis(accountId);
-    const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+    const fileRef = useRef();
+    const handleEditPwClick = () => {
+        window.open(`http://localhost:3000/tariner/edit/password`, "_blank", " width=300px, height= 300px");
+    };
 
     return (
         <AdminRootLayout>
@@ -25,24 +26,17 @@ function TrainerMainPage(props) {
                     <div css={s.trainerBox}>
                         <div css={s.trainerProfileBox}>
                             <div css={s.trainer}>트레이너 정보</div>
-                            {isPasswordModalOpen ? (
-                                <EditPasswordModal
-                                    accountId={accountId}
-                                    isPasswordModalOpen={isPasswordModalOpen}
-                                    setIsPasswordModalOpen={setIsPasswordModalOpen}
-                                />
-                            ) : (
-                                <></>
-                            )}
-                            <button onClick={() => setIsPasswordModalOpen(() => true)}>
-                                <FaChevronRight fontSize={"10px"} />
-                                비밀번호 변경
-                            </button>
                             <TrainerProfile
                                 trainerProfile={trainerProfile}
                                 setTrainerProfile={setTrainerProfile}
                                 accountId={accountId}
+                                fileRef={fileRef}
                             />
+                            <div css={s.borderBox}></div>
+                            <div css={s.buttonBox}>
+                                <button css={s.editPasswordButton} onClick={handleEditPwClick}>비밀번호 변경</button>
+                                <button css={s.editProfileButton} onClick={() => fileRef.current.click()}>프로필 변경</button>
+                            </div>
                         </div>
                         <div css={s.myMembersBox}>
                             <div css={s.myMembers}>내 회원들</div>

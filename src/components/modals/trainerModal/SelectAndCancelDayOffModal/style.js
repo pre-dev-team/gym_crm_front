@@ -6,8 +6,12 @@ export const btnWrapper = css`
 `;
 
 export const modalOpenBtn = css`
+    box-sizing: border-box;
+    border-collapse: collapse;
+    height: 30px;
+    width: 100%;
+    border: 1px solid hsl(0, 0%, 80%);
     cursor: pointer;
-    margin-left: auto;
 `;
 
 export const modalContainer = css`
