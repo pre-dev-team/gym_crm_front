@@ -19,9 +19,6 @@ function TrainerMainPage(props) {
     const accountId = usePrincipal();
     const { trainerId, trainerProfile, setTrainerProfile, membersList } = useTrainerApis(accountId);
     const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
-    const [accountInfo] = useRecoilState(accountInfoAtom);
-
-    console.log(accountInfo);
 
     return (
         <AdminRootLayout>
@@ -32,7 +29,7 @@ function TrainerMainPage(props) {
                             <div css={s.trainer}>트레이너 정보</div>
                             {isPasswordModalOpen ? (
                                 <EditPasswordModal
-                                    accountId={accountInfo.accountId}
+                                    accountId={accountId}
                                     isPasswordModalOpen={isPasswordModalOpen}
                                     setIsPasswordModalOpen={setIsPasswordModalOpen}
                                 />
