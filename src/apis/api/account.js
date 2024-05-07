@@ -1,8 +1,12 @@
-import axios from "axios";
 import instance from "../utils/instance";
 
 export const editUserPasswordRequest = async (data) => {
     const response = await instance.put("/account/user/password", data);
+    return response;
+};
+
+export const editTrainerPasswordRequest = async (data) => {
+    const response = await instance.put("/account/trainer/password", data);
     return response;
 };
 

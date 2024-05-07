@@ -52,8 +52,10 @@ export const searchButton = css`
     box-sizing: border-box;
     border-collapse: collapse;
     height: 30px;
-    width: 70px;
+    width: 100%;
     border: 1px solid hsl(0, 0%, 80%);
+    cursor: pointer;
+    margin-bottom: 5px;
 `;
 
 export const searchTypeOption1 = [

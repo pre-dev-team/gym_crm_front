@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 
 export const profileContainer = css`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin: 10px 5px;
+`;
+
+export const profileBox = css`
 `;
 
 export const profileImg = css`
@@ -14,9 +14,8 @@ export const profileImg = css`
     justify-content: center;
     align-items: center;
     border: 1px solid #dbdbdb;
-    border-radius: 50%;
-    width: 144px;
-    height: 144px;
+    width: 130px;
+    height: 130px;
     overflow: hidden;
     & > img {
         height: 100%;
@@ -26,11 +25,28 @@ export const profileImg = css`
 export const profileInfo = css`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin-top: 5px;
 
   & > div {
-    padding: 5px;
+    padding: 3px;
+    font-weight: 600;
   }
+
+  & > div:nth-of-type(1) {
+    margin: 10px 0px 0px 5px;
+    font-size: 25px;
+  }
+
+  & > div:nth-of-type(2) {
+    margin: 5px;
+    font-size: 15px;
+  }
+
+  & > div:nth-of-type(3) {
+    margin-left: 5px;
+    font-size: 15px;
+    text-align: center;
+  }
+
 `;
 
