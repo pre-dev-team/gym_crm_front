@@ -6,7 +6,7 @@ import OAuth2Page from "./OAuth2Page/OAuth2Page";
 import OAuth2SignupPage from "./OAuth2SignupPage/OAuth2SignupPage";
 import OAuth2SigninPage from "./OAuth2SigninPage/OAuth2SigninPage";
 import OAuth2MergePage from "./OAuth2MergePage/OAuth2MergePage";
-import JoinPresenter from "../../components/auth/JoinPresenter/JoinPresenter";
+import JoinPresenter from "./JoinPresenter/JoinPresenter";
 import SearchPasswordPage from "./SearchPasswordPage/SearchPasswordPage";
 
 function AuthPage(props) {
@@ -16,7 +16,7 @@ function AuthPage(props) {
             <Route path="/user/signin" element={<UserSigninPage />} />
             <Route path="/user/search/username" element={<SearchAccountPage />} />
             <Route path="/user/search/password" element={<SearchPasswordPage />} />
-            <Route path="/user/agree" element={<JoinPresenter />} />
+            <Route path="/user/agreement" element={<JoinPresenter />} />
             <Route path="/oauth2" element={<OAuth2Page />} />
             <Route path="/oauth2/signin" element={<OAuth2SigninPage />} />
             <Route path="/oauth2/merge" element={<OAuth2MergePage />} />
