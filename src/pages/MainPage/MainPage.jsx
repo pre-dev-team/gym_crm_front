@@ -13,8 +13,7 @@ function MainPage(props) {
     const handleOnWheel = (e) => {
         const { deltaY } = e;
         const { scrollTop } = backgoundRef.current;
-        console.log(backgoundRef.current.scrollTo);
-        e.preventDefault();
+        // e.preventDefault();
         if (deltaY > 0) {
             if (scrollTop >= 0 && scrollTop < 680) {
                 backgoundRef.current.scrollTo({

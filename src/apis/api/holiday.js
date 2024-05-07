@@ -16,6 +16,6 @@ export const selectHolidayRequest = async (params) => {
 };
 
 export const getDayTrainerHolidayRequst = async (params) => {
-    const response = await instance.get("/holiday/trainer/day", { params });
+    const response = await instance.get("/holiday/user/trainer/day", { params });
     return response;
 };

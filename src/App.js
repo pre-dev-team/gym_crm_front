@@ -24,9 +24,6 @@ function App() {
         onSuccess: (response) => {
             console.log("현재권한: " + response.data.authorities[0].authority);
         },
-        onError: (error) => {
-            console.log(error);
-        },
     });
 
     useEffect(() => {

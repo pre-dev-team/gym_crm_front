@@ -6,7 +6,7 @@ export const userReservationRequest = async (data) => {
 };
 
 export const getDayReservationRequest = async (params) => {
-    const response = await instance.get("/reservation/day", { params });
+    const response = await instance.get("/reservation/user/day", { params });
     return response;
 };
 
@@ -42,5 +42,10 @@ export const editReservationByUserRequest = async (data) => {
 
 export const selectMymemberInformationRequest = async (params) => {
     const response = await instance.get("/reservation/user/information", { params });
+    return response;
+};
+
+export const trainerMyMembersRequest = async (params) => {
+    const response = await instance.get("/reservation/mypage/members", { params });
     return response;
 };

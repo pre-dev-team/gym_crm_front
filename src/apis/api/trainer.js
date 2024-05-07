@@ -1,7 +1,7 @@
 import instance from "../utils/instance";
 
 export const trainerMyMembersRequest = async (params) => {
-    const response = await instance.get("/trainer/mypage/members", { params });
+    const response = await instance.get("/reservation/mypage/members", { params });
     return response;
 };
 
@@ -11,7 +11,7 @@ export const trainerInfoRequest = async (params) => {
 };
 
 export const getTrainerIdByAccountIdRequest = async (params) => {
-    const response = await instance.get("/auth/trainer/id", { params });
+    const response = await instance.get("/account/trainer/id", { params });
     return response;
 };
 
@@ -21,7 +21,7 @@ export const getTrainerReviews = async (params) => {
 };
 
 export const getTrainersByUserRequest = async () => {
-    const response = await instance.get("trainer/trainers/user");
+    const response = await instance.get("trainer/user/trainers");
     return response;
 };
 

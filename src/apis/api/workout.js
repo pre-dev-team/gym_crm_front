@@ -16,11 +16,11 @@ export const makeRoutineRequest = async (data) => {
 };
 
 export const editRoutineRequest = async (data) => {
-    const response = await instance.post("/routine/edit", data);
+    const response = await instance.post("/routine/trainer/addition", data);
     return response;
 };
 
 export const getRoutineByReservationIdRequest = async (params) => {
-    const response = await instance.get("/routine/find", { params });
+    const response = await instance.get("/routine/user", { params });
     return response;
 };
