@@ -32,11 +32,44 @@ export const trainerProfileBox = css`
     background-color: #fafafa;
 `;
 
+export const header = css`
+    margin: 5px;
+    padding: 5px;
+`;
+
 export const trainer = css`
     font-size: 18px;
     font-weight: 700;
     border-bottom: 2px solid #939393;
     padding: 10px;
+`;
+
+export const borderBox = css`
+    margin-top: 5px;
+    border: 1px solid #939393;
+`;
+
+export const buttonBox = css`
+    padding: 10px;
+`;
+
+export const editPasswordButton = css`
+    box-sizing: border-box;
+    border-collapse: collapse;
+    height: 35px;
+    width: 100%;
+    border: 1px solid hsl(0, 0%, 80%);
+    cursor: pointer;
+    margin-bottom: 5px;
+`;
+
+export const editProfileButton = css`
+    box-sizing: border-box;
+    border-collapse: collapse;
+    height: 35px;
+    width: 100%;
+    border: 1px solid hsl(0, 0%, 80%);
+    cursor: pointer;
 `;
 
 export const myMembersBox = css`

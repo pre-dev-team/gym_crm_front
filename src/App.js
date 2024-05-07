@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { messaging } from "./apis/api/firebase/firebaseConfig";
 import { onMessage } from "firebase/messaging";
 import EditAdminPasswordPage from "./pages/admin/EditAdminPasswordPage/EditAdminPasswordPage";
+import EditTrainerPasswordPage from "./pages/trainer/EditTrainerPasswordPage/EditTrainerPasswordPage";
 
 function App() {
     const principalQuery = useQuery(["principalQuery"], getPrincipalRequest, {
@@ -66,6 +67,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<TrainerMainPage />} />
                         <Route path="/inbody" element={<TrainerInbodyInputPage />} />
+                        <Route path="/tariner/edit/password" element={<EditTrainerPasswordPage />} />
                     </Routes>
                 </>
             ) : (

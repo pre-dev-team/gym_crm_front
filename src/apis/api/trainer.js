@@ -16,10 +16,9 @@ export const getTrainerIdByAccountIdRequest = async (params) => {
 };
 
 export const getTrainerReviews = async (params) => {
-    const response = await instance.get("/trainer/all", { params }); // 변경된 엔드포인트로 수정
+    const response = await instance.get("/trainer/all", { params });
     return response;
 };
-
 
 export const getTrainersByUserRequest = async () => {
     const response = await instance.get("trainer/user/trainers");
