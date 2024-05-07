@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import * as s from "./style";
 import AuthPageInput from "../../../components/auth/AuthPageInput/AuthPageinput";
 import RightTopButton from "../../../components/auth/RightTopButton/RightTopButton";
 import useInput from "../../../hooks/useInput";
