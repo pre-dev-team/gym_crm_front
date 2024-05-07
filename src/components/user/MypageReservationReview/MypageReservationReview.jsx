@@ -40,7 +40,7 @@ function MypageReservationReview({ accountId }) {
                             reservationId: res.reservationId,
                             reservationDate: res.reservationDate,
                             trainerId: res.trainerId,
-                            trainerName: res.name,
+                            trainerName: res.trainerName,
                             timeDuration: res.timeDuration,
                         };
                     })
@@ -62,6 +62,7 @@ function MypageReservationReview({ accountId }) {
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
                 setReviewedTrainerIds(() => response.data.map((res) => res.trainerId));
+                console.log(response.data);
             },
         }
     );

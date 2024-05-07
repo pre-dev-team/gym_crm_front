@@ -11,7 +11,7 @@ export const trainerInfoRequest = async (params) => {
 };
 
 export const getTrainerIdByAccountIdRequest = async (params) => {
-    const response = await instance.get("/auth/account/trainerid", { params });
+    const response = await instance.get("/account/trainer/id", { params });
     return response;
 };
 
@@ -20,8 +20,14 @@ export const getTrainerReviews = async (params) => {
     return response;
 };
 
-export const getTrainersRequest = async () => {
-    const response = await instance.get("trainer/trainers/user");
+
+export const getTrainersByUserRequest = async () => {
+    const response = await instance.get("trainer/user/trainers");
+    return response;
+};
+
+export const getTrainersByAdminRequest = async () => {
+    const response = await instance.get("trainer/admin/trainers");
     return response;
 };
 

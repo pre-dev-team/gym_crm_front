@@ -1,13 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { useMutation, useQuery } from "react-query";
-import { deleteTrainerRequest, getAllTrainersRequest } from "../../../apis/api/admin";
+import { deleteTrainerRequest } from "../../../apis/api/admin";
 import * as s from "./style";
 import { useState } from "react";
+import { getTrainersByAdminRequest } from "../../../apis/api/trainer";
 
 function TrainerTable({ setIsAdminHolidayModalOpen, setClickedTrainerId }) {
     const [trainers, setTrainers] = useState([]);
 
-    const getAllTrainersQuery = useQuery(["getAllTrainersQuery"], getAllTrainersRequest, {
+    const getAllTrainersQuery = useQuery(["getAllTrainersQuery"], getTrainersByAdminRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
@@ -52,7 +53,7 @@ function TrainerTable({ setIsAdminHolidayModalOpen, setClickedTrainerId }) {
                         <th>번호</th>
                         <th>이름</th>
                         <th>담당회원 수</th>
-                        <th>평균평점</th>
+                        <th>평균 리뷰평점</th>
                         <th>연차정보조회</th>
                         <th>퇴사</th>
                     </tr>

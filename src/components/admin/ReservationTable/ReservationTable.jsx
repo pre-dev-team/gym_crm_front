@@ -22,7 +22,7 @@ function ReservationTable({ reservations }) {
                                 <td>{reservation.reservationId}</td>
                                 <td>{reservation.reservationDate}</td>
                                 <td>{reservation.timeDuration}</td>
-                                <td>{reservation.name}</td>
+                                <td>{reservation.userName}</td>
                                 <td>{reservation.trainerName}</td>
                             </tr>
                         );

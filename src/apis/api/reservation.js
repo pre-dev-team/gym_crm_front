@@ -1,12 +1,12 @@
 import instance from "../utils/instance";
 
 export const userReservationRequest = async (data) => {
-    const response = await instance.post("/reservation/user/make", data);
+    const response = await instance.post("/reservation/user", data);
     return response;
 };
 
 export const getDayReservationRequest = async (params) => {
-    const response = await instance.get("/reservation/day", { params });
+    const response = await instance.get("/reservation/user/day", { params });
     return response;
 };
 
@@ -21,12 +21,12 @@ export const getTodayReservationRequest = async (params) => {
 };
 
 export const getUserAllReservationRequest = async (params) => {
-    const response = await instance.get("/reservation/user/find", { params });
+    const response = await instance.get("/reservation/user/all", { params });
     return response;
 };
 
 export const selectReservationAllUserRequest = async (params) => {
-    const response = await instance.get("/reservation/trainer/searchall", { params });
+    const response = await instance.get("/reservation/trainer/all", { params });
     return response;
 };
 
@@ -42,5 +42,10 @@ export const editReservationByUserRequest = async (data) => {
 
 export const selectMymemberInformationRequest = async (params) => {
     const response = await instance.get("/reservation/user/information", { params });
+    return response;
+};
+
+export const trainerMyMembersRequest = async (params) => {
+    const response = await instance.get("/reservation/mypage/members", { params });
     return response;
 };

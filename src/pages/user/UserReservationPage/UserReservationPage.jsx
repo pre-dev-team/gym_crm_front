@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import "react-datepicker/dist/react-datepicker.css";
 import "dayjs/locale/ko";
 import { useQuery } from "react-query";
-import { getTrainersRequest } from "../../../apis/api/trainer";
+import { getTrainersByUserRequest } from "../../../apis/api/trainer";
 import TrainerCardForReservation from "../../../components/user/TrainerCardForReservation/TrainerCardForReservation";
 import SelectTrainerModal from "../../../components/modals/userModal/SelectTrainerModal/SelectTrainerModal";
 import { useSearchParams } from "react-router-dom";
@@ -16,7 +16,7 @@ function UserReservationPage(props) {
     const [selectTrainerId, setSelectTrainerId] = useState(0);
     const [searchParams] = useSearchParams();
     const prevReservationId = searchParams.get("reservationId");
-    const getTrainers = useQuery(["getTrainers"], getTrainersRequest, {
+    const getTrainers = useQuery(["getTrainers"], getTrainersByUserRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {

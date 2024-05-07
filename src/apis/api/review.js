@@ -1,7 +1,7 @@
 import instance from "../utils/instance";
 
 export const userReviewRequest = async (data) => {
-    const response = await instance.post("/review/user/make", data);
+    const response = await instance.post("/review/user", data);
     return response;
 };
 
@@ -11,6 +11,6 @@ export const getUserReviewRequest = async (params) => {
 };
 
 export const getTopRatedTrainersInformationRequest = async () => {
-    const response = await instance.get("/review/toprated"); // 변경된 엔드포인트로 수정
+    const response = await instance.get("/review/top"); // 변경된 엔드포인트로 수정
     return response;
 };

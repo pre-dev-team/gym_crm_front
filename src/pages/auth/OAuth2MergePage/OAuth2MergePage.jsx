@@ -25,11 +25,17 @@ function OAuth2MergePage() {
     });
 
     const handleSigninSubmit = () => {
-        oAuth2MergeMutation.mutate({
+        console.log({
             username,
             password,
             oauth2Name: searchParams.get("name"),
             providerName: searchParams.get("provider"),
+        });
+        oAuth2MergeMutation.mutate({
+            username,
+            password,
+            oauth2Name: searchParams.get("name"),
+            oauth2ProviderName: searchParams.get("provider"),
         });
     };
 

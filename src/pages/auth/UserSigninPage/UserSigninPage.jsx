@@ -28,22 +28,15 @@ function UserSigninPage(props) {
             }
         },
         onError: (error) => {
-            alert("에러");
-            console.log(error);
+            alert(error.response.data);
         },
     });
 
     const handleLoginClick = () => {
-        console.log({
-            username: username,
-            password: password,
-        });
-
         if (!username || !password) {
             alert("아이디와 비밀번호를 모두 입력해주세요.");
             return;
         }
-
         userSigninMutation.mutate({
             username: username,
             password: password,
