@@ -1,46 +1,28 @@
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
 
-export const layout = css`
+export const layout = (agreed) => css`
     box-sizing: border-box;
     padding: 20px;
-    border: 1px solid #ccc;
     background-color: transparent;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
+    width: 100%;
+    height: 680px;
+    box-shadow: 2px 2px 2px 4px rgba(0, 0, 0, 0.1);
+    color: white;
 
-export const signupBox = css`
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 1px 0px 2px 1px black;
-    & > h1 {
-        margin-bottom: 20px;
-        color: #ffffff;
+    & > button {
+        width: 100%;
+        height: 35px;
+        font-size: 14px;
+        cursor: pointer;
+        background-color: transparent;
+        color: #999999;
+        box-shadow: ${agreed ? "3px 5px 8px 3px hsla(0, 0%, 0%, 0.411)" : ""};
+        transition: transform 0.3s, box-shadow 0.3s;
+        &:hover {
+            transform: ${agreed ? "translateY(2px)" : ""};
+        }
+        &:active {
+            box-shadow: inset 3px 5px 8px 3px hsla(0, 0%, 0%, 0.411);
+        }
     }
-`;
-
-export const listBox = css`
-    margin-top: 30px;
-`;
-
-export const inputBox = css`
-    margin-bottom: 10px;
-`;
-
-export const buttonBox = css`
-    margin-top: 20px;
-`;
-
-export const btnPrimary = css`
-    color: black;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-`;
-export const selectHeader = css`
-    cursor: pointer;
 `;

@@ -13,9 +13,7 @@ function AgreementAccordion({ title, content, setCheck, check }) {
         setCheck((prev) => {
             return {
                 ...prev,
-                [title]: {
-                    status: !prev[title].status,
-                },
+                [title]: !prev[title],
             };
         });
     };
@@ -24,7 +22,7 @@ function AgreementAccordion({ title, content, setCheck, check }) {
         <div css={s.container}>
             <h3>{title}</h3>
             <div css={s.checkBox} onClick={handleCheckClick}>
-                {check[title].status ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+                {check[title] ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
             </div>
             <span onClick={handleClick}>펼치기</span>
             <div>

@@ -8,10 +8,10 @@ import { useMutation } from "react-query";
 import { userSignupRequest } from "../../../apis/api/signup";
 import { agreedState } from "../../../atoms/agreed";
 import { useRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
 
 function UserSignupPage() {
     const [agreed, setAgreed] = useRecoilState(agreedState);
-
     const [username, usernameChange, usernameMessage, setUsername, setUsernameMessage] = useInput("username");
     const [password, passwordChange, passwordMessage, setPassword] = useInput("password");
     const [checkPassword, checkPasswordChange] = useInput("checkPassword");
@@ -19,11 +19,11 @@ function UserSignupPage() {
     const [phone, phoneChange, phoneMessage, setPhone] = useInput("phone");
     const [email, emailChange, emailMessage, setEmail] = useInput("email");
     const [checkPasswordMessage, setCheckPasswordMessage] = useState(null);
-
+    const navigator = useNavigate();
     useEffect(() => {
         if (!agreed) {
             alert("약관에 동의해야 회원가입 페이지에 접근할 수 있습니다.");
-            window.location.href = "/";
+            navigator("/auth/user/agreement");
         }
         return () => {
             setAgreed(false);

@@ -1,9 +1,11 @@
 import { css } from "@emotion/react";
 
 export const container = css`
+    box-sizing: border-box;
     position: relative;
     width: 100%;
     height: auto;
+    height: 250px;
     & > h3 {
         margin: 0;
         margin-bottom: 10px;
@@ -20,8 +22,13 @@ export const container = css`
 export const textarea = (isShow) => css`
     resize: none;
     width: 100%;
-    height: ${isShow ? "160px" : "20px"};
+    height: ${isShow ? "200px" : "50px"};
     transition: all ease-in-out 0.2s;
+    overflow-y: auto;
+    cursor: default;
+    &::-webkit-scrollbar {
+        color: aliceblue;
+    }
 `;
 
 export const checkBox = css`
@@ -29,5 +36,6 @@ export const checkBox = css`
     top: -2px;
     left: 100px;
     font-size: 25px;
+    transition: all ease-in-out 0.2s;
     cursor: pointer;
 `;
