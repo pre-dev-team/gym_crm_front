@@ -20,6 +20,7 @@ export const getTrainerReviews = async (params) => {
     return response;
 };
 
+
 export const getTrainersByUserRequest = async () => {
     const response = await instance.get("trainer/user/trainers");
     return response;
