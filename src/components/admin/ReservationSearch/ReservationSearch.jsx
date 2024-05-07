@@ -44,6 +44,7 @@ function ReservationSearch(props) {
             refetchOnWindowFocus: false,
             enabled: false,
             onSuccess: (response) => {
+                console.log(response.data);
                 setReservations(() => response.data);
             },
         }

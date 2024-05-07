@@ -10,8 +10,9 @@ import { dateFormatter } from "../../../../utils/dateFormatter";
 function AdminReviewModal({ isOpen, setIsAdminReviewModalOpen, clickedUserId }) {
     const [userReviews, setUserReviews] = useState([]);
     const [clickedReview, setClickedReview] = useState(null);
+
     const getUserReviewQuery = useQuery(
-        ["getUserReviewQuery"],
+        ["getUserReviewQuery", clickedUserId],
         () =>
             getUserReviewRequest({
                 userId: clickedUserId,

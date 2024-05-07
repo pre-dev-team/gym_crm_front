@@ -20,8 +20,13 @@ export const getTrainerReviews = async (params) => {
     return response;
 };
 
-export const getTrainersRequest = async () => {
-    const response = await instance.get("trainer/trainers");
+export const getTrainersByUserRequest = async () => {
+    const response = await instance.get("trainer/trainers/user");
+    return response;
+};
+
+export const getTrainersByAdminRequest = async () => {
+    const response = await instance.get("trainer/admin/trainers");
     return response;
 };
 
