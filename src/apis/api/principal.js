@@ -6,6 +6,6 @@ export const getPrincipalRequest = async () => {
 };
 
 export const getMyInfoRequest = async (params) => {
-    const response = await instance.get("auth/account/myinfo", { params });
+    const response = await instance.get("account/myinfo", { params });
     return response;
 };
