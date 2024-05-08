@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { oAuth2SignupRequest } from "../../../apis/api/signup";
 import { useMutation } from "react-query";
+import InputWithMessagebox from "../../../components/auth/InputWithMessageBox/InputWithMessagebox";
 
 function OAuth2SignupPage() {
     const [searchParams] = useSearchParams();
@@ -103,7 +104,8 @@ function OAuth2SignupPage() {
                 <h2>회원가입({searchParams.get("provider")})</h2>
                 <RightTopButton onClick={handleSignupSubmit}>가입하기</RightTopButton>
             </div>
-            <AuthPageInput
+
+            <InputWithMessagebox
                 type={"text"}
                 name={"username"}
                 placeholder={"사용자이름"}
@@ -111,7 +113,7 @@ function OAuth2SignupPage() {
                 onChange={userNameChange}
                 message={usernameMessage}
             />
-            <AuthPageInput
+            <InputWithMessagebox
                 type={"password"}
                 name={"password"}
                 placeholder={"비밀번호"}
@@ -119,7 +121,7 @@ function OAuth2SignupPage() {
                 onChange={passwordChange}
                 message={passwordMessage}
             />
-            <AuthPageInput
+            <InputWithMessagebox
                 type={"password"}
                 name={"checkPassword"}
                 placeholder={"비밀번호 확인"}
@@ -127,7 +129,7 @@ function OAuth2SignupPage() {
                 onChange={checkPasswordChange}
                 message={checkPasswordMessage}
             />
-            <AuthPageInput
+            <InputWithMessagebox
                 type={"text"}
                 name={"name"}
                 placeholder={"성명"}
@@ -135,7 +137,7 @@ function OAuth2SignupPage() {
                 onChange={nameChange}
                 message={nameMessage}
             />
-            <AuthPageInput
+            <InputWithMessagebox
                 type={"text"}
                 name={"email"}
                 placeholder={"이메일"}
@@ -143,7 +145,7 @@ function OAuth2SignupPage() {
                 onChange={emailChange}
                 message={emailMessage}
             />
-            <AuthPageInput
+            <InputWithMessagebox
                 type={"text"}
                 name={"phone"}
                 placeholder={"전화번호"}

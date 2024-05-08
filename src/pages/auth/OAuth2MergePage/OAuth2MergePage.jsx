@@ -71,7 +71,9 @@ function OAuth2MergePage() {
                     placeholder="패스워드"
                     message={passwordMessage}
                 />
-                <button disabled={!isValidAll}>로그인</button>
+                <button disabled={!isValidAll} onClick={handleMergeClick}>
+                    로그인
+                </button>
             </motion.div>
         </div>
     );

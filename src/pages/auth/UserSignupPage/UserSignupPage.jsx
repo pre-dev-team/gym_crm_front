@@ -5,10 +5,10 @@ import InputWithMessagebox from "../../../components/auth/InputWithMessageBox/In
 import { useEffect, useState } from "react";
 import useInput from "../../../hooks/useInput";
 import { useMutation } from "react-query";
-import { userSignupRequest } from "../../../apis/api/signup";
+import { oAuth2SignupRequest, userSignupRequest } from "../../../apis/api/signup";
 import { agreedState } from "../../../atoms/agreed";
 import { useRecoilState } from "recoil";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function UserSignupPage() {
     const [agreed, setAgreed] = useRecoilState(agreedState);
@@ -19,11 +19,18 @@ function UserSignupPage() {
     const [phone, phoneChange, phoneMessage, setPhone] = useInput("phone");
     const [email, emailChange, emailMessage, setEmail] = useInput("email");
     const [checkPasswordMessage, setCheckPasswordMessage] = useState(null);
+    const [searchParams] = useSearchParams();
+    const oAuth2Name = searchParams.get("name");
+    const provider = searchParams.get("provider");
     const navigator = useNavigate();
     useEffect(() => {
         if (!agreed) {
             alert("약관에 동의해야 회원가입 페이지에 접근할 수 있습니다.");
-            navigator("/auth/user/agreement");
+            if (!!oAuth2Name || !!provider) {
+                navigator(`/auth/user/agreement?name=${oAuth2Name}&provider=${provider}`);
+            } else {
+                navigator("/auth/user/agreement");
+            }
         }
         return () => {
             setAgreed(false);
@@ -81,6 +88,32 @@ function UserSignupPage() {
         },
     });
 
+    const oAuth2SignupMutation = useMutation({
+        mutationKey: "oAuth2SignupMutation",
+        mutationFn: oAuth2SignupRequest,
+        onSuccess: (response) => {
+            navigator("/auth/user/signin");
+        },
+        onError: (error) => {
+            if (error.response.status === 400) {
+                const errorMap = error.response.data;
+                const errorEntries = Object.entries(errorMap);
+                for (let [k, v] of errorEntries) {
+                    if (k === "username") {
+                        setUsernameMessage(() => {
+                            return {
+                                type: "error",
+                                text: v,
+                            };
+                        });
+                    }
+                }
+            } else {
+                alert("회원가입 오류");
+            }
+        },
+    });
+
     const handleSubmitClick = () => {
         if (!password) {
             alert("비밀번호를 입력하세요.");
@@ -101,14 +134,25 @@ function UserSignupPage() {
             return;
         }
 
-        userSignupMutation.mutate({
-            username: username,
-            password: password,
-            name: name,
-            phone: phone,
-            email: email,
-        });
-
+        if (!!oAuth2Name || !!provider) {
+            oAuth2SignupMutation.mutate({
+                username: username,
+                password: password,
+                name: name,
+                phone: phone,
+                email: email,
+                oauth2Name: oAuth2Name,
+                oauth2ProviderName: provider,
+            });
+        } else {
+            userSignupMutation.mutate({
+                username: username,
+                password: password,
+                name: name,
+                phone: phone,
+                email: email,
+            });
+        }
         alert("회원가입이 완료되었습니다.");
         window.location.href = "/";
     };
