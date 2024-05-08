@@ -16,7 +16,7 @@ function TrainerMainPage(props) {
     const { trainerId, trainerProfile, setTrainerProfile, membersList } = useTrainerApis(accountId);
     const fileRef = useRef();
     const handleEditPwClick = () => {
-        window.open(`http://localhost:3000/tariner/edit/password`, "_blank", " width=300px, height= 300px");
+        window.open(`http://localhost:3000/tariner/edit/password`, "_blank", " width=700px, height= 700px");
     };
 
     return (

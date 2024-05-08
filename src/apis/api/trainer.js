@@ -1,7 +1,7 @@
 import instance from "../utils/instance";
 
 export const trainerMyMembersRequest = async (params) => {
-    const response = await instance.get("/reservation/mypage/members", { params });
+    const response = await instance.get("/reservation/trainer/mypage/members", { params });
     return response;
 };
 

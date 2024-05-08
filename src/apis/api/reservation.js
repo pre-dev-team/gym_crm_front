@@ -44,8 +44,3 @@ export const selectMymemberInformationRequest = async (params) => {
     const response = await instance.get("/reservation/user/information", { params });
     return response;
 };
-
-export const trainerMyMembersRequest = async (params) => {
-    const response = await instance.get("/reservation/mypage/members", { params });
-    return response;
-};

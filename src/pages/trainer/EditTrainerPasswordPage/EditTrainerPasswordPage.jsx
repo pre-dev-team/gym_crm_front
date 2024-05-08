@@ -4,10 +4,12 @@ import * as s from "./style";
 import { REGEX } from "../../../constants/regex";
 import { useMutation } from "react-query";
 import { editTrainerPasswordRequest } from "../../../apis/api/account";
+import usePrincipal from "../../../hooks/usePrincipal";
 
 function EditTrainerPasswordPage(props) {
     const [validInputNames, setValidInputNames] = useState([]);
     const [message, setMessage] = useState("");
+    const accountId = usePrincipal();
     const [trainerInfo, setTrainerInfo] = useState({
         prevPassword: "",
         password: "",
@@ -57,8 +59,10 @@ function EditTrainerPasswordPage(props) {
 
     const handleApplyClick = () => {
         editTrainernPasswordMutation.mutate({
+            accountId: accountId,
             prevPassword: trainerInfo.prevPassword,
             password: trainerInfo.password,
+            checkPassword: trainerInfo.checkPassword
         });
     };
 

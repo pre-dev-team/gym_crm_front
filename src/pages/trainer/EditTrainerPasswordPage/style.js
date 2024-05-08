@@ -5,8 +5,8 @@ export const layout = css`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 300px;
-    height: 400px;
+    width: 700px;
+    height: 700px;
     background-color: #ededed;
     padding: 10px;
     overflow: hidden;
