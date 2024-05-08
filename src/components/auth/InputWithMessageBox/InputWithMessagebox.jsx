@@ -3,8 +3,7 @@ import * as s from "./style";
 import { motion } from "framer-motion";
 import { MdErrorOutline, MdCheckCircleOutline } from "react-icons/md";
 
-function InputWithMessagebox(props) {
-    const { message, type, placeholder, value, ref, name, onChange } = props;
+function InputWithMessagebox({ message, type, placeholder, value, ref, name, onChange }) {
     return (
         <div css={s.layout}>
             <div css={s.inputBox}>

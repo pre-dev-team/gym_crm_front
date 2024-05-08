@@ -26,10 +26,10 @@ export const choiceBox = css`
         margin-bottom: 20px;
     }
     & > button {
-        width: 100%;
-        height: 50px;
+        width: 95%;
+        height: 40px;
         cursor: pointer;
-        margin-bottom: 20px;
+        margin: 20px auto;
         font-size: 18px;
         background-color: transparent;
         color: #999999;
