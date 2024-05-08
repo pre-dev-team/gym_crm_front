@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import * as s from "./style";
 import { REGEX } from "../../../constants/regex";
 import { useMutation } from "react-query";
-import { editAdminPasswordRequest } from "../../../apis/api/admin";
+import { editUserPasswordRequest } from "../../../apis/api/account";
 
-function EditAdminPasswordPage(props) {
+function EditAdminPasswordPage() {
     const [validInputNames, setValidInputNames] = useState([]);
     const [message, setMessage] = useState("");
     const [trainerApplyInfo, setTrainerApplyInfo] = useState({
@@ -42,7 +42,7 @@ function EditAdminPasswordPage(props) {
     };
     const editAdminPasswordMutation = useMutation({
         mutationKey: "editAdminPasswordMutation",
-        mutationFn: editAdminPasswordRequest,
+        mutationFn: editUserPasswordRequest,
         retry: 0,
         onSuccess: (response) => {
             alert("변경성공");
@@ -57,6 +57,7 @@ function EditAdminPasswordPage(props) {
         editAdminPasswordMutation.mutate({
             prevPassword: trainerApplyInfo.prevPassword,
             password: trainerApplyInfo.password,
+            checkPassword: trainerApplyInfo.checkPassword
         });
     };
 
