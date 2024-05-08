@@ -34,8 +34,12 @@ function TrainerMainPage(props) {
                             />
                             <div css={s.borderBox}></div>
                             <div css={s.buttonBox}>
-                                <button css={s.editPasswordButton} onClick={handleEditPwClick}>비밀번호 변경</button>
-                                <button css={s.editProfileButton} onClick={() => fileRef.current.click()}>프로필 변경</button>
+                                <button css={s.editPasswordButton} onClick={handleEditPwClick}>
+                                    비밀번호 변경
+                                </button>
+                                <button css={s.editProfileButton} onClick={() => fileRef.current.click()}>
+                                    프로필 변경
+                                </button>
                             </div>
                         </div>
                         <div css={s.myMembersBox}>

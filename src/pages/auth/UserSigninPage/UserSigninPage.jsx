@@ -28,7 +28,11 @@ function UserSigninPage(props) {
             }
         },
         onError: (error) => {
-            alert(error.response.data);
+            if (!!error.response.data.error) {
+                alert(error.response.data.error);
+            } else {
+                alert(error.response.data);
+            }
         },
     });
 

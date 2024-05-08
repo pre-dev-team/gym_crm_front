@@ -38,7 +38,7 @@ function OAuth2Page() {
                     css={s.choiceBox}
                 >
                     <h1>{`${provider}로 새로 \n 회원가입하시겠습니까?`}</h1>
-                    <button onClick={() => navigator(`/auth/oauth2/signup?name=${name}&provider=${provider}`)}>
+                    <button onClick={() => navigator(`/auth/user/agreement?name=${name}&provider=${provider}`)}>
                         {provider}로 회원가입하기
                     </button>
                 </motion.div>
