@@ -84,7 +84,6 @@ export const myMembersBox = css`
 export const myMembers = css`
     font-size: 18px;
     font-weight: 700;
-    border-bottom: 2px solid #939393;
     padding: 10px;
 `;
 

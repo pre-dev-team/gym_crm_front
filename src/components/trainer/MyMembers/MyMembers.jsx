@@ -9,17 +9,24 @@ function MyMembers({ membersList, accountId }) {
 
     return (
         <div css={s.layout}>
-            <ul css={s.membersBox}>
-                {membersList.map((member) => (
-                    <li key={member.userId} css={s.member}>
-                        <p>{member.name}</p>
-                        <MyMembersModal accountId={accountId} userId={member.userId} />
-                        <button css={s.memeberInfoButton}>
-                            <a onClick={() => handleInbodyClick(member.userId)}>인바디입력</a>
-                        </button>
-                    </li>
-                ))}
-            </ul>
+            <table css={s.table}>
+                <thead css={s.head}>
+                    <tr>
+                        <th>이름</th>
+                        <th>조회버튼</th>
+                        <th>인바디버튼</th>
+                    </tr>
+                </thead>
+                <tbody css={s.membersBox}>
+                    {membersList.map((member) => (
+                        <tr key={member.userId}>
+                            <td>{member.name}</td>
+                            <td><MyMembersModal accountId={accountId} userId={member.userId} /></td>
+                            <td><button css={s.memeberInfoButton} onClick={() => handleInbodyClick(member.userId)}>인바디입력</button></td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 }

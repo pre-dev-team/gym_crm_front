@@ -1,5 +1,10 @@
 import { css } from "@emotion/react";
 
+export const layout = css`
+    width: 100%;
+    height: 100%;
+`;
+
 export const test = css`
     box-sizing: border-box;
     width: 100%;
@@ -17,6 +22,8 @@ export const tr = css`
 
 export const tr2 = css`
     text-align: center;
+    font-size: 16px;
+    font-weight: 600;
 `;
 
 export const btr = css`
@@ -27,7 +34,6 @@ export const btr = css`
 `;
 
 export const body = css`
-    height: 200px;
     text-align: center;
 `;
 

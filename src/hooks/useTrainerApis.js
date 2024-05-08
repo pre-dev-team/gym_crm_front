@@ -8,7 +8,7 @@ const useTrainerApis = (accountId) => {
     const [trainerProfile, setTrainerProfile] = useState([]);
     const [trainerId, setTrainerId] = useState("");
     const [allHolidayList, setAllHolidayList] = useState([]);
-
+    
     const trainerMyMembersQuery = useQuery(["trainerMyMembersQuery"], () => trainerMyMembersRequest({ accountId }), {
         retry: 0,
         refetchOnWindowFocus: false,
@@ -44,7 +44,28 @@ const useTrainerApis = (accountId) => {
         refetchOnWindowFocus: false,
         enabled: !!accountId,
         onSuccess: (response) => {
-            setAllHolidayList(() => response.data);
+            setAllHolidayList(() => {
+                const groupByDate = response.data.reduce((groups, holiday) => {
+                    const { holidayDate } = holiday;
+                    if (!groups[holidayDate]) {
+                        groups[holidayDate] = [];
+                    }
+                    groups[holidayDate].push(holiday);
+                    return groups;
+                }, {});
+
+                return Object.keys(groupByDate)
+                        .map((date) => {
+                            return {
+                                holidayDate: date,
+                                startTimeId: groupByDate[date][0]["timeId"],
+                                endTimeId: groupByDate[date][groupByDate[date].length - 1]["timeId"],
+                                name: groupByDate[date][0]["name"],
+                                confirm: groupByDate[date][0]["confirm"],
+                            };
+                        })
+                        .sort((a, b) => new Date(b.holidayDate) - new Date(a.holidayDate))
+            });
         },
     });
 

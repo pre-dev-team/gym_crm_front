@@ -25,28 +25,11 @@ function SelectAndCancelDayOffModal({ accountId }) {
     });
 
     useEffect(() => {
-        const groupByDate = allHolidayList.reduce((groups, holiday) => {
-            const { holidayDate } = holiday;
-            if (!groups[holidayDate]) {
-                groups[holidayDate] = [];
-            }
-            groups[holidayDate].push(holiday);
-            return groups;
-        }, {});
+        const unconfirmed = allHolidayList.filter(holiday => holiday.confirm === 0);
+        const confirmed = allHolidayList.filter(holiday => holiday.confirm === 1);
+        const dinied = allHolidayList.filter(holiday => holiday.confirm === 2);
 
-        setHolidayListDayByDay(() =>
-            Object.keys(groupByDate)
-                .map((date) => {
-                    return {
-                        holidayDate: date,
-                        startTimeId: groupByDate[date][0]["timeId"],
-                        endTimeId: groupByDate[date][groupByDate[date].length - 1]["timeId"],
-                        name: groupByDate[date][0]["name"],
-                        confirm: groupByDate[date][0]["confirm"],
-                    };
-                })
-                .sort((a, b) => new Date(b.holidayDate) - new Date(a.holidayDate))
-        );
+        setHolidayListDayByDay(() => [unconfirmed, confirmed, dinied])
     }, [allHolidayList]);
 
     const handleDeleteClick = (date) => {
@@ -71,45 +54,47 @@ function SelectAndCancelDayOffModal({ accountId }) {
                     <div css={s.modalContent}>
                         <h1>연차 조회</h1>
                         <div css={s.layout}>
-                            <table css={s.table}>
-                                <thead css={s.head}>
-                                    <tr css={s.tr}>
-                                        <th>번호</th>
-                                        <th>날짜</th>
-                                        <th>시간</th>
-                                        <th>이름</th>
-                                        <th>승인</th>
-                                        <th>연차</th>
-                                    </tr>
-                                </thead>
-                                <tbody css={s.body}>
-                                    {holidayListDayByDay.map((holiday, index) => (
-                                        <tr key={index} css={s.btr}>
-                                            <td>{index + 1}</td>
-                                            <td>{holiday.holidayDate}</td>
-                                            <td>
-                                                {holiday.startTimeId + 10}:00 ~ {holiday.endTimeId + 10}:00
-                                            </td>
-                                            <td>{holiday.name}</td>
-                                            <td>
-                                                {
-                                                    s.searchTypeOption2.find(
-                                                        (option) => option.value === holiday.confirm
-                                                    ).label
-                                                }
-                                            </td>
-                                            <td>
-                                                <button
-                                                    onClick={() => handleDeleteClick(holiday.holidayDate)}
-                                                    disabled={holiday.confirm !== 0}
-                                                >
-                                                    연차 취소
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+
+                            {holidayListDayByDay.map((list, dayIndex) => (
+                                <div css={s.tableBox}>
+                                    <table key={dayIndex} css={s.table}>
+                                        <thead css={s.head}>
+                                            <tr css={s.tr}>
+                                                <th>번호</th>
+                                                <th>날짜</th>
+                                                <th>시간</th>
+                                                <th>이름</th>
+                                                <th>승인</th>
+                                                <th>연차</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody css={s.body}>
+                                            {list.map((holiday, index) => (
+                                                <tr key={index} css={s.btr}>
+                                                    <td>{index + 1}</td>
+                                                    <td>{holiday.holidayDate}</td>
+                                                    <td>
+                                                        {holiday.startTimeId + 10}:00 ~ {holiday.endTimeId + 10}:00
+                                                    </td>
+                                                    <td>{holiday.name}</td>
+                                                    <td>
+                                                        {s.searchTypeOption2[holiday.confirm]}
+                                                    </td>
+                                                    <td>
+                                                        <button
+                                                            onClick={() => handleDeleteClick(holiday.holidayDate)}
+                                                            disabled={holiday.confirm !== 0}
+                                                        >
+                                                            연차 취소
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            ))}
+
                         </div>
                         <button css={s.modalCloseBtn} onClick={() => setModalOpen(false)}>
                             창 닫기
