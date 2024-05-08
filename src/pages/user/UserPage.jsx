@@ -4,6 +4,7 @@ import UserReservationMainPage from "./UserReservationMainPage/UserReservationMa
 import UserReservationPage from "./UserReservationPage/UserReservationPage";
 import UserReservationEditPage from "./UserReservationEditPage/UserReservationEditPage";
 import UserMyPage from "./UserMyPage/UserMyPage";
+import UserResignPage from "./UserResignPage/UserResignPage";
 
 // 여기서 user관련된 모든 것 할겁니다
 function UserPage(props) {
@@ -13,6 +14,7 @@ function UserPage(props) {
             <Route path="/reservation/make" element={<UserReservationPage />} />
             <Route path="/reservation/edit" element={<UserReservationEditPage />} />
             <Route path="/mypage" element={<UserMyPage />} />
+            <Route path="/mypage/resign" element={<UserResignPage />} />
         </Routes>
     );
 }

@@ -28,7 +28,6 @@ function MakeRoutineModal({ reservationId }) {
         dragItem.current = null;
         dragOverItem.current = null;
         setRoutineList(() => copyListItems);
-        console.log(routineList);
     };
 
     const userRoutineMutation = useMutation({

@@ -20,9 +20,11 @@ function AgreementAccordion({ title, content, setCheck, check }) {
 
     return (
         <div css={s.container}>
-            <h3>{title}</h3>
-            <div css={s.checkBox} onClick={handleCheckClick}>
-                {check[title] ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+            <div css={s.checkContainer}>
+                <h3>{title}</h3>
+                <div css={s.checkBox} onClick={handleCheckClick}>
+                    {check[title] ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+                </div>
             </div>
             <span onClick={handleClick}>펼치기</span>
             <div>

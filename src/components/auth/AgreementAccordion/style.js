@@ -12,30 +12,36 @@ export const container = css`
     }
     & > span {
         position: absolute;
-        top: 0;
+        top: 20px;
         right: 0;
         cursor: pointer;
     }
     color: white;
     margin-bottom: 10px;
 `;
+
+export const checkContainer = css`
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+`;
+
+export const checkBox = css`
+    font-size: 25px;
+    margin-left: 3px;
+    margin-top: 3px;
+    transition: all ease-in-out 0.2s;
+    cursor: pointer;
+`;
+
 export const textarea = (isShow) => css`
     resize: none;
     width: 100%;
-    height: ${isShow ? "200px" : "50px"};
+    height: ${isShow ? "170px" : "50px"};
     transition: all ease-in-out 0.2s;
     overflow-y: auto;
     cursor: default;
     &::-webkit-scrollbar {
         color: aliceblue;
     }
-`;
-
-export const checkBox = css`
-    position: absolute;
-    top: -2px;
-    left: 100px;
-    font-size: 25px;
-    transition: all ease-in-out 0.2s;
-    cursor: pointer;
 `;
