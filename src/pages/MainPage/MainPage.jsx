@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import KakaoMapAPI from "../../components/main/KakaoMapAPI/KakaoMapAPI";
 import ReviewAll from "../../components/main/ReviewAll/ReviewAll";
 import { useEffect, useRef, useState } from "react";
-import logo from "../../assets/image/test.png";
+import logo from "../../assets/image/test3.jpg";
 
 // 메인페이지입니다
 
@@ -54,7 +54,8 @@ function MainPage(props) {
     };
 
     useEffect(() => {
-        const text = `건강한 신체, 체력 향상, 목표 Team Pre-Dev와 함께 근성장의 한계를 넘어서세요`;
+        const text = `"PRE-DEV와 함께 근성장의 한계를 넘어서세요"`;
+        const text2 = `PRE-DEV`;
         const animateText = async () => {
             for (let i = 0; i < text.length; i++) {
                 await new Promise((resolve) => setTimeout(resolve, 100));
@@ -62,9 +63,9 @@ function MainPage(props) {
             }
         };
         const animateText2 = async () => {
-            for (let i = 0; i < text.length; i++) {
+            for (let i = 0; i < text2.length; i++) {
                 await new Promise((resolve) => setTimeout(resolve, 100));
-                setText(text.slice(0, i + 1));
+                setText2(text2.slice(0, i + 1));
             }
         };
         animateText();
@@ -73,6 +74,9 @@ function MainPage(props) {
 
     return (
         <div onWheel={handleOnWheel} ref={backgoundRef} css={s.background}>
+            <div css={s.imgBox}>
+                <img src={logo} />
+            </div>
             <div css={s.box1}>
                 <motion.div
                     transition={{ duration: 1, delay: 0 }}
@@ -81,18 +85,16 @@ function MainPage(props) {
                     exit={{ opacity: 0 }}
                     css={s.text1}
                 >
-                    <div>@team-pre-dev</div>
-                    <div>WELCOME to Pre-Dev!</div>
+                    <div>{displayText2}</div>
                 </motion.div>
                 <motion.div
-                    transition={{ duration: 1 }}
+                    transition={{ duration: 1, delay: 0 }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     css={s.text2}
                 >
                     <div>{displayText1}</div>
-                    <div>{displayText2}</div>
                 </motion.div>
             </div>
             <div css={s.box2}>

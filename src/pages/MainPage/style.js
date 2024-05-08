@@ -10,6 +10,19 @@ export const background = css`
     }
 `;
 
+export const imgBox = css`
+    position: absolute;
+    height: 100%;
+    z-index: 1;
+    & > img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        opacity: 0.2;
+    }
+`;
+
 export const box1 = css`
     @font-face {
         font-family: "establishRetrosansOTF";
@@ -27,26 +40,22 @@ export const box1 = css`
     font-size: 25px;
     font-family: "establishRetrosansOTF";
     text-align: center;
-    & > img {
-        height: 30%;
-    }
 `;
 
 export const text1 = css`
-    text-align: left;
-    padding-top: 30px;
+    padding-top: 100px;
     width: 80%;
     height: 130px;
-    font-size: 24px;
+    font-size: 50px;
     margin-top: 20px;
     font-weight: 500;
 `;
 export const text2 = css`
-    margin-top: 100px;
+    margin-top: 200px;
     width: 80%;
     height: 100px;
     text-align: left;
-    font-size: 20px;
+    font-size: 28px;
     font-weight: 500;
 `;
 export const text3 = css`
