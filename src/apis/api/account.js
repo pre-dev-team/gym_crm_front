@@ -24,3 +24,8 @@ export const getUserAccountInfoRequest = async (params) => {
     const response = await instance.get("/account/user/info", { params });
     return response;
 };
+
+export const deleteUserAccountRequest = async (accountId) => {
+    const response = await instance.delete(`/auth/user/resign/${accountId}`);
+    return response;
+};

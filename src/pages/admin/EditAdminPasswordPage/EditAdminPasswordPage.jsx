@@ -40,6 +40,7 @@ function EditAdminPasswordPage() {
             setMessage(() => REGEX.get(name).text);
         }
     };
+
     const editAdminPasswordMutation = useMutation({
         mutationKey: "editAdminPasswordMutation",
         mutationFn: editUserPasswordRequest,
@@ -57,7 +58,7 @@ function EditAdminPasswordPage() {
         editAdminPasswordMutation.mutate({
             prevPassword: trainerApplyInfo.prevPassword,
             password: trainerApplyInfo.password,
-            checkPassword: trainerApplyInfo.checkPassword
+            checkPassword: trainerApplyInfo.checkPassword,
         });
     };
 

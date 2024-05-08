@@ -4,10 +4,11 @@ import { motion } from "framer-motion";
 import AgreementAccordion from "../../../components/auth/AgreementAccordion/AgreementAccordion";
 import { privateInfomationTerm, reservationCancelAndReviewTerm } from "./terms";
 import * as s from "./style";
-// 앞으로의 예약은 모두 취소됨
-// 인바디 정보는 삭제됨
-// 리뷰는 삭제안됨.
+import { useMutation } from "react-query";
+import { deleteUserAccountRequest } from "../../../apis/api/account";
+import usePrincipal from "../../../hooks/usePrincipal";
 function UserResignPage(props) {
+    const userAccountId = usePrincipal();
     const [check, setCheck] = useState({
         "개인정보 삭제": false,
         "예약취소&리뷰보존": false,
@@ -21,7 +22,20 @@ function UserResignPage(props) {
             setAgree(() => false);
         }
     }, [check]);
-    const handleResignClick = () => {};
+
+    const deleteUserAccountMutation = useMutation({
+        retry: 0,
+        mutationFn: deleteUserAccountRequest,
+        mutationKey: "deleteUserAccountMutation",
+        onSuccess: (response) => {
+            localStorage.clear("accessToken");
+            window.location.replace("/");
+        },
+    });
+
+    const handleResignClick = () => {
+        deleteUserAccountMutation.mutate(userAccountId);
+    };
     return (
         <motion.div
             transition={{ duration: 0.3, delay: 0 }}
