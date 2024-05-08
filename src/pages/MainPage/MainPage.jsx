@@ -3,12 +3,14 @@ import * as s from "./style";
 import { motion } from "framer-motion";
 import KakaoMapAPI from "../../components/main/KakaoMapAPI/KakaoMapAPI";
 import ReviewAll from "../../components/main/ReviewAll/ReviewAll";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "../../assets/image/test.png";
 
 // 메인페이지입니다
 
 function MainPage(props) {
+    const [displayText1, setText] = useState("");
+    const [displayText2, setText2] = useState("");
     const backgoundRef = useRef();
     const handleOnWheel = (e) => {
         const { deltaY } = e;
@@ -51,6 +53,24 @@ function MainPage(props) {
         }
     };
 
+    useEffect(() => {
+        const text = `건강한 신체, 체력 향상, 목표 Team Pre-Dev와 함께 근성장의 한계를 넘어서세요`;
+        const animateText = async () => {
+            for (let i = 0; i < text.length; i++) {
+                await new Promise((resolve) => setTimeout(resolve, 100));
+                setText(text.slice(0, i + 1));
+            }
+        };
+        const animateText2 = async () => {
+            for (let i = 0; i < text.length; i++) {
+                await new Promise((resolve) => setTimeout(resolve, 100));
+                setText(text.slice(0, i + 1));
+            }
+        };
+        animateText();
+        animateText2();
+    }, []);
+
     return (
         <div onWheel={handleOnWheel} ref={backgoundRef} css={s.background}>
             <div css={s.box1}>
@@ -65,42 +85,14 @@ function MainPage(props) {
                     <div>WELCOME to Pre-Dev!</div>
                 </motion.div>
                 <motion.div
-                    transition={{ duration: 1, delay: 0.5 }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    css={s.logo}
-                >
-                    <img src={logo} alt="" />
-                </motion.div>
-                <motion.div
-                    transition={{ duration: 1, delay: 1 }}
+                    transition={{ duration: 1 }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     css={s.text2}
                 >
-                    <div>Real Man</div>
-                    <div>Workout-verse</div>
-                </motion.div>
-                <motion.div
-                    transition={{ duration: 1, delay: 1.5 }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    css={s.text3}
-                >
-                    <div>건강한 신체, 체력 향상, 목표</div>
-                    <div>달성하기 위한 기본입니다</div>
-                </motion.div>
-                <motion.div
-                    transition={{ duration: 1, delay: 2 }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    css={s.text4}
-                >
-                    Be a man at Pre-Dev
+                    <div>{displayText1}</div>
+                    <div>{displayText2}</div>
                 </motion.div>
             </div>
             <div css={s.box2}>

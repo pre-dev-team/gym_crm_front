@@ -11,6 +11,13 @@ export const background = css`
 `;
 
 export const box1 = css`
+    @font-face {
+        font-family: "establishRetrosansOTF";
+        src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRetrosansOTF.woff")
+            format("woff");
+        font-weight: normal;
+        font-style: normal;
+    }
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -18,6 +25,7 @@ export const box1 = css`
     align-items: center;
     color: white;
     font-size: 25px;
+    font-family: "establishRetrosansOTF";
     text-align: center;
     & > img {
         height: 30%;
@@ -25,23 +33,27 @@ export const box1 = css`
 `;
 
 export const text1 = css`
-    width: 100%;
+    text-align: left;
+    padding-top: 30px;
+    width: 80%;
     height: 130px;
     font-size: 24px;
     margin-top: 20px;
     font-weight: 500;
 `;
 export const text2 = css`
-    width: 100%;
+    margin-top: 100px;
+    width: 80%;
     height: 100px;
-    font-size: 36px;
-    font-weight: 700;
-    text-align: center;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 500;
 `;
 export const text3 = css`
     width: 100%;
     height: 100px;
     font-size: 14px;
+    font-weight: 500;
     text-align: center;
 `;
 export const logo = css`
@@ -54,7 +66,7 @@ export const logo = css`
 export const text4 = css`
     width: 100%;
     font-size: 36px;
-    font-weight: 700;
+    font-weight: 500;
 `;
 
 export const box2 = css`

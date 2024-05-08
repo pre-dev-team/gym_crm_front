@@ -12,8 +12,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 function UserSignupPage() {
     const [agreed, setAgreed] = useRecoilState(agreedState);
-    const [username, usernameChange, usernameMessage, setUsername, setUsernameMessage] = useInput("username");
-    const [password, passwordChange, passwordMessage, setPassword] = useInput("password");
+    const [username, usernameChange, usernameMessage, , setUsernameMessage] = useInput("username");
+    const [password, passwordChange, passwordMessage] = useInput("password");
     const [checkPassword, checkPasswordChange] = useInput("checkPassword");
     const [name, nameChange, nameMessage, setName] = useInput("name");
     const [phone, phoneChange, phoneMessage, setPhone] = useInput("phone");
