@@ -13,6 +13,17 @@ function MakeReviewModal({ accountId, trainerId, isReviewModalOpen, setIsReviewM
         setText(() => e.target.value);
     };
 
+    useEffect(() => {
+        const escModalClose = (e) => {
+            if (e.key === "Escape") {
+                setIsReviewModalOpen(() => false);
+            }
+        };
+
+        window.addEventListener("keydown", escModalClose);
+        return () => window.removeEventListener("keydown", escModalClose);
+    }, [isReviewModalOpen]);
+
     const reviewSubmitMutation = useMutation({
         mutationKey: "reviewSubmitMutation",
         mutationFn: userReviewRequest,
