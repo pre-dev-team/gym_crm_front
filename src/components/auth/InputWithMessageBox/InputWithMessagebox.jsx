@@ -1,9 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { motion } from "framer-motion";
+import { forwardRef } from "react";
 import { MdErrorOutline, MdCheckCircleOutline } from "react-icons/md";
 
-function InputWithMessagebox({ message, type, placeholder, value, ref, name, onChange }) {
+const InputWithMessagebox = forwardRef(({ type, name, value, placeholder, onChange, message }, ref) => {
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            ref.current.click();
+        }
+    };
+
     return (
         <div css={s.layout}>
             <div css={s.inputBox}>
@@ -11,10 +18,10 @@ function InputWithMessagebox({ message, type, placeholder, value, ref, name, onC
                     type={type}
                     name={name}
                     value={value}
-                    ref={ref}
                     placeholder={placeholder}
                     maxLength={20}
                     onChange={onChange}
+                    onKeyDown={(e) => handleKeyDown(e)}
                 />
             </div>
             {!!message && (
@@ -42,6 +49,6 @@ function InputWithMessagebox({ message, type, placeholder, value, ref, name, onC
             )}
         </div>
     );
-}
+});
 
 export default InputWithMessagebox;

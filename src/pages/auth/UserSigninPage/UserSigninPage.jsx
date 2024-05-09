@@ -9,11 +9,12 @@ import naverImg from "../../../assets/icons/naver.png";
 import kakaoImg from "../../../assets/icons/kakao.png";
 import { useMutation } from "react-query";
 import { SigninRequest } from "../../../apis/api/signin";
+import { useRef } from "react";
 
 function UserSigninPage(props) {
-    const [username, usernameChange, usernameMessage, setUsername] = useInput();
-    const [password, passwordChange, passwordMessage, setPassword] = useInput();
-
+    const [username, usernameChange] = useInput();
+    const [password, passwordChange] = useInput();
+    const clickRef = useRef();
     const userSigninMutation = useMutation({
         mutationKey: "userSigninMutation",
         mutationFn: SigninRequest,
@@ -72,10 +73,13 @@ function UserSigninPage(props) {
                             value={password}
                             placeholder={"비밀번호"}
                             onChange={passwordChange}
+                            ref={clickRef}
                         />
                     </div>
                     <div css={s.buttonBox}>
-                        <button onClick={handleLoginClick}>로그인</button>
+                        <button onClick={handleLoginClick} ref={clickRef}>
+                            로그인
+                        </button>
                     </div>
                     <div css={s.searchBox}>
                         <Link to={"/auth/user/search/username"}>아이디찾기</Link>
