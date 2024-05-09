@@ -9,6 +9,7 @@ export const layout = (isOpen) => css`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 5px;
     width: ${isOpen ? "370px" : "0px"};
     height: ${isOpen ? "500px" : "0px"};
     background-color: #494949;
@@ -23,12 +24,17 @@ export const tableBox = css`
     height: 20%;
     overflow-y: scroll;
     margin-bottom: 5px;
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #2f3542;
+    }
 `;
 export const table = css`
     width: 100%;
     text-align: center;
     color: #fafafa;
-
     & td > button:hover {
         cursor: pointer;
     }

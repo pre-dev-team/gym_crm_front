@@ -57,7 +57,7 @@ function UserInbodyModal({ accountId, isInbodyModalOpen, setIsInbodyModalOpen })
                             <th>체중</th>
                             <th>골격근량</th>
                             <th>체지방량</th>
-                            <th>스캔조회</th>
+                            <th>조회</th>
                         </tr>
                     </thead>
                     <tbody>
