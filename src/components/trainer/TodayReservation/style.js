@@ -46,23 +46,19 @@ export const body = css`
         border: none;
         width: 80px;
         height: 20px;
-        background-color: #a5c9ff;
         cursor: pointer;
-        &:hover {
-            background-color: #65a2ff;
-        }
     }
 `;
 
-export const tr = (isReservedTimeToday, isReservedTimeTomorrow) => css`
+export const tr = (isReservedTimeToday, isReservedTimeTomorrow, randomColor) => css`
     & td:nth-of-type(2),
     & td:nth-of-type(3),
     & td:nth-of-type(4) {
-        background-color: ${isReservedTimeToday ? "#A5C9FF" : "none"};
+        background-color: ${isReservedTimeToday ? randomColor : "none"};
     }
     & td:nth-of-type(5),
     & td:nth-of-type(6),
     & td:nth-of-type(7) {
-        background-color: ${isReservedTimeTomorrow ? "#A5C9FF" : "none"};
+        background-color: ${isReservedTimeTomorrow ? randomColor : "none"};
     }
 `;

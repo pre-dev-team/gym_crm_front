@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StarScore from "../../../common/StarScore/StarScore";
 import * as s from "./style";
 import { motion } from "framer-motion";
@@ -12,6 +12,17 @@ function MakeReviewModal({ accountId, trainerId, isReviewModalOpen, setIsReviewM
     const handleTextChane = (e) => {
         setText(() => e.target.value);
     };
+
+    useEffect(() => {
+        const escModalClose = (e) => {
+            if (e.key === "Escape") {
+                setIsReviewModalOpen(() => false);
+            }
+        };
+
+        window.addEventListener("keydown", escModalClose);
+        return () => window.removeEventListener("keydown", escModalClose);
+    }, [isReviewModalOpen]);
 
     const reviewSubmitMutation = useMutation({
         mutationKey: "reviewSubmitMutation",

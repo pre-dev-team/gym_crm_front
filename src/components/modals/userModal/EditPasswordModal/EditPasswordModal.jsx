@@ -6,13 +6,25 @@ import * as s from "./style";
 import { motion } from "framer-motion";
 
 import { editUserPasswordRequest } from "../../../../apis/api/account";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 function EditPasswordModal({ accountId, isPasswordModalOpen, setIsPasswordModalOpen }) {
     const [prevPassword, handlePrevPasswordChange, prevPasswordMessage] = useInput();
     const [password, handlePasswordChange, passwordMessage, setPassword] = useInput("password");
-    const [checkPassword, handleCheckPasswordChange, checkPasswordMessage, setCheckPassword, setCheckPasswordMessage] =
-        useInput();
+    const [checkPassword, handleCheckPasswordChange, checkPasswordMessage, , setCheckPasswordMessage] = useInput();
+    const buttonRef = useRef();
+
+    useEffect(() => {
+        const escModalClose = (e) => {
+            if (e.key === "Escape") {
+                setIsPasswordModalOpen(() => false);
+            }
+        };
+
+        window.addEventListener("keydown", escModalClose);
+        return () => window.removeEventListener("keydown", escModalClose);
+    }, [isPasswordModalOpen]);
+
     const editPasswordMutation = useMutation({
         mutationKey: "editPasswordMutation",
         mutationFn: editUserPasswordRequest,
@@ -88,10 +100,13 @@ function EditPasswordModal({ accountId, isPasswordModalOpen, setIsPasswordModalO
                         onChange={handleCheckPasswordChange}
                         message={checkPasswordMessage}
                         name={"checkpassword"}
+                        ref={buttonRef}
                     />
                 </div>
                 <div css={s.buttonBox}>
-                    <button onClick={handleEditPasswordClick}>변경하기</button>
+                    <button onClick={handleEditPasswordClick} ref={buttonRef}>
+                        변경하기
+                    </button>
                     <button onClick={() => setIsPasswordModalOpen(() => false)}>닫기</button>
                 </div>
             </div>

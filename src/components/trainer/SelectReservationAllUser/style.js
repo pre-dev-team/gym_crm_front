@@ -30,13 +30,14 @@ export const table = css`
         border: 1px solid #dbdbdb;
     }
     & th:nth-of-type(1) {
-        width: 100px;
+        width: 120px;
     }
     & th:nth-of-type(2) {
         width: 140px;
     }
     & td {
         width: 80px;
+        height: 20px;
         display: flex;
         flex-direction: row;
         justify-content: center;

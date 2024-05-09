@@ -2,42 +2,40 @@
 import AdminModalLayout from "../AdminModalLayout/AdminModalLayout";
 import * as s from "./style";
 import useAdminHolidayApis from "../../../../hooks/useAdminHolidayApis";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { decideHolidayAppliesRequest } from "../../../../apis/api/admin";
 
 function AdminHolidayModal({ isOpen, setIsAdminHolidayModalOpen, clickedTrainerId, setClickedTrainerId }) {
     const { unconfirmedHolidayApplies, confirmedHolidayApplies } = useAdminHolidayApis(clickedTrainerId);
-
+    const queryClient = useQueryClient();
     const decideHolidayAppliesMutation = useMutation({
         mutationFn: decideHolidayAppliesRequest,
         mutationKey: "decideHolidayAppliesMutation",
         retry: 0,
         onSuccess: (response) => {
             alert("확인되었습니다.");
-            window.location.reload();
+            queryClient.invalidateQueries("getUnconfirmedHolidayAppliesQuery");
+            queryClient.invalidateQueries("getConfirmedHolidayAppliesQuery");
         },
     });
 
     const handleConfirmClick = (trainerId, holidayDate) => {
         if (window.confirm("승인하시겠습니까?")) {
-            console.log({
-                trainerId: trainerId,
-                holidayDate: holidayDate,
-                status: true,
-            });
             decideHolidayAppliesMutation.mutate({
                 trainerId: trainerId,
                 holidayDate: holidayDate,
                 status: true,
             });
-        } else {
-            if (window.confirm("반려하시겠습니까?")) {
-                decideHolidayAppliesMutation.mutate({
-                    trainerId: trainerId,
-                    holidayDate: holidayDate,
-                    status: false,
-                });
-            }
+        }
+    };
+
+    const handleDenyClick = (trainerId, holidayDate) => {
+        if (window.confirm("반려하시겠습니까?")) {
+            decideHolidayAppliesMutation.mutate({
+                trainerId: trainerId,
+                holidayDate: holidayDate,
+                status: false,
+            });
         }
     };
 
@@ -53,7 +51,8 @@ function AdminHolidayModal({ isOpen, setIsAdminHolidayModalOpen, clickedTrainerI
                                 <th>이름</th>
                                 <th>신청일자</th>
                                 <th>시간</th>
-                                <th>상태</th>
+                                <th>승인</th>
+                                <th>반려</th>
                             </tr>
                             {unconfirmedHolidayApplies.map((holiday, index) => {
                                 return (
@@ -71,7 +70,14 @@ function AdminHolidayModal({ isOpen, setIsAdminHolidayModalOpen, clickedTrainerI
                                                     handleConfirmClick(holiday.trainerId, holiday.holidayDate)
                                                 }
                                             >
-                                                승인대기중
+                                                승인
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button
+                                                onClick={() => handleDenyClick(holiday.trainerId, holiday.holidayDate)}
+                                            >
+                                                반려
                                             </button>
                                         </td>
                                     </tr>

@@ -2,12 +2,24 @@
 import { useQuery } from "react-query";
 import * as s from "./style";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { workout } from "../../../../assets/workoutImg/workoutImg";
 import { getRoutineByReservationIdRequest } from "../../../../apis/api/workout";
 
 function UserRoutineModal({ isModalOpen, setIsModalOpen, clickedReservationId }) {
     const [routines, setRoutines] = useState([]);
+
+    useEffect(() => {
+        const escModalClose = (e) => {
+            if (e.key === "Escape") {
+                setIsModalOpen(() => false);
+            }
+        };
+
+        window.addEventListener("keydown", escModalClose);
+        return () => window.removeEventListener("keydown", escModalClose);
+    }, [isModalOpen]);
+
     const getUserRoutineQuery = useQuery(
         ["getUserRoutineQuery", clickedReservationId],
         () =>
@@ -36,7 +48,7 @@ function UserRoutineModal({ isModalOpen, setIsModalOpen, clickedReservationId })
                     return (
                         <motion.div
                             css={s.routineCard}
-                            transition={{ duration: 0.2, delay: (routine.workoutRoutineOrder - 1) * 0.7 }}
+                            transition={{ duration: 0.2, delay: (routine.workoutRoutineOrder - 1) * 0.5 }}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}

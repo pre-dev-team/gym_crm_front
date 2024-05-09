@@ -1,16 +1,27 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import WorkoutSelect from "../../../trainer/WorkoutSelect/WorkoutSelect";
 import { useMutation } from "react-query";
 import { makeRoutineRequest } from "../../../../apis/api/workout";
 import { workout } from "../../../../assets/workoutImg/workoutImg";
 
-function MakeRoutineModal({ reservationId }) {
+function MakeRoutineModal({ reservationId, color }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [routineList, setRoutineList] = useState([]);
     const dragItem = useRef();
     const dragOverItem = useRef();
+
+    useEffect(() => {
+        const escKeyDown = (e) => {
+            if (e.key === "Escape") {
+                setModalOpen(() => false);
+            }
+        };
+        window.addEventListener("keydown", escKeyDown);
+
+        return () => window.removeEventListener("keydown", escKeyDown);
+    }, [modalOpen]);
 
     const dargStart = (position) => {
         dragItem.current = position;
@@ -86,7 +97,7 @@ function MakeRoutineModal({ reservationId }) {
     return (
         <>
             <div css={s.btnWrapper}>
-                <button css={s.modalOpenBtn} onClick={() => setModalOpen(true)}>
+                <button css={s.modalOpenBtn(color)} onClick={() => setModalOpen(true)}>
                     루틴 생성
                 </button>
             </div>

@@ -21,8 +21,14 @@ function MyMembers({ membersList, accountId }) {
                     {membersList.map((member) => (
                         <tr key={member.userId}>
                             <td>{member.name}</td>
-                            <td><MyMembersModal accountId={accountId} userId={member.userId} /></td>
-                            <td><button css={s.memeberInfoButton} onClick={() => handleInbodyClick(member.userId)}>인바디입력</button></td>
+                            <td>
+                                <MyMembersModal accountId={accountId} userId={member.userId} />
+                            </td>
+                            <td>
+                                <button css={s.memeberInfoButton} onClick={() => handleInbodyClick(member.userId)}>
+                                    인바디입력
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

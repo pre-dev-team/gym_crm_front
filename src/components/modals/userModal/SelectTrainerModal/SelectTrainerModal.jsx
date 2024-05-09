@@ -30,6 +30,17 @@ function SelectTrainerModal({ trainerId, setIsClick, prevReservationId }) {
     const accountId = usePrincipal();
     const schedule = useSchedule();
 
+    useEffect(() => {
+        const escModalClose = (e) => {
+            if (e.key === "Escape") {
+                setIsClick(() => false);
+            }
+        };
+
+        window.addEventListener("keydown", escModalClose);
+        return () => window.removeEventListener("keydown", escModalClose);
+    }, [setIsClick]);
+
     const getDayReservationQuery = useQuery(
         ["getDayReservationQuery", selectDate],
         () =>

@@ -2,7 +2,7 @@
 import * as s from "./style";
 import { motion } from "framer-motion";
 import InputWithMessagebox from "../../../components/auth/InputWithMessageBox/InputWithMessagebox";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useInput from "../../../hooks/useInput";
 import { useMutation } from "react-query";
 import { oAuth2SignupRequest, userSignupRequest } from "../../../apis/api/signup";
@@ -19,6 +19,7 @@ function UserSignupPage() {
     const [phone, phoneChange, phoneMessage, setPhone] = useInput("phone");
     const [email, emailChange, emailMessage, setEmail] = useInput("email");
     const [checkPasswordMessage, setCheckPasswordMessage] = useState(null);
+    const buttonRef = useRef();
     const [searchParams] = useSearchParams();
     const oAuth2Name = searchParams.get("name");
     const provider = searchParams.get("provider");
@@ -225,10 +226,13 @@ function UserSignupPage() {
                         placeholder="이메일"
                         onChange={emailChange}
                         message={emailMessage}
+                        ref={buttonRef}
                     />
                 </div>
                 <div css={s.buttonBox}>
-                    <button onClick={handleSubmitClick}>가입</button>
+                    <button onClick={handleSubmitClick} ref={buttonRef}>
+                        가입
+                    </button>
                 </div>
             </div>
         </motion.div>

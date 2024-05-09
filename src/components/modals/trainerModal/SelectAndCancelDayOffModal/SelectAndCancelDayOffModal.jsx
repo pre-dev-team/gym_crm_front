@@ -10,6 +10,16 @@ function SelectAndCancelDayOffModal({ accountId }) {
     const modalBackground = useRef();
     const { allHolidayList } = useTrainerApis(accountId);
     const [holidayListDayByDay, setHolidayListDayByDay] = useState([]);
+    useEffect(() => {
+        const escKeyDown = (e) => {
+            if (e.key === "Escape") {
+                setModalOpen(() => false);
+            }
+        };
+        window.addEventListener("keydown", escKeyDown);
+
+        return () => window.removeEventListener("keydown", escKeyDown);
+    }, [modalOpen]);
 
     const deleteHolidayMutation = useMutation({
         mutationKey: "deleteHolidayMutation",
@@ -25,11 +35,11 @@ function SelectAndCancelDayOffModal({ accountId }) {
     });
 
     useEffect(() => {
-        const unconfirmed = allHolidayList.filter(holiday => holiday.confirm === 0);
-        const confirmed = allHolidayList.filter(holiday => holiday.confirm === 1);
-        const dinied = allHolidayList.filter(holiday => holiday.confirm === 2);
+        const unconfirmed = allHolidayList.filter((holiday) => holiday.confirm === 0);
+        const confirmed = allHolidayList.filter((holiday) => holiday.confirm === 1);
+        const dinied = allHolidayList.filter((holiday) => holiday.confirm === 2);
 
-        setHolidayListDayByDay(() => [unconfirmed, confirmed, dinied])
+        setHolidayListDayByDay(() => [unconfirmed, confirmed, dinied]);
     }, [allHolidayList]);
 
     const handleDeleteClick = (date) => {
@@ -54,10 +64,9 @@ function SelectAndCancelDayOffModal({ accountId }) {
                     <div css={s.modalContent}>
                         <h1>연차 조회</h1>
                         <div css={s.layout}>
-
                             {holidayListDayByDay.map((list, dayIndex) => (
-                                <div css={s.tableBox}>
-                                    <table key={dayIndex} css={s.table}>
+                                <div css={s.tableBox} key={dayIndex}>
+                                    <table css={s.table}>
                                         <thead css={s.head}>
                                             <tr css={s.tr}>
                                                 <th>번호</th>
@@ -77,9 +86,7 @@ function SelectAndCancelDayOffModal({ accountId }) {
                                                         {holiday.startTimeId + 10}:00 ~ {holiday.endTimeId + 10}:00
                                                     </td>
                                                     <td>{holiday.name}</td>
-                                                    <td>
-                                                        {s.searchTypeOption2[holiday.confirm]}
-                                                    </td>
+                                                    <td>{s.searchTypeOption2[holiday.confirm]}</td>
                                                     <td>
                                                         <button
                                                             onClick={() => handleDeleteClick(holiday.holidayDate)}
@@ -94,7 +101,6 @@ function SelectAndCancelDayOffModal({ accountId }) {
                                     </table>
                                 </div>
                             ))}
-
                         </div>
                         <button css={s.modalCloseBtn} onClick={() => setModalOpen(false)}>
                             창 닫기

@@ -55,7 +55,7 @@ function TrainerInbodyInputPage() {
         uploadTask.on(
             "state_changed",
             (snapshot) => {
-                alert("업로드 중...");
+                console.log("업로드 중...");
             },
             (error) => {
                 alert("업로드 에러");
@@ -95,13 +95,6 @@ function TrainerInbodyInputPage() {
         골격근량:${inbodyInfo.muscleMass}, 
         체지방량:${inbodyInfo.fatMass}`;
         if (window.confirm(message)) {
-            console.log({
-                userId: userId,
-                inbodyImage: inbodyInfo.inbodyImage,
-                weight: inbodyInfo.weight,
-                muscleMass: inbodyInfo.muscleMass,
-                fatMass: inbodyInfo.fatMass,
-            });
             addUserInbodyInfoMutation.mutate({
                 userId: userId,
                 inbodyUrl: inbodyInfo.inbodyImage,
