@@ -43,22 +43,31 @@ export const modalCloseBtn = css`
 
 export const layout = css`
     margin: 0;
+    width: 100%;
+    height: 620px;
+`;
+
+export const tableBox = css`
+    overflow: auto;
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border: 1px solid black;
+    margin-bottom: 10px;
 `;
 
 export const table = css`
+    width: 100%;
     box-sizing: border-box;
-    border: 1px solid black;
-    width: 700px;
-    height: 600px;
 `;
 
 export const head = css`
-
+    
 `;
 
 export const tr = css`
     font-size: 20px;
-
+    position: sticky;
 `;
 
 export const btr = css`
@@ -71,11 +80,10 @@ export const btr = css`
 `;
 
 export const body = css`
-    
 `;
 
-export const searchTypeOption2 = [
-    { value: 0, label: "승인 대기 중" },
-    { value: 1, label: "승인 완료" },
-    { value: 2, label: "승인 반려" }
-];
+export const searchTypeOption2 = {
+    0 : "승인 대기 중",
+    1 : "승인 완료",
+    2 : "승인 반려",
+};

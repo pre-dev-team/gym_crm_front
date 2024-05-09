@@ -7,7 +7,12 @@ export const btnWrapper = css`
 
 export const modalOpenBtn = css`
     cursor: pointer;
-    margin-left: auto;
+    width: 100%;
+    border: none;
+    background-color: #dbdbdb;
+    &:hover {
+        background-color: #eeeeee;
+    }
 `;
 
 export const modalContainer = css`
@@ -43,9 +48,8 @@ export const modalCloseBtn = css`
 
 export const layout = css`
     margin: auto;
-    height: 100%;
+    height: 620px;
     width: 100%;
-    overflow: auto;
 `;
 
 export const test = css`
@@ -57,7 +61,6 @@ export const test = css`
 `;
 
 export const table = css`
-    box-sizing: border-box;
     width: 100%;
 `;
 
@@ -69,16 +72,13 @@ export const tr = css`
     font-size: 20px;
 `;
 
-export const btr = css`
-
-    & > td {
-        text-align: center;
-    }
-`;
-
 export const body = css`
-    height: 200px;
     text-align: center;
+    
+    & > tr > td {
+        font-size: 16px;
+        font-weight: 600;
+    }
 `;
 
 export const test2 = css`

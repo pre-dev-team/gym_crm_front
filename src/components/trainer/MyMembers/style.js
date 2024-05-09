@@ -1,28 +1,67 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-    margin: auto;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    overflow-y: auto;
+`;
+
+export const table = css`
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+    overflow: auto;
+`;
+
+export const head = css`
+    & > th {
+        border: 1px solid #939393;
+        height: 28px;
+    }
+
+    & > th:nth-of-type(1) {
+        border-left: none;
+    }
+
+    & > th:nth-of-type(3) {
+        border-right: none;
+    }
 `;
 
 export const membersBox = css`
-    box-sizing: border-box;
-    list-style-type: none;
-    padding: 0px;
-`;
 
-export const member = css`
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 10px;
-    border: 1px solid #ccc;
-    width: 250px;
-    height: 40px;
+    & > tr > td {
+        height: 23px;
+        border: 1px solid #939393;
+    }
+
+    & > tr > td:nth-of-type(1) {
+        border-left: none;
+    }
+
+    & > tr > td:nth-of-type(3) {
+        border-right: none;
+    }
+
+
+    & > tr > td:nth-of-type(2) {
+        background-color: #dbdbdb;
+    }
+
+    & > tr > td:nth-of-type(3) {
+        background-color: #dbdbdb;
+    }
+
 `;
 
 export const memeberInfoButton = css`
-    margin-left: 5px;
-    padding: 2px;
+    width: 100%;
+    border: none;
+    background-color: #dbdbdb;
+    
+    &:hover {
+        background-color: #eeeeee;
+    }
     cursor: pointer;
 `;
