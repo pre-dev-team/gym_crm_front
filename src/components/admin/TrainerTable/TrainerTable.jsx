@@ -21,7 +21,7 @@ function TrainerTable({ setIsAdminHolidayModalOpen, setClickedTrainerId }) {
         mutationFn: deleteTrainerRequest,
         retry: 0,
         onSuccess: (response) => {
-            console.log(response);
+            getAllTrainersQuery.refetch();
         },
         onError: (error) => {
             console.log(error.response.data);

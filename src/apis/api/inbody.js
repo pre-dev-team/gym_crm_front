@@ -6,7 +6,7 @@ export const getUserInbodyRequest = async (params) => {
 };
 
 export const addUserInbodyInfoRequest = async (data) => {
-    const response = await instance.post("/inbody/trainer/user", data);
+    const response = await instance.post("/inbody/trainer", data);
     return response;
 };
 

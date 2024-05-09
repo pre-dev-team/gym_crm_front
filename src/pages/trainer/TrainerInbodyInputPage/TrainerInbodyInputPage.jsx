@@ -55,7 +55,7 @@ function TrainerInbodyInputPage() {
         uploadTask.on(
             "state_changed",
             (snapshot) => {
-                alert("업로드 중...");
+                console.log("업로드 중...");
             },
             (error) => {
                 alert("업로드 에러");

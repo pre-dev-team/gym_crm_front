@@ -4,10 +4,11 @@ import * as s from "./style";
 import { storage } from "../../../apis/api/firebase/firebaseConfig";
 import { v4 as uuid } from "uuid";
 import { updateTrainerImgRequest } from "../../../apis/api/trainer";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 function TrainerProfile({ trainerProfile, setTrainerProfile, accountId, fileRef }) {
+    const queryClient = useQueryClient();
     const { name, phone, email, username, trainerProfileImgUrl } = trainerProfile;
 
     const trainerImgMutation = useMutation({
@@ -15,16 +16,7 @@ function TrainerProfile({ trainerProfile, setTrainerProfile, accountId, fileRef 
         mutationFn: updateTrainerImgRequest,
         retry: 0,
         onSuccess: (response) => {
-            setTrainerProfile((prev) => {
-                return {
-                    ...prev,
-                    trainerProfileImgUrl: response.data,
-                };
-            });
-            alert("3초후 새로고침할거임");
-            setTimeout(() => {
-                window.location.reload();
-            }, [3000]);
+            queryClient.invalidateQueries(["trainerInfoQuery"]);
         },
     });
 
@@ -46,8 +38,8 @@ function TrainerProfile({ trainerProfile, setTrainerProfile, accountId, fileRef 
 
         uploadTask.on(
             "state_changed",
-            (snapshot) => { },
-            (error) => { },
+            (snapshot) => {},
+            (error) => {},
             () => {
                 alert("업로드를 완료하셨습니다.");
                 getDownloadURL(storageRef).then((url) => {
