@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import WorkoutSelect from "../../../trainer/WorkoutSelect/WorkoutSelect";
 import { useMutation } from "react-query";
 import { makeRoutineRequest } from "../../../../apis/api/workout";
@@ -11,6 +11,17 @@ function MakeRoutineModal({ reservationId, color }) {
     const [routineList, setRoutineList] = useState([]);
     const dragItem = useRef();
     const dragOverItem = useRef();
+
+    useEffect(() => {
+        const escKeyDown = (e) => {
+            if (e.key === "Escape") {
+                setModalOpen(() => false);
+            }
+        };
+        window.addEventListener("keydown", escKeyDown);
+
+        return () => window.removeEventListener("keydown", escKeyDown);
+    }, [modalOpen]);
 
     const dargStart = (position) => {
         dragItem.current = position;

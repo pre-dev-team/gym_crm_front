@@ -11,6 +11,16 @@ function MyMembersModal({ accountId, userId }) {
     const modalBackground = useRef();
     const [userInformationList, setUserInformationList] = useState([]);
     const [inbodyInformation, setInbodyInformation] = useState([]);
+    useEffect(() => {
+        const escKeyDown = (e) => {
+            if (e.key === "Escape") {
+                setModalOpen(() => false);
+            }
+        };
+        window.addEventListener("keydown", escKeyDown);
+
+        return () => window.removeEventListener("keydown", escKeyDown);
+    }, [modalOpen]);
 
     const userInformationQuery = useQuery(
         ["userInformationQuery", userId],

@@ -14,6 +14,17 @@ function SelectRoutineModal({ reservationId, color }) {
         getRoutineByReservationIdQuery.refetch();
     };
 
+    useEffect(() => {
+        const escKeyDown = (e) => {
+            if (e.key === "Escape") {
+                setModalOpen(() => false);
+            }
+        };
+        window.addEventListener("keydown", escKeyDown);
+
+        return () => window.removeEventListener("keydown", escKeyDown);
+    }, [modalOpen]);
+
     const getRoutineByReservationIdQuery = useQuery(
         ["getRoutineByReservationIdQuery"],
         () =>

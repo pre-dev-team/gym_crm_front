@@ -10,6 +10,16 @@ function SelectAndCancelDayOffModal({ accountId }) {
     const modalBackground = useRef();
     const { allHolidayList } = useTrainerApis(accountId);
     const [holidayListDayByDay, setHolidayListDayByDay] = useState([]);
+    useEffect(() => {
+        const escKeyDown = (e) => {
+            if (e.key === "Escape") {
+                setModalOpen(() => false);
+            }
+        };
+        window.addEventListener("keydown", escKeyDown);
+
+        return () => window.removeEventListener("keydown", escKeyDown);
+    }, [modalOpen]);
 
     const deleteHolidayMutation = useMutation({
         mutationKey: "deleteHolidayMutation",
