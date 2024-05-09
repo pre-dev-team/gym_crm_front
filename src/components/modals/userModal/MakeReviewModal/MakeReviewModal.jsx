@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StarScore from "../../../common/StarScore/StarScore";
 import * as s from "./style";
 import { motion } from "framer-motion";
