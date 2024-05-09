@@ -55,8 +55,7 @@ function MainPage(props) {
     };
 
     useEffect(() => {
-        const text1 = `"PRE-DEV와 함께 성장의`;
-        const text2 = `한계를 넘어서세요"`;
+        const text1 = `"PRE-DEV와 함께 성장의 한계를 넘어서세요"`;
         const title = `PRE-DEV`;
         const typingTitle = async () => {
             for (let i = 0; i < title.length; i++) {
@@ -69,13 +68,6 @@ function MainPage(props) {
             for (let i = 0; i < text1.length; i++) {
                 await new Promise((resolve) => setTimeout(resolve, 100));
                 setText1(text1.slice(0, i + 1));
-            }
-            typingText2();
-        };
-        const typingText2 = async () => {
-            for (let i = 0; i < text2.length; i++) {
-                await new Promise((resolve) => setTimeout(resolve, 100));
-                setText2(text2.slice(0, i + 1));
             }
         };
         typingTitle();
@@ -95,16 +87,10 @@ function MainPage(props) {
                     css={s.text1}
                 >
                     <div>{displayTitle}</div>
-                </motion.div>
-                <motion.div
-                    transition={{ duration: 1, delay: 0 }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    css={s.text2}
-                >
-                    <div>{displayText1}</div>
-                    <div>{displayText2}</div>
+                    <div css={s.text2}>
+                        <div>{displayText1}</div>
+                        <div>{displayText2}</div>
+                    </div>
                 </motion.div>
             </div>
             <div css={s.box2}>
