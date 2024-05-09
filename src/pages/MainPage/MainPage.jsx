@@ -9,7 +9,8 @@ import logo from "../../assets/image/test3.jpg";
 // 메인페이지입니다
 
 function MainPage(props) {
-    const [displayText1, setText] = useState("");
+    const [displayTitle, setTitle] = useState("");
+    const [displayText1, setText1] = useState("");
     const [displayText2, setText2] = useState("");
     const backgoundRef = useRef();
     const handleOnWheel = (e) => {
@@ -54,22 +55,30 @@ function MainPage(props) {
     };
 
     useEffect(() => {
-        const text = `"PRE-DEV와 함께 근성장의 한계를 넘어서세요"`;
-        const text2 = `PRE-DEV`;
-        const animateText = async () => {
-            for (let i = 0; i < text.length; i++) {
+        const text1 = `"PRE-DEV와 함께 성장의`;
+        const text2 = `한계를 넘어서세요"`;
+        const title = `PRE-DEV`;
+        const typingTitle = async () => {
+            for (let i = 0; i < title.length; i++) {
                 await new Promise((resolve) => setTimeout(resolve, 100));
-                setText(text.slice(0, i + 1));
+                setTitle(title.slice(0, i + 1));
             }
+            typingText1();
         };
-        const animateText2 = async () => {
+        const typingText1 = async () => {
+            for (let i = 0; i < text1.length; i++) {
+                await new Promise((resolve) => setTimeout(resolve, 100));
+                setText1(text1.slice(0, i + 1));
+            }
+            typingText2();
+        };
+        const typingText2 = async () => {
             for (let i = 0; i < text2.length; i++) {
                 await new Promise((resolve) => setTimeout(resolve, 100));
                 setText2(text2.slice(0, i + 1));
             }
         };
-        animateText();
-        animateText2();
+        typingTitle();
     }, []);
 
     return (
@@ -85,7 +94,7 @@ function MainPage(props) {
                     exit={{ opacity: 0 }}
                     css={s.text1}
                 >
-                    <div>{displayText2}</div>
+                    <div>{displayTitle}</div>
                 </motion.div>
                 <motion.div
                     transition={{ duration: 1, delay: 0 }}
@@ -95,6 +104,7 @@ function MainPage(props) {
                     css={s.text2}
                 >
                     <div>{displayText1}</div>
+                    <div>{displayText2}</div>
                 </motion.div>
             </div>
             <div css={s.box2}>

@@ -46,7 +46,7 @@ export const text1 = css`
     padding-top: 100px;
     width: 80%;
     height: 130px;
-    font-size: 50px;
+    font-size: 60px;
     margin-top: 20px;
     font-weight: 500;
 `;
@@ -54,8 +54,8 @@ export const text2 = css`
     margin-top: 200px;
     width: 80%;
     height: 100px;
-    text-align: left;
-    font-size: 28px;
+    text-align: center;
+    font-size: 26px;
     font-weight: 500;
 `;
 export const text3 = css`
