@@ -37,14 +37,16 @@ export const btnWrapper = css`
     justify-content: center;
 `;
 
-export const modalOpenBtn = css`
+export const modalOpenBtn = (color) => css`
     cursor: pointer;
     margin-left: auto;
-    background-color: #a5c9ff;
+    background-color: ${color};
     border: none;
     width: 80px;
     &:hover {
-        background-color: #65a2ff;
+        background-color: ${color};
+        font-weight: 1000;
+        font-size: 14px;
     }
 `;
 

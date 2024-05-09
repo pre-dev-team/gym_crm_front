@@ -6,7 +6,7 @@ import { useMutation } from "react-query";
 import { makeRoutineRequest } from "../../../../apis/api/workout";
 import { workout } from "../../../../assets/workoutImg/workoutImg";
 
-function MakeRoutineModal({ reservationId }) {
+function MakeRoutineModal({ reservationId, color }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [routineList, setRoutineList] = useState([]);
     const dragItem = useRef();
@@ -86,7 +86,7 @@ function MakeRoutineModal({ reservationId }) {
     return (
         <>
             <div css={s.btnWrapper}>
-                <button css={s.modalOpenBtn} onClick={() => setModalOpen(true)}>
+                <button css={s.modalOpenBtn(color)} onClick={() => setModalOpen(true)}>
                     루틴 생성
                 </button>
             </div>

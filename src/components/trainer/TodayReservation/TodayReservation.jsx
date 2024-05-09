@@ -6,8 +6,9 @@ import MakeRoutineModal from "../../modals/trainerModal/MakeRoutineModal/MakeRou
 import { getTodayReservationRequest } from "../../../apis/api/reservation";
 import { timeList } from "./time";
 import SelectRoutineModal from "../../modals/trainerModal/SelectRoutineModal/SelectRoutineModal";
+import { randomColor } from "../../../constants/color";
 
-function TodayReservation({ trainerId }) {
+function TodayReservation({ trainerId, color }) {
     const [today, setToday] = useState(new Date());
     const [todayReservations, setTodayReservations] = useState([]);
     const [tomorrowReservations, setTomorrowReservations] = useState([]);
@@ -75,6 +76,7 @@ function TodayReservation({ trainerId }) {
                 </thead>
                 <tbody css={s.body}>
                     {timeList.map((time) => {
+                        const color = randomColor.get();
                         const reservationTodayThisTime = todayReservations.filter(
                             (reservation) => reservation.timeId === time.id
                         );
@@ -84,7 +86,7 @@ function TodayReservation({ trainerId }) {
                         );
                         const isReservedTimeTomorrow = reservationTommorowThisTime.length !== 0;
                         return (
-                            <tr key={time.id} css={s.tr(isReservedTimeToday, isReservedTimeTomorrow)}>
+                            <tr key={time.id} css={s.tr(isReservedTimeToday, isReservedTimeTomorrow, color)}>
                                 <td>{time.value}</td>
                                 {isReservedTimeToday ? (
                                     // 오늘 시간대가 예약되었을 때
@@ -92,11 +94,13 @@ function TodayReservation({ trainerId }) {
                                         <td>{reservationTodayThisTime[0].name}</td>
                                         <td>
                                             <SelectRoutineModal
+                                                color={color}
                                                 reservationId={reservationTodayThisTime[0].reservationId}
                                             />
                                         </td>
                                         <td>
                                             <MakeRoutineModal
+                                                color={color}
                                                 reservationId={reservationTodayThisTime[0].reservationId}
                                             />
                                         </td>

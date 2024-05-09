@@ -6,7 +6,7 @@ import { useMutation, useQuery } from "react-query";
 import { editRoutineRequest, getRoutineByReservationIdRequest } from "../../../../apis/api/workout";
 import { workout } from "../../../../assets/workoutImg/workoutImg";
 
-function SelectRoutineModal({ reservationId }) {
+function SelectRoutineModal({ reservationId, color }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [routineList, setRoutineList] = useState([]);
     const handleModalOpenClick = () => {
@@ -14,9 +14,6 @@ function SelectRoutineModal({ reservationId }) {
         getRoutineByReservationIdQuery.refetch();
     };
 
-    useEffect(() => {
-        console.log(routineList);
-    }, [routineList]);
     const getRoutineByReservationIdQuery = useQuery(
         ["getRoutineByReservationIdQuery"],
         () =>
@@ -116,7 +113,7 @@ function SelectRoutineModal({ reservationId }) {
     return (
         <>
             <div css={s.btnWrapper}>
-                <button css={s.modalOpenBtn} onClick={handleModalOpenClick}>
+                <button css={s.modalOpenBtn(color)} onClick={handleModalOpenClick}>
                     루틴 조회
                 </button>
             </div>
