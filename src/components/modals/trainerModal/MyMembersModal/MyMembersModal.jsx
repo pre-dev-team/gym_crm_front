@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import * as s from "./style";
 import { useQuery } from "react-query";
 import { selectMymemberInformationRequest } from "../../../../apis/api/reservation";

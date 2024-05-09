@@ -59,8 +59,6 @@ function UserReservationPage(props) {
         }
     }, [selectDate, selectTimeId, reservedTimeId]);
 
-    // #########################################클릭 핸들러######################################### //
-
     const handleTimeClick = (timeId) => {
         setSelectTimeId(() => timeId);
         if (selectTimeId === timeId) {

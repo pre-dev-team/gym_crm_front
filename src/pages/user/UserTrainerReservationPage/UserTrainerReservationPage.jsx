@@ -2,8 +2,6 @@
 import * as s from "./style";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import "react-datepicker/dist/react-datepicker.css";
-import "dayjs/locale/ko";
 import { useQuery } from "react-query";
 import { getTrainersRequest } from "../../../apis/api/trainer";
 import TrainerCardForReservation from "../../../components/TrainerCardForReservation/TrainerCardForReservation";
@@ -13,6 +11,7 @@ function UserTrainerReservationPage(props) {
     const [trainers, setTrainers] = useState([]);
     const [isClick, setIsClick] = useState(false);
     const [selectTrainerId, setSelectTrainerId] = useState(0);
+
     const getTrainers = useQuery(["getTrainers"], getTrainersRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
