@@ -3,12 +3,15 @@ import * as s from "./style";
 import { motion } from "framer-motion";
 import KakaoMapAPI from "../../components/main/KakaoMapAPI/KakaoMapAPI";
 import ReviewAll from "../../components/main/ReviewAll/ReviewAll";
-import { useRef } from "react";
-import logo from "../../assets/image/test.png";
+import { useEffect, useRef, useState } from "react";
+import logo from "../../assets/image/test3.jpg";
 
 // 메인페이지입니다
 
 function MainPage(props) {
+    const [displayTitle, setTitle] = useState("");
+    const [displayText1, setText1] = useState("");
+    const [displayText2, setText2] = useState("");
     const backgoundRef = useRef();
     const handleOnWheel = (e) => {
         const { deltaY } = e;
@@ -51,8 +54,38 @@ function MainPage(props) {
         }
     };
 
+    useEffect(() => {
+        const text1 = `"PRE-DEV와 함께 성장의`;
+        const text2 = `한계를 넘어서세요"`;
+        const title = `PRE-DEV`;
+        const typingTitle = async () => {
+            for (let i = 0; i < title.length; i++) {
+                await new Promise((resolve) => setTimeout(resolve, 100));
+                setTitle(title.slice(0, i + 1));
+            }
+            typingText1();
+        };
+        const typingText1 = async () => {
+            for (let i = 0; i < text1.length; i++) {
+                await new Promise((resolve) => setTimeout(resolve, 100));
+                setText1(text1.slice(0, i + 1));
+            }
+            typingText2();
+        };
+        const typingText2 = async () => {
+            for (let i = 0; i < text2.length; i++) {
+                await new Promise((resolve) => setTimeout(resolve, 100));
+                setText2(text2.slice(0, i + 1));
+            }
+        };
+        typingTitle();
+    }, []);
+
     return (
         <div onWheel={handleOnWheel} ref={backgoundRef} css={s.background}>
+            <div css={s.imgBox}>
+                <img src={logo} />
+            </div>
             <div css={s.box1}>
                 <motion.div
                     transition={{ duration: 1, delay: 0 }}
@@ -61,46 +94,17 @@ function MainPage(props) {
                     exit={{ opacity: 0 }}
                     css={s.text1}
                 >
-                    <div>@team-pre-dev</div>
-                    <div>WELCOME to Pre-Dev!</div>
+                    <div>{displayTitle}</div>
                 </motion.div>
                 <motion.div
-                    transition={{ duration: 1, delay: 0.5 }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    css={s.logo}
-                >
-                    <img src={logo} alt="" />
-                </motion.div>
-                <motion.div
-                    transition={{ duration: 1, delay: 1 }}
+                    transition={{ duration: 1, delay: 0 }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     css={s.text2}
                 >
-                    <div>Real Man</div>
-                    <div>Workout-verse</div>
-                </motion.div>
-                <motion.div
-                    transition={{ duration: 1, delay: 1.5 }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    css={s.text3}
-                >
-                    <div>건강한 신체, 체력 향상, 목표</div>
-                    <div>달성하기 위한 기본입니다</div>
-                </motion.div>
-                <motion.div
-                    transition={{ duration: 1, delay: 2 }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    css={s.text4}
-                >
-                    Be a man at Pre-Dev
+                    <div>{displayText1}</div>
+                    <div>{displayText2}</div>
                 </motion.div>
             </div>
             <div css={s.box2}>

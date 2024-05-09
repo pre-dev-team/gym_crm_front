@@ -10,7 +10,27 @@ export const background = css`
     }
 `;
 
+export const imgBox = css`
+    position: absolute;
+    height: 100%;
+    z-index: 1;
+    & > img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        opacity: 0.2;
+    }
+`;
+
 export const box1 = css`
+    @font-face {
+        font-family: "establishRetrosansOTF";
+        src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRetrosansOTF.woff")
+            format("woff");
+        font-weight: normal;
+        font-style: normal;
+    }
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -18,30 +38,31 @@ export const box1 = css`
     align-items: center;
     color: white;
     font-size: 25px;
+    font-family: "establishRetrosansOTF";
     text-align: center;
-    & > img {
-        height: 30%;
-    }
 `;
 
 export const text1 = css`
-    width: 100%;
+    padding-top: 100px;
+    width: 80%;
     height: 130px;
-    font-size: 24px;
+    font-size: 60px;
     margin-top: 20px;
     font-weight: 500;
 `;
 export const text2 = css`
-    width: 100%;
+    margin-top: 200px;
+    width: 80%;
     height: 100px;
-    font-size: 36px;
-    font-weight: 700;
     text-align: center;
+    font-size: 26px;
+    font-weight: 500;
 `;
 export const text3 = css`
     width: 100%;
     height: 100px;
     font-size: 14px;
+    font-weight: 500;
     text-align: center;
 `;
 export const logo = css`
@@ -54,7 +75,7 @@ export const logo = css`
 export const text4 = css`
     width: 100%;
     font-size: 36px;
-    font-weight: 700;
+    font-weight: 500;
 `;
 
 export const box2 = css`
