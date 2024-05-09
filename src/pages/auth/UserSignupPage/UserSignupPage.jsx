@@ -68,7 +68,7 @@ function UserSignupPage() {
         onSuccess: (response) => {
             console.log(response);
             alert("회원가입 성공");
-            window.location.replace("/");
+            window.location.replace("/auth/user/signin");
         },
         onError: (error) => {
             if (error.response.status === 400) {
