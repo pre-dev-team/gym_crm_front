@@ -9,10 +9,17 @@ import { useNavigate } from "react-router-dom";
 function UserInbodyModal({ accountId, isInbodyModalOpen, setIsInbodyModalOpen }) {
     const [inbodyInfos, setInbodyInfos] = useState([]);
     const [selectedInbodyImgUrl, setSelectedInbodyImgUrl] = useState("");
-    const navigator = useNavigate();
+
     useEffect(() => {
-        console.log(selectedInbodyImgUrl);
-    }, [selectedInbodyImgUrl]);
+        const escModalClose = (e) => {
+            if (e.key === "Escape") {
+                setIsInbodyModalOpen(() => false);
+            }
+        };
+
+        window.addEventListener("keydown", escModalClose);
+        return () => window.removeEventListener("keydown", escModalClose);
+    }, [isInbodyModalOpen]);
 
     const getUserInbodyQuery = useQuery(
         ["getUserInbodyQuery"],
