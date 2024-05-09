@@ -29,7 +29,6 @@ const useWorkouts = (categoryId) => {
             onError: (error) => {
                 console.log(error);
             },
-            // enabled:!!categoryId
         }
     );
 

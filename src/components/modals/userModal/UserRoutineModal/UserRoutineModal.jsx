@@ -1,10 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import * as s from "./style";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { getUserInbodyRequest } from "../../../../apis/api/inbody";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { workout } from "../../../../assets/workoutImg/workoutImg";
 import { getRoutineByReservationIdRequest } from "../../../../apis/api/workout";
 

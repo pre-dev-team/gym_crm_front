@@ -7,6 +7,8 @@ import * as s from "./style";
 import { useMutation } from "react-query";
 import { deleteUserAccountRequest } from "../../../apis/api/account";
 import usePrincipal from "../../../hooks/usePrincipal";
+
+
 function UserResignPage(props) {
     const userAccountId = usePrincipal();
     const [check, setCheck] = useState({

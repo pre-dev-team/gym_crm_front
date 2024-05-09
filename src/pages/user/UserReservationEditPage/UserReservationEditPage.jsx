@@ -2,19 +2,11 @@
 import * as s from "./style";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import "react-datepicker/dist/react-datepicker.css";
-import "dayjs/locale/ko";
 import { useMutation, useQuery } from "react-query";
 import { cancelReservationByUserRequest, getUserAllReservationRequest } from "../../../apis/api/reservation";
 import usePrincipal from "../../../hooks/usePrincipal";
 import { dateFormatter } from "../../../utils/dateFormatter";
 import { useNavigate } from "react-router-dom";
-
-const CustomInput = ({ value, onClick }) => (
-    <button css={s.customButton} onClick={onClick}>
-        {value}
-    </button>
-);
 
 function UserReservationEditPage(props) {
     const [allUserReservations, setAllUserReservations] = useState([]);
@@ -65,8 +57,6 @@ function UserReservationEditPage(props) {
         const today = dateFormatter(new Date());
         setComingReservations(() => allUserReservations.filter((res) => res.reservationDate >= today));
     }, [allUserReservations]);
-
-    // #########################################클릭 핸들러######################################### //
 
     const handleEditClick = (reservationId) => {
         if (window.confirm("변경하시겠습니까?")) {
@@ -122,34 +112,6 @@ function UserReservationEditPage(props) {
                     })
                 )}
             </div>
-            {/* <DatePicker
-                onChange={(date) => {
-                    setSelectDate(() => date);
-                }}
-                selected={selectDate}
-                minDate={new Date()}
-                dateFormat="yyyy-MM-dd"
-                locale={ko}
-                todayButton={true}
-                customInput={<CustomInput />}
-            />
-            <div css={s.periodBox}>
-                {possibleTimes.map((time) => {
-                    return (
-                        <div
-                            key={time.timeId}
-                            onClick={() => handleTimeClick(time.timeId)}
-                            id={time.timeId}
-                            css={s.periodButton(time.timeId === selectTimeId)}
-                        >
-                            {time.timeDuration}
-                        </div>
-                    );
-                })}
-            </div>
-            <div css={s.trainerBox}>
-                <TrainerBoardForReservation accountId={accountId} selectTimeId={selectTimeId} selectDate={selectDate} />
-            </div> */}
         </motion.div>
     );
 }

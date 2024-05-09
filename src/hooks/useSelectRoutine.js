@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { findWorkoutsByWorkoutCategoryId, getCountsRequest, getWeightsRequest, getWorkoutCategoriesRequest } from "../apis/api/workout";
+import { getCountsRequest, getWeightsRequest } from "../apis/api/workout";
 
 const useSelectRoutine = (categoryId) => {
   

@@ -2,8 +2,6 @@
 import * as s from "./style";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import "react-datepicker/dist/react-datepicker.css";
-import "dayjs/locale/ko";
 import { useQuery } from "react-query";
 import { getTrainersByUserRequest } from "../../../apis/api/trainer";
 import TrainerCardForReservation from "../../../components/user/TrainerCardForReservation/TrainerCardForReservation";

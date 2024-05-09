@@ -18,13 +18,10 @@ export const storage = getStorage(app);
 export const messaging = getMessaging(app);
 
 export const requestForFCMToken = async () => {
-    console.log("requestForFCMToken 호출");
     try {
         const currentToken = await getToken(messaging, {
             vapidKey: process.env.REACT_APP_VAPID_KEY,
         });
-
-        console.log(currentToken);
 
         if (!!currentToken) {
             instance.post("/notification/register", {
@@ -34,7 +31,7 @@ export const requestForFCMToken = async () => {
             alert("토큰을 찾을 수 없습니다");
         }
     } catch (error) {
-        console.error(error);
+
     }
 };
 
@@ -44,10 +41,10 @@ export function registerServiceWorker() {
             navigator.serviceWorker
                 .register("/firebase-messaging-sw.js")
                 .then(function (registration) {
-                    console.log("Service Worker가 scope에 등록되었습니다.:", registration.scope);
+
                 })
                 .catch(function (err) {
-                    console.log("Service Worker 등록 실패:", err);
+
                 });
         });
     }
