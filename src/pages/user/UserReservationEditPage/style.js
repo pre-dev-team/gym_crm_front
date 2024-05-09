@@ -11,6 +11,9 @@ export const layout = css`
     padding: 10px;
     width: 100%;
     height: 90%;
+    & > h1 {
+        color: white;
+    }
 `;
 
 export const reservationBox = css`
@@ -42,8 +45,8 @@ export const reservationCard = css`
     box-shadow: 3px 7px 12px 3px hsla(0, 0%, 0%, 1);
     margin-bottom: 20px;
     padding: 5px;
-    width: 250px;
-    height: 100px;
+    width: 300px;
+    height: 140px;
     background-color: #dbdbdb;
 `;
 
@@ -54,32 +57,34 @@ export const table = css`
     }
     & th:nth-of-type(1),
     & td:nth-of-type(1) {
-        width: 80px;
+        width: 100px;
     }
     & th:nth-of-type(2),
     & td:nth-of-type(2) {
-        width: 80px;
+        width: 100px;
     }
     & th:nth-of-type(3),
     & td:nth-of-type(3) {
-        width: 60px;
+        width: 100px;
     }
     margin-bottom: 10px;
 `;
 
 export const buttonBox = css`
+    display: flex;
+    flex-direction: column;
     & > button {
-        width: 70px;
+        width: 200px;
         height: 30px;
         &:hover {
             cursor: pointer;
         }
     }
     & > button:nth-of-type(1) {
-        margin-right: 10px;
         &:hover {
             cursor: pointer;
         }
+        margin-bottom: 5px;
     }
 `;
 

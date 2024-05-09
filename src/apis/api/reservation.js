@@ -41,6 +41,6 @@ export const editReservationByUserRequest = async (data) => {
 };
 
 export const selectMymemberInformationRequest = async (params) => {
-    const response = await instance.get("/reservation/user/information", { params });
+    const response = await instance.get("/reservation/trainer/information", { params });
     return response;
 };

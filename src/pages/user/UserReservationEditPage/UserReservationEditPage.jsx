@@ -89,10 +89,10 @@ function UserReservationEditPage(props) {
             exit={{ opacity: 0 }}
             css={s.layout}
         >
-            <h1>나의 예약</h1>
+            <h1>예약 조회</h1>
             <div css={s.reservationBox}>
                 {comingReservations.length === 0 ? (
-                    <>예약 없음</>
+                    <h1>예약 없음</h1>
                 ) : (
                     comingReservations.map((reservation) => {
                         return (
@@ -114,42 +114,16 @@ function UserReservationEditPage(props) {
                                     </tbody>
                                 </table>
                                 <div css={s.buttonBox}>
-                                    <button onClick={() => handleEditClick(reservation.reservationId)}>변경</button>
-                                    <button onClick={() => handleCancelClick(reservation.reservationId)}>취소</button>
+                                    <button onClick={() => handleEditClick(reservation.reservationId)}>변경하기</button>
+                                    <button onClick={() => handleCancelClick(reservation.reservationId)}>
+                                        취소하기
+                                    </button>
                                 </div>
                             </div>
                         );
                     })
                 )}
             </div>
-            {/* <DatePicker
-                onChange={(date) => {
-                    setSelectDate(() => date);
-                }}
-                selected={selectDate}
-                minDate={new Date()}
-                dateFormat="yyyy-MM-dd"
-                locale={ko}
-                todayButton={true}
-                customInput={<CustomInput />}
-            />
-            <div css={s.periodBox}>
-                {possibleTimes.map((time) => {
-                    return (
-                        <div
-                            key={time.timeId}
-                            onClick={() => handleTimeClick(time.timeId)}
-                            id={time.timeId}
-                            css={s.periodButton(time.timeId === selectTimeId)}
-                        >
-                            {time.timeDuration}
-                        </div>
-                    );
-                })}
-            </div>
-            <div css={s.trainerBox}>
-                <TrainerBoardForReservation accountId={accountId} selectTimeId={selectTimeId} selectDate={selectDate} />
-            </div> */}
         </motion.div>
     );
 }

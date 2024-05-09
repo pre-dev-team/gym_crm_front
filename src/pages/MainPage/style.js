@@ -13,7 +13,6 @@ export const background = css`
 export const imgBox = css`
     position: absolute;
     height: 100%;
-    z-index: 1;
     & > img {
         display: flex;
         align-items: center;
@@ -36,6 +35,7 @@ export const box1 = css`
     width: 100%;
     height: 680px;
     align-items: center;
+    justify-content: center;
     color: white;
     font-size: 25px;
     font-family: "establishRetrosansOTF";
@@ -43,21 +43,25 @@ export const box1 = css`
 `;
 
 export const text1 = css`
-    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 80%;
     height: 130px;
     font-size: 60px;
     margin-top: 20px;
-    font-weight: 500;
+    font-weight: 300;
+    text-align: center;
 `;
+
 export const text2 = css`
-    margin-top: 200px;
     width: 80%;
     height: 100px;
     text-align: center;
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 500;
 `;
+
 export const text3 = css`
     width: 100%;
     height: 100px;
