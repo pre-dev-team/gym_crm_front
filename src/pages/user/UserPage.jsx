@@ -6,7 +6,6 @@ import UserReservationEditPage from "./UserReservationEditPage/UserReservationEd
 import UserMyPage from "./UserMyPage/UserMyPage";
 import UserResignPage from "./UserResignPage/UserResignPage";
 
-// 여기서 user관련된 모든 것 할겁니다
 function UserPage(props) {
     return (
         <Routes>

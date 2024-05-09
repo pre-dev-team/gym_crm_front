@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import * as s from "./style";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";

@@ -19,19 +19,6 @@ function SearchPasswordPage(props) {
     const [second, setSecond] = useState(180);
     const [isMailSended, setIsMailSended] = useState(false);
 
-    // useEffect(() => {
-    //     const timer = setInterval(() => {
-    //         setSecond((prevSecound) => {
-    //             if (prevSecound === 0) {
-    //                 clearInterval(timer);
-    //                 return 0;
-    //             }
-    //             return prevSecound - 1;
-    //         });
-    //     }, 1000);
-    //     return () => clearInterval(timer);
-    // }, [isMailSended]);
-
     const time = useMemo(() => {
         const timer = setInterval(() => {
             setSecond((prevSecound) => {

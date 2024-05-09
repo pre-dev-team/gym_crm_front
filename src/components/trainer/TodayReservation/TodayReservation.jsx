@@ -89,7 +89,6 @@ function TodayReservation({ trainerId, color }) {
                             <tr key={time.id} css={s.tr(isReservedTimeToday, isReservedTimeTomorrow, color)}>
                                 <td>{time.value}</td>
                                 {isReservedTimeToday ? (
-                                    // 오늘 시간대가 예약되었을 때
                                     <>
                                         <td>{reservationTodayThisTime[0].name}</td>
                                         <td>

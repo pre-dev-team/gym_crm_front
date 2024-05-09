@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useRef, useState } from "react";
 import * as s from "./style";
 import { storage } from "../../../apis/api/firebase/firebaseConfig";
 import { v4 as uuid } from "uuid";

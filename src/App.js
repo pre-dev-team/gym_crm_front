@@ -23,13 +23,11 @@ function App() {
         retry: 0,
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
-            console.log("현재권한: " + response.data.authorities[0].authority);
         },
     });
 
     useEffect(() => {
         const unsubscribe = onMessage(messaging, (payload) => {
-            console.log("온그라운드 푸쉬 알림 수신", payload);
             const notificationTitle = payload.notification.title;
             const notificationOptions = {
                 body: payload.notification.body,

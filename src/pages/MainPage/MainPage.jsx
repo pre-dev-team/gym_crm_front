@@ -6,8 +6,6 @@ import ReviewAll from "../../components/main/ReviewAll/ReviewAll";
 import { useEffect, useRef, useState } from "react";
 import logo from "../../assets/image/test3.jpg";
 
-// 메인페이지입니다
-
 function MainPage(props) {
     const [displayTitle, setTitle] = useState("");
     const [displayText1, setText1] = useState("");
