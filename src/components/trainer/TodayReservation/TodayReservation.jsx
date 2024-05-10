@@ -116,11 +116,13 @@ function TodayReservation({ trainerId }) {
                                         <td>{reservationTommorowThisTime[0].name}</td>
                                         <td>
                                             <SelectRoutineModal
+                                                color={color}
                                                 reservationId={reservationTommorowThisTime[0].reservationId}
                                             />
                                         </td>
                                         <td>
                                             <MakeRoutineModal
+                                                color={color}
                                                 reservationId={reservationTommorowThisTime[0].reservationId}
                                             />
                                         </td>

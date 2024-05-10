@@ -34,7 +34,6 @@ function SelectReservationAllUser({ accountId }) {
             refetchOnWindowFocus: false,
             enabled: false,
             onSuccess: (response) => {
-                console.log(response.data);
                 setReservationList(() => response.data);
             },
         }

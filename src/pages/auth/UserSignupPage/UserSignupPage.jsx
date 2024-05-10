@@ -67,7 +67,6 @@ function UserSignupPage() {
         mutationKey: "userSignupMutation",
         mutationFn: userSignupRequest,
         onSuccess: (response) => {
-            console.log(response);
             alert("회원가입 성공");
             window.location.replace("/auth/user/signin");
         },

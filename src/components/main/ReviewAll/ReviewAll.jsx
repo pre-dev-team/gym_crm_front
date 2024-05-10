@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from "react";
-import * as s from "./style"; // 스타일 파일 불러오기
-import { getTopRatedTrainersInformationRequest } from "../../../apis/api/review"; // 트레이너 API 함수 불러오기
+import * as s from "./style";
+import { getTopRatedTrainersInformationRequest } from "../../../apis/api/review";
 import { FaStar } from "react-icons/fa";
 import { useQuery } from "react-query";
 
@@ -14,7 +14,7 @@ const makeStarByScore = (score) => {
 };
 
 function ReviewAll(props) {
-    const [trainerReviews, setTrainerReviews] = useState([]); // 트레이너 리뷰 상태 관리
+    const [trainerReviews, setTrainerReviews] = useState([]);
 
     const getTopRatedTrainersInformationQuery = useQuery(
         ["getTopRatedTrainersInformationQuery"],

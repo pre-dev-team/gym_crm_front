@@ -35,7 +35,6 @@ function MyMembersModal({ accountId, userId }) {
             refetchOnWindowFocus: false,
             enabled: false,
             onSuccess: (response) => {
-                console.log(response.data);
                 setUserInformationList(() => response.data);
             },
         }
@@ -52,7 +51,6 @@ function MyMembersModal({ accountId, userId }) {
             refetchOnWindowFocus: false,
             enabled: !!userId,
             onSuccess: (response) => {
-                console.log(response.data);
                 setInbodyInformation(response.data);
             },
         }
