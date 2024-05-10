@@ -44,7 +44,7 @@ function UserRoutineModal({ isModalOpen, setIsModalOpen, clickedReservationId })
             css={s.layout(isModalOpen)}
         >
             <div css={s.routineCardBox}>
-                {routines.map((routine) => {
+                {routines.map((routine, index) => {
                     return (
                         <motion.div
                             css={s.routineCard}
@@ -52,6 +52,7 @@ function UserRoutineModal({ isModalOpen, setIsModalOpen, clickedReservationId })
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
+                            key={index}
                         >
                             <div css={s.indexBox}>
                                 <h1>{routine.workoutRoutineOrder}</h1>

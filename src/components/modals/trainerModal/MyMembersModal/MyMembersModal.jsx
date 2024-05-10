@@ -11,6 +11,7 @@ function MyMembersModal({ accountId, userId }) {
     const modalBackground = useRef();
     const [userInformationList, setUserInformationList] = useState([]);
     const [inbodyInformation, setInbodyInformation] = useState([]);
+    
     useEffect(() => {
         const escKeyDown = (e) => {
             if (e.key === "Escape") {
