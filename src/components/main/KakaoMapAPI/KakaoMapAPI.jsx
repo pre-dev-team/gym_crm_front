@@ -23,7 +23,7 @@ function KakaoMapAPI() {
 
                 var infowindow = new kakao.maps.InfoWindow({
                     content:
-                        '<div style="width: 150px; color: black; text-align: center; padding: 6px 0; font-size: 11px">코리아IT 피트니스(본점)</div>',
+                        '<div style="width: 150px; color: black; text-align: center; padding: 6px 0; font-size: 11px">PRE-DEV</div>',
                 });
                 infowindow.open(map, marker);
                 map.setCenter(coords);

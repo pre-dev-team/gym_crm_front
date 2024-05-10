@@ -8,7 +8,7 @@ import { timeList } from "./time";
 import SelectRoutineModal from "../../modals/trainerModal/SelectRoutineModal/SelectRoutineModal";
 import { randomColor } from "../../../constants/color";
 
-function TodayReservation({ trainerId, color }) {
+function TodayReservation({ trainerId }) {
     const [today, setToday] = useState(new Date());
     const [todayReservations, setTodayReservations] = useState([]);
     const [tomorrowReservations, setTomorrowReservations] = useState([]);

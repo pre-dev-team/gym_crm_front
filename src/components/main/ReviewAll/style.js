@@ -51,6 +51,7 @@ export const photoBox = css`
     }
 `;
 export const rightBox = css`
+    position: relative;
     width: 55%;
     height: 100%;
     display: flex;
@@ -58,13 +59,22 @@ export const rightBox = css`
     & > h1 {
         margin: 0;
     }
+    & > div:nth-of-type(4) {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
 `;
 export const starBox = css`
     width: 100%;
     font-size: 16px;
     margin-bottom: 5px;
+    & > div:nth-of-type(1) {
+        font-size: 12px;
+        width: 100%;
+    }
 `;
 export const textBox = css`
     width: 100%;
-    font-size: 14px;
+    font-size: 12px;
 `;
