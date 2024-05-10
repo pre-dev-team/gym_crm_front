@@ -62,7 +62,6 @@ function MypageReservationReview({ accountId }) {
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
                 setReviewedTrainerIds(() => response.data.map((res) => res.trainerId));
-                console.log(response.data);
             },
         }
     );
