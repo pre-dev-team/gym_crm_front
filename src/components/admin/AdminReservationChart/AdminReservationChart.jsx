@@ -27,6 +27,7 @@ const layout = css`
 function AdminReservationChart(props) {
     ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
     const [chartData, setChartData] = useState([]);
+    
     const getMonthReservationsCountQuery = useQuery(
         ["getMonthReservationsCountQuery"],
         getMonthReservationsCountRequest,

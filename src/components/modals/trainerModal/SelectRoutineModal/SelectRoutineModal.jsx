@@ -9,6 +9,7 @@ import { workout } from "../../../../assets/workoutImg/workoutImg";
 function SelectRoutineModal({ reservationId, color }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [routineList, setRoutineList] = useState([]);
+    
     const handleModalOpenClick = () => {
         setModalOpen(() => true);
         getRoutineByReservationIdQuery.refetch();

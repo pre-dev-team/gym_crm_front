@@ -9,6 +9,7 @@ import usePrincipal from "../../../hooks/usePrincipal";
 function RootHeader(props) {
     const navigate = useNavigate();
     const accountId = usePrincipal();
+    
     const handleLogoutClick = () => {
         if (accountId === 0) {
             return;

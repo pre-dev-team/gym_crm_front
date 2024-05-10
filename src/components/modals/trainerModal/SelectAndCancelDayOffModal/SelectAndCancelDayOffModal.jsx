@@ -10,6 +10,7 @@ function SelectAndCancelDayOffModal({ accountId }) {
     const modalBackground = useRef();
     const { allHolidayList } = useTrainerApis(accountId);
     const [holidayListDayByDay, setHolidayListDayByDay] = useState([]);
+    
     useEffect(() => {
         const escKeyDown = (e) => {
             if (e.key === "Escape") {

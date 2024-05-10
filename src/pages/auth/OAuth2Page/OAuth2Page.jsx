@@ -10,6 +10,7 @@ function OAuth2Page() {
     const name = searchParams.get("name");
     const provider = searchParams.get("provider");
     const navigator = useNavigate();
+    
     return (
         <div css={s.layout}>
             {isNoClick ? (

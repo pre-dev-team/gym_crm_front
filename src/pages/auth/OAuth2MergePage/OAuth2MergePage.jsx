@@ -16,7 +16,6 @@ function OAuth2MergePage() {
 
     useEffect(() => {
         const messageTypeList = [usernameMessage?.type, passwordMessage?.type];
-        console.log(messageTypeList);
         if (messageTypeList.indexOf(undefined) !== -1 || messageTypeList.indexOf("error") !== -1) {
             setIsValidAll(() => false);
         }

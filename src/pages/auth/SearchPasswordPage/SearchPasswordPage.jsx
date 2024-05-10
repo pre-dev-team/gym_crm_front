@@ -37,7 +37,6 @@ function SearchPasswordPage(props) {
         mutationFn: searchPasswordByEmailRequest,
         retry: 0,
         onSuccess: (response) => {
-            console.log(response);
             if (response.data === false) {
                 alert("해당 사용자가 존재하지 않습니다");
                 return;

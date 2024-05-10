@@ -8,6 +8,7 @@ import { decideHolidayAppliesRequest } from "../../../../apis/api/admin";
 function AdminHolidayModal({ isOpen, setIsAdminHolidayModalOpen, clickedTrainerId, setClickedTrainerId }) {
     const { unconfirmedHolidayApplies, confirmedHolidayApplies } = useAdminHolidayApis(clickedTrainerId);
     const queryClient = useQueryClient();
+    
     const decideHolidayAppliesMutation = useMutation({
         mutationFn: decideHolidayAppliesRequest,
         mutationKey: "decideHolidayAppliesMutation",

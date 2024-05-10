@@ -9,6 +9,7 @@ import { userReviewRequest } from "../../../../apis/api/review";
 function MakeReviewModal({ accountId, trainerId, isReviewModalOpen, setIsReviewModalOpen }) {
     const [score, setScore] = useState(0);
     const [text, setText] = useState("");
+    
     const handleTextChane = (e) => {
         setText(() => e.target.value);
     };

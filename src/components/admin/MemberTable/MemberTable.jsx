@@ -8,6 +8,7 @@ function MemberTable({ setIsAdminReviewModalOpen, setClickedUserId }) {
     const [members, setMembers] = useState([]);
     const [name, setName] = useState("");
     const searchButtonRef = useRef();
+    
     const getUsersByNameQuery = useQuery(
         ["getUsersByNameQuery"],
         () =>

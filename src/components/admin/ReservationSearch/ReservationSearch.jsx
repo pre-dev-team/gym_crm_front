@@ -23,6 +23,7 @@ function ReservationSearch(props) {
     const [searchType, setSearchType] = useState(1);
     const [reservations, setReservations] = useState([]);
     const searchButtonRef = useRef();
+    
     const handleInputChange = (e) => {
         if (e.key === "Enter") {
             searchButtonRef.current.focus();
@@ -44,7 +45,6 @@ function ReservationSearch(props) {
             refetchOnWindowFocus: false,
             enabled: false,
             onSuccess: (response) => {
-                console.log(response.data);
                 setReservations(() => response.data);
             },
         }

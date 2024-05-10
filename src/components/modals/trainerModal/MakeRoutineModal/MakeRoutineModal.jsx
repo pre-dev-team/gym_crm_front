@@ -59,22 +59,9 @@ function MakeRoutineModal({ reservationId, color }) {
         const copyListItem = [...routineList];
         copyListItem.splice(index, 1);
         setRoutineList(() => copyListItem);
-        console.log(routineList);
     };
 
     const handleSubmitClick = () => {
-        console.log(
-            routineList.map((workoutRoutine, index) => {
-                return {
-                    reservationId: reservationId,
-                    workoutId: workoutRoutine.routine.workout.value,
-                    workoutRoutineCount: workoutRoutine.routine.count,
-                    workoutRoutineSet: workoutRoutine.routine.set,
-                    workoutRoutineWeight: workoutRoutine.routine.weight,
-                    workoutRoutineOrder: index + 1,
-                };
-            })
-        );
         userRoutineMutation.mutate(
             routineList.map((workoutRoutine, index) => {
                 return {
