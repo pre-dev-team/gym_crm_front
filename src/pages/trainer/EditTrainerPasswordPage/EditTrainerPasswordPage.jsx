@@ -48,12 +48,11 @@ function EditTrainerPasswordPage(props) {
         mutationFn: editTrainerPasswordRequest,
         retry: 0,
         onSuccess: (response) => {
-            console.log(response.data)
             alert("변경성공");
             window.close();
         },
         onError: (error) => {
-            alert(error.reponse.data);
+            alert("비밀번호를 올바르게 입력하세요.")
         },
     });
 
@@ -65,8 +64,6 @@ function EditTrainerPasswordPage(props) {
             checkPassword: trainerInfo.checkPassword
         });
     };
-
-    console.log()
 
     return (
         <div css={s.layout}>
