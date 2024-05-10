@@ -15,7 +15,6 @@ export const layout = (isClose) => css`
     box-shadow: 10px 1px 1px 1px black;
     transition: all 0.5s ease;
     opacity: ${isClose ? 0 : 1};
-    z-index: 10;
 `;
 
 export const customButton = css`

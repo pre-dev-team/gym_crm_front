@@ -14,6 +14,7 @@ function UserReservationPage(props) {
     const [selectTrainerId, setSelectTrainerId] = useState(0);
     const [searchParams] = useSearchParams();
     const prevReservationId = searchParams.get("reservationId");
+
     const getTrainers = useQuery(["getTrainers"], getTrainersByUserRequest, {
         retry: 0,
         refetchOnWindowFocus: false,
