@@ -46,8 +46,10 @@ function ReviewAll(props) {
                                     {trainer.trainerName}
                                 </h1>
                                 <div css={s.starBox}>
-                                    {makeStarByScore(trainer.trainerReviewScore)}({trainer.trainerReviewScore}/10)
+                                    {makeStarByScore(trainer.trainerReviewScore)}{" "}
+                                    <div>({trainer.trainerReviewScore}/10)</div>
                                 </div>
+
                                 <div css={s.textBox}>"{trainer.trainerReviewText}"</div>
                                 <div>-{trainer.username} 고객님</div>
                             </div>

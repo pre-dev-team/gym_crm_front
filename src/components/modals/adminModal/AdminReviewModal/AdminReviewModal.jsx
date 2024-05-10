@@ -22,6 +22,7 @@ function AdminReviewModal({ isOpen, setIsAdminReviewModalOpen, clickedUserId }) 
             refetchOnWindowFocus: false,
             enabled: !!clickedUserId,
             onSuccess: (response) => {
+                setClickedReview(() => null);
                 setUserReviews(() =>
                     response.data.map((review) => {
                         return {
