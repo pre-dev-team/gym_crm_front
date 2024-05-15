@@ -92,13 +92,13 @@ function UserSigninPage(props) {
                         <span>또는</span>
                     </span>
                     <div css={s.oauthBox}>
-                        <Link to={"http://localhost:8080/oauth2/authorization/google"}>
+                        <Link to={"http://3.34.8.7/oauth2/authorization/google"}>
                             <img src={googleImg} alt="구글로그인" />
                         </Link>
-                        <Link to={"http://localhost:8080/oauth2/authorization/naver"}>
+                        <Link to={"http://3.34.8.7/oauth2/authorization/naver"}>
                             <img src={naverImg} alt="네이버로그인" />
                         </Link>
-                        <Link to={"http://localhost:8080/oauth2/authorization/kakao"}>
+                        <Link to={"http://3.34.8.7/oauth2/authorization/kakao"}>
                             <img src={kakaoImg} alt="카카오로그인" />
                         </Link>
                     </div>
