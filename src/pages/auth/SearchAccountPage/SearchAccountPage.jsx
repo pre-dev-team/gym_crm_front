@@ -72,7 +72,7 @@ function SearchAccountPage(props) {
                 <div css={s.selectBox}>
                     <div css={s.inputBox}>
                         <InputWithMessagebox
-                            type={"text"}
+                            type={"text"}dfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
                             name={"name"}
                             placeholder={"이름"}
                             value={name}
